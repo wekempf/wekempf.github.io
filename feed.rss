@@ -4,9 +4,9 @@
 		<title>Digital Tapestry</title>
 		<link>http://digitaltapestry.net/</link>
 		<description>Weaving a Digital Tapestry</description>
-		<copyright>2016</copyright>
-		<pubDate>Sat, 31 Dec 2016 00:30:53 GMT</pubDate>
-		<lastBuildDate>Sat, 31 Dec 2016 00:30:53 GMT</lastBuildDate>
+		<copyright>2017</copyright>
+		<pubDate>Sun, 01 Jan 2017 14:39:55 GMT</pubDate>
+		<lastBuildDate>Sun, 01 Jan 2017 14:39:55 GMT</lastBuildDate>
 		<item>
 			<title>Logging - Part II</title>
 			<link>http://digitaltapestry.net/posts/logging-part-II</link>
@@ -525,6 +525,38 @@ data" concept.&lt;/p&gt;
 &lt;p&gt;This has been a very lengthy post, and we haven't really learned much about how to use MEL yet. I
 warned you this wasn't a tutorial seriese. :) In &lt;a href="/posts/logging-part-II"&gt;Part II&lt;/a&gt; I'll look at
 the design of &lt;code&gt;ILoggerFactory&lt;/code&gt; which gets us a little closer into how to use MEL.&lt;/p&gt;</content:encoded>
+		</item>
+		<item>
+			<title>Welcome Back</title>
+			<link>http://digitaltapestry.net/posts/welcome-back</link>
+			<description>&lt;p&gt;Hi again. Or hi for the first time if you're new.&lt;/p&gt;</description>
+			<guid>http://digitaltapestry.net/posts/welcome-back</guid>
+			<pubDate>Mon, 26 Dec 2016 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;Hi again. Or hi for the first time if you're new.&lt;/p&gt;
+&lt;p&gt;My old Digital Tapestry blog died. I was using &lt;a href="http://www.orchardproject.net/"&gt;Orchard&lt;/a&gt; which is a fine .NET based CMS and hosting
+on a provider that I paid for by the year. I was happy with that for some time. Then, I screwed up. I got busy, and failed to
+maintain everything. Orchard development kept on going, while my little sight sat dormant. When I finally got the time to get
+back to it, I screwed something up trying to update the codebase. The site mostly still worked, but certain key things, like
+the ability to export the content, no longer worked. Still being busy, I figured I'd fix that in the future and posted one or
+two more articles and went dark again. Way too much time passed and the bill for my provider came due. Honestly, I was posting
+so infrequently at this point that I found it hard to justify the cost, so I figured I'd just migrate off to something less
+expensive. Well, remember I said I'd screwed up export? Long story short, I screwed up and lost the entire site. Some of it
+is in the Internet Archive, so I may recreate some of the better articles manually in the future, but mostly, it's all
+gone. My bad.&lt;/p&gt;
+&lt;p&gt;Fast forward. I've had some life changes, including a new job. It's time to start blogging again. This time I decided I'd
+go with something a bit "safer" and a lot less expensive (as in, free). I'm using &lt;a href="https://pages.github.com/"&gt;GitHub Pages&lt;/a&gt;
+for hosting. Normally you'd use Jekyll there, but honestly, Jekyll on Windows isn't great and the restiction on using
+plugins on Pages combined to make me consider something else. As a .NET developer, a .NET based static site generator
+sounded like the way to go. There's a few out there, but I settled on &lt;a href="http://wyam.io"&gt;Wyam&lt;/a&gt;. The author, Dave Glick,
+has been super awesome on Gitter, helping me to get over a few misunderstandings and fixing a few bugs I found in
+extremely short order. I'm confident I've chosen the right tool.&lt;/p&gt;
+&lt;p&gt;Please bear with me for a while as I get this site up and running proper. Right now it's entirely based on the built-in
+Wyam Blog recipe and CleanBlog theme. I'll customize it slowly over time. Of particular note is that currently there's
+no comments. I'll add Disqus comments as soon as I can, but time is limited still, so it may take a few days or more.&lt;/p&gt;
+&lt;p&gt;As before, I plan to mostly blog about .NET development topics. I will also blog a bit about this site and using
+Wyam. I'm working on a tutorial to make it a little easier of others to get up and going with Wyam on GitHub Pages,
+and as I make modifications here I'll likely blog about them as well.&lt;/p&gt;
+&lt;p&gt;Here's to what I hope is a bright rebirth of this blog.&lt;/p&gt;</content:encoded>
 		</item>
 	</channel>
 </rss>
