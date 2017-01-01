@@ -4,7 +4,7 @@
 	<id>http://digitaltapestry.net/</id>
 	<title>Digital Tapestry</title>
 	<rights>2017</rights>
-	<updated>2017-01-01T14:39:55Z</updated>
+	<updated>2017-01-01T15:28:59Z</updated>
 	<subtitle>Weaving a Digital Tapestry</subtitle>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/logging-part-II" />
@@ -18,7 +18,33 @@ which I amusingly abbreviate to just MEL. In particular, we explored the design 
 In this post we'll continue to explore MEL by looking next at the design of the &lt;code&gt;ILoggerFactory&lt;/code&gt; interface.&lt;/p&gt;
 &lt;blockquote class="blockquote"&gt;
 &lt;p&gt;Finish me!&lt;/p&gt;
-&lt;/blockquote&gt;</content>
+&lt;/blockquote&gt;
+
+
+&lt;div id="disqus_thread"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'logging-part-II';
+    var disqus_title = 'Logging - Part II';
+    var disqus_url = 'http://digitaltapestry.net/posts/logging-part-II';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+&lt;/script&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+&lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
 		<summary>&lt;p&gt;In &lt;a href="/posts/logging-part-I"&gt;Part I&lt;/a&gt; we were introduced to &lt;a href="https://github.com/aspnet/Logging"&gt;Microsoft.Extensions.Logging&lt;/a&gt;
 which I amusingly abbreviate to just MEL. In particular, we explored the design of the &lt;code&gt;ILogger&lt;/code&gt; interface.
 In this post we'll continue to explore MEL by looking next at the design of the &lt;code&gt;ILoggerFactory&lt;/code&gt; interface.&lt;/p&gt;</summary>
@@ -520,7 +546,33 @@ parameter directly, instead using the extension overloads that treat everything 
 data" concept.&lt;/p&gt;
 &lt;p&gt;This has been a very lengthy post, and we haven't really learned much about how to use MEL yet. I
 warned you this wasn't a tutorial seriese. :) In &lt;a href="/posts/logging-part-II"&gt;Part II&lt;/a&gt; I'll look at
-the design of &lt;code&gt;ILoggerFactory&lt;/code&gt; which gets us a little closer into how to use MEL.&lt;/p&gt;</content>
+the design of &lt;code&gt;ILoggerFactory&lt;/code&gt; which gets us a little closer into how to use MEL.&lt;/p&gt;
+
+
+&lt;div id="disqus_thread"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'logging-part-I';
+    var disqus_title = 'Logging - Part I';
+    var disqus_url = 'http://digitaltapestry.net/posts/logging-part-I';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+&lt;/script&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+&lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
 		<summary>&lt;p&gt;We've all dealt with logging in our projects before. This is a mostly known commodity for every developer.
 So, why am I blogging about it? Well, I think there's something to be learned about the finer points of
 logging, and there's a new kid on the block: &lt;a href="https://github.com/aspnet/Logging"&gt;Microsoft.Extensions.Logging&lt;/a&gt;.&lt;/p&gt;</summary>
@@ -554,7 +606,33 @@ no comments. I'll add Disqus comments as soon as I can, but time is limited stil
 &lt;p&gt;As before, I plan to mostly blog about .NET development topics. I will also blog a bit about this site and using
 Wyam. I'm working on a tutorial to make it a little easier of others to get up and going with Wyam on GitHub Pages,
 and as I make modifications here I'll likely blog about them as well.&lt;/p&gt;
-&lt;p&gt;Here's to what I hope is a bright rebirth of this blog.&lt;/p&gt;</content>
+&lt;p&gt;Here's to what I hope is a bright rebirth of this blog.&lt;/p&gt;
+
+
+&lt;div id="disqus_thread"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'welcome-back';
+    var disqus_title = 'Welcome Back';
+    var disqus_url = 'http://digitaltapestry.net/posts/welcome-back';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+&lt;/script&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+&lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
 		<summary>&lt;p&gt;Hi again. Or hi for the first time if you're new.&lt;/p&gt;</summary>
 	</entry>
 </feed>
