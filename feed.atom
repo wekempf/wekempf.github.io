@@ -4,21 +4,132 @@
 	<id>http://digitaltapestry.net/</id>
 	<title>Digital Tapestry</title>
 	<rights>2017</rights>
-	<updated>2017-01-01T15:28:59Z</updated>
+	<updated>2017-01-01T17:27:27Z</updated>
 	<subtitle>Weaving a Digital Tapestry</subtitle>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/logging-part-II" />
 		<id>http://digitaltapestry.net/posts/logging-part-II</id>
 		<title>Logging - Part II</title>
-		<updated>2016-12-29T00:00:00Z</updated>
+		<updated>2017-01-01T00:00:00Z</updated>
 		<content>&lt;h1 id="logging"&gt;Logging&lt;/h1&gt;
 &lt;h2 id="part-ii"&gt;Part II&lt;/h2&gt;
 &lt;p&gt;In &lt;a href="/posts/logging-part-I"&gt;Part I&lt;/a&gt; we were introduced to &lt;a href="https://github.com/aspnet/Logging"&gt;Microsoft.Extensions.Logging&lt;/a&gt;
 which I amusingly abbreviate to just MEL. In particular, we explored the design of the &lt;code&gt;ILogger&lt;/code&gt; interface.
 In this post we'll continue to explore MEL by looking next at the design of the &lt;code&gt;ILoggerFactory&lt;/code&gt; interface.&lt;/p&gt;
+&lt;h3 id="iloggerfactory"&gt;ILoggerFactory&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;ILoggerFactory&lt;/code&gt; type is used to create &lt;code&gt;ILogger&lt;/code&gt; instances. Here it is:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;/// &amp;lt;summary&amp;gt;
+/// Represents a type used to configure the logging system and create instances of &amp;lt;see cref="ILogger"/&amp;gt; from
+/// the registered &amp;lt;see cref="ILoggerProvider"/&amp;gt;s.
+/// &amp;lt;/summary&amp;gt;
+public interface ILoggerFactory : IDisposable
+{
+    /// &amp;lt;summary&amp;gt;
+    /// Creates a new &amp;lt;see cref="ILogger"/&amp;gt; instance.
+    /// &amp;lt;/summary&amp;gt;
+    /// &amp;lt;param name="categoryName"&amp;gt;The category name for messages produced by the logger.&amp;lt;/param&amp;gt;
+    /// &amp;lt;returns&amp;gt;The &amp;lt;see cref="ILogger"/&amp;gt;.&amp;lt;/returns&amp;gt;
+    ILogger CreateLogger(string categoryName);
+
+    /// &amp;lt;summary&amp;gt;
+    /// Adds an &amp;lt;see cref="ILoggerProvider"/&amp;gt; to the logging system.
+    /// &amp;lt;/summary&amp;gt;
+    /// &amp;lt;param name="provider"&amp;gt;The &amp;lt;see cref="ILoggerProvider"/&amp;gt;.&amp;lt;/param&amp;gt;
+    void AddProvider(ILoggerProvider provider);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This one is even simpler than &lt;code&gt;ILogger&lt;/code&gt;, with only two methods. The &lt;code&gt;AddProvider&lt;/code&gt; method is what you use to
+control where log events go, but I'm not going to cover that in this post. I'll probably cover it in a future
+post. For now, let's focus on &lt;code&gt;CreateLogger&lt;/code&gt; instead.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;CreateLogger&lt;/code&gt; method is called, not surprisingly, to create an &lt;code&gt;ILogger&lt;/code&gt; instance. Depending on the
+logging framework you're used to using, you may be surprised at the &lt;code&gt;categoryName&lt;/code&gt; parameter it requires,
+however. Some, but not all, logging frameworks allow you to create loggers that log with different
+"categories" to allow you to control filtring at a very fine grained level. For instance, if you know
+you have a bug in &lt;code&gt;SomeClass&lt;/code&gt; you could turn logging up to include &lt;code&gt;Debug&lt;/code&gt; level events only for the
+"category" that &lt;code&gt;SomeClass&lt;/code&gt; logs to. Often these categories are based on a &lt;code&gt;Type&lt;/code&gt; name (the full name,
+including the namespace). MEL makes it easy to do the same thing by providing some extension methods.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-cscript"&gt;/// &amp;lt;summary&amp;gt;
+/// ILoggerFactory extension methods for common scenarios.
+/// &amp;lt;/summary&amp;gt;
+public static class LoggerFactoryExtensions
+{
+    /// &amp;lt;summary&amp;gt;
+    /// Creates a new ILogger instance using the full name of the given type.
+    /// &amp;lt;/summary&amp;gt;
+    /// &amp;lt;typeparam name="T"&amp;gt;The type.&amp;lt;/typeparam&amp;gt;
+    /// &amp;lt;param name="factory"&amp;gt;The factory.&amp;lt;/param&amp;gt;
+    public static ILogger&amp;lt;T&amp;gt; CreateLogger&amp;lt;T&amp;gt;(this ILoggerFactory factory)
+    {
+        // ..
+    }
+
+    /// &amp;lt;summary&amp;gt;
+    /// Creates a new ILogger instance using the full name of the given type.
+    /// &amp;lt;/summary&amp;gt;
+    /// &amp;lt;param name="factory"&amp;gt;The factory.&amp;lt;/param&amp;gt;
+    /// &amp;lt;param name="type"&amp;gt;The type.&amp;lt;/param&amp;gt;
+    public static ILogger CreateLogger(this ILoggerFactory factory, Type type)
+    {
+        // ..
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There's a concrete &lt;code&gt;LoggerFactory&lt;/code&gt; instance that implements &lt;code&gt;ILoggerFactory&lt;/code&gt;. So, putting everything
+we've learned so far together, here's a simple console application that logs a single message
+to standard output.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;using Microsoft.Extensions.Logging;
+using System;
+
+namespace LoggingPlay
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var factory = new LoggerFactory()
+                .AddConsole();
+            var logger = factory.CreateLogger&amp;lt;Program&amp;gt;();
+            logger.LogInformation("Started at {Time}.", DateTime.Now);
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
 &lt;blockquote class="blockquote"&gt;
-&lt;p&gt;Finish me!&lt;/p&gt;
+&lt;p&gt;Note: To use this code you'll also have to include the NuGet packages for &lt;code&gt;Microsoft.Extensions.Logging&lt;/code&gt;
+and &lt;code&gt;Microsoft.Extensions.Logging.Console&lt;/code&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;p&gt;Most of this should be familiar to you at this point. The &lt;code&gt;AddConsole&lt;/code&gt; method may not make any sense to
+you yet. This is actually an extension method found in &lt;code&gt;Microsoft.Extensions.Logging.Console&lt;/code&gt;. it
+simply creates a "provider" that writes log events to standard output and adds it by calling
+&lt;code&gt;ILoggerFactory.AddProvider&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;When you run this, the following is produced.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;info: LoggingPlay.Program[0]
+      Started at 01/01/2017 12:00:25.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The output is based on the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;"info" is the log level.&lt;/li&gt;
+&lt;li&gt;"LoggingPlay.Program" is the category name, derived from the generic type parameter used in the
+&lt;code&gt;CreateLogger&lt;/code&gt; call.&lt;/li&gt;
+&lt;li&gt;"[0]" is the event ID (we didn't specify one when we called &lt;code&gt;LogInformation&lt;/code&gt; so it defaulted to 0).&lt;/li&gt;
+&lt;li&gt;"Started at 01/01/2017 12:00:25" is the fomratted message generated from the template and parameters
+we passed to &lt;code&gt;LogInformation&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some providers allow you to configure the output format, but as far as I know the console provider does not.
+Each provider will be unique and you'll have to learn how to use it on your own. I'll cover at
+least the basics of some of them in the future. Remember, I'm not giving you a tutorial here,
+but rather I'm exploring the API design.&lt;/p&gt;
+&lt;p&gt;While you're not forced into any specific usage pattern here, typically your application should follow
+a simple pattern. You'll have a single &lt;code&gt;LoggerFactory&lt;/code&gt; instance for the entire application, which
+you add providers to at startup. Then, in every class that will do some logging you'll include an
+&lt;code&gt;ILogger&lt;/code&gt; instance created by calling &lt;code&gt;CreateInstance&amp;lt;T&amp;gt;&lt;/code&gt;. It's a really good idea to do all of this
+through Dependency Injection. We know enough now to add the &lt;code&gt;LoggerFactory&lt;/code&gt; to the DI container of
+your choice and inject &lt;code&gt;ILoggerFactory&lt;/code&gt; into the classes that will create log events. This will
+work, but it does seem strange and a bit of a chore to inject an &lt;code&gt;ILoggerFactory&lt;/code&gt; instead of an
+&lt;code&gt;ILogger&lt;/code&gt;. Some DI containers would allow you to do some clever configuration to allow injecting
+an &lt;code&gt;ILogger&lt;/code&gt; created with the Type that the logger is being injected into, but not all containers
+can accomplish this. MEL's design actually considers this, which is something we'll explore
+in Part III.&lt;/p&gt;
 
 
 &lt;div id="disqus_thread"&gt;&lt;/div&gt;
