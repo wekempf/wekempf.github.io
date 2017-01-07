@@ -4,7 +4,7 @@
 	<id>http://digitaltapestry.net/</id>
 	<title>Digital Tapestry</title>
 	<rights>2017</rights>
-	<updated>2017-01-07T18:59:20Z</updated>
+	<updated>2017-01-07T19:09:56Z</updated>
 	<subtitle>Weaving a Digital Tapestry</subtitle>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/understanding-task-II" />
@@ -13,7 +13,7 @@
 		<updated>2017-01-07T12:39:00Z</updated>
 		<content>&lt;h1 id="understanding-task"&gt;Understanding Task&lt;/h1&gt;
 &lt;h2 id="part-i"&gt;Part I&lt;/h2&gt;
-&lt;p&gt;In &lt;a href="understanding-task-I"&gt;Part I&lt;/a&gt; I explained that a &lt;code&gt;Task&lt;/code&gt; is really &lt;strong&gt;just&lt;/strong&gt; a datastructure
+&lt;p&gt;In &lt;a href="/posts/understanding-task-I"&gt;Part I&lt;/a&gt; I explained that a &lt;code&gt;Task&lt;/code&gt; is really &lt;strong&gt;just&lt;/strong&gt; a datastructure
 that represents the result of "something", and implemented a &lt;em&gt;very&lt;/em&gt; basic &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to illustrate
 that. Of course, that isn't a very complete picture and I promised that this time around we'd
 update &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to more closely represent the mental model you have for &lt;code&gt;Task&lt;/code&gt;.&lt;/p&gt;
@@ -183,7 +183,7 @@ much better suited for using the TPL.&lt;/p&gt;
 &lt;/script&gt;
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 &lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
-		<summary>&lt;p&gt;In &lt;a href="understanding-task-I"&gt;Part I&lt;/a&gt; I explained that a &lt;code&gt;Task&lt;/code&gt; is really &lt;strong&gt;just&lt;/strong&gt; a datastructure
+		<summary>&lt;p&gt;In &lt;a href="/posts/understanding-task-I"&gt;Part I&lt;/a&gt; I explained that a &lt;code&gt;Task&lt;/code&gt; is really &lt;strong&gt;just&lt;/strong&gt; a datastructure
 that represents the result of "something", and implemented a &lt;em&gt;very&lt;/em&gt; basic &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to illustrate
 that. Of course, that isn't a very complete picture and I promised that this time around we'd
 update &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to more closely represent the mental model you have for &lt;code&gt;Task&lt;/code&gt;.&lt;/p&gt;</summary>

@@ -5,12 +5,12 @@
 		<link>http://digitaltapestry.net/</link>
 		<description>Weaving a Digital Tapestry</description>
 		<copyright>2017</copyright>
-		<pubDate>Sat, 07 Jan 2017 18:59:20 GMT</pubDate>
-		<lastBuildDate>Sat, 07 Jan 2017 18:59:20 GMT</lastBuildDate>
+		<pubDate>Sat, 07 Jan 2017 19:09:56 GMT</pubDate>
+		<lastBuildDate>Sat, 07 Jan 2017 19:09:56 GMT</lastBuildDate>
 		<item>
 			<title>Understanding Task - Part II</title>
 			<link>http://digitaltapestry.net/posts/understanding-task-II</link>
-			<description>&lt;p&gt;In &lt;a href="understanding-task-I"&gt;Part I&lt;/a&gt; I explained that a &lt;code&gt;Task&lt;/code&gt; is really &lt;strong&gt;just&lt;/strong&gt; a datastructure
+			<description>&lt;p&gt;In &lt;a href="/posts/understanding-task-I"&gt;Part I&lt;/a&gt; I explained that a &lt;code&gt;Task&lt;/code&gt; is really &lt;strong&gt;just&lt;/strong&gt; a datastructure
 that represents the result of "something", and implemented a &lt;em&gt;very&lt;/em&gt; basic &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to illustrate
 that. Of course, that isn't a very complete picture and I promised that this time around we'd
 update &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to more closely represent the mental model you have for &lt;code&gt;Task&lt;/code&gt;.&lt;/p&gt;</description>
@@ -18,7 +18,7 @@ update &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to more closely represen
 			<pubDate>Sat, 07 Jan 2017 12:39:00 GMT</pubDate>
 			<content:encoded>&lt;h1 id="understanding-task"&gt;Understanding Task&lt;/h1&gt;
 &lt;h2 id="part-i"&gt;Part I&lt;/h2&gt;
-&lt;p&gt;In &lt;a href="understanding-task-I"&gt;Part I&lt;/a&gt; I explained that a &lt;code&gt;Task&lt;/code&gt; is really &lt;strong&gt;just&lt;/strong&gt; a datastructure
+&lt;p&gt;In &lt;a href="/posts/understanding-task-I"&gt;Part I&lt;/a&gt; I explained that a &lt;code&gt;Task&lt;/code&gt; is really &lt;strong&gt;just&lt;/strong&gt; a datastructure
 that represents the result of "something", and implemented a &lt;em&gt;very&lt;/em&gt; basic &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to illustrate
 that. Of course, that isn't a very complete picture and I promised that this time around we'd
 update &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to more closely represent the mental model you have for &lt;code&gt;Task&lt;/code&gt;.&lt;/p&gt;
