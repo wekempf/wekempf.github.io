@@ -4,8 +4,124 @@
 	<id>http://digitaltapestry.net/</id>
 	<title>Digital Tapestry</title>
 	<rights>2017</rights>
-	<updated>2017-01-01T17:27:27Z</updated>
+	<updated>2017-01-07T17:29:18Z</updated>
 	<subtitle>Weaving a Digital Tapestry</subtitle>
+	<entry>
+		<link href="http://digitaltapestry.net/posts/understanding-task-I" />
+		<id>http://digitaltapestry.net/posts/understanding-task-I</id>
+		<title>Understanding Task - Part I</title>
+		<updated>2017-01-07T00:00:00Z</updated>
+		<content>&lt;h1 id="understanding-task"&gt;Understanding Task&lt;/h1&gt;
+&lt;h2 id="part-i"&gt;Part I&lt;/h2&gt;
+&lt;p&gt;I've noticed that many developers I work and talk with have a pretty big misunderstanding of the &lt;code&gt;Task&lt;/code&gt; and &lt;code&gt;Task&amp;lt;T&amp;gt;&lt;/code&gt; types
+from the Task Programming Library (TPL). In their minds a &lt;code&gt;Task&lt;/code&gt; is a synonym for a &lt;code&gt;Thread&lt;/code&gt;. With a bit of explanation
+I can get them to almost understand that a &lt;code&gt;Task&lt;/code&gt; is more often than not run on the thread pool, or represents asynchronous
+I/O, but I don't get the feeling that I too often actually get them to understand this at a deep level. I think that
+being able to effectively write programs with the TPL you do need this understanding, so I'm going to write a blog series
+about asynchronous programming from a different point of view than most. I'm going to start from the bottom and work my
+way up, while most other books/blogs/articles start at the top and work their way down, though usually not going to deep.
+My hope is that by working from the bottom up, some of the mystery will just disappear.&lt;/p&gt;
+&lt;p&gt;I'll start by once again defining what a &lt;code&gt;Task&lt;/code&gt; is at its most basic definition. A &lt;code&gt;Task&lt;/code&gt; isn't something magical. Nor is
+it really what the name implies: a running operation of some sort. No, a &lt;code&gt;Task&lt;/code&gt; is just a simple data structure that
+holds the result of something. That's it. At this point, don't even think in terms of that "something" being an asynchronous
+operation. At it's simplest, that is not the case, and thinking in those terms right now will just confuse you and lead
+you to some incorrect assumptions. Dispel this thought from your mind.&lt;/p&gt;
+&lt;p&gt;So, let's make this idea concrete instead of just asking you to comprehend this based solely on the claims somebody
+on the Internet made. Let's actually start to build our own version of the TPL to understand this. Granted, what
+we'll develop here and in future parts of this seriese will be naive implementations and a far cry from the actual
+implementation in the TPL, but it will give us very deep understandings of what the TPL is all about. Remember, though,
+we're building this from the bottom up. Don't try and think about where we'll be next or how we'll wind up at what
+you're familiar with. Just stay with me at the stage in development that we're at.&lt;/p&gt;
+&lt;p&gt;So, let's create a &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt;. For now we're going to ignore the non-generic version. We're also going to make the
+most basic thing we can, ignoring many things that you know exist for the real &lt;code&gt;Task&amp;lt;T&amp;gt;&lt;/code&gt;. Please, try not to think
+about what you know, and just think about what we need at the simplest. From my description of what a &lt;code&gt;Task&lt;/code&gt; is,
+the simplest implementation for our &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; could look something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;public class MyTask&amp;lt;TResult&amp;gt;
+{
+    public TResult Result { get; set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Really, it's as simple as that. This is a data structure that represents the result of "something". Most of what a
+&lt;code&gt;Task&lt;/code&gt; is all about is represented in the above code. Truly, I'm not trying to deceive you here, and if you're looking
+for a deep understanding of the TPL, this isn't a gross oversimplification either. Yes, it is a simplification,
+without a doubt, but it &lt;em&gt;does&lt;/em&gt; give a very accurate representation of the concept of a &lt;code&gt;Task&lt;/code&gt;. A &lt;code&gt;Task&lt;/code&gt; &lt;em&gt;is&lt;/em&gt;
+just the result of &lt;em&gt;something&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Obviously, where not done. I will contend this represents the largest portion of the concept of a &lt;code&gt;Task&lt;/code&gt;, but that
+doesn't mean we're done here. In fact, I've not done enough to make the light bulb click for you yet, I'm sure. At
+this point you have more questions than you had before, and you're likely just thinking I'm a pretentious no-it-all
+for distilling things down to this level. Bear with me. We're going to start fleshing things out now, and you'll
+start to see the larger picture.&lt;/p&gt;
+&lt;p&gt;So, a &lt;code&gt;Task&lt;/code&gt; just represents the result of &lt;em&gt;something&lt;/em&gt;, but the above doesn't really go far enough to allow us to
+represent the result of &lt;em&gt;anything&lt;/em&gt;, or more accurately anything we'd model in a program. If nothing else, as
+developers we realize most of the things we'd care to represent the result of has the potential to fail, so the
+result is either successful or not. In .NET we represent failures with an &lt;code&gt;Exception&lt;/code&gt;, so lets modify our code
+to include this.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;public class MyTask&amp;lt;TResult&amp;gt;
+{
+    public Exception Error { get; set; }
+
+    public TResult Result { get; set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is starting to more closely resemble what we're used to, but there's serious problems with this code even
+at this simple level. With it coded the way it is the &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; could have &lt;em&gt;both&lt;/em&gt; a &lt;code&gt;Result&lt;/code&gt; and an &lt;code&gt;Error&lt;/code&gt;.
+We need to constrain what it can represent. We'll do that by making the type immutable. While we're at it,
+let's use factory methods instead of constructors to create instances of this.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;public class MyTask&amp;lt;TResult&amp;gt;
+{
+    private MyTask()
+    {
+    }
+
+    public static MyTask&amp;lt;TResult&amp;gt; SetError(Exception e) =&amp;gt; new MyTask&amp;lt;TResult&amp;gt; { Error = e };
+
+    public static MyTask&amp;lt;TResult&amp;gt; SetResult(TResult result) =&amp;gt; new MyTask&amp;lt;TResult&amp;gt; { Result = result };
+
+    public Exception Error { get; private set; }
+
+    public TResult Result { get; private set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There, that's it for now. Pretty simple, huh? Yeah, I know you still have questions. This code does a good
+job representing my definition of a &lt;code&gt;Task&lt;/code&gt;, but it's done &lt;em&gt;nothing&lt;/em&gt; to turn the light bulb on yet, because
+we're still missing some functionality that you know must exist. We'll come much closer to the mental model
+you have next time, but in doing so I hope to also start to make you let go of that mental model and replace
+it with a more accurate one.&lt;/p&gt;
+
+
+&lt;div id="disqus_thread"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'understanding-task-I';
+    var disqus_title = 'Understanding Task - Part I';
+    var disqus_url = 'http://digitaltapestry.net/posts/understanding-task-I';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+&lt;/script&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+&lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
+		<summary>&lt;p&gt;I've noticed that many developers I work and talk with have a pretty big misunderstanding of the &lt;code&gt;Task&lt;/code&gt; and &lt;code&gt;Task&amp;lt;T&amp;gt;&lt;/code&gt; types
+from the Task Programming Library (TPL). In their minds a &lt;code&gt;Task&lt;/code&gt; is a synonym for a &lt;code&gt;Thread&lt;/code&gt;. With a bit of explanation
+I can get them to almost understand that a &lt;code&gt;Task&lt;/code&gt; is more often than not run on the thread pool, or represents asynchronous
+I/O, but I don't get the feeling that I too often actually get them to understand this at a deep level. I think that
+being able to effectively write programs with the TPL you do need this understanding, so I'm going to write a blog series
+about asynchronous programming from a different point of view than most. I'm going to start from the bottom and work my
+way up, while most other books/blogs/articles start at the top and work their way down, though usually not going to deep.
+My hope is that by working from the bottom up, some of the mystery will just disappear.&lt;/p&gt;</summary>
+	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/logging-part-II" />
 		<id>http://digitaltapestry.net/posts/logging-part-II</id>
@@ -696,7 +812,7 @@ logging, and there's a new kid on the block: &lt;a href="https://github.com/aspn
 		<content>&lt;p&gt;Hi again. Or hi for the first time if you're new.&lt;/p&gt;
 &lt;p&gt;My old Digital Tapestry blog died. I was using &lt;a href="http://www.orchardproject.net/"&gt;Orchard&lt;/a&gt; which is a fine .NET based CMS and hosting
 on a provider that I paid for by the year. I was happy with that for some time. Then, I screwed up. I got busy, and failed to
-maintain everything. Orchard development kept on going, while my little sight sat dormant. When I finally got the time to get
+maintain everything. Orchard development kept on going, while my little site sat dormant. When I finally got the time to get
 back to it, I screwed something up trying to update the codebase. The site mostly still worked, but certain key things, like
 the ability to export the content, no longer worked. Still being busy, I figured I'd fix that in the future and posted one or
 two more articles and went dark again. Way too much time passed and the bill for my provider came due. Honestly, I was posting

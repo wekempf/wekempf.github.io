@@ -104,6 +104,21 @@
 <div class="row">
     <div class="col-sm-8 right-border">
                 <div class="post-preview">
+                    <a href="/posts/understanding-task-I">
+                        <h2 class="post-title">Understanding Task - Part I</h2>
+                    </a>
+                    <p class="post-meta">Posted on Saturday, January 7, 2017</p>
+                    <p>I've noticed that many developers I work and talk with have a pretty big misunderstanding of the <code>Task</code> and <code>Task&lt;T&gt;</code> types
+from the Task Programming Library (TPL). In their minds a <code>Task</code> is a synonym for a <code>Thread</code>. With a bit of explanation
+I can get them to almost understand that a <code>Task</code> is more often than not run on the thread pool, or represents asynchronous
+I/O, but I don't get the feeling that I too often actually get them to understand this at a deep level. I think that
+being able to effectively write programs with the TPL you do need this understanding, so I'm going to write a blog series
+about asynchronous programming from a different point of view than most. I'm going to start from the bottom and work my
+way up, while most other books/blogs/articles start at the top and work their way down, though usually not going to deep.
+My hope is that by working from the bottom up, some of the mystery will just disappear.</p>             
+                </div>       
+                    <hr /> 
+                <div class="post-preview">
                     <a href="/posts/logging-part-II">
                         <h2 class="post-title">Logging - Part II</h2>
                     </a>
@@ -122,25 +137,19 @@ In this post we'll continue to explore MEL by looking next at the design of the 
 So, why am I blogging about it? Well, I think there's something to be learned about the finer points of
 logging, and there's a new kid on the block: <a href="https://github.com/aspnet/Logging">Microsoft.Extensions.Logging</a>.</p>             
                 </div>       
-                    <hr /> 
-                <div class="post-preview">
-                    <a href="/posts/welcome-back">
-                        <h2 class="post-title">Welcome Back</h2>
-                    </a>
-                    <p class="post-meta">Posted on Monday, December 26, 2016</p>
-                    <p>Hi again. Or hi for the first time if you're new.</p>             
-                </div>       
     </div>
     <div class="col-sm-4 sidebar">
         <hr class="visible-xs-block" />
         <h5>Tags</h5>
         <div>
-                <a role="button" href="/tags/microsoft.extensions.logging" class="btn btn-default btn-sm"> Microsoft.Extensions.Logging (2)</a>
+                <a role="button" href="/tags/net" class="btn btn-default btn-sm"> .NET (3)</a>
+                <a role="button" href="/tags/c%23" class="btn btn-default btn-sm"> C# (3)</a>
                 <a role="button" href="/tags/logging" class="btn btn-default btn-sm"> Logging (2)</a>
-                <a role="button" href="/tags/c%23" class="btn btn-default btn-sm"> C# (2)</a>
-                <a role="button" href="/tags/net" class="btn btn-default btn-sm"> .NET (2)</a>
-                <a role="button" href="/tags/wyam" class="btn btn-default btn-sm"> Wyam (1)</a>
+                <a role="button" href="/tags/microsoft.extensions.logging" class="btn btn-default btn-sm"> Microsoft.Extensions.Logging (2)</a>
+                <a role="button" href="/tags/tpl" class="btn btn-default btn-sm"> TPL (1)</a>
                 <a role="button" href="/tags/digitaltapestry" class="btn btn-default btn-sm"> digitaltapestry (1)</a>
+                <a role="button" href="/tags/task" class="btn btn-default btn-sm"> Task (1)</a>
+                <a role="button" href="/tags/wyam" class="btn btn-default btn-sm"> Wyam (1)</a>
         </div>
         <ul class="pager">
             <li class="next">
@@ -150,6 +159,7 @@ logging, and there's a new kid on the block: <a href="https://github.com/aspnet/
         <hr />
         <h5>Older Posts</h5>
         <ul class="list-unstyled">
+                <li><a href="/posts/welcome-back">Welcome Back</a></li>
         </ul>
         <ul class="pager">
             <li class="next">
