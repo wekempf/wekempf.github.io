@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 
-        <title>Digital Tapestry - Logging - Part II</title>
+        <title>Digital Tapestry - Understanding Task - Part II</title>
         <meta name="description" content="Weaving a Digital Tapestry" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">        
 
@@ -28,9 +28,9 @@
         <meta name="msapplication-tooltip" content="Digital Tapestry" />
         <meta name="msapplication-starturl" content="/" />
 
-        <meta property="og:title" content="Digital Tapestry - Logging - Part II" />
+        <meta property="og:title" content="Digital Tapestry - Understanding Task - Part II" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://digitaltapestry.net/posts/logging-part-II" />
+        <meta property="og:url" content="http://digitaltapestry.net/posts/understanding-task-II" />
         <!-- TODO: More social graph meta tags -->
 
         <script src="/assets/js/jquery.min.js"></script>
@@ -88,14 +88,14 @@
 
     
 <div class="post-heading">
-    <h1>Logging - Part II</h1>
+    <h1>Understanding Task - Part II</h1>
     <div class="meta">        
-Published on Sunday, January 1, 2017<br>    </div>
+Published on Saturday, January 7, 2017<br>    </div>
         <div class="tags">
                     <a role="button" href="/tags/net" class="btn btn-default btn-xs">.NET</a>
                     <a role="button" href="/tags/c%23" class="btn btn-default btn-xs">C#</a>
-                    <a role="button" href="/tags/logging" class="btn btn-default btn-xs">Logging</a>
-                    <a role="button" href="/tags/microsoft.extensions.logging" class="btn btn-default btn-xs">Microsoft.Extensions.Logging</a>
+                    <a role="button" href="/tags/task" class="btn btn-default btn-xs">Task</a>
+                    <a role="button" href="/tags/tpl" class="btn btn-default btn-xs">TPL</a>
         </div>     
 </div>
                                         </div>
@@ -109,134 +109,161 @@ Published on Sunday, January 1, 2017<br>    </div>
                                 <div id="content" class="col-md-12">
                                         
 
-<h1 id="logging">Logging</h1>
-<h2 id="part-ii">Part II</h2>
-<p>In <a href="/posts/logging-part-I">Part I</a> we were introduced to <a href="https://github.com/aspnet/Logging">Microsoft.Extensions.Logging</a>
-which I amusingly abbreviate to just MEL. In particular, we explored the design of the <code>ILogger</code> interface.
-In this post we'll continue to explore MEL by looking next at the design of the <code>ILoggerFactory</code> interface.</p>
-<h3 id="iloggerfactory">ILoggerFactory</h3>
-<p>The <code>ILoggerFactory</code> type is used to create <code>ILogger</code> instances. Here it is:</p>
-<pre><code class="language-csharp">/// &lt;summary&gt;
-/// Represents a type used to configure the logging system and create instances of &lt;see cref=&quot;ILogger&quot;/&gt; from
-/// the registered &lt;see cref=&quot;ILoggerProvider&quot;/&gt;s.
-/// &lt;/summary&gt;
-public interface ILoggerFactory : IDisposable
+<h1 id="understanding-task">Understanding Task</h1>
+<h2 id="part-i">Part I</h2>
+<p>In <a href="understanding-task-I">Part I</a> I explained that a <code>Task</code> is really <strong>just</strong> a datastructure
+that represents the result of &quot;something&quot;, and implemented a <em>very</em> basic <code>MyTask&lt;T&gt;</code> to illustrate
+that. Of course, that isn't a very complete picture and I promised that this time around we'd
+update <code>MyTask&lt;T&gt;</code> to more closely represent the mental model you have for <code>Task</code>.</p>
+<p>Most developer's mental model is very firmly fixed around a <code>Task</code> representing a thread, or maybe
+they have a slightly better understanding and think of it as something run on the thread pool. A
+very few might actually think in terms of any asynchronous operation, which is much closer to the
+truth. In the Task Programming Library (TPL) we call it a <code>Task</code>, but other languages and frameworks
+call them a <code>Promise</code> or a <code>Future</code>. These are probably better names, to be honest, as they get you
+closer to the correct mental model.</p>
+<p>I said a <code>Task</code> is just the result of <em>something</em>, but let's refine that. It's a datastructure that
+represents the result of <em>something once there is a result</em>. The result may exist now, or it may
+exist in the future, and the <code>Task</code> represents that result <em>now</em>. That may be a complicated explanation
+for you to understand, so once again we'll attempt to make it concrete.</p>
+<p>Currently, our <code>MyTask&lt;T&gt;</code> represents a result that's already available. Let's modify it so it can
+<em>also</em> represent a result that may be available only in the future. Here's our code so far.</p>
+<pre><code class="language-csharp">public class MyTask&lt;TResult&gt;
 {
-    /// &lt;summary&gt;
-    /// Creates a new &lt;see cref=&quot;ILogger&quot;/&gt; instance.
-    /// &lt;/summary&gt;
-    /// &lt;param name=&quot;categoryName&quot;&gt;The category name for messages produced by the logger.&lt;/param&gt;
-    /// &lt;returns&gt;The &lt;see cref=&quot;ILogger&quot;/&gt;.&lt;/returns&gt;
-    ILogger CreateLogger(string categoryName);
-
-    /// &lt;summary&gt;
-    /// Adds an &lt;see cref=&quot;ILoggerProvider&quot;/&gt; to the logging system.
-    /// &lt;/summary&gt;
-    /// &lt;param name=&quot;provider&quot;&gt;The &lt;see cref=&quot;ILoggerProvider&quot;/&gt;.&lt;/param&gt;
-    void AddProvider(ILoggerProvider provider);
-}
-</code></pre>
-<p>This one is even simpler than <code>ILogger</code>, with only two methods. The <code>AddProvider</code> method is what you use to
-control where log events go, but I'm not going to cover that in this post. I'll probably cover it in a future
-post. For now, let's focus on <code>CreateLogger</code> instead.</p>
-<p>The <code>CreateLogger</code> method is called, not surprisingly, to create an <code>ILogger</code> instance. Depending on the
-logging framework you're used to using, you may be surprised at the <code>categoryName</code> parameter it requires,
-however. Some, but not all, logging frameworks allow you to create loggers that log with different
-&quot;categories&quot; to allow you to control filtring at a very fine grained level. For instance, if you know
-you have a bug in <code>SomeClass</code> you could turn logging up to include <code>Debug</code> level events only for the
-&quot;category&quot; that <code>SomeClass</code> logs to. Often these categories are based on a <code>Type</code> name (the full name,
-including the namespace). MEL makes it easy to do the same thing by providing some extension methods.</p>
-<pre><code class="language-cscript">/// &lt;summary&gt;
-/// ILoggerFactory extension methods for common scenarios.
-/// &lt;/summary&gt;
-public static class LoggerFactoryExtensions
-{
-    /// &lt;summary&gt;
-    /// Creates a new ILogger instance using the full name of the given type.
-    /// &lt;/summary&gt;
-    /// &lt;typeparam name=&quot;T&quot;&gt;The type.&lt;/typeparam&gt;
-    /// &lt;param name=&quot;factory&quot;&gt;The factory.&lt;/param&gt;
-    public static ILogger&lt;T&gt; CreateLogger&lt;T&gt;(this ILoggerFactory factory)
+    private MyTask()
     {
-        // ..
     }
 
-    /// &lt;summary&gt;
-    /// Creates a new ILogger instance using the full name of the given type.
-    /// &lt;/summary&gt;
-    /// &lt;param name=&quot;factory&quot;&gt;The factory.&lt;/param&gt;
-    /// &lt;param name=&quot;type&quot;&gt;The type.&lt;/param&gt;
-    public static ILogger CreateLogger(this ILoggerFactory factory, Type type)
-    {
-        // ..
-    }
+    public static MyTask&lt;TResult&gt; SetError(Exception e) =&gt; new MyTask&lt;TResult&gt; { Error = e };
+
+    public static MyTask&lt;TResult&gt; SetResult(TResult result) =&gt; new MyTask&lt;TResult&gt; { Result = result };
+
+    public Exception Error { get; private set; }
+
+    public TResult Result { get; private set; }
 }
 </code></pre>
-<p>There's a concrete <code>LoggerFactory</code> instance that implements <code>ILoggerFactory</code>. So, putting everything
-we've learned so far together, here's a simple console application that logs a single message
-to standard output.</p>
-<pre><code class="language-csharp">using Microsoft.Extensions.Logging;
-using System;
-
-namespace LoggingPlay
+<p>If this is  going to represent a result that may only be available in the future, we need some way to
+set the result in the future. This is a tricky thing to solve, and this is where the TPL gets really
+clever. We need to create a <code>MyTask&lt;T&gt;</code> that doesn't have a result, and then have some way to set the
+result in the future. However, we don't want just anyone to be able to set the result. We want only
+the code/method that creates the <code>MyTask&lt;T&gt;</code> instance to be able to set its result. The TPL does this
+by using another type as both a factory object and the only way to set the result of the <code>Task</code>.
+In the TPL, this type is called the <code>TaskCompletionSource&lt;T&gt;</code>. Let's create our own <code>MyTaskCompletionSource&lt;T&gt;</code>.</p>
+<pre><code class="language-csharp">public class MyTask&lt;TResult&gt;
 {
-    class Program
+    internal MyTask()
     {
-        static void Main(string[] args)
+    }
+
+    public Exception Error { get; internal set; }
+
+    public TResult Result { get; internal set; }
+}
+
+public class MyTaskCompletionSource&lt;TResult&gt;
+{
+    public MyTask&lt;TResult&gt; Task { get; } = new MyTask&lt;TResult&gt;();
+
+    public void SetError(Exception e) =&gt; Task.Error = e;
+
+    public void SetResult(TResult result) =&gt; Task.Result = result;
+}
+</code></pre>
+<p>The <code>MyTask&lt;T&gt;</code> constructor and the setters for <code>Error</code> and <code>Result</code> are all declared internal. Only
+<code>MyTaskCompletionSource&lt;T&gt;</code> should call these. The only way for end user code to create a <code>MyTask&lt;T&gt;</code>
+and to set its results is to use a <code>MyTaskCompletionSource&lt;T&gt;</code>.</p>
+<p>So, we've split up the construction from the setting of the results, allowing us to set the results sometime
+in the future. However, there's no way to know when the result is available, and so trying to get the
+<code>Result</code> or the <code>Error</code> before it's been set won't behave the way we'd like. Things will get a bit more
+complicated now, but lets solve these problems.</p>
+<pre><code class="language-csharp">public class MyTask&lt;TResult&gt;
+{
+    private readonly ManualResetEvent completedEvent = new ManualResetEvent(false);
+    private Exception error;
+    private TResult result;
+
+    internal MyTask()
+    {
+    }
+
+    public Exception Error
+    {
+        get
         {
-            var factory = new LoggerFactory()
-                .AddConsole();
-            var logger = factory.CreateLogger&lt;Program&gt;();
-            logger.LogInformation(&quot;Started at {Time}.&quot;, DateTime.Now);
+            this.completedEvent.WaitOne();
+            return this.error;
+        }
+
+        set
+        {
+            this.error = value;
+            this.completedEvent.Set();
+        }
+    }
+
+    public TResult Result
+    {
+        get
+        {
+            this.completedEvent.WaitOne();
+            if (this.error != null)
+            {
+                throw new InvalidOperationException(&quot;Operation failed.&quot;, this.error);
+            }
+
+            return this.result;
+        }
+
+        set
+        {
+            this.result = value;
+            this.completedEvent.WaitOne();
         }
     }
 }
+
+public class MyTaskCompletionSource&lt;TResult&gt;
+{
+    public MyTask&lt;TResult&gt; Task { get; } = new MyTask&lt;TResult&gt;();
+
+    public void SetError(Exception e) =&gt; Task.Error = e;
+
+    public void SetResult(TResult result) =&gt; Task.Result = result;
+}
 </code></pre>
 <blockquote class="blockquote">
-<p>Note: To use this code you'll also have to include the NuGet packages for <code>Microsoft.Extensions.Logging</code>
-and <code>Microsoft.Extensions.Logging.Console</code>.</p>
+<p>WARNING: The above code is <strong>NOT</strong> thread-safe.</p>
 </blockquote>
-<p>Most of this should be familiar to you at this point. The <code>AddConsole</code> method may not make any sense to
-you yet. This is actually an extension method found in <code>Microsoft.Extensions.Logging.Console</code>. it
-simply creates a &quot;provider&quot; that writes log events to standard output and adds it by calling
-<code>ILoggerFactory.AddProvider</code>.</p>
-<p>When you run this, the following is produced.</p>
-<pre><code class="language-text">info: LoggingPlay.Program[0]
-      Started at 01/01/2017 12:00:25.
-</code></pre>
-<p>The output is based on the following:</p>
-<ul>
-<li>&quot;info&quot; is the log level.</li>
-<li>&quot;LoggingPlay.Program&quot; is the category name, derived from the generic type parameter used in the
-<code>CreateLogger</code> call.</li>
-<li>&quot;[0]&quot; is the event ID (we didn't specify one when we called <code>LogInformation</code> so it defaulted to 0).</li>
-<li>&quot;Started at 01/01/2017 12:00:25&quot; is the fomratted message generated from the template and parameters
-we passed to <code>LogInformation</code>.</li>
-</ul>
-<p>Some providers allow you to configure the output format, but as far as I know the console provider does not.
-Each provider will be unique and you'll have to learn how to use it on your own. I'll cover at
-least the basics of some of them in the future. Remember, I'm not giving you a tutorial here,
-but rather I'm exploring the API design.</p>
-<p>While you're not forced into any specific usage pattern here, typically your application should follow
-a simple pattern. You'll have a single <code>LoggerFactory</code> instance for the entire application, which
-you add providers to at startup. Then, in every class that will do some logging you'll include an
-<code>ILogger</code> instance created by calling <code>CreateInstance&lt;T&gt;</code>. It's a really good idea to do all of this
-through Dependency Injection. We know enough now to add the <code>LoggerFactory</code> to the DI container of
-your choice and inject <code>ILoggerFactory</code> into the classes that will create log events. This will
-work, but it does seem strange and a bit of a chore to inject an <code>ILoggerFactory</code> instead of an
-<code>ILogger</code>. Some DI containers would allow you to do some clever configuration to allow injecting
-an <code>ILogger</code> created with the Type that the logger is being injected into, but not all containers
-can accomplish this. MEL's design actually considers this, which is something we'll explore
-in Part III.</p>
+<p>I told you I'd show you a naive implementation. This code illustrates the ideas well, but it is <strong>NOT</strong>
+thread-safe and there are other issues (like the <code>MyTaskCompletionSource&lt;T&gt;</code> being able to set
+both a <code>Result</code> and an <code>Error</code>). I'm not trying to write production code here, but instead to just
+get across the concepts. Since <code>Task</code> already exists I feel safe in posting code like this, because no
+one would ever use it, but heed my warning: don't use this code as a way to understand how to write
+thread-safe or production code.</p>
+<p>So, with the warnings out of the way, let's see what we did. Our <code>MyTask&lt;T&gt;</code> now has a <code>ManualResetEvent</code>
+that helps us to know <em>when</em> the results have been set. We modified the setters for <code>Error</code> and
+<code>Result</code> so that when the <code>MyTaskCompletionSource&lt;T&gt;</code> calls them the event is set as well. Meanwhile,
+the getters wait for this event to be set, making them blocking calls that will wait for the values
+to be set before returning them. In addition, I went ahead and made the getter for <code>Result</code> throw an
+exception if the result is actually an <code>Error</code> instead.</p>
+<p>I hope the lightbulb just turned on for many of you. While the implementation is horrid, it does
+represent the bulk of what a real <code>Task</code> is. In fact, there's only two concepts we've left out
+here: continuations and cancellation. I'm not going to cover those anytime soon.</p>
+<p>Note that there's no <code>Thread</code> anywhere in this code. Nor have I used the thread pool. Despite that,
+this <em>is</em> a complete representation of a <code>Task</code> (minus continuations and cancellation, of course).
+I here some of you saying &quot;but what about <code>Task.Run</code>?&quot; Well, we'll talk about that and other
+related concepts next time, but <code>Task</code> doesn't really need them. This is really the complete
+concept of a <code>Task</code>, and if you shift your mental model to think in these terms you'll be
+much better suited for using the TPL.</p>
 
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
-    var disqus_identifier = 'logging-part-II';
-    var disqus_title = 'Logging - Part II';
-    var disqus_url = 'http://digitaltapestry.net/posts/logging-part-II';
+    var disqus_identifier = 'understanding-task-II';
+    var disqus_title = 'Understanding Task - Part II';
+    var disqus_url = 'http://digitaltapestry.net/posts/understanding-task-II';
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {

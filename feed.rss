@@ -5,8 +5,190 @@
 		<link>http://digitaltapestry.net/</link>
 		<description>Weaving a Digital Tapestry</description>
 		<copyright>2017</copyright>
-		<pubDate>Sat, 07 Jan 2017 18:36:36 GMT</pubDate>
-		<lastBuildDate>Sat, 07 Jan 2017 18:36:36 GMT</lastBuildDate>
+		<pubDate>Sat, 07 Jan 2017 18:59:20 GMT</pubDate>
+		<lastBuildDate>Sat, 07 Jan 2017 18:59:20 GMT</lastBuildDate>
+		<item>
+			<title>Understanding Task - Part II</title>
+			<link>http://digitaltapestry.net/posts/understanding-task-II</link>
+			<description>&lt;p&gt;In &lt;a href="understanding-task-I"&gt;Part I&lt;/a&gt; I explained that a &lt;code&gt;Task&lt;/code&gt; is really &lt;strong&gt;just&lt;/strong&gt; a datastructure
+that represents the result of "something", and implemented a &lt;em&gt;very&lt;/em&gt; basic &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to illustrate
+that. Of course, that isn't a very complete picture and I promised that this time around we'd
+update &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to more closely represent the mental model you have for &lt;code&gt;Task&lt;/code&gt;.&lt;/p&gt;</description>
+			<guid>http://digitaltapestry.net/posts/understanding-task-II</guid>
+			<pubDate>Sat, 07 Jan 2017 12:39:00 GMT</pubDate>
+			<content:encoded>&lt;h1 id="understanding-task"&gt;Understanding Task&lt;/h1&gt;
+&lt;h2 id="part-i"&gt;Part I&lt;/h2&gt;
+&lt;p&gt;In &lt;a href="understanding-task-I"&gt;Part I&lt;/a&gt; I explained that a &lt;code&gt;Task&lt;/code&gt; is really &lt;strong&gt;just&lt;/strong&gt; a datastructure
+that represents the result of "something", and implemented a &lt;em&gt;very&lt;/em&gt; basic &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to illustrate
+that. Of course, that isn't a very complete picture and I promised that this time around we'd
+update &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to more closely represent the mental model you have for &lt;code&gt;Task&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Most developer's mental model is very firmly fixed around a &lt;code&gt;Task&lt;/code&gt; representing a thread, or maybe
+they have a slightly better understanding and think of it as something run on the thread pool. A
+very few might actually think in terms of any asynchronous operation, which is much closer to the
+truth. In the Task Programming Library (TPL) we call it a &lt;code&gt;Task&lt;/code&gt;, but other languages and frameworks
+call them a &lt;code&gt;Promise&lt;/code&gt; or a &lt;code&gt;Future&lt;/code&gt;. These are probably better names, to be honest, as they get you
+closer to the correct mental model.&lt;/p&gt;
+&lt;p&gt;I said a &lt;code&gt;Task&lt;/code&gt; is just the result of &lt;em&gt;something&lt;/em&gt;, but let's refine that. It's a datastructure that
+represents the result of &lt;em&gt;something once there is a result&lt;/em&gt;. The result may exist now, or it may
+exist in the future, and the &lt;code&gt;Task&lt;/code&gt; represents that result &lt;em&gt;now&lt;/em&gt;. That may be a complicated explanation
+for you to understand, so once again we'll attempt to make it concrete.&lt;/p&gt;
+&lt;p&gt;Currently, our &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; represents a result that's already available. Let's modify it so it can
+&lt;em&gt;also&lt;/em&gt; represent a result that may be available only in the future. Here's our code so far.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;public class MyTask&amp;lt;TResult&amp;gt;
+{
+    private MyTask()
+    {
+    }
+
+    public static MyTask&amp;lt;TResult&amp;gt; SetError(Exception e) =&amp;gt; new MyTask&amp;lt;TResult&amp;gt; { Error = e };
+
+    public static MyTask&amp;lt;TResult&amp;gt; SetResult(TResult result) =&amp;gt; new MyTask&amp;lt;TResult&amp;gt; { Result = result };
+
+    public Exception Error { get; private set; }
+
+    public TResult Result { get; private set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If this is  going to represent a result that may only be available in the future, we need some way to
+set the result in the future. This is a tricky thing to solve, and this is where the TPL gets really
+clever. We need to create a &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; that doesn't have a result, and then have some way to set the
+result in the future. However, we don't want just anyone to be able to set the result. We want only
+the code/method that creates the &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; instance to be able to set its result. The TPL does this
+by using another type as both a factory object and the only way to set the result of the &lt;code&gt;Task&lt;/code&gt;.
+In the TPL, this type is called the &lt;code&gt;TaskCompletionSource&amp;lt;T&amp;gt;&lt;/code&gt;. Let's create our own &lt;code&gt;MyTaskCompletionSource&amp;lt;T&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;public class MyTask&amp;lt;TResult&amp;gt;
+{
+    internal MyTask()
+    {
+    }
+
+    public Exception Error { get; internal set; }
+
+    public TResult Result { get; internal set; }
+}
+
+public class MyTaskCompletionSource&amp;lt;TResult&amp;gt;
+{
+    public MyTask&amp;lt;TResult&amp;gt; Task { get; } = new MyTask&amp;lt;TResult&amp;gt;();
+
+    public void SetError(Exception e) =&amp;gt; Task.Error = e;
+
+    public void SetResult(TResult result) =&amp;gt; Task.Result = result;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; constructor and the setters for &lt;code&gt;Error&lt;/code&gt; and &lt;code&gt;Result&lt;/code&gt; are all declared internal. Only
+&lt;code&gt;MyTaskCompletionSource&amp;lt;T&amp;gt;&lt;/code&gt; should call these. The only way for end user code to create a &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt;
+and to set its results is to use a &lt;code&gt;MyTaskCompletionSource&amp;lt;T&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;So, we've split up the construction from the setting of the results, allowing us to set the results sometime
+in the future. However, there's no way to know when the result is available, and so trying to get the
+&lt;code&gt;Result&lt;/code&gt; or the &lt;code&gt;Error&lt;/code&gt; before it's been set won't behave the way we'd like. Things will get a bit more
+complicated now, but lets solve these problems.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;public class MyTask&amp;lt;TResult&amp;gt;
+{
+    private readonly ManualResetEvent completedEvent = new ManualResetEvent(false);
+    private Exception error;
+    private TResult result;
+
+    internal MyTask()
+    {
+    }
+
+    public Exception Error
+    {
+        get
+        {
+            this.completedEvent.WaitOne();
+            return this.error;
+        }
+
+        set
+        {
+            this.error = value;
+            this.completedEvent.Set();
+        }
+    }
+
+    public TResult Result
+    {
+        get
+        {
+            this.completedEvent.WaitOne();
+            if (this.error != null)
+            {
+                throw new InvalidOperationException("Operation failed.", this.error);
+            }
+
+            return this.result;
+        }
+
+        set
+        {
+            this.result = value;
+            this.completedEvent.WaitOne();
+        }
+    }
+}
+
+public class MyTaskCompletionSource&amp;lt;TResult&amp;gt;
+{
+    public MyTask&amp;lt;TResult&amp;gt; Task { get; } = new MyTask&amp;lt;TResult&amp;gt;();
+
+    public void SetError(Exception e) =&amp;gt; Task.Error = e;
+
+    public void SetResult(TResult result) =&amp;gt; Task.Result = result;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote class="blockquote"&gt;
+&lt;p&gt;WARNING: The above code is &lt;strong&gt;NOT&lt;/strong&gt; thread-safe.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I told you I'd show you a naive implementation. This code illustrates the ideas well, but it is &lt;strong&gt;NOT&lt;/strong&gt;
+thread-safe and there are other issues (like the &lt;code&gt;MyTaskCompletionSource&amp;lt;T&amp;gt;&lt;/code&gt; being able to set
+both a &lt;code&gt;Result&lt;/code&gt; and an &lt;code&gt;Error&lt;/code&gt;). I'm not trying to write production code here, but instead to just
+get across the concepts. Since &lt;code&gt;Task&lt;/code&gt; already exists I feel safe in posting code like this, because no
+one would ever use it, but heed my warning: don't use this code as a way to understand how to write
+thread-safe or production code.&lt;/p&gt;
+&lt;p&gt;So, with the warnings out of the way, let's see what we did. Our &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; now has a &lt;code&gt;ManualResetEvent&lt;/code&gt;
+that helps us to know &lt;em&gt;when&lt;/em&gt; the results have been set. We modified the setters for &lt;code&gt;Error&lt;/code&gt; and
+&lt;code&gt;Result&lt;/code&gt; so that when the &lt;code&gt;MyTaskCompletionSource&amp;lt;T&amp;gt;&lt;/code&gt; calls them the event is set as well. Meanwhile,
+the getters wait for this event to be set, making them blocking calls that will wait for the values
+to be set before returning them. In addition, I went ahead and made the getter for &lt;code&gt;Result&lt;/code&gt; throw an
+exception if the result is actually an &lt;code&gt;Error&lt;/code&gt; instead.&lt;/p&gt;
+&lt;p&gt;I hope the lightbulb just turned on for many of you. While the implementation is horrid, it does
+represent the bulk of what a real &lt;code&gt;Task&lt;/code&gt; is. In fact, there's only two concepts we've left out
+here: continuations and cancellation. I'm not going to cover those anytime soon.&lt;/p&gt;
+&lt;p&gt;Note that there's no &lt;code&gt;Thread&lt;/code&gt; anywhere in this code. Nor have I used the thread pool. Despite that,
+this &lt;em&gt;is&lt;/em&gt; a complete representation of a &lt;code&gt;Task&lt;/code&gt; (minus continuations and cancellation, of course).
+I here some of you saying "but what about &lt;code&gt;Task.Run&lt;/code&gt;?" Well, we'll talk about that and other
+related concepts next time, but &lt;code&gt;Task&lt;/code&gt; doesn't really need them. This is really the complete
+concept of a &lt;code&gt;Task&lt;/code&gt;, and if you shift your mental model to think in these terms you'll be
+much better suited for using the TPL.&lt;/p&gt;
+
+
+&lt;div id="disqus_thread"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'understanding-task-II';
+    var disqus_title = 'Understanding Task - Part II';
+    var disqus_url = 'http://digitaltapestry.net/posts/understanding-task-II';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+&lt;/script&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+&lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content:encoded>
+		</item>
 		<item>
 			<title>Understanding Task - Part I</title>
 			<link>http://digitaltapestry.net/posts/understanding-task-I</link>
