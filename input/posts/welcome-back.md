@@ -8,7 +8,7 @@ Hi again. Or hi for the first time if you're new.
 
 My old Digital Tapestry blog died. I was using [Orchard](http://www.orchardproject.net/) which is a fine .NET based CMS and hosting
 on a provider that I paid for by the year. I was happy with that for some time. Then, I screwed up. I got busy, and failed to
-maintain everything. Orchard development kept on going, while my little sight sat dormant. When I finally got the time to get
+maintain everything. Orchard development kept on going, while my little site sat dormant. When I finally got the time to get
 back to it, I screwed something up trying to update the codebase. The site mostly still worked, but certain key things, like
 the ability to export the content, no longer worked. Still being busy, I figured I'd fix that in the future and posted one or
 two more articles and went dark again. Way too much time passed and the bill for my provider came due. Honestly, I was posting
