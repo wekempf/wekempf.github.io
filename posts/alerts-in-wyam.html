@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 
-        <title>Digital Tapestry - Task</title>
+        <title>Digital Tapestry - Alerts In Wyam</title>
         <meta name="description" content="Weaving a Digital Tapestry" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">        
 
@@ -28,9 +28,9 @@
         <meta name="msapplication-tooltip" content="Digital Tapestry" />
         <meta name="msapplication-starturl" content="/" />
 
-        <meta property="og:title" content="Digital Tapestry - Task" />
+        <meta property="og:title" content="Digital Tapestry - Alerts In Wyam" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://digitaltapestry.net/tags/task" />
+        <meta property="og:url" content="http://digitaltapestry.net/posts/alerts-in-wyam" />
         <!-- TODO: More social graph meta tags -->
 
         <script src="/assets/js/jquery.min.js"></script>
@@ -85,9 +85,20 @@
                         <div class="container">
                                 <div class="row">
                                         <div class="col-md-12">
-<div class="site-heading">
-    <h1>Task</h1>
-</div>                                            </div>
+
+    
+<div class="post-heading">
+    <h1>Alerts In Wyam</h1>
+    <div class="meta">        
+Published on Sunday, January 8, 2017<br>    </div>
+        <div class="tags">
+                    <a role="button" href="/tags/css" class="btn btn-default btn-xs">CSS</a>
+                    <a role="button" href="/tags/markdig" class="btn btn-default btn-xs">Markdig</a>
+                    <a role="button" href="/tags/markdown" class="btn btn-default btn-xs">Markdown</a>
+                    <a role="button" href="/tags/wyam" class="btn btn-default btn-xs">Wyam</a>
+        </div>     
+</div>
+                                        </div>
                                 </div>
                         </div>
                 </header>
@@ -96,40 +107,117 @@
                 <div class="container">
                         <div class="row">
                                 <div id="content" class="col-md-12">
-                                        <div class="container-sm-height">
-    <div class="row row-sm-height">
-        <div class="col-sm-8 right-border col-sm-height">
-                    <div class="post-list">
-            <a href="/posts/understanding-task-II">
-                <h3 class="post-title">Understanding Task - Part II</h3>
-            </a>
-            <p class="post-meta">Posted on Saturday, January 7, 2017</p>            
-        </div>   
-        <div class="post-list">
-            <a href="/posts/understanding-task-I">
-                <h3 class="post-title">Understanding Task - Part I</h3>
-            </a>
-            <p class="post-meta">Posted on Saturday, January 7, 2017</p>            
-        </div>   
+                                        
 
-            <hr class="visible-xs-block" />
-        </div>
-		
-        <div class="col-sm-4 col-sm-height">
-                <a role="button" href="/tags/net" class="btn btn-default btn-xs"> .NET (4)</a>
-                <a role="button" href="/tags/c%23" class="btn btn-default btn-xs"> C# (4)</a>
-                <a role="button" href="/tags/css" class="btn btn-default btn-xs"> CSS (1)</a>
-                <a role="button" href="/tags/digitaltapestry" class="btn btn-default btn-xs"> digitaltapestry (1)</a>
-                <a role="button" href="/tags/logging" class="btn btn-default btn-xs"> Logging (2)</a>
-                <a role="button" href="/tags/markdig" class="btn btn-default btn-xs"> Markdig (1)</a>
-                <a role="button" href="/tags/markdown" class="btn btn-default btn-xs"> Markdown (1)</a>
-                <a role="button" href="/tags/microsoft.extensions.logging" class="btn btn-default btn-xs"> Microsoft.Extensions.Logging (2)</a>
-                <a role="button" href="/tags/task" class="btn btn-primary btn-xs"> Task (2)</a>
-                <a role="button" href="/tags/tpl" class="btn btn-default btn-xs"> TPL (2)</a>
-                <a role="button" href="/tags/wyam" class="btn btn-default btn-xs"> Wyam (2)</a>
-        </div>
-    </div>
+<h1 id="alerts-in-wyam">Alerts in Wyam</h1>
+<p>Bootstrap has the concept of &quot;alerts&quot;, which are specially styled divs used to call out notes.
+Here's some examples:</p>
+<div class="alert alert-success"><p>A success alert.</p>
 </div>
+<div class="alert alert-info"><p>An info alert.</p>
+</div>
+<div class="alert alert-warning"><p>A warning alert.</p>
+</div>
+<div class="alert alert-danger"><p>A danger alert.</p>
+</div>
+<p>I wanted to be able to add these alerts to a Markdown document processed by <a href="https://wyam.io">Wyam</a>.
+It took me a while to figure this out. Wyam uses <a href="https://github.com/lunet-io/markdig/">Markdig</a>
+for the Markdown processor, which includes several extensions. Which extensions are used is
+controllable via the global metadata <code>MarkdownExtensions</code> property, which defaults to &quot;advanced+bootstrap&quot;.
+The &quot;advanced&quot; part of that includes many extensions, but the important one here is the extension
+for custom containers and special attributes. Combined, they let you code an alert like this:</p>
+<pre><code class="language-markdown">:::{.alert .alert-warning}
+A warning alert.
+:::
+</code></pre>
+<p>The <code>:::</code> is similar to a code fence, but defines a custom container (a div), while <code>{.alert .alert-warning}</code>
+specifies the CSS classes to add to the element.</p>
+<p>I wanted to modify the styling for the alerts a bit, in order to include a glyphicon in every such alert.
+So, I created a <code>input\assets\css\override.css</code> file to replace the file in the theme with the following
+contents:</p>
+<pre><code class="language-css">.alert {
+    margin-left: 10px;
+}
+.alert-success:before {
+    position: relative;
+    top: 1px;
+    float: left;
+    margin-right: 8px;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    content: &quot;\e125&quot;;
+}
+.alert-info:before {
+    position: relative;
+    top: 1px;
+    float: left;
+    margin-right: 8px;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    content: &quot;\270f&quot;;
+}
+.alert-warning:before {
+    position: relative;
+    top: 1px;
+    float: left;
+    margin-right: 8px;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    content: &quot;\e107&quot;;
+}
+.alert-danger:before {
+    position: relative;
+    top: 1px;
+    float: left;
+    margin-right: 8px;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    content: &quot;\e074&quot;;
+}
+.alert &gt; p {
+    margin-top: 0px;
+}
+</code></pre>
+<p>The examples I showed at the top of this post were created using the Markdown from the example and styled
+with the above CSS.</p>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'alerts-in-wyam';
+    var disqus_title = 'Alerts In Wyam';
+    var disqus_url = 'http://digitaltapestry.net/posts/alerts-in-wyam';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
                                 </div>
                         </div>
                 </div>
