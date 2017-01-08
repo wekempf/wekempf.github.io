@@ -104,6 +104,19 @@
 <div class="row">
     <div class="col-sm-8 right-border">
                 <div class="post-preview">
+                    <a href="/posts/less-in-wyam">
+                        <h2 class="post-title">Less in Wyam</h2>
+                    </a>
+                    <p class="post-meta">Posted on Sunday, January 8, 2017</p>
+                    <p>In the <a href="/posts/alerts-in-wyam">last post</a> I showed how to user Bootstrap alerts from
+within a Wyam based blog site. I included some CSS to restyle the alerts to include
+glyphicons for the various alert types. The CSS I used had a lot of repetitive code.
+The <a href="http://lesscs.org">Less</a> CSS preprocessor makes it easy to use mixins to eliminate
+duplicate code in CSS files. Wyam has a module for using Less, so I updated my site
+to use it.</p>             
+                </div>       
+                    <hr /> 
+                <div class="post-preview">
                     <a href="/posts/alerts-in-wyam">
                         <h2 class="post-title">Alerts In Wyam</h2>
                     </a>
@@ -122,36 +135,21 @@ that represents the result of "something", and implemented a <em>very</em> basic
 that. Of course, that isn't a very complete picture and I promised that this time around we'd
 update <code>MyTask&lt;T&gt;</code> to more closely represent the mental model you have for <code>Task</code>.</p>             
                 </div>       
-                    <hr /> 
-                <div class="post-preview">
-                    <a href="/posts/understanding-task-I">
-                        <h2 class="post-title">Understanding Task - Part I</h2>
-                    </a>
-                    <p class="post-meta">Posted on Saturday, January 7, 2017</p>
-                    <p>I've noticed that many developers I work and talk with have a pretty big misunderstanding of the <code>Task</code> and <code>Task&lt;T&gt;</code> types
-from the Task Programming Library (TPL). In their minds a <code>Task</code> is a synonym for a <code>Thread</code>. With a bit of explanation
-I can get them to almost understand that a <code>Task</code> is more often than not run on the thread pool, or represents asynchronous
-I/O, but I don't get the feeling that I too often actually get them to understand this at a deep level. I think that
-being able to effectively write programs with the TPL you do need this understanding, so I'm going to write a blog series
-about asynchronous programming from a different point of view than most. I'm going to start from the bottom and work my
-way up, while most other books/blogs/articles start at the top and work their way down, though usually not going to deep.
-My hope is that by working from the bottom up, some of the mystery will just disappear.</p>             
-                </div>       
     </div>
     <div class="col-sm-4 sidebar">
         <hr class="visible-xs-block" />
         <h5>Tags</h5>
         <div>
-                <a role="button" href="/tags/net" class="btn btn-default btn-sm"> .NET (4)</a>
                 <a role="button" href="/tags/c%23" class="btn btn-default btn-sm"> C# (4)</a>
-                <a role="button" href="/tags/microsoft.extensions.logging" class="btn btn-default btn-sm"> Microsoft.Extensions.Logging (2)</a>
-                <a role="button" href="/tags/wyam" class="btn btn-default btn-sm"> Wyam (2)</a>
-                <a role="button" href="/tags/tpl" class="btn btn-default btn-sm"> TPL (2)</a>
+                <a role="button" href="/tags/net" class="btn btn-default btn-sm"> .NET (4)</a>
+                <a role="button" href="/tags/wyam" class="btn btn-default btn-sm"> Wyam (3)</a>
                 <a role="button" href="/tags/logging" class="btn btn-default btn-sm"> Logging (2)</a>
+                <a role="button" href="/tags/tpl" class="btn btn-default btn-sm"> TPL (2)</a>
                 <a role="button" href="/tags/task" class="btn btn-default btn-sm"> Task (2)</a>
-                <a role="button" href="/tags/markdown" class="btn btn-default btn-sm"> Markdown (1)</a>
-                <a role="button" href="/tags/css" class="btn btn-default btn-sm"> CSS (1)</a>
-                <a role="button" href="/tags/digitaltapestry" class="btn btn-default btn-sm"> digitaltapestry (1)</a>
+                <a role="button" href="/tags/microsoft.extensions.logging" class="btn btn-default btn-sm"> Microsoft.Extensions.Logging (2)</a>
+                <a role="button" href="/tags/css" class="btn btn-default btn-sm"> CSS (2)</a>
+                <a role="button" href="/tags/less" class="btn btn-default btn-sm"> LESS (1)</a>
+                <a role="button" href="/tags/markdig" class="btn btn-default btn-sm"> Markdig (1)</a>
         </div>
         <ul class="pager">
             <li class="next">
@@ -161,6 +159,7 @@ My hope is that by working from the bottom up, some of the mystery will just dis
         <hr />
         <h5>Older Posts</h5>
         <ul class="list-unstyled">
+                <li><a href="/posts/understanding-task-I">Understanding Task - Part I</a></li>
                 <li><a href="/posts/logging-part-II">Logging - Part II</a></li>
                 <li><a href="/posts/logging-part-I">Logging - Part I</a></li>
                 <li><a href="/posts/welcome-back">Welcome Back</a></li>

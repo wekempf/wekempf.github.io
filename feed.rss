@@ -5,8 +5,110 @@
 		<link>http://digitaltapestry.net/</link>
 		<description>Weaving a Digital Tapestry</description>
 		<copyright>2017</copyright>
-		<pubDate>Sun, 08 Jan 2017 16:32:47 GMT</pubDate>
-		<lastBuildDate>Sun, 08 Jan 2017 16:32:47 GMT</lastBuildDate>
+		<pubDate>Sun, 08 Jan 2017 18:41:39 GMT</pubDate>
+		<lastBuildDate>Sun, 08 Jan 2017 18:41:39 GMT</lastBuildDate>
+		<item>
+			<title>Less in Wyam</title>
+			<link>http://digitaltapestry.net/posts/less-in-wyam</link>
+			<description>&lt;p&gt;In the &lt;a href="/posts/alerts-in-wyam"&gt;last post&lt;/a&gt; I showed how to user Bootstrap alerts from
+within a Wyam based blog site. I included some CSS to restyle the alerts to include
+glyphicons for the various alert types. The CSS I used had a lot of repetitive code.
+The &lt;a href="http://lesscs.org"&gt;Less&lt;/a&gt; CSS preprocessor makes it easy to use mixins to eliminate
+duplicate code in CSS files. Wyam has a module for using Less, so I updated my site
+to use it.&lt;/p&gt;</description>
+			<guid>http://digitaltapestry.net/posts/less-in-wyam</guid>
+			<pubDate>Sun, 08 Jan 2017 13:25:42 GMT</pubDate>
+			<content:encoded>&lt;h1 id="less-in-wyam"&gt;Less in Wyam&lt;/h1&gt;
+&lt;p&gt;In the &lt;a href="/posts/alerts-in-wyam"&gt;last post&lt;/a&gt; I showed how to user Bootstrap alerts from
+within a Wyam based blog site. I included some CSS to restyle the alerts to include
+glyphicons for the various alert types. The CSS I used had a lot of repetitive code.
+The &lt;a href="http://lesscs.org"&gt;Less&lt;/a&gt; CSS preprocessor makes it easy to use mixins to eliminate
+duplicate code in CSS files. Wyam has a module for using Less, so I updated my site
+to use it.&lt;/p&gt;
+&lt;p&gt;The first thing I had to do was modify my config.wyam file.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;#n -p Wyam.Less
+
+Settings.Host = "digitaltapestry.net";
+GlobalMetadata["Title"] = "Digital Tapestry";
+GlobalMetadata["Description"] = "Weaving a Digital Tapestry";
+GlobalMetadata["Intro"] = "The musings of a .NET developer.";
+
+Pipelines.Add("Less",
+    ReadFiles("**/*.less"),
+    Less(),
+    WriteFiles(".css")
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Obviously this is specific to my site. You'll need the &lt;code&gt;#n -p Wyam.Less&lt;/code&gt; and the call
+to &lt;code&gt;Pipelines.Add&lt;/code&gt; while the rest is site specific.&lt;/p&gt;
+&lt;p&gt;With that in place I created a &lt;code&gt;input\assets\css\override.less&lt;/code&gt; with the following
+code.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-css"&gt;.alert {
+    margin-left: 10px;
+}
+.alert &amp;gt; p {
+    margin-top: 0px;
+}
+.alert-glyphicon {
+    position: relative;
+    top: 1px;
+    float: left;
+    margin-right: 8px;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+.alert-success:before {
+    content: "\e125";
+    .alert-glyphicon;
+}
+.alert-info:before {
+    content: "\270f";
+    .alert-glyphicon;
+}
+.alert-warning:before {
+    content: "\e107";
+    .alert-glyphicon;
+}
+.alert-danger:before {
+    content: "\e074";
+    .alert-glyphicon;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is simpler than the original CSS thanks to the &lt;code&gt;.alert-glyphicon&lt;/code&gt; mixin.&lt;/p&gt;
+&lt;p&gt;If you've already created a &lt;code&gt;input\assets\css\override.css&lt;/code&gt; you'll have to delete
+it. Now when you build the site, &lt;code&gt;override.less&lt;/code&gt; gets compiled to &lt;code&gt;override.css&lt;/code&gt;.
+This does still copy the &lt;code&gt;override.less&lt;/code&gt; file to the output as well. If I figure
+out how to remove that, I'll update this post.&lt;/p&gt;
+
+
+&lt;div id="disqus_thread"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'less-in-wyam';
+    var disqus_title = 'Less in Wyam';
+    var disqus_url = 'http://digitaltapestry.net/posts/less-in-wyam';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+&lt;/script&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+&lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content:encoded>
+		</item>
 		<item>
 			<title>Alerts In Wyam</title>
 			<link>http://digitaltapestry.net/posts/alerts-in-wyam</link>

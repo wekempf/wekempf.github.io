@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 
-        <title>Digital Tapestry - Wyam</title>
+        <title>Digital Tapestry - Less in Wyam</title>
         <meta name="description" content="Weaving a Digital Tapestry" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">        
 
@@ -28,9 +28,9 @@
         <meta name="msapplication-tooltip" content="Digital Tapestry" />
         <meta name="msapplication-starturl" content="/" />
 
-        <meta property="og:title" content="Digital Tapestry - Wyam" />
+        <meta property="og:title" content="Digital Tapestry - Less in Wyam" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://digitaltapestry.net/tags/wyam" />
+        <meta property="og:url" content="http://digitaltapestry.net/posts/less-in-wyam" />
         <!-- TODO: More social graph meta tags -->
 
         <script src="/assets/js/jquery.min.js"></script>
@@ -85,9 +85,19 @@
                         <div class="container">
                                 <div class="row">
                                         <div class="col-md-12">
-<div class="site-heading">
-    <h1>Wyam</h1>
-</div>                                            </div>
+
+    
+<div class="post-heading">
+    <h1>Less in Wyam</h1>
+    <div class="meta">        
+Published on Sunday, January 8, 2017<br>    </div>
+        <div class="tags">
+                    <a role="button" href="/tags/css" class="btn btn-default btn-xs">CSS</a>
+                    <a role="button" href="/tags/less" class="btn btn-default btn-xs">LESS</a>
+                    <a role="button" href="/tags/wyam" class="btn btn-default btn-xs">Wyam</a>
+        </div>     
+</div>
+                                        </div>
                                 </div>
                         </div>
                 </header>
@@ -96,47 +106,98 @@
                 <div class="container">
                         <div class="row">
                                 <div id="content" class="col-md-12">
-                                        <div class="container-sm-height">
-    <div class="row row-sm-height">
-        <div class="col-sm-8 right-border col-sm-height">
-                    <div class="post-list">
-            <a href="/posts/less-in-wyam">
-                <h3 class="post-title">Less in Wyam</h3>
-            </a>
-            <p class="post-meta">Posted on Sunday, January 8, 2017</p>            
-        </div>   
-        <div class="post-list">
-            <a href="/posts/alerts-in-wyam">
-                <h3 class="post-title">Alerts In Wyam</h3>
-            </a>
-            <p class="post-meta">Posted on Sunday, January 8, 2017</p>            
-        </div>   
-        <div class="post-list">
-            <a href="/posts/welcome-back">
-                <h3 class="post-title">Welcome Back</h3>
-            </a>
-            <p class="post-meta">Posted on Monday, December 26, 2016</p>            
-        </div>   
+                                        
 
-            <hr class="visible-xs-block" />
-        </div>
-		
-        <div class="col-sm-4 col-sm-height">
-                <a role="button" href="/tags/net" class="btn btn-default btn-xs"> .NET (4)</a>
-                <a role="button" href="/tags/c%23" class="btn btn-default btn-xs"> C# (4)</a>
-                <a role="button" href="/tags/css" class="btn btn-default btn-xs"> CSS (2)</a>
-                <a role="button" href="/tags/digitaltapestry" class="btn btn-default btn-xs"> digitaltapestry (1)</a>
-                <a role="button" href="/tags/less" class="btn btn-default btn-xs"> LESS (1)</a>
-                <a role="button" href="/tags/logging" class="btn btn-default btn-xs"> Logging (2)</a>
-                <a role="button" href="/tags/markdig" class="btn btn-default btn-xs"> Markdig (1)</a>
-                <a role="button" href="/tags/markdown" class="btn btn-default btn-xs"> Markdown (1)</a>
-                <a role="button" href="/tags/microsoft.extensions.logging" class="btn btn-default btn-xs"> Microsoft.Extensions.Logging (2)</a>
-                <a role="button" href="/tags/task" class="btn btn-default btn-xs"> Task (2)</a>
-                <a role="button" href="/tags/tpl" class="btn btn-default btn-xs"> TPL (2)</a>
-                <a role="button" href="/tags/wyam" class="btn btn-primary btn-xs"> Wyam (3)</a>
-        </div>
-    </div>
-</div>
+<h1 id="less-in-wyam">Less in Wyam</h1>
+<p>In the <a href="/posts/alerts-in-wyam">last post</a> I showed how to user Bootstrap alerts from
+within a Wyam based blog site. I included some CSS to restyle the alerts to include
+glyphicons for the various alert types. The CSS I used had a lot of repetitive code.
+The <a href="http://lesscs.org">Less</a> CSS preprocessor makes it easy to use mixins to eliminate
+duplicate code in CSS files. Wyam has a module for using Less, so I updated my site
+to use it.</p>
+<p>The first thing I had to do was modify my config.wyam file.</p>
+<pre><code class="language-csharp">#n -p Wyam.Less
+
+Settings.Host = &quot;digitaltapestry.net&quot;;
+GlobalMetadata[&quot;Title&quot;] = &quot;Digital Tapestry&quot;;
+GlobalMetadata[&quot;Description&quot;] = &quot;Weaving a Digital Tapestry&quot;;
+GlobalMetadata[&quot;Intro&quot;] = &quot;The musings of a .NET developer.&quot;;
+
+Pipelines.Add(&quot;Less&quot;,
+    ReadFiles(&quot;**/*.less&quot;),
+    Less(),
+    WriteFiles(&quot;.css&quot;)
+);
+</code></pre>
+<p>Obviously this is specific to my site. You'll need the <code>#n -p Wyam.Less</code> and the call
+to <code>Pipelines.Add</code> while the rest is site specific.</p>
+<p>With that in place I created a <code>input\assets\css\override.less</code> with the following
+code.</p>
+<pre><code class="language-css">.alert {
+    margin-left: 10px;
+}
+.alert &gt; p {
+    margin-top: 0px;
+}
+.alert-glyphicon {
+    position: relative;
+    top: 1px;
+    float: left;
+    margin-right: 8px;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+.alert-success:before {
+    content: &quot;\e125&quot;;
+    .alert-glyphicon;
+}
+.alert-info:before {
+    content: &quot;\270f&quot;;
+    .alert-glyphicon;
+}
+.alert-warning:before {
+    content: &quot;\e107&quot;;
+    .alert-glyphicon;
+}
+.alert-danger:before {
+    content: &quot;\e074&quot;;
+    .alert-glyphicon;
+}
+</code></pre>
+<p>This is simpler than the original CSS thanks to the <code>.alert-glyphicon</code> mixin.</p>
+<p>If you've already created a <code>input\assets\css\override.css</code> you'll have to delete
+it. Now when you build the site, <code>override.less</code> gets compiled to <code>override.css</code>.
+This does still copy the <code>override.less</code> file to the output as well. If I figure
+out how to remove that, I'll update this post.</p>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'less-in-wyam';
+    var disqus_title = 'Less in Wyam';
+    var disqus_url = 'http://digitaltapestry.net/posts/less-in-wyam';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
                                 </div>
                         </div>
                 </div>
