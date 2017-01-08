@@ -1,5 +1,6 @@
 ---
-Title:  "Understanding Task - Part I"
+Title:  "Understanding Task - Part II"
+Image: /assets/banner_web.jpg
 Published: 2017-01-07 12:39:00
 Tags: ["C#", ".NET", "Task", "TPL"]
 ---
@@ -8,7 +9,7 @@ Tags: ["C#", ".NET", "Task", "TPL"]
 
 ## Part I
 
-In [Part I](understanding-task-I) I explained that a `Task` is really **just** a datastructure
+In [Part I](/posts/understanding-task-I) I explained that a `Task` is really **just** a datastructure
 that represents the result of "something", and implemented a *very* basic `MyTask<T>` to illustrate
 that. Of course, that isn't a very complete picture and I promised that this time around we'd
 update `MyTask<T>` to more closely represent the mental model you have for `Task`.
