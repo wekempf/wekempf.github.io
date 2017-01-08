@@ -5,8 +5,8 @@
 		<link>http://digitaltapestry.net/</link>
 		<description>Weaving a Digital Tapestry</description>
 		<copyright>2017</copyright>
-		<pubDate>Sun, 08 Jan 2017 18:41:39 GMT</pubDate>
-		<lastBuildDate>Sun, 08 Jan 2017 18:41:39 GMT</lastBuildDate>
+		<pubDate>Sun, 08 Jan 2017 19:10:56 GMT</pubDate>
+		<lastBuildDate>Sun, 08 Jan 2017 19:10:56 GMT</lastBuildDate>
 		<item>
 			<title>Less in Wyam</title>
 			<link>http://digitaltapestry.net/posts/less-in-wyam</link>
@@ -27,6 +27,7 @@ duplicate code in CSS files. Wyam has a module for using Less, so I updated my s
 to use it.&lt;/p&gt;
 &lt;p&gt;The first thing I had to do was modify my config.wyam file.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-csharp"&gt;#n -p Wyam.Less
+#n -p Wyam.Minification
 
 Settings.Host = "digitaltapestry.net";
 GlobalMetadata["Title"] = "Digital Tapestry";
@@ -36,11 +37,14 @@ GlobalMetadata["Intro"] = "The musings of a .NET developer.";
 Pipelines.Add("Less",
     ReadFiles("**/*.less"),
     Less(),
+    MinifyCss(),
     WriteFiles(".css")
 );
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Obviously this is specific to my site. You'll need the &lt;code&gt;#n -p Wyam.Less&lt;/code&gt; and the call
-to &lt;code&gt;Pipelines.Add&lt;/code&gt; while the rest is site specific.&lt;/p&gt;
+&lt;p&gt;Obviously this is specific to my site. You'll need the &lt;code&gt;#n -p Wyam.Less&lt;/code&gt;, &lt;code&gt;#n -p Wyam.Minification&lt;/code&gt;
+and the call to &lt;code&gt;Pipelines.Add&lt;/code&gt; while the rest is site specific. &lt;code&gt;MinifyCss&lt;/code&gt; is optional. it
+minifies the output CSS, which is a good idea for "production", but you may not want to do it while
+working on the CSS.&lt;/p&gt;
 &lt;p&gt;With that in place I created a &lt;code&gt;input\assets\css\override.less&lt;/code&gt; with the following
 code.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-css"&gt;.alert {
@@ -199,6 +203,15 @@ contents:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The examples I showed at the top of this post were created using the Markdown from the example and styled
 with the above CSS.&lt;/p&gt;
+&lt;p&gt;Update: Dave Glick, the awesome author of Wyam, solved the issue of the LESS file being copied for me on
+&lt;a href="https://gitter.im/Wyamio/Wyam"&gt;Gitter&lt;/a&gt;. He answers inquiries on there so quickly that I suspect he's
+actually an AI robot. ;)&lt;/p&gt;
+&lt;p&gt;Here's the code to add to remove LESS files from being copied to the output.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;Pipelines[BlogPipelines.Resources].Clear();
+Pipelines[BlogPipelines.Resources].Add(
+    CopyFiles("**/*{!.cshtml,!.md,!.less,}")
+);
+&lt;/code&gt;&lt;/pre&gt;
 
 
 &lt;div id="disqus_thread"&gt;&lt;/div&gt;

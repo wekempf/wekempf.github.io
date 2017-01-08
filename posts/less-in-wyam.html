@@ -117,6 +117,7 @@ duplicate code in CSS files. Wyam has a module for using Less, so I updated my s
 to use it.</p>
 <p>The first thing I had to do was modify my config.wyam file.</p>
 <pre><code class="language-csharp">#n -p Wyam.Less
+#n -p Wyam.Minification
 
 Settings.Host = &quot;digitaltapestry.net&quot;;
 GlobalMetadata[&quot;Title&quot;] = &quot;Digital Tapestry&quot;;
@@ -126,11 +127,14 @@ GlobalMetadata[&quot;Intro&quot;] = &quot;The musings of a .NET developer.&quot;
 Pipelines.Add(&quot;Less&quot;,
     ReadFiles(&quot;**/*.less&quot;),
     Less(),
+    MinifyCss(),
     WriteFiles(&quot;.css&quot;)
 );
 </code></pre>
-<p>Obviously this is specific to my site. You'll need the <code>#n -p Wyam.Less</code> and the call
-to <code>Pipelines.Add</code> while the rest is site specific.</p>
+<p>Obviously this is specific to my site. You'll need the <code>#n -p Wyam.Less</code>, <code>#n -p Wyam.Minification</code>
+and the call to <code>Pipelines.Add</code> while the rest is site specific. <code>MinifyCss</code> is optional. it
+minifies the output CSS, which is a good idea for &quot;production&quot;, but you may not want to do it while
+working on the CSS.</p>
 <p>With that in place I created a <code>input\assets\css\override.less</code> with the following
 code.</p>
 <pre><code class="language-css">.alert {
