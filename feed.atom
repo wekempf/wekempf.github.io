@@ -4,7 +4,7 @@
 	<id>http://digitaltapestry.net/</id>
 	<title>Digital Tapestry</title>
 	<rights>2017</rights>
-	<updated>2017-01-08T16:27:46Z</updated>
+	<updated>2017-01-08T16:32:47Z</updated>
 	<subtitle>Weaving a Digital Tapestry</subtitle>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/alerts-in-wyam" />
@@ -26,7 +26,7 @@ Here's some examples:&lt;/p&gt;
 It took me a while to figure this out. Wyam uses &lt;a href="https://github.com/lunet-io/markdig/"&gt;Markdig&lt;/a&gt;
 for the Markdown processor, which includes several extensions. Which extensions are used is
 controllable via the global metadata &lt;code&gt;MarkdownExtensions&lt;/code&gt; property, which defaults to "advanced+bootstrap".
-The "advanced" part of that includes many extensions, but the important one here is the extension
+The "advanced" part of that includes many extensions, but the important ones here are the extension
 for custom containers and special attributes. Combined, they let you code an alert like this:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-markdown"&gt;:::{.alert .alert-warning}
 A warning alert.
