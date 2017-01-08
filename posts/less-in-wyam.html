@@ -109,7 +109,7 @@ Published on Sunday, January 8, 2017<br>    </div>
                                         
 
 <h1 id="less-in-wyam">Less in Wyam</h1>
-<p>In the <a href="/posts/alerts-in-wyam">last post</a> I showed how to user Bootstrap alerts from
+<p>In the <a href="/posts/alerts-in-wyam">last post</a> I showed how to use Bootstrap alerts from
 within a Wyam based blog site. I included some CSS to restyle the alerts to include
 glyphicons for the various alert types. The CSS I used had a lot of repetitive code.
 The <a href="http://lesscs.org">Less</a> CSS preprocessor makes it easy to use mixins to eliminate
@@ -174,8 +174,8 @@ code.</p>
 <p>This is simpler than the original CSS thanks to the <code>.alert-glyphicon</code> mixin.</p>
 <p>If you've already created a <code>input\assets\css\override.css</code> you'll have to delete
 it. Now when you build the site, <code>override.less</code> gets compiled to <code>override.css</code>.
-This does still copy the <code>override.less</code> file to the output as well. If I figure
-out how to remove that, I'll update this post.</p>
+This does still copy the <code>override.less</code> file to the output as well. <del><sub>If I figure
+out how to remove that, I'll update this post.</sub></del></p>
 <p>Update: Dave Glick, the awesome author of Wyam, solved the issue of the LESS file being copied for me on
 <a href="https://gitter.im/Wyamio/Wyam">Gitter</a>. He answers inquiries on there so quickly that I suspect he's
 actually an AI robot. ;)</p>

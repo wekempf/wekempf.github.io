@@ -4,7 +4,7 @@
 	<id>http://digitaltapestry.net/</id>
 	<title>Digital Tapestry</title>
 	<rights>2017</rights>
-	<updated>2017-01-08T19:15:10Z</updated>
+	<updated>2017-01-08T19:23:35Z</updated>
 	<subtitle>Weaving a Digital Tapestry</subtitle>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/less-in-wyam" />
@@ -12,7 +12,7 @@
 		<title>Less in Wyam</title>
 		<updated>2017-01-08T13:25:42Z</updated>
 		<content>&lt;h1 id="less-in-wyam"&gt;Less in Wyam&lt;/h1&gt;
-&lt;p&gt;In the &lt;a href="/posts/alerts-in-wyam"&gt;last post&lt;/a&gt; I showed how to user Bootstrap alerts from
+&lt;p&gt;In the &lt;a href="/posts/alerts-in-wyam"&gt;last post&lt;/a&gt; I showed how to use Bootstrap alerts from
 within a Wyam based blog site. I included some CSS to restyle the alerts to include
 glyphicons for the various alert types. The CSS I used had a lot of repetitive code.
 The &lt;a href="http://lesscs.org"&gt;Less&lt;/a&gt; CSS preprocessor makes it easy to use mixins to eliminate
@@ -77,8 +77,8 @@ code.&lt;/p&gt;
 &lt;p&gt;This is simpler than the original CSS thanks to the &lt;code&gt;.alert-glyphicon&lt;/code&gt; mixin.&lt;/p&gt;
 &lt;p&gt;If you've already created a &lt;code&gt;input\assets\css\override.css&lt;/code&gt; you'll have to delete
 it. Now when you build the site, &lt;code&gt;override.less&lt;/code&gt; gets compiled to &lt;code&gt;override.css&lt;/code&gt;.
-This does still copy the &lt;code&gt;override.less&lt;/code&gt; file to the output as well. If I figure
-out how to remove that, I'll update this post.&lt;/p&gt;
+This does still copy the &lt;code&gt;override.less&lt;/code&gt; file to the output as well. &lt;del&gt;&lt;sub&gt;If I figure
+out how to remove that, I'll update this post.&lt;/sub&gt;&lt;/del&gt;&lt;/p&gt;
 &lt;p&gt;Update: Dave Glick, the awesome author of Wyam, solved the issue of the LESS file being copied for me on
 &lt;a href="https://gitter.im/Wyamio/Wyam"&gt;Gitter&lt;/a&gt;. He answers inquiries on there so quickly that I suspect he's
 actually an AI robot. ;)&lt;/p&gt;
@@ -114,7 +114,7 @@ Pipelines[BlogPipelines.Resources].Add(
 &lt;/script&gt;
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 &lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
-		<summary>&lt;p&gt;In the &lt;a href="/posts/alerts-in-wyam"&gt;last post&lt;/a&gt; I showed how to user Bootstrap alerts from
+		<summary>&lt;p&gt;In the &lt;a href="/posts/alerts-in-wyam"&gt;last post&lt;/a&gt; I showed how to use Bootstrap alerts from
 within a Wyam based blog site. I included some CSS to restyle the alerts to include
 glyphicons for the various alert types. The CSS I used had a lot of repetitive code.
 The &lt;a href="http://lesscs.org"&gt;Less&lt;/a&gt; CSS preprocessor makes it easy to use mixins to eliminate
