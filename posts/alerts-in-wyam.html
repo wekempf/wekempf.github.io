@@ -192,15 +192,6 @@ contents:</p>
 </code></pre>
 <p>The examples I showed at the top of this post were created using the Markdown from the example and styled
 with the above CSS.</p>
-<p>Update: Dave Glick, the awesome author of Wyam, solved the issue of the LESS file being copied for me on
-<a href="https://gitter.im/Wyamio/Wyam">Gitter</a>. He answers inquiries on there so quickly that I suspect he's
-actually an AI robot. ;)</p>
-<p>Here's the code to add to remove LESS files from being copied to the output.</p>
-<pre><code class="language-csharp">Pipelines[BlogPipelines.Resources].Clear();
-Pipelines[BlogPipelines.Resources].Add(
-    CopyFiles(&quot;**/*{!.cshtml,!.md,!.less,}&quot;)
-);
-</code></pre>
 
 
 <div id="disqus_thread"></div>

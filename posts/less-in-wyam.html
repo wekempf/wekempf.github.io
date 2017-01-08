@@ -176,6 +176,15 @@ code.</p>
 it. Now when you build the site, <code>override.less</code> gets compiled to <code>override.css</code>.
 This does still copy the <code>override.less</code> file to the output as well. If I figure
 out how to remove that, I'll update this post.</p>
+<p>Update: Dave Glick, the awesome author of Wyam, solved the issue of the LESS file being copied for me on
+<a href="https://gitter.im/Wyamio/Wyam">Gitter</a>. He answers inquiries on there so quickly that I suspect he's
+actually an AI robot. ;)</p>
+<p>Here's the code to add to remove LESS files from being copied to the output.</p>
+<pre><code class="language-csharp">Pipelines[BlogPipelines.Resources].Clear();
+Pipelines[BlogPipelines.Resources].Add(
+    CopyFiles(&quot;**/*{!.cshtml,!.md,!.less,}&quot;)
+);
+</code></pre>
 
 
 <div id="disqus_thread"></div>
