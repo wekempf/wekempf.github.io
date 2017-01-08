@@ -1,4 +1,5 @@
 #n -p Wyam.Less
+#n -p Wyam.Minification
 
 Settings.Host = "digitaltapestry.net";
 GlobalMetadata["Title"] = "Digital Tapestry";
@@ -8,5 +9,11 @@ GlobalMetadata["Intro"] = "The musings of a .NET developer.";
 Pipelines.Add("Less",
     ReadFiles("**/*.less"),
     Less(),
+    MinifyCss(),
     WriteFiles(".css")
+);
+
+Pipelines[BlogPipelines.Resources].Clear();
+Pipelines[BlogPipelines.Resources].Add(
+    CopyFiles("**/*{!.cshtml,!.md,!.less,}")
 );

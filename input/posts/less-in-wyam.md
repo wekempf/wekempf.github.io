@@ -17,6 +17,7 @@ The first thing I had to do was modify my config.wyam file.
 
 ```csharp
 #n -p Wyam.Less
+#n -p Wyam.Minification
 
 Settings.Host = "digitaltapestry.net";
 GlobalMetadata["Title"] = "Digital Tapestry";
@@ -26,12 +27,15 @@ GlobalMetadata["Intro"] = "The musings of a .NET developer.";
 Pipelines.Add("Less",
     ReadFiles("**/*.less"),
     Less(),
+    MinifyCss(),
     WriteFiles(".css")
 );
 ```
 
-Obviously this is specific to my site. You'll need the ```#n -p Wyam.Less``` and the call
-to ```Pipelines.Add``` while the rest is site specific.
+Obviously this is specific to my site. You'll need the ```#n -p Wyam.Less```, ```#n -p Wyam.Minification```
+and the call to ```Pipelines.Add``` while the rest is site specific. ```MinifyCss``` is optional. it
+minifies the output CSS, which is a good idea for "production", but you may not want to do it while
+working on the CSS.
 
 With that in place I created a ```input\assets\css\override.less``` with the following
 code.
