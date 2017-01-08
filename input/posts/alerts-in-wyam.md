@@ -29,7 +29,7 @@ I wanted to be able to add these alerts to a Markdown document processed by [Wya
 It took me a while to figure this out. Wyam uses [Markdig](https://github.com/lunet-io/markdig/)
 for the Markdown processor, which includes several extensions. Which extensions are used is
 controllable via the global metadata `MarkdownExtensions` property, which defaults to "advanced+bootstrap".
-The "advanced" part of that includes many extensions, but the important one here is the extension
+The "advanced" part of that includes many extensions, but the important ones here are the extension
 for custom containers and special attributes. Combined, they let you code an alert like this:
 
 ```markdown
