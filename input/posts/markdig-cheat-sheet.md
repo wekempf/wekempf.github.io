@@ -488,5 +488,6 @@ graph TD;
 [^4]: Not working with Wyam and I'm not sure why. Maybe a new feature and Wyam isn't using the newest version?
 [^5]: Not working. Produces an error "Inline has already a parent".
 [^6]: I'll be honest, I don't understand the use case for this one.
-[^7]: This needs mermaid.css and mermaid.js to be linked. Currently I'm not doing that in this blog, so
-      the results are broken.
+[^7]: This needs mermaid.css and mermaid.js to be linked. I've done so here, but the way you do it will be
+      improved the next release, so I'll wait to blog about that. Not sure why the generated diagram here
+      is missing the arrow lines, but I don't believe it's got anything to do with Wyam or Markdig.

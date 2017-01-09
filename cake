@@ -37,19 +37,18 @@ Task("Publish")
         if (GitClonePages() != 0) {
             throw new Exception("Unable to clone Pages.");
         }
-        var dirs = GetDirectories("./pages/*")
-            .Except(GetDirectories("./pages/.git"), DirectoryPathComparer.Default);
+        var dirs = GetDirectories("./pages/*") - GetDirectories("./pages/.git");
         DeleteDirectories(dirs, true);
-        var files = GetFiles("./pages/*")
-            .Except(GetFiles("./pages/CNAME"), FilePathComparer.Default);
+        var files = GetFiles("./pages/*") - GetFiles("./pages/CNAME");
+        foreach (var f in files) Information(f.FullPath);
         DeleteFiles(files);
         CopyFiles("./output/**/*", "./pages", true);
         if (GitCommitPages() != 0) {
             throw new Exception("Unable to commit Pages.");
         }
-        if (GitPushPages() != 0) {
+        /*if (GitPushPages() != 0) {
             throw new Exception("Unable to publish Pages.");
-        }
+        }*/
     });
 
 RunTarget(target);
@@ -89,42 +88,4 @@ int GitCommitPages() {
 
 int GitPushPages() {
     return GitCommand("push", "./pages");
-}
-
-public class FilePathComparer : IEqualityComparer<FilePath>
-{
-    public bool Equals(FilePath x, FilePath y)
-    {
-        return string.Equals(x.FullPath, y.FullPath, StringComparison.OrdinalIgnoreCase);
-    }
-
-    public int GetHashCode(FilePath x)
-    {
-        return x.FullPath.GetHashCode();
-    }
-
-    private static FilePathComparer instance = new FilePathComparer();
-    public static FilePathComparer Default
-    {
-        get { return instance; }
-    }
-}
-
-public class DirectoryPathComparer : IEqualityComparer<DirectoryPath>
-{
-    public bool Equals(DirectoryPath x, DirectoryPath y)
-    {
-        return string.Equals(x.FullPath, y.FullPath, StringComparison.OrdinalIgnoreCase);
-    }
-
-    public int GetHashCode(DirectoryPath x)
-    {
-        return x.FullPath.GetHashCode();
-    }
-
-    private static DirectoryPathComparer instance = new DirectoryPathComparer();
-    public static DirectoryPathComparer Default
-    {
-        get { return instance; }
-    }
 }
