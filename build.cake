@@ -40,7 +40,8 @@ Task("Publish")
         var dirs = GetDirectories("./pages/*")
             .Except(GetDirectories("./pages/.git"), DirectoryPathComparer.Default);
         DeleteDirectories(dirs, true);
-        var files = GetFiles("./pages/*");
+        var files = GetFiles("./pages/*")
+            .Except(GetFiles("./pages/CNAME"), FilePathComparer.Default);
         DeleteFiles(files);
         CopyFiles("./output/**/*", "./pages", true);
         if (GitCommitPages() != 0) {
@@ -88,6 +89,25 @@ int GitCommitPages() {
 
 int GitPushPages() {
     return GitCommand("push", "./pages");
+}
+
+public class FilePathComparer : IEqualityComparer<FilePath>
+{
+    public bool Equals(FilePath x, FilePath y)
+    {
+        return string.Equals(x.FullPath, y.FullPath, StringComparison.OrdinalIgnoreCase);
+    }
+
+    public int GetHashCode(FilePath x)
+    {
+        return x.FullPath.GetHashCode();
+    }
+
+    private static FilePathComparer instance = new FilePathComparer();
+    public static FilePathComparer Default
+    {
+        get { return instance; }
+    }
 }
 
 public class DirectoryPathComparer : IEqualityComparer<DirectoryPath>
