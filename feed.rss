@@ -5,8 +5,665 @@
 		<link>http://digitaltapestry.net/</link>
 		<description>Weaving a Digital Tapestry</description>
 		<copyright>2017</copyright>
-		<pubDate>Sun, 08 Jan 2017 19:23:35 GMT</pubDate>
-		<lastBuildDate>Sun, 08 Jan 2017 19:23:35 GMT</lastBuildDate>
+		<pubDate>Mon, 09 Jan 2017 01:16:07 GMT</pubDate>
+		<lastBuildDate>Mon, 09 Jan 2017 01:16:07 GMT</lastBuildDate>
+		<item>
+			<title>Markdig Cheat Sheet</title>
+			<link>http://digitaltapestry.net/posts/markdig-cheat-sheet</link>
+			<description>&lt;p&gt;I mentioned in the post &lt;a href="/posts/alerts-in-wyam"&gt;Alerts in Wyam&lt;/a&gt; that Wyam uses Markdig for Markdown
+processing, and that Markdig supports extensions. Currently, Markdig lacks documentation. For this
+reason, I'm going to try and create a “cheat sheet” for the extensions.&lt;/p&gt;</description>
+			<guid>http://digitaltapestry.net/posts/markdig-cheat-sheet</guid>
+			<pubDate>Sun, 08 Jan 2017 17:17:42 GMT</pubDate>
+			<content:encoded>&lt;h1 id="markdig-cheat-sheet"&gt;Markdig Cheat Sheet&lt;/h1&gt;
+&lt;p&gt;I mentioned in the post &lt;a href="/posts/alerts-in-wyam"&gt;Alerts in Wyam&lt;/a&gt; that Wyam uses Markdig for Markdown
+processing, and that Markdig supports extensions. Currently, Markdig lacks documentation. For this
+reason, I'm going to try and create a “cheat sheet” for the extensions.&lt;/p&gt;
+&lt;h2 id="pipe-tables"&gt;Pipe Tables&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;pipetables –or– advanced&lt;/td&gt;
+&lt;td&gt;http://pandoc.org/MANUAL.html#extension-pipe_tables&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;Right | Left | Default | Center
+-----:|:-----|---------|:-----:
+12    | 12   | 12      | 12
+123   | 123  | 123     | 123
+1     | 1    | 1       | 1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result"&gt;Result&lt;/h3&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="text-align: right;"&gt;Right&lt;/th&gt;
+&lt;th&gt;Left&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;th style="text-align: center;"&gt;Center&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align: right;"&gt;12&lt;/td&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: right;"&gt;123&lt;/td&gt;
+&lt;td&gt;123&lt;/td&gt;
+&lt;td&gt;123&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;123&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: right;"&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="grid-tables"&gt;Grid Tables&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;gridtables –or– advanced&lt;/td&gt;
+&lt;td&gt;http://pandoc.org/MANUAL.html#extension-grid_tables&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-1"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;+-------+------+---------+--------+
+| Right | Left | Default | Center |
++======:+:=====+=========+:======:+
+| 12    | 12   | 12      | 12     |
++-------+------+---------+--------+
+| 123   | 123  | 123     | 123    |
++-------+------+---------+--------+
+| 1     | 1    | 1       | 1      |
++-------+------+---------+--------+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-1"&gt;Result &lt;a id="fnref:1" href="#fn:1" class="footnote-ref"&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;table class="table"&gt;
+&lt;colgroup&gt;&lt;col style="width:23.33%"&gt;
+&lt;col style="width:20%"&gt;
+&lt;col style="width:30%"&gt;
+&lt;col style="width:26.67%"&gt;
+&lt;/colgroup&gt;&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Right&lt;/th&gt;
+&lt;th&gt;Left&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;th&gt;Center&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;123&lt;/td&gt;
+&lt;td&gt;123&lt;/td&gt;
+&lt;td&gt;123&lt;/td&gt;
+&lt;td&gt;123&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="extra-emphasis"&gt;Extra Emphasis&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;emphasisextras –or– advanced&lt;/td&gt;
+&lt;td&gt;http://pandoc.org/MANUAL.html#strikeout –and– https://markdown-it.github.io/&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-2"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;~~strike through~~ example
+
+~subscript~ example
+
+^superscript^ example
+
+++inserted++ example
+
+==marked== example
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-2"&gt;Result&lt;/h3&gt;
+&lt;p&gt;&lt;del&gt;strike through&lt;/del&gt; example&lt;/p&gt;
+&lt;p&gt;&lt;sub&gt;subscript&lt;/sub&gt; example&lt;/p&gt;
+&lt;p&gt;&lt;sup&gt;superscript&lt;/sup&gt; example&lt;/p&gt;
+&lt;p&gt;&lt;ins&gt;inserted&lt;/ins&gt; example&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;marked&lt;/mark&gt; example&lt;/p&gt;
+&lt;h2 id="special-attributes"&gt;Special Attributes&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;attributes –or– advanced&lt;/td&gt;
+&lt;td&gt;https://michelf.ca/projects/php-markdown/extra/#spe-attr&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-3"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;# Header 1 {#header1}
+
+[Link](#header1) back to header1
+
+# Header 2 {.my-class}
+
+# Le Site {lang=fr}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-3"&gt;Result &lt;a id="fnref:2" href="#fn:2" class="footnote-ref"&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;h1 id="header1"&gt;Header 1&lt;/h1&gt;
+&lt;p&gt;&lt;a href="#header1"&gt;Link&lt;/a&gt; back to header1&lt;/p&gt;
+&lt;h1 id="header-2" class="my-class"&gt;Header 2&lt;/h1&gt;
+&lt;h1 id="le-site" lang="fr"&gt;Le Site&lt;/h1&gt;
+&lt;h2 id="definition-lists"&gt;Definition Lists&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;definitionlists –or– advanced&lt;/td&gt;
+&lt;td&gt;https://michelf.ca/projects/php-markdown/extra/#def-list&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-4"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;Apple
+: Pomaceous fruit of plants of the genus Malus in 
+  the family Rosaceae.
+
+Orange
+: The fruit of an evergreen tree of the genus Citrus.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-4"&gt;Result &lt;a id="fnref:3" href="#fn:2" class="footnote-ref"&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Apple
+: Pomaceous fruit of plants of the genus Malus in
+the family Rosaceae.&lt;/p&gt;
+&lt;p&gt;Orange
+: The fruit of an evergreen tree of the genus Citrus.&lt;/p&gt;
+&lt;h2 id="footnotes"&gt;Footnotes&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;footnotes –or– advanced&lt;/td&gt;
+&lt;td&gt;https://michelf.ca/projects/php-markdown/extra/#footnotes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-5"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;This is an example[^3] of footnote usage.
+
+[^3]: An example footnote.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-5"&gt;Result&lt;/h3&gt;
+&lt;p&gt;This is an example&lt;a id="fnref:6" href="#fn:3" class="footnote-ref"&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt; of footnote usage.&lt;/p&gt;
+&lt;h2 id="auto-identifiers"&gt;Auto-identifiers&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;autoidentifiers –or– advanced&lt;/td&gt;
+&lt;td&gt;http://pandoc.org/MANUAL.html#extension-auto_identifiers&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-6"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;# Automatic Header identifiers
+
+[Link](#automatic-header-identifiers) to header.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-6"&gt;Result&lt;/h3&gt;
+&lt;h1 id="automatic-header-identifiers"&gt;Automatic Header identifiers&lt;/h1&gt;
+&lt;p&gt;&lt;a href="#automatic-header-identifiers"&gt;Link&lt;/a&gt; to header.&lt;/p&gt;
+&lt;h2 id="auto-links"&gt;Auto-links&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;autolinks –or– advanced&lt;/td&gt;
+&lt;td&gt;generates links if a text starts with &lt;code&gt;http://&lt;/code&gt; or &lt;code&gt;https://&lt;/code&gt; or &lt;code&gt;ftp://&lt;/code&gt; or &lt;code&gt;mailto:&lt;/code&gt; or &lt;code&gt;www.xxx.yyy&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-7"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;http://www.digitaltapestry.net
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-7"&gt;Result &lt;a id="fnref:7" href="#fn:4" class="footnote-ref"&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;http://www.digitaltapestry.net&lt;/p&gt;
+&lt;h2 id="task-lists"&gt;Task Lists&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;tasklists –or– advanced&lt;/td&gt;
+&lt;td&gt;https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-8"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;- [ ] a task list item
+- [ ] list syntax required
+- [ ] normal **formatting**
+- [ ] incomplete
+- [x] completed
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-8"&gt;Result&lt;/h3&gt;
+&lt;ul class="contains-task-list"&gt;
+&lt;li class="task-list-item"&gt;&lt;input disabled="disabled" type="checkbox"&gt; a task list item&lt;/li&gt;
+&lt;li class="task-list-item"&gt;&lt;input disabled="disabled" type="checkbox"&gt; list syntax required&lt;/li&gt;
+&lt;li class="task-list-item"&gt;&lt;input disabled="disabled" type="checkbox"&gt; normal &lt;strong&gt;formatting&lt;/strong&gt;&lt;/li&gt;
+&lt;li class="task-list-item"&gt;&lt;input disabled="disabled" type="checkbox"&gt; incomplete&lt;/li&gt;
+&lt;li class="task-list-item"&gt;&lt;input disabled="disabled" type="checkbox" checked="checked"&gt; completed&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="extra-bullet-lists"&gt;Extra Bullet Lists&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;listextras –or– advanced&lt;/td&gt;
+&lt;td&gt;supporting alpha bullet a. b. and roman bullet (i, ii...etc.)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-9"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;1. Level 1
+    i. Level i
+        a. Level a
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-9"&gt;Result&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Level 1
+&lt;ol type="i"&gt;
+&lt;li&gt;Level i
+&lt;ol type="a"&gt;
+&lt;li&gt;Level a&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="media-support"&gt;Media Support&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;medialinks –or– advanced&lt;/td&gt;
+&lt;td&gt;https://talk.commonmark.org/t/embedded-audio-and-video/441&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-10"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;![Rick Roll](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-10"&gt;Result&lt;/h3&gt;
+&lt;p&gt;&lt;iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" class="img-fluid" width="500" height="281" frameborder="0" allowfullscreen=""&gt;&lt;/iframe&gt;&lt;/p&gt;
+&lt;h2 id="abbreviations"&gt;Abbreviations&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;abbreviations –or– advanced&lt;/td&gt;
+&lt;td&gt;https://michelf.ca/projects/php-markdown/extra/#abbr&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-11"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;*[HTML]: Hypertext Markup Language
+
+Later in a text we are using HTML and it becomes an abbr tag HTML
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-11"&gt;Result &lt;a id="fnref:8" href="#fn:5" class="footnote-ref"&gt;&lt;sup&gt;5&lt;/sup&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;*[HTML]: Hypertext Markup Language&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Later in a text we are using HTML and it becomes an abbr tag HTML&lt;/p&gt;
+&lt;h2 id="citation"&gt;Citation&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;citations –or– advanced&lt;/td&gt;
+&lt;td&gt;https://talk.commonmark.org/t/referencing-creative-works-with-cite/892&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-12"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;""Tractatus Logico-Philosophicus"" was first published in 1921.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-12"&gt;Result&lt;/h3&gt;
+&lt;p&gt;&lt;cite&gt;Tractatus Logico-Philosophicus&lt;/cite&gt; was first published in 1921.&lt;/p&gt;
+&lt;h2 id="custom-containers"&gt;Custom Containers&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;customcontainers –or– advanced&lt;/td&gt;
+&lt;td&gt;https://talk.commonmark.org/t/custom-container-for-block-and-inline/2051&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-13"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;:::{.alert .alert-info}
+This is a Bootstrap alert.
+:::
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-13"&gt;Result&lt;/h3&gt;
+&lt;div class="alert alert-info"&gt;&lt;p&gt;This is a Bootstrap alert.&lt;/p&gt;
+&lt;/div&gt;
+&lt;h2 id="figures"&gt;Figures&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;figures –or– advanced&lt;/td&gt;
+&lt;td&gt;https://talk.commonmark.org/t/image-tag-should-expand-to-figure-when-used-with-title/265/5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-14"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;![Kookburra](/kookaburra.jpg "Kookburra")
+![Pelican](/pelican.jpg "Pelican")
+![Cheeky looking Rainbow Lorikeet](/lorikeet.jpg "Rainbow Lorikeet")
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-14"&gt;Result&lt;/h3&gt;
+&lt;p&gt;&lt;img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Kookaburra_melb.jpg" class="img-fluid" width="100" height="100" alt="Kookburra" title="Kookburra"&gt;
+&lt;img src="http://carolinabirds.org/Daniels/Florida/FLlg/Pelican,%20White%20Sanibel2.jpg" class="img-fluid" width="100" height="100" alt="Pelican" title="Pelican"&gt;
+&lt;img src="http://images.fineartamerica.com/images-medium-large/female-rainbow-lorikeet--trichoglossus-haematodus-life-on-white.jpg" class="img-fluid" width="100" height="100" alt="Cheeky looking Rainbow Lorikeet" title="Rainbow Lorikeet"&gt;&lt;/p&gt;
+&lt;h2 id="footers"&gt;Footers&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;footers –or– advanced&lt;/td&gt;
+&lt;td&gt;https://talk.commonmark.org/t/syntax-for-footer/2070&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-15"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;&amp;gt; This is a blockquote
+&amp;gt; ^^ This is a ""citation for name""
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-15"&gt;Result&lt;/h3&gt;
+&lt;blockquote class="blockquote"&gt;
+&lt;p&gt;This is a blockquote&lt;/p&gt;
+&lt;footer&gt;This is a &lt;cite&gt;citation for name&lt;/cite&gt;&lt;/footer&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="mathematics"&gt;Mathematics&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;mathematics –or– advanced&lt;/td&gt;
+&lt;td&gt;https://talk.commonmark.org/t/mathematics-extension/457/31&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-16"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;This is a $math block$
+
+$$
+\begin{equation}
+  \int_0^\infty \frac{x^3}{e^x-1}\,dx = \frac{\pi^4}{15}
+  \label{eq:sample}
+\end{equation}
+$$
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-16"&gt;Result &lt;a id="fnref:4" href="#fn:2" class="footnote-ref"&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; &lt;a id="fnref:9" href="#fn:6" class="footnote-ref"&gt;&lt;sup&gt;6&lt;/sup&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;This is a &lt;span class="math"&gt;math block&lt;/span&gt;&lt;/p&gt;
+&lt;div class="math"&gt;\begin{equation}
+  \int_0^\infty \frac{x^3}{e^x-1}\,dx = \frac{\pi^4}{15}
+  \label{eq:sample}
+\end{equation}
+&lt;/div&gt;
+&lt;h2 id="emoji"&gt;Emoji&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;emojis&lt;/td&gt;
+&lt;td&gt;https://markdown-it.github.io/&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-17"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;It's easy to use emojis. ;) That's cool! 8-)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-17"&gt;Result&lt;/h3&gt;
+&lt;p&gt;It's easy to use emojis. 😉 That's cool! 😎&lt;/p&gt;
+&lt;h2 id="smartypants"&gt;SmartyPants&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;smartypants&lt;/td&gt;
+&lt;td&gt;https://daringfireball.net/projects/smartypants/&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-18"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;This is a "text"
+
+This is a 'text'
+
+This is a &amp;lt;&amp;lt;text&amp;gt;&amp;gt;
+
+This is a "text
+
+This is a "text 'with" a another text'
+
+This is a -- text
+
+This is a --- text
+
+This is a en ellipsis...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-18"&gt;Result&lt;/h3&gt;
+&lt;p&gt;This is a “text”&lt;/p&gt;
+&lt;p&gt;This is a ‘text’&lt;/p&gt;
+&lt;p&gt;This is a «text»&lt;/p&gt;
+&lt;p&gt;This is a "text&lt;/p&gt;
+&lt;p&gt;This is a “text 'with” a another text'&lt;/p&gt;
+&lt;p&gt;This is a – text&lt;/p&gt;
+&lt;p&gt;This is a — text&lt;/p&gt;
+&lt;p&gt;This is a en ellipsis…&lt;/p&gt;
+&lt;h2 id="diagrams"&gt;Diagrams&lt;/h2&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag&lt;/th&gt;
+&lt;th&gt;docs&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;diagrams –or– advanced&lt;/td&gt;
+&lt;td&gt;https://knsv.github.io/mermaid/&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="code-19"&gt;Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;    ```mermaid
+    graph TD;
+        A--&amp;gt;B;
+        A--&amp;gt;C;
+        B--&amp;gt;D;
+        C--&amp;gt;D;
+    ```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="result-19"&gt;Result &lt;a id="fnref:5" href="#fn:2" class="footnote-ref"&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; &lt;a id="fnref:10" href="#fn:7" class="footnote-ref"&gt;&lt;sup&gt;7&lt;/sup&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="mermaid"&gt;graph TD;
+    A--&amp;gt;B;
+    A--&amp;gt;C;
+    B--&amp;gt;D;
+    C--&amp;gt;D;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;div class="footnotes"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;Alignment doesn't appear to be working, and I don't now why.&lt;a href="#fnref:1" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;Not all results are visibly evident with the current styling. View the HTML produced.&lt;a href="#fnref:2" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;a href="#fnref:3" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;a href="#fnref:4" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;a href="#fnref:5" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:3"&gt;
+&lt;p&gt;An example footnote.&lt;a href="#fnref:6" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:4"&gt;
+&lt;p&gt;Not working with Wyam and I'm not sure why. Maybe a new feature and Wyam isn't using the newest version?&lt;a href="#fnref:7" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:5"&gt;
+&lt;p&gt;Not working. Produces an error “Inline has already a parent”.&lt;a href="#fnref:8" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:6"&gt;
+&lt;p&gt;I'll be honest, I don't understand the use case for this one.&lt;a href="#fnref:9" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:7"&gt;
+&lt;p&gt;This needs mermaid.css and mermaid.js to be linked. Currently I'm not doing that in this blog, so
+the results are broken.&lt;a href="#fnref:10" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+
+
+&lt;div id="disqus_thread"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'markdig-cheat-sheet';
+    var disqus_title = 'Markdig Cheat Sheet';
+    var disqus_url = 'http://digitaltapestry.net/posts/markdig-cheat-sheet';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+&lt;/script&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+&lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content:encoded>
+		</item>
 		<item>
 			<title>Less in Wyam</title>
 			<link>http://digitaltapestry.net/posts/less-in-wyam</link>
@@ -43,7 +700,7 @@ Pipelines.Add("Less",
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Obviously this is specific to my site. You'll need the &lt;code&gt;#n -p Wyam.Less&lt;/code&gt;, &lt;code&gt;#n -p Wyam.Minification&lt;/code&gt;
 and the call to &lt;code&gt;Pipelines.Add&lt;/code&gt; while the rest is site specific. &lt;code&gt;MinifyCss&lt;/code&gt; is optional. it
-minifies the output CSS, which is a good idea for "production", but you may not want to do it while
+minifies the output CSS, which is a good idea for “production”, but you may not want to do it while
 working on the CSS.&lt;/p&gt;
 &lt;p&gt;With that in place I created a &lt;code&gt;input\assets\css\override.less&lt;/code&gt; with the following
 code.&lt;/p&gt;
@@ -88,7 +745,7 @@ This does still copy the &lt;code&gt;override.less&lt;/code&gt; file to the outp
 out how to remove that, I'll update this post.&lt;/sub&gt;&lt;/del&gt;&lt;/p&gt;
 &lt;p&gt;Update: Dave Glick, the awesome author of Wyam, solved the issue of the LESS file being copied for me on
 &lt;a href="https://gitter.im/Wyamio/Wyam"&gt;Gitter&lt;/a&gt;. He answers inquiries on there so quickly that I suspect he's
-actually an AI robot. ;)&lt;/p&gt;
+actually an AI robot. 😉&lt;/p&gt;
 &lt;p&gt;Here's the code to add to remove LESS files from being copied to the output.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-csharp"&gt;Pipelines[BlogPipelines.Resources].Clear();
 Pipelines[BlogPipelines.Resources].Add(
@@ -125,12 +782,12 @@ Pipelines[BlogPipelines.Resources].Add(
 		<item>
 			<title>Alerts In Wyam</title>
 			<link>http://digitaltapestry.net/posts/alerts-in-wyam</link>
-			<description>&lt;p&gt;Bootstrap has the concept of "alerts", which are specially styled divs used to call out notes.
+			<description>&lt;p&gt;Bootstrap has the concept of “alerts”, which are specially styled divs used to call out notes.
 Here's some examples:&lt;/p&gt;</description>
 			<guid>http://digitaltapestry.net/posts/alerts-in-wyam</guid>
 			<pubDate>Sun, 08 Jan 2017 11:02:00 GMT</pubDate>
 			<content:encoded>&lt;h1 id="alerts-in-wyam"&gt;Alerts in Wyam&lt;/h1&gt;
-&lt;p&gt;Bootstrap has the concept of "alerts", which are specially styled divs used to call out notes.
+&lt;p&gt;Bootstrap has the concept of “alerts”, which are specially styled divs used to call out notes.
 Here's some examples:&lt;/p&gt;
 &lt;div class="alert alert-success"&gt;&lt;p&gt;A success alert.&lt;/p&gt;
 &lt;/div&gt;
@@ -143,7 +800,7 @@ Here's some examples:&lt;/p&gt;
 &lt;p&gt;I wanted to be able to add these alerts to a Markdown document processed by &lt;a href="https://wyam.io"&gt;Wyam&lt;/a&gt;.
 It took me a while to figure this out. Wyam uses &lt;a href="https://github.com/lunet-io/markdig/"&gt;Markdig&lt;/a&gt;
 for the Markdown processor, which includes several extensions. Which extensions are used is
-controllable via the global metadata &lt;code&gt;MarkdownExtensions&lt;/code&gt; property, which defaults to "advanced+bootstrap".
+controllable via the global metadata &lt;code&gt;MarkdownExtensions&lt;/code&gt; property, which defaults to “advanced+bootstrap”.
 The "advanced" part of that includes many extensions, but the important ones here are the extension
 for custom containers and special attributes. Combined, they let you code an alert like this:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-markdown"&gt;:::{.alert .alert-warning}
@@ -243,7 +900,7 @@ with the above CSS.&lt;/p&gt;
 			<title>Understanding Task - Part II</title>
 			<link>http://digitaltapestry.net/posts/understanding-task-II</link>
 			<description>&lt;p&gt;In &lt;a href="/posts/understanding-task-I"&gt;Part I&lt;/a&gt; I explained that a &lt;code&gt;Task&lt;/code&gt; is really &lt;strong&gt;just&lt;/strong&gt; a datastructure
-that represents the result of "something", and implemented a &lt;em&gt;very&lt;/em&gt; basic &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to illustrate
+that represents the result of “something”, and implemented a &lt;em&gt;very&lt;/em&gt; basic &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to illustrate
 that. Of course, that isn't a very complete picture and I promised that this time around we'd
 update &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to more closely represent the mental model you have for &lt;code&gt;Task&lt;/code&gt;.&lt;/p&gt;</description>
 			<enclosure url="http://digitaltapestry.net/assets/banner_web.jpg" length="0" type="image" />
@@ -252,7 +909,7 @@ update &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to more closely represen
 			<content:encoded>&lt;h1 id="understanding-task"&gt;Understanding Task&lt;/h1&gt;
 &lt;h2 id="part-i"&gt;Part I&lt;/h2&gt;
 &lt;p&gt;In &lt;a href="/posts/understanding-task-I"&gt;Part I&lt;/a&gt; I explained that a &lt;code&gt;Task&lt;/code&gt; is really &lt;strong&gt;just&lt;/strong&gt; a datastructure
-that represents the result of "something", and implemented a &lt;em&gt;very&lt;/em&gt; basic &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to illustrate
+that represents the result of “something”, and implemented a &lt;em&gt;very&lt;/em&gt; basic &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to illustrate
 that. Of course, that isn't a very complete picture and I promised that this time around we'd
 update &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to more closely represent the mental model you have for &lt;code&gt;Task&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Most developer's mental model is very firmly fixed around a &lt;code&gt;Task&lt;/code&gt; representing a thread, or maybe
@@ -391,7 +1048,7 @@ represent the bulk of what a real &lt;code&gt;Task&lt;/code&gt; is. In fact, the
 here: continuations and cancellation. I'm not going to cover those anytime soon.&lt;/p&gt;
 &lt;p&gt;Note that there's no &lt;code&gt;Thread&lt;/code&gt; anywhere in this code. Nor have I used the thread pool. Despite that,
 this &lt;em&gt;is&lt;/em&gt; a complete representation of a &lt;code&gt;Task&lt;/code&gt; (minus continuations and cancellation, of course).
-I here some of you saying "but what about &lt;code&gt;Task.Run&lt;/code&gt;?" Well, we'll talk about that and other
+I here some of you saying “but what about &lt;code&gt;Task.Run&lt;/code&gt;?” Well, we'll talk about that and other
 related concepts next time, but &lt;code&gt;Task&lt;/code&gt; doesn't really need them. This is really the complete
 concept of a &lt;code&gt;Task&lt;/code&gt;, and if you shift your mental model to think in these terms you'll be
 much better suited for using the TPL.&lt;/p&gt;
@@ -447,7 +1104,7 @@ way up, while most other books/blogs/articles start at the top and work their wa
 My hope is that by working from the bottom up, some of the mystery will just disappear.&lt;/p&gt;
 &lt;p&gt;I'll start by once again defining what a &lt;code&gt;Task&lt;/code&gt; is at its most basic definition. A &lt;code&gt;Task&lt;/code&gt; isn't something magical. Nor is
 it really what the name implies: a running operation of some sort. No, a &lt;code&gt;Task&lt;/code&gt; is just a simple data structure that
-holds the result of something. That's it. At this point, don't even think in terms of that "something" being an asynchronous
+holds the result of something. That's it. At this point, don't even think in terms of that “something” being an asynchronous
 operation. At it's simplest, that is not the case, and thinking in those terms right now will just confuse you and lead
 you to some incorrect assumptions. Dispel this thought from your mind.&lt;/p&gt;
 &lt;p&gt;So, let's make this idea concrete instead of just asking you to comprehend this based solely on the claims somebody
@@ -465,7 +1122,7 @@ the simplest implementation for our &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code
     public TResult Result { get; set; }
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Really, it's as simple as that. This is a data structure that represents the result of "something". Most of what a
+&lt;p&gt;Really, it's as simple as that. This is a data structure that represents the result of “something”. Most of what a
 &lt;code&gt;Task&lt;/code&gt; is all about is represented in the above code. Truly, I'm not trying to deceive you here, and if you're looking
 for a deep understanding of the TPL, this isn't a gross oversimplification either. Yes, it is a simplification,
 without a doubt, but it &lt;em&gt;does&lt;/em&gt; give a very accurate representation of the concept of a &lt;code&gt;Task&lt;/code&gt;. A &lt;code&gt;Task&lt;/code&gt; &lt;em&gt;is&lt;/em&gt;
@@ -579,7 +1236,7 @@ post. For now, let's focus on &lt;code&gt;CreateLogger&lt;/code&gt; instead.&lt;
 &lt;p&gt;The &lt;code&gt;CreateLogger&lt;/code&gt; method is called, not surprisingly, to create an &lt;code&gt;ILogger&lt;/code&gt; instance. Depending on the
 logging framework you're used to using, you may be surprised at the &lt;code&gt;categoryName&lt;/code&gt; parameter it requires,
 however. Some, but not all, logging frameworks allow you to create loggers that log with different
-"categories" to allow you to control filtring at a very fine grained level. For instance, if you know
+“categories” to allow you to control filtring at a very fine grained level. For instance, if you know
 you have a bug in &lt;code&gt;SomeClass&lt;/code&gt; you could turn logging up to include &lt;code&gt;Debug&lt;/code&gt; level events only for the
 "category" that &lt;code&gt;SomeClass&lt;/code&gt; logs to. Often these categories are based on a &lt;code&gt;Type&lt;/code&gt; name (the full name,
 including the namespace). MEL makes it easy to do the same thing by providing some extension methods.&lt;/p&gt;
@@ -635,7 +1292,7 @@ and &lt;code&gt;Microsoft.Extensions.Logging.Console&lt;/code&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Most of this should be familiar to you at this point. The &lt;code&gt;AddConsole&lt;/code&gt; method may not make any sense to
 you yet. This is actually an extension method found in &lt;code&gt;Microsoft.Extensions.Logging.Console&lt;/code&gt;. it
-simply creates a "provider" that writes log events to standard output and adds it by calling
+simply creates a “provider” that writes log events to standard output and adds it by calling
 &lt;code&gt;ILoggerFactory.AddProvider&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;When you run this, the following is produced.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-text"&gt;info: LoggingPlay.Program[0]
@@ -643,11 +1300,11 @@ simply creates a "provider" that writes log events to standard output and adds i
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The output is based on the following:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;"info" is the log level.&lt;/li&gt;
-&lt;li&gt;"LoggingPlay.Program" is the category name, derived from the generic type parameter used in the
+&lt;li&gt;“info” is the log level.&lt;/li&gt;
+&lt;li&gt;“LoggingPlay.Program” is the category name, derived from the generic type parameter used in the
 &lt;code&gt;CreateLogger&lt;/code&gt; call.&lt;/li&gt;
-&lt;li&gt;"[0]" is the event ID (we didn't specify one when we called &lt;code&gt;LogInformation&lt;/code&gt; so it defaulted to 0).&lt;/li&gt;
-&lt;li&gt;"Started at 01/01/2017 12:00:25" is the fomratted message generated from the template and parameters
+&lt;li&gt;“[0]” is the event ID (we didn't specify one when we called &lt;code&gt;LogInformation&lt;/code&gt; so it defaulted to 0).&lt;/li&gt;
+&lt;li&gt;“Started at 01/01/2017 12:00:25” is the fomratted message generated from the template and parameters
 we passed to &lt;code&gt;LogInformation&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Some providers allow you to configure the output format, but as far as I know the console provider does not.
@@ -709,14 +1366,14 @@ logging, and there's a new kid on the block: &lt;a href="https://github.com/aspn
 coined that, and kinda like it) is a little different. See, first and foremost, MEL is a logging abstraction,
 not a logging framework. It's main intent is to provide interfaces that act as a facade over any other
 logging framework. Technically, any logging framework that exposes interfaces could make this claim, since
-pretty much all of them provide a way to plug in "listeners", "providers" or some other conceptual name
+pretty much all of them provide a way to plug in “listeners”, "providers" or some other conceptual name
 for a type that controls how and where to log. By creating one of these you can pretty much bridge from
 one logging framework to another, and MEL isn't much different in this regard. Where MEL differs, however
 is in the fact that the design was &lt;strong&gt;intended&lt;/strong&gt; to be used in this fashion. Its logging abstractions are
 generic and fully intended to allow adapting to any other framework. Other projects, such as
 &lt;a href="https://github.com/net-commons/common-logging"&gt;common-logging&lt;/a&gt; have attempted to do the same thing,
 but I really think MEL has done the best job here. It's simple, elegant, and provides all the features
-you'd want in a way that doesn't require the underlying frameworks to have to be "bent" to work with it.&lt;/p&gt;
+you'd want in a way that doesn't require the underlying frameworks to have to be “bent” to work with it.&lt;/p&gt;
 &lt;p&gt;That's a pretty bold claim. I'm going to spend a few posts here going over MEL's design to try and back
 up that claim. A caveat, though. I'm new to MEL, and not a contributor to it. MEL is also, at the moment,
 underdocumented and not talked much about, so this will actually be one of the few blog posts on the
@@ -1016,7 +1673,7 @@ familiar.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-csharp"&gt;logger.LogInformation("Something happened.");
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;You can, but I would not recommend writing code like that. I think there's a better way to use MEL,
-which we'll slowly cover throughout this series. Bear with me. :)&lt;/p&gt;
+which we'll slowly cover throughout this series. Bear with me. 😃&lt;/p&gt;
 &lt;p&gt;Let's pick apart this &lt;code&gt;Log&lt;/code&gt; method a bit, to get a deeper understanding of MEL.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-csharp"&gt;void Log&amp;lt;TState&amp;gt;(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func&amp;lt;TState, Exception, string&amp;gt; formatter);
 &lt;/code&gt;&lt;/pre&gt;
@@ -1076,12 +1733,12 @@ to configure how to filter. As the comment says, &lt;code&gt;None&lt;/code&gt; m
 no sense at all when logging. By combining the concepts into a single type we lose some compiler enforcement,
 and a developer &lt;strong&gt;could&lt;/strong&gt; use &lt;code&gt;None&lt;/code&gt; while logging, as much as that makes no sense to do. The bigger issue here,
 though, is actually the value assigned. &lt;code&gt;None&lt;/code&gt; has an integral value of 6, while the Framework design
-Guidelines tell you that such "no value" enumeration tags should always have a value of 0. Worse, 0
+Guidelines tell you that such “no value” enumeration tags should always have a value of 0. Worse, 0
 is assigned as the value for the tag &lt;code&gt;Trace&lt;/code&gt;. This means &lt;code&gt;default(LogLevel)&lt;/code&gt; equals &lt;code&gt;Trace&lt;/code&gt;, not &lt;code&gt;None&lt;/code&gt;
 as one would expect. Oh well, no code is perfect.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-csharp"&gt;void Log&amp;lt;TState&amp;gt;(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func&amp;lt;TState, Exception, string&amp;gt; formatter);
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The next parameter is an &lt;code&gt;EventId&lt;/code&gt;. Most logging frameworks have this concept as well... an integer identifier
+&lt;p&gt;The next parameter is an &lt;code&gt;EventId&lt;/code&gt;. Most logging frameworks have this concept as well… an integer identifier
 for the log event. Many frameworks don't actually use this identifier in any meaningful way, so some
 may not quite understand why this concept is so important. It's all about filtering, reporting and
 parsing the logs. If a particular log event has a unique identifier it's easy to locate all such
@@ -1143,7 +1800,7 @@ is one design area I'd like to explore more.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-csharp"&gt;void Log&amp;lt;TState&amp;gt;(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func&amp;lt;TState, Exception, string&amp;gt; formatter);
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Next, we have a &lt;code&gt;TState&lt;/code&gt; parameter. Many logging frameworks just log messages. Luckily, that's not
-the case for MEL. MEL logs data, not messages. This is a concept known as "semantic logging", and
+the case for MEL. MEL logs data, not messages. This is a concept known as “semantic logging”, and
 it makes the logging richer. By logging data instead of messages it makes your logs consumable by
 more than just a human. Rich data mining, filtering and reporting becomes available to you, making
 your logs useful for things other than manually diagnosing issues. For instance, it would be trivial
@@ -1154,11 +1811,11 @@ use a string "template" and a params array to create an internal &lt;code&gt;For
 &lt;code&gt;TState&lt;/code&gt;. An example of this would be the following:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-csharp"&gt;logger.Log("Operation {Operation} started at time {Time}", "SomeOperation", DateTime.Now);
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The first string represents a "template", not an actual log message. This might appear to be an
+&lt;p&gt;The first string represents a “template”, not an actual log message. This might appear to be an
 interpolated string based on what looks like "holes" (&lt;code&gt;{Operation}&lt;/code&gt; and &lt;code&gt;{Time}&lt;/code&gt;), but note the
-lack of a '$' prefix. This is just a string, not an interpolated string. The "holes" are named
+lack of a ‘$’ prefix. This is just a string, not an interpolated string. The "holes" are named
 placeholders where the params array members are filled in, in the order provided. So, in this
-example the &lt;code&gt;{Operation}&lt;/code&gt; placeholder will be filled in with "SomeOperation". Please note
+example the &lt;code&gt;{Operation}&lt;/code&gt; placeholder will be filled in with “SomeOperation”. Please note
 that MEL doesn't do this formatting. Within MEL this remains a template and is not transformed
 into a message. This means the rich data information is retained, and for example a log provider
 could translate this into rich JSON.&lt;/p&gt;
@@ -1181,17 +1838,17 @@ greatest flexibility.&lt;/p&gt;
 are typically generated in response to an exception being thrown, so including the exception
 in the log event is natural. This information &lt;em&gt;could&lt;/em&gt; just be included in the &lt;code&gt;TState&lt;/code&gt; parameter.
 I can only assume that MEL doesn't do that in order to make it easier for providers to deal with
-the exception directly. If it were "buried" inside the &lt;code&gt;TState&lt;/code&gt; it would be nearly impossible
+the exception directly. If it were “buried” inside the &lt;code&gt;TState&lt;/code&gt; it would be nearly impossible
 to deal with the exception programatically.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-csharp"&gt;void Log&amp;lt;TState&amp;gt;(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func&amp;lt;TState, Exception, string&amp;gt; formatter);
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Finally, we have a &lt;code&gt;Func&amp;lt;TState, Exception, string&amp;gt;&lt;/code&gt; parameter that provides a way to format
 the event into a more traditional log message. This design might make for an interesting extension
 space for advanced usage, but most people that use MEL will never touch this or the &lt;code&gt;TState&lt;/code&gt;
-parameter directly, instead using the extension overloads that treat everything as a "template +
-data" concept.&lt;/p&gt;
+parameter directly, instead using the extension overloads that treat everything as a “template +
+data” concept.&lt;/p&gt;
 &lt;p&gt;This has been a very lengthy post, and we haven't really learned much about how to use MEL yet. I
-warned you this wasn't a tutorial seriese. :) In &lt;a href="/posts/logging-part-II"&gt;Part II&lt;/a&gt; I'll look at
+warned you this wasn't a tutorial seriese. 😃 In &lt;a href="/posts/logging-part-II"&gt;Part II&lt;/a&gt; I'll look at
 the design of &lt;code&gt;ILoggerFactory&lt;/code&gt; which gets us a little closer into how to use MEL.&lt;/p&gt;
 
 
@@ -1238,7 +1895,7 @@ expensive. Well, remember I said I'd screwed up export? Long story short, I scre
 is in the Internet Archive, so I may recreate some of the better articles manually in the future, but mostly, it's all
 gone. My bad.&lt;/p&gt;
 &lt;p&gt;Fast forward. I've had some life changes, including a new job. It's time to start blogging again. This time I decided I'd
-go with something a bit "safer" and a lot less expensive (as in, free). I'm using &lt;a href="https://pages.github.com/"&gt;GitHub Pages&lt;/a&gt;
+go with something a bit “safer” and a lot less expensive (as in, free). I'm using &lt;a href="https://pages.github.com/"&gt;GitHub Pages&lt;/a&gt;
 for hosting. Normally you'd use Jekyll there, but honestly, Jekyll on Windows isn't great and the restiction on using
 plugins on Pages combined to make me consider something else. As a .NET developer, a .NET based static site generator
 sounded like the way to go. There's a few out there, but I settled on &lt;a href="http://wyam.io"&gt;Wyam&lt;/a&gt;. The author, Dave Glick,

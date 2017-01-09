@@ -142,7 +142,7 @@ post. For now, let's focus on <code>CreateLogger</code> instead.</p>
 <p>The <code>CreateLogger</code> method is called, not surprisingly, to create an <code>ILogger</code> instance. Depending on the
 logging framework you're used to using, you may be surprised at the <code>categoryName</code> parameter it requires,
 however. Some, but not all, logging frameworks allow you to create loggers that log with different
-&quot;categories&quot; to allow you to control filtring at a very fine grained level. For instance, if you know
+&ldquo;categories&rdquo; to allow you to control filtring at a very fine grained level. For instance, if you know
 you have a bug in <code>SomeClass</code> you could turn logging up to include <code>Debug</code> level events only for the
 &quot;category&quot; that <code>SomeClass</code> logs to. Often these categories are based on a <code>Type</code> name (the full name,
 including the namespace). MEL makes it easy to do the same thing by providing some extension methods.</p>
@@ -198,7 +198,7 @@ and <code>Microsoft.Extensions.Logging.Console</code>.</p>
 </blockquote>
 <p>Most of this should be familiar to you at this point. The <code>AddConsole</code> method may not make any sense to
 you yet. This is actually an extension method found in <code>Microsoft.Extensions.Logging.Console</code>. it
-simply creates a &quot;provider&quot; that writes log events to standard output and adds it by calling
+simply creates a &ldquo;provider&rdquo; that writes log events to standard output and adds it by calling
 <code>ILoggerFactory.AddProvider</code>.</p>
 <p>When you run this, the following is produced.</p>
 <pre><code class="language-text">info: LoggingPlay.Program[0]
@@ -206,11 +206,11 @@ simply creates a &quot;provider&quot; that writes log events to standard output 
 </code></pre>
 <p>The output is based on the following:</p>
 <ul>
-<li>&quot;info&quot; is the log level.</li>
-<li>&quot;LoggingPlay.Program&quot; is the category name, derived from the generic type parameter used in the
+<li>&ldquo;info&rdquo; is the log level.</li>
+<li>&ldquo;LoggingPlay.Program&rdquo; is the category name, derived from the generic type parameter used in the
 <code>CreateLogger</code> call.</li>
-<li>&quot;[0]&quot; is the event ID (we didn't specify one when we called <code>LogInformation</code> so it defaulted to 0).</li>
-<li>&quot;Started at 01/01/2017 12:00:25&quot; is the fomratted message generated from the template and parameters
+<li>&ldquo;[0]&rdquo; is the event ID (we didn't specify one when we called <code>LogInformation</code> so it defaulted to 0).</li>
+<li>&ldquo;Started at 01/01/2017 12:00:25&rdquo; is the fomratted message generated from the template and parameters
 we passed to <code>LogInformation</code>.</li>
 </ul>
 <p>Some providers allow you to configure the output format, but as far as I know the console provider does not.

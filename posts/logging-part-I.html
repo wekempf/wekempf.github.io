@@ -118,14 +118,14 @@ logging, and there's a new kid on the block: <a href="https://github.com/aspnet/
 coined that, and kinda like it) is a little different. See, first and foremost, MEL is a logging abstraction,
 not a logging framework. It's main intent is to provide interfaces that act as a facade over any other
 logging framework. Technically, any logging framework that exposes interfaces could make this claim, since
-pretty much all of them provide a way to plug in &quot;listeners&quot;, &quot;providers&quot; or some other conceptual name
+pretty much all of them provide a way to plug in &ldquo;listeners&rdquo;, &quot;providers&quot; or some other conceptual name
 for a type that controls how and where to log. By creating one of these you can pretty much bridge from
 one logging framework to another, and MEL isn't much different in this regard. Where MEL differs, however
 is in the fact that the design was <strong>intended</strong> to be used in this fashion. Its logging abstractions are
 generic and fully intended to allow adapting to any other framework. Other projects, such as
 <a href="https://github.com/net-commons/common-logging">common-logging</a> have attempted to do the same thing,
 but I really think MEL has done the best job here. It's simple, elegant, and provides all the features
-you'd want in a way that doesn't require the underlying frameworks to have to be &quot;bent&quot; to work with it.</p>
+you'd want in a way that doesn't require the underlying frameworks to have to be &ldquo;bent&rdquo; to work with it.</p>
 <p>That's a pretty bold claim. I'm going to spend a few posts here going over MEL's design to try and back
 up that claim. A caveat, though. I'm new to MEL, and not a contributor to it. MEL is also, at the moment,
 underdocumented and not talked much about, so this will actually be one of the few blog posts on the
@@ -425,7 +425,7 @@ familiar.</p>
 <pre><code class="language-csharp">logger.LogInformation(&quot;Something happened.&quot;);
 </code></pre>
 <p>You can, but I would not recommend writing code like that. I think there's a better way to use MEL,
-which we'll slowly cover throughout this series. Bear with me. :)</p>
+which we'll slowly cover throughout this series. Bear with me. 😃</p>
 <p>Let's pick apart this <code>Log</code> method a bit, to get a deeper understanding of MEL.</p>
 <pre><code class="language-csharp">void Log&lt;TState&gt;(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func&lt;TState, Exception, string&gt; formatter);
 </code></pre>
@@ -485,12 +485,12 @@ to configure how to filter. As the comment says, <code>None</code> makes perfect
 no sense at all when logging. By combining the concepts into a single type we lose some compiler enforcement,
 and a developer <strong>could</strong> use <code>None</code> while logging, as much as that makes no sense to do. The bigger issue here,
 though, is actually the value assigned. <code>None</code> has an integral value of 6, while the Framework design
-Guidelines tell you that such &quot;no value&quot; enumeration tags should always have a value of 0. Worse, 0
+Guidelines tell you that such &ldquo;no value&rdquo; enumeration tags should always have a value of 0. Worse, 0
 is assigned as the value for the tag <code>Trace</code>. This means <code>default(LogLevel)</code> equals <code>Trace</code>, not <code>None</code>
 as one would expect. Oh well, no code is perfect.</p>
 <pre><code class="language-csharp">void Log&lt;TState&gt;(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func&lt;TState, Exception, string&gt; formatter);
 </code></pre>
-<p>The next parameter is an <code>EventId</code>. Most logging frameworks have this concept as well... an integer identifier
+<p>The next parameter is an <code>EventId</code>. Most logging frameworks have this concept as well&hellip; an integer identifier
 for the log event. Many frameworks don't actually use this identifier in any meaningful way, so some
 may not quite understand why this concept is so important. It's all about filtering, reporting and
 parsing the logs. If a particular log event has a unique identifier it's easy to locate all such
@@ -552,7 +552,7 @@ is one design area I'd like to explore more.</p>
 <pre><code class="language-csharp">void Log&lt;TState&gt;(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func&lt;TState, Exception, string&gt; formatter);
 </code></pre>
 <p>Next, we have a <code>TState</code> parameter. Many logging frameworks just log messages. Luckily, that's not
-the case for MEL. MEL logs data, not messages. This is a concept known as &quot;semantic logging&quot;, and
+the case for MEL. MEL logs data, not messages. This is a concept known as &ldquo;semantic logging&rdquo;, and
 it makes the logging richer. By logging data instead of messages it makes your logs consumable by
 more than just a human. Rich data mining, filtering and reporting becomes available to you, making
 your logs useful for things other than manually diagnosing issues. For instance, it would be trivial
@@ -563,11 +563,11 @@ use a string &quot;template&quot; and a params array to create an internal <code
 <code>TState</code>. An example of this would be the following:</p>
 <pre><code class="language-csharp">logger.Log(&quot;Operation {Operation} started at time {Time}&quot;, &quot;SomeOperation&quot;, DateTime.Now);
 </code></pre>
-<p>The first string represents a &quot;template&quot;, not an actual log message. This might appear to be an
+<p>The first string represents a &ldquo;template&rdquo;, not an actual log message. This might appear to be an
 interpolated string based on what looks like &quot;holes&quot; (<code>{Operation}</code> and <code>{Time}</code>), but note the
-lack of a '$' prefix. This is just a string, not an interpolated string. The &quot;holes&quot; are named
+lack of a &lsquo;$&rsquo; prefix. This is just a string, not an interpolated string. The &quot;holes&quot; are named
 placeholders where the params array members are filled in, in the order provided. So, in this
-example the <code>{Operation}</code> placeholder will be filled in with &quot;SomeOperation&quot;. Please note
+example the <code>{Operation}</code> placeholder will be filled in with &ldquo;SomeOperation&rdquo;. Please note
 that MEL doesn't do this formatting. Within MEL this remains a template and is not transformed
 into a message. This means the rich data information is retained, and for example a log provider
 could translate this into rich JSON.</p>
@@ -590,17 +590,17 @@ greatest flexibility.</p>
 are typically generated in response to an exception being thrown, so including the exception
 in the log event is natural. This information <em>could</em> just be included in the <code>TState</code> parameter.
 I can only assume that MEL doesn't do that in order to make it easier for providers to deal with
-the exception directly. If it were &quot;buried&quot; inside the <code>TState</code> it would be nearly impossible
+the exception directly. If it were &ldquo;buried&rdquo; inside the <code>TState</code> it would be nearly impossible
 to deal with the exception programatically.</p>
 <pre><code class="language-csharp">void Log&lt;TState&gt;(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func&lt;TState, Exception, string&gt; formatter);
 </code></pre>
 <p>Finally, we have a <code>Func&lt;TState, Exception, string&gt;</code> parameter that provides a way to format
 the event into a more traditional log message. This design might make for an interesting extension
 space for advanced usage, but most people that use MEL will never touch this or the <code>TState</code>
-parameter directly, instead using the extension overloads that treat everything as a &quot;template +
-data&quot; concept.</p>
+parameter directly, instead using the extension overloads that treat everything as a &ldquo;template +
+data&rdquo; concept.</p>
 <p>This has been a very lengthy post, and we haven't really learned much about how to use MEL yet. I
-warned you this wasn't a tutorial seriese. :) In <a href="/posts/logging-part-II">Part II</a> I'll look at
+warned you this wasn't a tutorial seriese. 😃 In <a href="/posts/logging-part-II">Part II</a> I'll look at
 the design of <code>ILoggerFactory</code> which gets us a little closer into how to use MEL.</p>
 
 

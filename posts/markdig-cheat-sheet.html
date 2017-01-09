@@ -1,0 +1,800 @@
+
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+
+        <title>Digital Tapestry - Markdig Cheat Sheet</title>
+        <meta name="description" content="Weaving a Digital Tapestry" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+
+        <link type="application/rss+xml" rel="alternate" title="Digital Tapestry" href="/feed.rss" />
+        <link type="application/atom+xml" rel="alternate" title="Digital Tapestry" href="/feed.atom" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/assets/css/highlight.css" rel="stylesheet">
+        <link href="/assets/css/clean-blog.css" rel="stylesheet" />
+        <link href="/assets/css/master.css" rel="stylesheet" />
+        <link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="/assets/css/override.css" rel="stylesheet" />
+
+
+        <meta name="application-name" content="Digital Tapestry" />
+        <meta name="msapplication-tooltip" content="Digital Tapestry" />
+        <meta name="msapplication-starturl" content="/" />
+
+        <meta property="og:title" content="Digital Tapestry - Markdig Cheat Sheet" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://digitaltapestry.net/posts/markdig-cheat-sheet" />
+        <!-- TODO: More social graph meta tags -->
+
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>     
+        <script src="/assets/js/highlight.pack.js"></script>   
+        <script src="/assets/js/clean-blog.js"></script>
+        <script src="/assets/js/d3.v3.min.js"></script>
+        <script src="/assets/js/trianglify.min.js"></script>
+        <script src="/assets/js/Please-compressed.js"></script>
+                
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+                <script src="/assets/js/html5shiv.js"></script>
+                <script src="/assets/js/respond.min.js"></script>
+        <![endif]-->
+
+
+        </head>
+        <body>
+                
+                <!-- Navigation -->
+                <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+                        <div class="container-fluid">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <div class="navbar-header page-scroll">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        </button>
+                                        <a class="navbar-brand" href="/">Digital Tapestry</a>
+                                </div>
+                        
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse" id="navbar-collapse">
+                                        <ul class="nav navbar-nav navbar-right">
+                                                        <li><a href="/tags">All Tags</a></li>
+        <li><a href="/posts">Archive</a></li>
+        <li><a href="/resume">Resume</a></li>
+ 
+                                        </ul>
+                                </div>
+                                <!-- /.navbar-collapse -->
+                        </div>
+                        <!-- /.container -->
+                </nav>
+                
+                <!-- Page Header -->
+                <header class="intro-header" id="intro-header">
+                        <div class="container">
+                                <div class="row">
+                                        <div class="col-md-12">
+
+    
+<div class="post-heading">
+    <h1>Markdig Cheat Sheet</h1>
+    <div class="meta">        
+Published on Sunday, January 8, 2017<br>    </div>
+        <div class="tags">
+                    <a role="button" href="/tags/markdig" class="btn btn-default btn-xs">Markdig</a>
+                    <a role="button" href="/tags/wyam" class="btn btn-default btn-xs">Wyam</a>
+        </div>     
+</div>
+                                        </div>
+                                </div>
+                        </div>
+                </header>
+                
+                <!-- Main Content -->
+                <div class="container">
+                        <div class="row">
+                                <div id="content" class="col-md-12">
+                                        
+
+<h1 id="markdig-cheat-sheet">Markdig Cheat Sheet</h1>
+<p>I mentioned in the post <a href="/posts/alerts-in-wyam">Alerts in Wyam</a> that Wyam uses Markdig for Markdown
+processing, and that Markdig supports extensions. Currently, Markdig lacks documentation. For this
+reason, I'm going to try and create a &ldquo;cheat sheet&rdquo; for the extensions.</p>
+<h2 id="pipe-tables">Pipe Tables</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pipetables &ndash;or&ndash; advanced</td>
+<td>http://pandoc.org/MANUAL.html#extension-pipe_tables</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code">Code</h3>
+<pre><code class="language-text">Right | Left | Default | Center
+-----:|:-----|---------|:-----:
+12    | 12   | 12      | 12
+123   | 123  | 123     | 123
+1     | 1    | 1       | 1
+</code></pre>
+<h3 id="result">Result</h3>
+<table class="table">
+<thead>
+<tr>
+<th style="text-align: right;">Right</th>
+<th>Left</th>
+<th>Default</th>
+<th style="text-align: center;">Center</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">12</td>
+<td>12</td>
+<td>12</td>
+<td style="text-align: center;">12</td>
+</tr>
+<tr>
+<td style="text-align: right;">123</td>
+<td>123</td>
+<td>123</td>
+<td style="text-align: center;">123</td>
+</tr>
+<tr>
+<td style="text-align: right;">1</td>
+<td>1</td>
+<td>1</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="grid-tables">Grid Tables</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gridtables &ndash;or&ndash; advanced</td>
+<td>http://pandoc.org/MANUAL.html#extension-grid_tables</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-1">Code</h3>
+<pre><code class="language-text">+-------+------+---------+--------+
+| Right | Left | Default | Center |
++======:+:=====+=========+:======:+
+| 12    | 12   | 12      | 12     |
++-------+------+---------+--------+
+| 123   | 123  | 123     | 123    |
++-------+------+---------+--------+
+| 1     | 1    | 1       | 1      |
++-------+------+---------+--------+
+</code></pre>
+<h3 id="result-1">Result <a id="fnref:1" href="#fn:1" class="footnote-ref"><sup>1</sup></a></h3>
+<table class="table">
+<col style="width:23.33%">
+<col style="width:20%">
+<col style="width:30%">
+<col style="width:26.67%">
+<thead>
+<tr>
+<th>Right</th>
+<th>Left</th>
+<th>Default</th>
+<th>Center</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12</td>
+<td>12</td>
+<td>12</td>
+<td>12</td>
+</tr>
+<tr>
+<td>123</td>
+<td>123</td>
+<td>123</td>
+<td>123</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="extra-emphasis">Extra Emphasis</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>emphasisextras &ndash;or&ndash; advanced</td>
+<td>http://pandoc.org/MANUAL.html#strikeout &ndash;and&ndash; https://markdown-it.github.io/</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-2">Code</h3>
+<pre><code class="language-text">~~strike through~~ example
+
+~subscript~ example
+
+^superscript^ example
+
+++inserted++ example
+
+==marked== example
+</code></pre>
+<h3 id="result-2">Result</h3>
+<p><del>strike through</del> example</p>
+<p><sub>subscript</sub> example</p>
+<p><sup>superscript</sup> example</p>
+<p><ins>inserted</ins> example</p>
+<p><mark>marked</mark> example</p>
+<h2 id="special-attributes">Special Attributes</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>attributes &ndash;or&ndash; advanced</td>
+<td>https://michelf.ca/projects/php-markdown/extra/#spe-attr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-3">Code</h3>
+<pre><code class="language-text"># Header 1 {#header1}
+
+[Link](#header1) back to header1
+
+# Header 2 {.my-class}
+
+# Le Site {lang=fr}
+</code></pre>
+<h3 id="result-3">Result <a id="fnref:2" href="#fn:2" class="footnote-ref"><sup>2</sup></a></h3>
+<h1 id="header1">Header 1</h1>
+<p><a href="#header1">Link</a> back to header1</p>
+<h1 id="header-2" class="my-class">Header 2</h1>
+<h1 id="le-site" lang="fr">Le Site</h1>
+<h2 id="definition-lists">Definition Lists</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>definitionlists &ndash;or&ndash; advanced</td>
+<td>https://michelf.ca/projects/php-markdown/extra/#def-list</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-4">Code</h3>
+<pre><code class="language-text">Apple
+: Pomaceous fruit of plants of the genus Malus in 
+  the family Rosaceae.
+
+Orange
+: The fruit of an evergreen tree of the genus Citrus.
+</code></pre>
+<h3 id="result-4">Result <a id="fnref:3" href="#fn:2" class="footnote-ref"><sup>2</sup></a></h3>
+<p>Apple
+: Pomaceous fruit of plants of the genus Malus in
+the family Rosaceae.</p>
+<p>Orange
+: The fruit of an evergreen tree of the genus Citrus.</p>
+<h2 id="footnotes">Footnotes</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>footnotes &ndash;or&ndash; advanced</td>
+<td>https://michelf.ca/projects/php-markdown/extra/#footnotes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-5">Code</h3>
+<pre><code class="language-text">This is an example[^3] of footnote usage.
+
+[^3]: An example footnote.
+</code></pre>
+<h3 id="result-5">Result</h3>
+<p>This is an example<a id="fnref:6" href="#fn:3" class="footnote-ref"><sup>3</sup></a> of footnote usage.</p>
+<h2 id="auto-identifiers">Auto-identifiers</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>autoidentifiers &ndash;or&ndash; advanced</td>
+<td>http://pandoc.org/MANUAL.html#extension-auto_identifiers</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-6">Code</h3>
+<pre><code class="language-text"># Automatic Header identifiers
+
+[Link](#automatic-header-identifiers) to header.
+</code></pre>
+<h3 id="result-6">Result</h3>
+<h1 id="automatic-header-identifiers">Automatic Header identifiers</h1>
+<p><a href="#automatic-header-identifiers">Link</a> to header.</p>
+<h2 id="auto-links">Auto-links</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>autolinks &ndash;or&ndash; advanced</td>
+<td>generates links if a text starts with <code>http://</code> or <code>https://</code> or <code>ftp://</code> or <code>mailto:</code> or <code>www.xxx.yyy</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-7">Code</h3>
+<pre><code class="language-text">http://www.digitaltapestry.net
+</code></pre>
+<h3 id="result-7">Result <a id="fnref:7" href="#fn:4" class="footnote-ref"><sup>4</sup></a></h3>
+<p>http://www.digitaltapestry.net</p>
+<h2 id="task-lists">Task Lists</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tasklists &ndash;or&ndash; advanced</td>
+<td>https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-8">Code</h3>
+<pre><code class="language-text">- [ ] a task list item
+- [ ] list syntax required
+- [ ] normal **formatting**
+- [ ] incomplete
+- [x] completed
+</code></pre>
+<h3 id="result-8">Result</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> a task list item</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> list syntax required</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> normal <strong>formatting</strong></li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> incomplete</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> completed</li>
+</ul>
+<h2 id="extra-bullet-lists">Extra Bullet Lists</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>listextras &ndash;or&ndash; advanced</td>
+<td>supporting alpha bullet a. b. and roman bullet (i, ii...etc.)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-9">Code</h3>
+<pre><code class="language-text">1. Level 1
+    i. Level i
+        a. Level a
+</code></pre>
+<h3 id="result-9">Result</h3>
+<ol>
+<li>Level 1
+<ol type="i">
+<li>Level i
+<ol type="a">
+<li>Level a</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="media-support">Media Support</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>medialinks &ndash;or&ndash; advanced</td>
+<td>https://talk.commonmark.org/t/embedded-audio-and-video/441</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-10">Code</h3>
+<pre><code class="language-text">![Rick Roll](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+</code></pre>
+<h3 id="result-10">Result</h3>
+<p><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" class="img-fluid" width="500" height="281" frameborder="0" allowfullscreen></iframe></p>
+<h2 id="abbreviations">Abbreviations</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>abbreviations &ndash;or&ndash; advanced</td>
+<td>https://michelf.ca/projects/php-markdown/extra/#abbr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-11">Code</h3>
+<pre><code class="language-text">*[HTML]: Hypertext Markup Language
+
+Later in a text we are using HTML and it becomes an abbr tag HTML
+</code></pre>
+<h3 id="result-11">Result <a id="fnref:8" href="#fn:5" class="footnote-ref"><sup>5</sup></a></h3>
+<p><code>*[HTML]: Hypertext Markup Language</code></p>
+<p>Later in a text we are using HTML and it becomes an abbr tag HTML</p>
+<h2 id="citation">Citation</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>citations &ndash;or&ndash; advanced</td>
+<td>https://talk.commonmark.org/t/referencing-creative-works-with-cite/892</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-12">Code</h3>
+<pre><code class="language-text">&quot;&quot;Tractatus Logico-Philosophicus&quot;&quot; was first published in 1921.
+</code></pre>
+<h3 id="result-12">Result</h3>
+<p><cite>Tractatus Logico-Philosophicus</cite> was first published in 1921.</p>
+<h2 id="custom-containers">Custom Containers</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>customcontainers &ndash;or&ndash; advanced</td>
+<td>https://talk.commonmark.org/t/custom-container-for-block-and-inline/2051</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-13">Code</h3>
+<pre><code class="language-text">:::{.alert .alert-info}
+This is a Bootstrap alert.
+:::
+</code></pre>
+<h3 id="result-13">Result</h3>
+<div class="alert alert-info"><p>This is a Bootstrap alert.</p>
+</div>
+<h2 id="figures">Figures</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>figures &ndash;or&ndash; advanced</td>
+<td>https://talk.commonmark.org/t/image-tag-should-expand-to-figure-when-used-with-title/265/5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-14">Code</h3>
+<pre><code class="language-text">![Kookburra](/kookaburra.jpg &quot;Kookburra&quot;)
+![Pelican](/pelican.jpg &quot;Pelican&quot;)
+![Cheeky looking Rainbow Lorikeet](/lorikeet.jpg &quot;Rainbow Lorikeet&quot;)
+</code></pre>
+<h3 id="result-14">Result</h3>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Kookaburra_melb.jpg" class="img-fluid" width="100" height="100" alt="Kookburra" title="Kookburra" />
+<img src="http://carolinabirds.org/Daniels/Florida/FLlg/Pelican,%20White%20Sanibel2.jpg" class="img-fluid" width="100" height="100" alt="Pelican" title="Pelican" />
+<img src="http://images.fineartamerica.com/images-medium-large/female-rainbow-lorikeet--trichoglossus-haematodus-life-on-white.jpg" class="img-fluid" width="100" height="100" alt="Cheeky looking Rainbow Lorikeet" title="Rainbow Lorikeet" /></p>
+<h2 id="footers">Footers</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>footers &ndash;or&ndash; advanced</td>
+<td>https://talk.commonmark.org/t/syntax-for-footer/2070</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-15">Code</h3>
+<pre><code class="language-text">&gt; This is a blockquote
+&gt; ^^ This is a &quot;&quot;citation for name&quot;&quot;
+</code></pre>
+<h3 id="result-15">Result</h3>
+<blockquote class="blockquote">
+<p>This is a blockquote</p>
+<footer>This is a <cite>citation for name</cite></footer>
+</blockquote>
+<h2 id="mathematics">Mathematics</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mathematics &ndash;or&ndash; advanced</td>
+<td>https://talk.commonmark.org/t/mathematics-extension/457/31</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-16">Code</h3>
+<pre><code class="language-text">This is a $math block$
+
+$$
+\begin{equation}
+  \int_0^\infty \frac{x^3}{e^x-1}\,dx = \frac{\pi^4}{15}
+  \label{eq:sample}
+\end{equation}
+$$
+</code></pre>
+<h3 id="result-16">Result <a id="fnref:4" href="#fn:2" class="footnote-ref"><sup>2</sup></a> <a id="fnref:9" href="#fn:6" class="footnote-ref"><sup>6</sup></a></h3>
+<p>This is a <span class="math">math block</span></p>
+<div class="math">\begin{equation}
+  \int_0^\infty \frac{x^3}{e^x-1}\,dx = \frac{\pi^4}{15}
+  \label{eq:sample}
+\end{equation}
+</div>
+<h2 id="emoji">Emoji</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>emojis</td>
+<td>https://markdown-it.github.io/</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-17">Code</h3>
+<pre><code class="language-text">It's easy to use emojis. ;) That's cool! 8-)
+</code></pre>
+<h3 id="result-17">Result</h3>
+<p>It's easy to use emojis. 😉 That's cool! 😎</p>
+<h2 id="smartypants">SmartyPants</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>smartypants</td>
+<td>https://daringfireball.net/projects/smartypants/</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-18">Code</h3>
+<pre><code class="language-text">This is a &quot;text&quot;
+
+This is a 'text'
+
+This is a &lt;&lt;text&gt;&gt;
+
+This is a &quot;text
+
+This is a &quot;text 'with&quot; a another text'
+
+This is a -- text
+
+This is a --- text
+
+This is a en ellipsis...
+</code></pre>
+<h3 id="result-18">Result</h3>
+<p>This is a &ldquo;text&rdquo;</p>
+<p>This is a &lsquo;text&rsquo;</p>
+<p>This is a &laquo;text&raquo;</p>
+<p>This is a &quot;text</p>
+<p>This is a &ldquo;text 'with&rdquo; a another text'</p>
+<p>This is a &ndash; text</p>
+<p>This is a &mdash; text</p>
+<p>This is a en ellipsis&hellip;</p>
+<h2 id="diagrams">Diagrams</h2>
+<table class="table">
+<thead>
+<tr>
+<th>tag</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>diagrams &ndash;or&ndash; advanced</td>
+<td>https://knsv.github.io/mermaid/</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-19">Code</h3>
+<pre><code class="language-text">    ```mermaid
+    graph TD;
+        A--&gt;B;
+        A--&gt;C;
+        B--&gt;D;
+        C--&gt;D;
+    ```
+</code></pre>
+<h3 id="result-19">Result <a id="fnref:5" href="#fn:2" class="footnote-ref"><sup>2</sup></a> <a id="fnref:10" href="#fn:7" class="footnote-ref"><sup>7</sup></a></h3>
+<div class="mermaid">graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+</div>
+<hr />
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Alignment doesn't appear to be working, and I don't now why.<a href="#fnref:1" class="footnote-back-ref">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Not all results are visibly evident with the current styling. View the HTML produced.<a href="#fnref:2" class="footnote-back-ref">&#8617;</a><a href="#fnref:3" class="footnote-back-ref">&#8617;</a><a href="#fnref:4" class="footnote-back-ref">&#8617;</a><a href="#fnref:5" class="footnote-back-ref">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>An example footnote.<a href="#fnref:6" class="footnote-back-ref">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Not working with Wyam and I'm not sure why. Maybe a new feature and Wyam isn't using the newest version?<a href="#fnref:7" class="footnote-back-ref">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>Not working. Produces an error &ldquo;Inline has already a parent&rdquo;.<a href="#fnref:8" class="footnote-back-ref">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p>I'll be honest, I don't understand the use case for this one.<a href="#fnref:9" class="footnote-back-ref">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p>This needs mermaid.css and mermaid.js to be linked. Currently I'm not doing that in this blog, so
+the results are broken.<a href="#fnref:10" class="footnote-back-ref">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'markdig-cheat-sheet';
+    var disqus_title = 'Markdig Cheat Sheet';
+    var disqus_url = 'http://digitaltapestry.net/posts/markdig-cheat-sheet';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                                </div>
+                        </div>
+                </div>
+                
+                <hr>
+                
+                <!-- Footer -->
+                <footer>
+                        <div class="container">
+        <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="copyright text-muted">
+                        Copyright © 2017
+                        <br />
+                        <a href="/feed.rss"><i class="fa fa-rss"></i> RSS Feed</a> | <a href="/feed.atom"><i class="fa fa-rss"></i> Atom Feed</a>
+                        <br />
+                        <strong><a href="https://wyam.io">Generated by Wyam</a></strong>
+                    </p>
+                </div>
+        </div>
+</div>
+                </footer> 
+
+                
+                <script>hljs.initHighlightingOnLoad();</script>
+
+                        <script type="text/javascript">                
+                                // Header background                        
+                                var colors = Please.make_color({
+                                        colors_returned: 3,
+                                        saturation: .6
+                                });
+                                var t = new Trianglify({
+                                        x_gradient: colors,
+                                        y_gradient: ["#FFFFFF"]
+                                });
+                                var header = document.getElementById("intro-header");
+                                var pattern = t.generate(header.clientWidth, header.clientHeight);
+                                header.setAttribute('style', 'background-image: ' + pattern.dataUrl);                        
+                        </script>
+        </body>
+</html>
+

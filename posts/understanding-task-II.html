@@ -112,7 +112,7 @@ Published on Saturday, January 7, 2017<br>    </div>
 <h1 id="understanding-task">Understanding Task</h1>
 <h2 id="part-i">Part I</h2>
 <p>In <a href="/posts/understanding-task-I">Part I</a> I explained that a <code>Task</code> is really <strong>just</strong> a datastructure
-that represents the result of &quot;something&quot;, and implemented a <em>very</em> basic <code>MyTask&lt;T&gt;</code> to illustrate
+that represents the result of &ldquo;something&rdquo;, and implemented a <em>very</em> basic <code>MyTask&lt;T&gt;</code> to illustrate
 that. Of course, that isn't a very complete picture and I promised that this time around we'd
 update <code>MyTask&lt;T&gt;</code> to more closely represent the mental model you have for <code>Task</code>.</p>
 <p>Most developer's mental model is very firmly fixed around a <code>Task</code> representing a thread, or maybe
@@ -251,7 +251,7 @@ represent the bulk of what a real <code>Task</code> is. In fact, there's only tw
 here: continuations and cancellation. I'm not going to cover those anytime soon.</p>
 <p>Note that there's no <code>Thread</code> anywhere in this code. Nor have I used the thread pool. Despite that,
 this <em>is</em> a complete representation of a <code>Task</code> (minus continuations and cancellation, of course).
-I here some of you saying &quot;but what about <code>Task.Run</code>?&quot; Well, we'll talk about that and other
+I here some of you saying &ldquo;but what about <code>Task.Run</code>?&rdquo; Well, we'll talk about that and other
 related concepts next time, but <code>Task</code> doesn't really need them. This is really the complete
 concept of a <code>Task</code>, and if you shift your mental model to think in these terms you'll be
 much better suited for using the TPL.</p>

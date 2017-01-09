@@ -133,7 +133,7 @@ Pipelines.Add(&quot;Less&quot;,
 </code></pre>
 <p>Obviously this is specific to my site. You'll need the <code>#n -p Wyam.Less</code>, <code>#n -p Wyam.Minification</code>
 and the call to <code>Pipelines.Add</code> while the rest is site specific. <code>MinifyCss</code> is optional. it
-minifies the output CSS, which is a good idea for &quot;production&quot;, but you may not want to do it while
+minifies the output CSS, which is a good idea for &ldquo;production&rdquo;, but you may not want to do it while
 working on the CSS.</p>
 <p>With that in place I created a <code>input\assets\css\override.less</code> with the following
 code.</p>
@@ -178,7 +178,7 @@ This does still copy the <code>override.less</code> file to the output as well. 
 out how to remove that, I'll update this post.</sub></del></p>
 <p>Update: Dave Glick, the awesome author of Wyam, solved the issue of the LESS file being copied for me on
 <a href="https://gitter.im/Wyamio/Wyam">Gitter</a>. He answers inquiries on there so quickly that I suspect he's
-actually an AI robot. ;)</p>
+actually an AI robot. 😉</p>
 <p>Here's the code to add to remove LESS files from being copied to the output.</p>
 <pre><code class="language-csharp">Pipelines[BlogPipelines.Resources].Clear();
 Pipelines[BlogPipelines.Resources].Add(
