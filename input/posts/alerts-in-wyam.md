@@ -104,16 +104,3 @@ contents:
 
 The examples I showed at the top of this post were created using the Markdown from the example and styled
 with the above CSS.
-
-Update: Dave Glick, the awesome author of Wyam, solved the issue of the LESS file being copied for me on
-[Gitter](https://gitter.im/Wyamio/Wyam). He answers inquiries on there so quickly that I suspect he's
-actually an AI robot. ;)
-
-Here's the code to add to remove LESS files from being copied to the output.
-
-```csharp
-Pipelines[BlogPipelines.Resources].Clear();
-Pipelines[BlogPipelines.Resources].Add(
-    CopyFiles("**/*{!.cshtml,!.md,!.less,}")
-);
-```

@@ -6,7 +6,7 @@ Tags: ["Wyam", "CSS", "LESS"]
 
 # Less in Wyam
 
-In the [last post](/posts/alerts-in-wyam) I showed how to user Bootstrap alerts from
+In the [last post](/posts/alerts-in-wyam) I showed how to use Bootstrap alerts from
 within a Wyam based blog site. I included some CSS to restyle the alerts to include
 glyphicons for the various alert types. The CSS I used had a lot of repetitive code.
 The [Less](http://lesscs.org) CSS preprocessor makes it easy to use mixins to eliminate
@@ -80,5 +80,18 @@ This is simpler than the original CSS thanks to the ```.alert-glyphicon``` mixin
 
 If you've already created a ```input\assets\css\override.css``` you'll have to delete
 it. Now when you build the site, ```override.less``` gets compiled to ```override.css```.
-This does still copy the ```override.less``` file to the output as well. If I figure
-out how to remove that, I'll update this post.
+This does still copy the ```override.less``` file to the output as well. ~~~If I figure
+out how to remove that, I'll update this post.~~~
+
+Update: Dave Glick, the awesome author of Wyam, solved the issue of the LESS file being copied for me on
+[Gitter](https://gitter.im/Wyamio/Wyam). He answers inquiries on there so quickly that I suspect he's
+actually an AI robot. ;)
+
+Here's the code to add to remove LESS files from being copied to the output.
+
+```csharp
+Pipelines[BlogPipelines.Resources].Clear();
+Pipelines[BlogPipelines.Resources].Add(
+    CopyFiles("**/*{!.cshtml,!.md,!.less,}")
+);
+```
