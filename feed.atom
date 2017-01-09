@@ -4,7 +4,7 @@
 	<id>http://digitaltapestry.net/</id>
 	<title>Digital Tapestry</title>
 	<rights>2017</rights>
-	<updated>2017-01-09T12:15:30Z</updated>
+	<updated>2017-01-09T22:16:58Z</updated>
 	<subtitle>Weaving a Digital Tapestry</subtitle>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/markdig-cheat-sheet" />
@@ -628,8 +628,9 @@ This is a en ellipsis...
 &lt;p&gt;I'll be honest, I don't understand the use case for this one.&lt;a href="#fnref:9" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn:7"&gt;
-&lt;p&gt;This needs mermaid.css and mermaid.js to be linked. Currently I'm not doing that in this blog, so
-the results are broken.&lt;a href="#fnref:10" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This needs mermaid.css and mermaid.js to be linked. I've done so here, but the way you do it will be
+improved the next release, so I'll wait to blog about that. Not sure why the generated diagram here
+is missing the arrow lines, but I don't believe it's got anything to do with Wyam or Markdig.&lt;a href="#fnref:10" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
