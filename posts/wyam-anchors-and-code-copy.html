@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+
+        <title>Digital Tapestry - Wyam Anchors and Code Copy</title>
+        <meta name="description" content="Weaving a Digital Tapestry" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+
+        <link type="application/rss+xml" rel="alternate" title="Digital Tapestry" href="/feed.rss" />
+        <link type="application/atom+xml" rel="alternate" title="Digital Tapestry" href="/feed.atom" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/assets/css/highlight.css" rel="stylesheet">
+        <link href="/assets/css/clean-blog.css" rel="stylesheet" />
+        <link href="/assets/css/master.css" rel="stylesheet" />
+        <link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="/assets/css/override.css" rel="stylesheet" />
+        <ling href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css" rel="stylesheet" type="text/css">
+
+
+        <meta name="application-name" content="Digital Tapestry" />
+        <meta name="msapplication-tooltip" content="Digital Tapestry" />
+        <meta name="msapplication-starturl" content="/" />
+
+        <meta property="og:title" content="Digital Tapestry - Wyam Anchors and Code Copy" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://digitaltapestry.net/posts/wyam-anchors-and-code-copy" />
+        <!-- TODO: More social graph meta tags -->
+
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>     
+        <script src="/assets/js/highlight.pack.js"></script>   
+        <script src="/assets/js/clean-blog.js"></script>
+        <script src="/assets/js/d3.v3.min.js"></script>
+        <script src="/assets/js/trianglify.min.js"></script>
+        <script src="/assets/js/Please-compressed.js"></script>
+        <script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+                
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+                <script src="/assets/js/html5shiv.js"></script>
+                <script src="/assets/js/respond.min.js"></script>
+        <![endif]-->
+
+
+        </head>
+        <body>
+                
+                <!-- Navigation -->
+                <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+                        <div class="container-fluid">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <div class="navbar-header page-scroll">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        </button>
+                                        <a class="navbar-brand" href="/">Digital Tapestry</a>
+                                </div>
+                        
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse" id="navbar-collapse">
+                                        <ul class="nav navbar-nav navbar-right">
+                                                        <li><a href="/tags">All Tags</a></li>
+        <li><a href="/posts">Archive</a></li>
+        <li><a href="/resume">Resume</a></li>
+ 
+                                        </ul>
+                                </div>
+                                <!-- /.navbar-collapse -->
+                        </div>
+                        <!-- /.container -->
+                </nav>
+                
+                <!-- Page Header -->
+                <header class="intro-header" id="intro-header">
+                        <div class="container">
+                                <div class="row">
+                                        <div class="col-md-12">
+
+    
+<div class="post-heading">
+    <h1>Wyam Anchors and Code Copy</h1>
+    <div class="meta">        
+Published on Wednesday, January 11, 2017<br>    </div>
+        <div class="tags">
+                    <a role="button" href="/tags/anchorjs" class="btn btn-default btn-xs">AnchorJS</a>
+                    <a role="button" href="/tags/clipboard.js" class="btn btn-default btn-xs">clipboard.js</a>
+                    <a role="button" href="/tags/css" class="btn btn-default btn-xs">CSS</a>
+                    <a role="button" href="/tags/javascript" class="btn btn-default btn-xs">JavaScript</a>
+                    <a role="button" href="/tags/wyam" class="btn btn-default btn-xs">Wyam</a>
+        </div>     
+</div>
+                                        </div>
+                                </div>
+                        </div>
+                </header>
+                
+                <!-- Main Content -->
+                <div class="container">
+                        <div class="row">
+                                <div id="content" class="col-md-12">
+                                        
+
+<h1 id="wyam-anchors-and-code-copy">Wyam Anchors and Code Copy</h1>
+<p>On the <a href="https://wyam.io">Wyam</a> <a href="https://gitter.im/Wyamio/Wyam">Gitter</a> discussion Gary Ewan Park (&#64;gep13 <a id="fnref:1" href="#fn:1" class="footnote-ref"><sup>1</sup></a>)
+asked the following:</p>
+<blockquote class="blockquote">
+<p>If you look at a GitHub wiki page, say this one&hellip;</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>when you hover over the headers, you get this:</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><img src="https://files.gitter.im/Wyamio/Wyam/ZknP/blob" class="img-fluid" alt="Anchor Button" title="Anchor Button" /></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>which allows you to click the link to the header. Markdig is already generating the link to the header, but is there an easy way to
+add the showing of the link on hover, and to allow copying from the address bar?</p>
+</blockquote>
+<p>Dave Glick (&#64;daveglick <a id="fnref:3" href="#fn:2" class="footnote-ref"><sup>2</sup></a>), the author of Wyam, responded with:</p>
+<blockquote class="blockquote">
+<p>There is - in fact strongly considering adding this and code block copy buttons to the themes (it's all frontend JS stuff) - here's
+the two libraries I like the best: <a href="https://github.com/bryanbraun/anchorjs">https://github.com/bryanbraun/anchorjs</a> (for anchor links)
+and <a href="https://github.com/zenorocha/clipboard.js">https://github.com/zenorocha/clipboard.js</a> (for clipboard copying)</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Adding them to your own site would just be a matter of putting the appropriate JS in the _Scripts.cshtml file</p>
+</blockquote>
+<p>So, the three of us set off independently to see if we could figure out how to get these working. &#64;daveglick <a id="fnref:4" href="#fn:2" class="footnote-ref"><sup>2</sup></a> intends to add
+support for this to the existing themes, I believe, so most of what I write here won't be relevant to anyone in the future,
+but I'm going to go ahead and record how I got it working for posterity. There's still some tips you can glean from what I found
+when you're trying to extend an existing Wyam theme on your own.</p>
+<h2 id="anchorjs">AnchorJS</h2>
+<p>This was the easy one. In fact, &#64;gep13 <a id="fnref:2" href="#fn:1" class="footnote-ref"><sup>1</sup></a> and &#64;daveglick <a id="fnref:5" href="#fn:2" class="footnote-ref"><sup>2</sup></a> had this one done before I started looking into it. Anyway,
+this is strictly a JavaScript bit of magic. Here's how you can get it to work.</p>
+<p>If you don't already have a <code>_Scripts.cshtml</code> override file created in your input folder, do so. This is a &ldquo;hook&rdquo; into
+the theme that allows you to add your own JavaScript to every page. For AnchorJS, this is what I added.</p>
+<pre><code class="language-JavaScript">&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    anchors.options.placement = 'left';
+    anchors.add();
+&lt;/script&gt;
+</code></pre>
+<p>That's it. Nothing else needs to be done. I will point out there's one impact to doing this that I don't care for. This
+will add the anchor button to the <code>h1</code> tag in the header of the page. The one inside the blog's banner. This one
+serves no purpose, really, and I think it looks bad. Some CSS or JavaScript magic could probably fix this easy enough,
+but I've not done that work.</p>
+<h2 id="clipboard.js">clipboard.js</h2>
+<p>This one was more difficult. The idea is we want a button to appear with every code block that when clicked copies
+the code in that block. Since clipboard.js is really just about adding clipboard support through JavaScript, and not
+explicitly about adding copy buttons to code blocks, the <a href="https://clipboardjs.com/">instructions</a> on the site only gets
+you so far. However, that page does do exactly what we want. So, I figured I could just &ldquo;steal&rdquo; the code from the
+page source.</p>
+<p>I used Edge to do this.</p>
+<div class="alert alert-info"><p>Yeah, I'm that guy. The lone man daring to use the browser no one else will touch. I'm going to describe how <strong>I</strong>
+did this, using Edge. You'll have to figure out how to do the same thing in your browser of choice&hellip; they all
+have similar capabilities.</p>
+</div>
+<p>I right clicked on one of the code blocks and selected &ldquo;Inspect Element&rdquo; to get into the developer tools at
+the proper location. By inspecting the HTML for this element I was able to find the CSS classes to search for.
+Edge's developer tools allow you to search all the source files, including linked JavaScript and CSS files.
+So, using this I was able to find both the JavaScript file(s) involved here as well as the CSS file(s).
+Unfortunately for us humans, all of these files were minified, making the entirely unreadable. I figured
+there must be some online tools for &quot;unmininfying&quot; both, so I went to Bing (don't shame me) and typed
+both &ldquo;format JavaScript&rdquo; and &quot;format CSS&quot; into the search. On Bing, the top entry for both is a tool
+to format the JavaScript/CSS right there in the search results. Handy to know.</p>
+<div class="alert alert-info"><p>In case you're just figuring it out, I'm not exactly a web developer. I've done web development professionally,
+but that was 12 years ago. Or, if you count XUL based desktop development, 10 years ago. I'm not up
+on the latest web development technologies and tools.</p>
+</div>
+<p>The JavaScript was spread across a few files, so it took a while to locate everything, but it wasn't really
+so bad. That site uses generic CSS class names that I'm concerned could clash, so I modified the code
+slightly for my own purposes. Here's what I came up with for the JavaScript.</p>
+<pre><code class="language-JavaScript">&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    var snippets = document.querySelectorAll(&quot;pre &gt; code&quot;);
+    [].forEach.call(snippets, function(snippet) {
+        snippet.insertAdjacentHTML(&quot;beforebegin&quot;, &quot;&lt;button class='btn-copy' data-clipboard-snippet&gt;&lt;img class='clippy' width=13 src='/assets/images/clippy.svg' alt='Copy to clipboard'&gt;&lt;/button&gt;&quot;);
+    });
+    var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+        target: function(trigger) {
+            return trigger.nextElementSibling;
+        }
+    });
+    clipboardSnippets.on('success', function(e) {
+        e.clearSelection();
+        showTooltip(e.trigger, &quot;Copied!&quot;);
+    });
+    clipboardSnippets.on('error', function(e) {
+        showTooltip(e.trigger, fallbackMessage(e.action));
+    });
+
+    var btns = document.querySelectorAll('.btn-copy');
+    for (var i = 0; i &lt; btns.length; i++) {
+        btns[i].addEventListener('mouseleave', function(e) {
+            e.currentTarget.setAttribute('class', 'btn-copy');
+            e.currentTarget.removeAttribute('aria-label');
+        });
+    }
+
+    function showTooltip(elem, msg) {
+        elem.setAttribute('class', 'btn-copy tooltipped tooltipped-s');
+        elem.setAttribute('aria-label', msg);
+    }
+
+    function fallbackMessage(action) {
+        var actionMsg = '';
+        var actionKey = (action === 'cut' ? 'X' : 'C');
+        if (/iPhone|iPad/i.test(navigator.userAgent)) {
+            actionMsg = 'No support :(';
+        } else if (/Mac/i.test(navigator.userAgent)) {
+            actionMsg = 'Press ⌘-' + actionKey + ' to ' + action;
+        } else {
+            actionMsg = 'Press Ctrl-' + actionKey + ' to ' + action;
+        }
+        return actionMsg;
+    }
+    hljs.initHighlightingOnLoad();
+&lt;/script&gt;
+</code></pre>
+<p>I'll be honest here, I don't know what the purpose of the <code>hljs.initHighlightingOnLoad</code> is. I've
+kept it from the code I stole, but I should really figure out why it's there at some point.</p>
+<p>The CSS was trickier. Like the JavaScript, it was spread out through multiple files. The bigger issue,
+though, was that much of it was specific to this site, and not necessarily something we'd need ourselves.
+So, I tried to eliminate everything that's not necessary. My CSS skills are a bit lacking, though,
+so I may have eliminated too much and/or kept things that are unecessary. However, as you can see
+it does work. Long term, it may be that it would benefit from some tweaking. In particular, I'll point
+out this all relies on an SVG image for the copy button. I'd like to make this use a glyphicon instead.
+Anyway, here's the CSS I've used.</p>
+<pre><code class="language-CSS">.btn-copy[disabled] .clippy {
+    opacity: .3;
+}
+pre .btn-copy {
+    -webkit-transition: opacity 0.3s ease-in-out;
+    -o-transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    padding: 2px 6px;
+    float: right;
+}
+pre:hover .btn-copy {
+    opacity: 1;
+}
+.tooltipped {
+    position: relative
+}
+.tooltipped:after {
+    position: absolute;
+    z-index: 1000000;
+    display: none;
+    padding: 5px 8px;
+    font: normal normal 11px/1.5 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: break-word;
+    white-space: pre;
+    pointer-events: none;
+    content: attr(aria-label);
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 3px;
+    -webkit-font-smoothing: subpixel-antialiased
+}
+.tooltipped:before {
+    position: absolute;
+    z-index: 1000001;
+    display: none;
+    width: 0;
+    height: 0;
+    color: rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+    content: &quot;&quot;;
+    border: 5px solid transparent
+}
+.tooltipped:hover:before, .tooltipped:hover:after, .tooltipped:active:before, .tooltipped:active:after, .tooltipped:focus:before, .tooltipped:focus:after {
+    display: inline-block;
+    text-decoration: none
+}
+.tooltipped-s:after, .tooltipped-se:after, .tooltipped-sw:after {
+    top: 100%;
+    right: 50%;
+    margin-top: 5px
+}
+.tooltipped-s:before, .tooltipped-se:before, .tooltipped-sw:before {
+    top: auto;
+    right: 50%;
+    bottom: -5px;
+    margin-right: -5px;
+    border-bottom-color: rgba(0, 0, 0, 0.8)
+}
+</code></pre>
+<p>This goes in <code>override.css</code> in your input directory (create one if you haven't already). Or, like me, you can get creative
+and use <a href="http://lesscss.org">Less</a>, which I've <a href="/posts/less-in-wyam.md">blogged about</a>.</p>
+<p>That's it. If &#64;daveglick <a id="fnref:6" href="#fn:2" class="footnote-ref"><sup>2</sup></a> hasn't added this to the themes by the time you read this, that's how you can make this work.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://github.com/gep13">Gary Ewan Park (&#64;gep13)</a><a href="#fnref:1" class="footnote-back-ref">&#8617;</a><a href="#fnref:2" class="footnote-back-ref">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://github.com/daveaglick">Dave Glick (&#64;daveglick)</a><a href="#fnref:3" class="footnote-back-ref">&#8617;</a><a href="#fnref:4" class="footnote-back-ref">&#8617;</a><a href="#fnref:5" class="footnote-back-ref">&#8617;</a><a href="#fnref:6" class="footnote-back-ref">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'wyam-anchors-and-code-copy';
+    var disqus_title = 'Wyam Anchors and Code Copy';
+    var disqus_url = 'http://digitaltapestry.net/posts/wyam-anchors-and-code-copy';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                                </div>
+                        </div>
+                </div>
+                
+                <hr>
+                
+                <!-- Footer -->
+                <footer>
+                        <div class="container">
+        <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="copyright text-muted">
+                        Copyright © 2017
+                        <br />
+                        <a href="/feed.rss"><i class="fa fa-rss"></i> RSS Feed</a> | <a href="/feed.atom"><i class="fa fa-rss"></i> Atom Feed</a>
+                        <br />
+                        <strong><a href="https://wyam.io">Generated by Wyam</a></strong>
+                    </p>
+                </div>
+        </div>
+</div>
+                </footer> 
+
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js"></script>
+<script type="text/javascript">
+    anchors.options.placement = 'left';
+    anchors.add();
+
+    var snippets = document.querySelectorAll("pre > code");
+    [].forEach.call(snippets, function(snippet) {
+        snippet.insertAdjacentHTML("beforebegin", "<button class='btn-copy' data-clipboard-snippet><img class='clippy' width=13 src='/assets/images/clippy.svg' alt='Copy to clipboard'></button>");
+    });
+    var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+        target: function(trigger) {
+            return trigger.nextElementSibling;
+        }
+    });
+    clipboardSnippets.on('success', function(e) {
+        e.clearSelection();
+        showTooltip(e.trigger, "Copied!");
+    });
+    clipboardSnippets.on('error', function(e) {
+        showTooltip(e.trigger, fallbackMessage(e.action));
+    });
+
+    var btns = document.querySelectorAll('.btn-copy');
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('mouseleave', function(e) {
+            e.currentTarget.setAttribute('class', 'btn-copy');
+            e.currentTarget.removeAttribute('aria-label');
+        });
+    }
+
+    function showTooltip(elem, msg) {
+        elem.setAttribute('class', 'btn-copy tooltipped tooltipped-s');
+        elem.setAttribute('aria-label', msg);
+    }
+
+    function fallbackMessage(action) {
+        var actionMsg = '';
+        var actionKey = (action === 'cut' ? 'X' : 'C');
+        if (/iPhone|iPad/i.test(navigator.userAgent)) {
+            actionMsg = 'No support :(';
+        } else if (/Mac/i.test(navigator.userAgent)) {
+            actionMsg = 'Press ⌘-' + actionKey + ' to ' + action;
+        } else {
+            actionMsg = 'Press Ctrl-' + actionKey + ' to ' + action;
+        }
+        return actionMsg;
+    }
+    hljs.initHighlightingOnLoad();
+</script>
+                <script>hljs.initHighlightingOnLoad();</script>
+
+                        <script type="text/javascript">                
+                                // Header background                        
+                                var colors = Please.make_color({
+                                        colors_returned: 3,
+                                        saturation: .6
+                                });
+                                var t = new Trianglify({
+                                        x_gradient: colors,
+                                        y_gradient: ["#FFFFFF"]
+                                });
+                                var header = document.getElementById("intro-header");
+                                var pattern = t.generate(header.clientWidth, header.clientHeight);
+                                header.setAttribute('style', 'background-image: ' + pattern.dataUrl);                        
+                        </script>
+        </body>
+</html>

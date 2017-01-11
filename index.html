@@ -107,6 +107,15 @@
 <div class="row">
     <div class="col-sm-8 right-border">
                 <div class="post-preview">
+                    <a href="/posts/wyam-anchors-and-code-copy">
+                        <h2 class="post-title">Wyam Anchors and Code Copy</h2>
+                    </a>
+                    <p class="post-meta">Posted on Wednesday, January 11, 2017</p>
+                    <p>On the <a href="https://wyam.io">Wyam</a> <a href="https://gitter.im/Wyamio/Wyam">Gitter</a> discussion Gary Ewan Park (@gep13 <a id="fnref:1" href="#fn:1" class="footnote-ref"><sup>1</sup></a>)
+asked the following:</p>             
+                </div>       
+                    <hr /> 
+                <div class="post-preview">
                     <a href="/posts/markdig-cheat-sheet">
                         <h2 class="post-title">Markdig Cheat Sheet</h2>
                     </a>
@@ -128,30 +137,21 @@ The <a href="http://lesscs.org">Less</a> CSS preprocessor makes it easy to use m
 duplicate code in CSS files. Wyam has a module for using Less, so I updated my site
 to use it.</p>             
                 </div>       
-                    <hr /> 
-                <div class="post-preview">
-                    <a href="/posts/alerts-in-wyam">
-                        <h2 class="post-title">Alerts In Wyam</h2>
-                    </a>
-                    <p class="post-meta">Posted on Sunday, January 8, 2017</p>
-                    <p>Bootstrap has the concept of “alerts”, which are specially styled divs used to call out notes.
-Here's some examples:</p>             
-                </div>       
     </div>
     <div class="col-sm-4 sidebar">
         <hr class="visible-xs-block" />
         <h5>Tags</h5>
         <div>
-                <a role="button" href="/tags/wyam" class="btn btn-default btn-sm"> Wyam (4)</a>
+                <a role="button" href="/tags/wyam" class="btn btn-default btn-sm"> Wyam (5)</a>
                 <a role="button" href="/tags/net" class="btn btn-default btn-sm"> .NET (4)</a>
                 <a role="button" href="/tags/c%23" class="btn btn-default btn-sm"> C# (4)</a>
-                <a role="button" href="/tags/markdig" class="btn btn-default btn-sm"> Markdig (2)</a>
+                <a role="button" href="/tags/css" class="btn btn-default btn-sm"> CSS (3)</a>
                 <a role="button" href="/tags/microsoft.extensions.logging" class="btn btn-default btn-sm"> Microsoft.Extensions.Logging (2)</a>
-                <a role="button" href="/tags/logging" class="btn btn-default btn-sm"> Logging (2)</a>
+                <a role="button" href="/tags/markdig" class="btn btn-default btn-sm"> Markdig (2)</a>
                 <a role="button" href="/tags/tpl" class="btn btn-default btn-sm"> TPL (2)</a>
+                <a role="button" href="/tags/logging" class="btn btn-default btn-sm"> Logging (2)</a>
                 <a role="button" href="/tags/task" class="btn btn-default btn-sm"> Task (2)</a>
-                <a role="button" href="/tags/css" class="btn btn-default btn-sm"> CSS (2)</a>
-                <a role="button" href="/tags/markdown" class="btn btn-default btn-sm"> Markdown (1)</a>
+                <a role="button" href="/tags/clipboard.js" class="btn btn-default btn-sm"> clipboard.js (1)</a>
         </div>
         <ul class="pager">
             <li class="next">
@@ -161,10 +161,10 @@ Here's some examples:</p>
         <hr />
         <h5>Older Posts</h5>
         <ul class="list-unstyled">
+                <li><a href="/posts/alerts-in-wyam">Alerts In Wyam</a></li>
                 <li><a href="/posts/understanding-task-II">Understanding Task - Part II</a></li>
                 <li><a href="/posts/understanding-task-I">Understanding Task - Part I</a></li>
                 <li><a href="/posts/logging-part-II">Logging - Part II</a></li>
-                <li><a href="/posts/logging-part-I">Logging - Part I</a></li>
         </ul>
         <ul class="pager">
             <li class="next">
@@ -198,7 +198,56 @@ Here's some examples:</p>
 </div>
                 </footer> 
 
-                
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js"></script>
+<script type="text/javascript">
+    anchors.options.placement = 'left';
+    anchors.add();
+
+    var snippets = document.querySelectorAll("pre > code");
+    [].forEach.call(snippets, function(snippet) {
+        snippet.insertAdjacentHTML("beforebegin", "<button class='btn-copy' data-clipboard-snippet><img class='clippy' width=13 src='/assets/images/clippy.svg' alt='Copy to clipboard'></button>");
+    });
+    var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+        target: function(trigger) {
+            return trigger.nextElementSibling;
+        }
+    });
+    clipboardSnippets.on('success', function(e) {
+        e.clearSelection();
+        showTooltip(e.trigger, "Copied!");
+    });
+    clipboardSnippets.on('error', function(e) {
+        showTooltip(e.trigger, fallbackMessage(e.action));
+    });
+
+    var btns = document.querySelectorAll('.btn-copy');
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('mouseleave', function(e) {
+            e.currentTarget.setAttribute('class', 'btn-copy');
+            e.currentTarget.removeAttribute('aria-label');
+        });
+    }
+
+    function showTooltip(elem, msg) {
+        elem.setAttribute('class', 'btn-copy tooltipped tooltipped-s');
+        elem.setAttribute('aria-label', msg);
+    }
+
+    function fallbackMessage(action) {
+        var actionMsg = '';
+        var actionKey = (action === 'cut' ? 'X' : 'C');
+        if (/iPhone|iPad/i.test(navigator.userAgent)) {
+            actionMsg = 'No support :(';
+        } else if (/Mac/i.test(navigator.userAgent)) {
+            actionMsg = 'Press ⌘-' + actionKey + ' to ' + action;
+        } else {
+            actionMsg = 'Press Ctrl-' + actionKey + ' to ' + action;
+        }
+        return actionMsg;
+    }
+    hljs.initHighlightingOnLoad();
+</script>
                 <script>hljs.initHighlightingOnLoad();</script>
 
                         <script type="text/javascript">                
