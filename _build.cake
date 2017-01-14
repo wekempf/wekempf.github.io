@@ -46,9 +46,9 @@ Task("Publish")
         if (GitCommitPages() != 0) {
             throw new Exception("Unable to commit Pages.");
         }
-        /*if (GitPushPages() != 0) {
+        if (GitPushPages() != 0) {
             throw new Exception("Unable to publish Pages.");
-        }*/
+        }
     });
 
 RunTarget(target);
