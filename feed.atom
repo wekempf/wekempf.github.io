@@ -4,7 +4,7 @@
 	<id>http://digitaltapestry.net/</id>
 	<title>Digital Tapestry</title>
 	<rights>2017</rights>
-	<updated>2017-01-14T19:45:01Z</updated>
+	<updated>2017-01-14T19:46:03Z</updated>
 	<subtitle>Weaving a Digital Tapestry</subtitle>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/playing-with-equality" />
@@ -222,7 +222,6 @@ and eventually show you an interesting trick you can use when implementing equal
 		<updated>2017-01-12T11:02:00Z</updated>
 		<content>&lt;h1 id="emoji-cheat-sheet"&gt;Emoji Cheat Sheet&lt;/h1&gt;
 &lt;p&gt;This cheat sheet was compiled from the &lt;a href="https://github.com/lunet-io/markdig/blob/master/src/Markdig/Extensions/Emoji/EmojiParser.cs"&gt;source for Markdig&lt;/a&gt;.
-Not all shortcuts are working properly, which I assume is due to &lt;a href="https://wyam.io"&gt;Wyam&lt;/a&gt; using an older version of Markdig.
 A couple of shortcuts use the &lt;code&gt;\&lt;/code&gt; character, which doesn't always work well with the rest of Markdown, and may require a trailing space.
 One shortcut, &lt;code&gt;&amp;lt;/3&lt;/code&gt;, breaks my Markdown pipetable in the source and I had to use the alternate &lt;code&gt;:broken_heart:&lt;/code&gt; shortcut
 for the visual display here. This shortcut works in other places, but interfered with the pipetable here, which I cannot explain.&lt;/p&gt;
@@ -4003,7 +4002,6 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 &lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
 		<summary>&lt;p&gt;This cheat sheet was compiled from the &lt;a href="https://github.com/lunet-io/markdig/blob/master/src/Markdig/Extensions/Emoji/EmojiParser.cs"&gt;source for Markdig&lt;/a&gt;.
-Not all shortcuts are working properly, which I assume is due to &lt;a href="https://wyam.io"&gt;Wyam&lt;/a&gt; using an older version of Markdig.
 A couple of shortcuts use the &lt;code&gt;\&lt;/code&gt; character, which doesn't always work well with the rest of Markdown, and may require a trailing space.
 One shortcut, &lt;code&gt;&amp;lt;/3&lt;/code&gt;, breaks my Markdown pipetable in the source and I had to use the alternate &lt;code&gt;:broken_heart:&lt;/code&gt; shortcut
 for the visual display here. This shortcut works in other places, but interfered with the pipetable here, which I cannot explain.&lt;/p&gt;</summary>
