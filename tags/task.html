@@ -123,17 +123,17 @@
                 <a role="button" href="/tags/anchorjs" class="btn btn-default btn-xs"> AnchorJS (1)</a>
                 <a role="button" href="/tags/c%23" class="btn btn-default btn-xs"> C# (4)</a>
                 <a role="button" href="/tags/clipboard.js" class="btn btn-default btn-xs"> clipboard.js (1)</a>
-                <a role="button" href="/tags/css" class="btn btn-default btn-xs"> CSS (3)</a>
+                <a role="button" href="/tags/css" class="btn btn-default btn-xs"> CSS (4)</a>
                 <a role="button" href="/tags/digitaltapestry" class="btn btn-default btn-xs"> digitaltapestry (1)</a>
                 <a role="button" href="/tags/javascript" class="btn btn-default btn-xs"> JavaScript (1)</a>
                 <a role="button" href="/tags/less" class="btn btn-default btn-xs"> LESS (1)</a>
                 <a role="button" href="/tags/logging" class="btn btn-default btn-xs"> Logging (2)</a>
-                <a role="button" href="/tags/markdig" class="btn btn-default btn-xs"> Markdig (2)</a>
-                <a role="button" href="/tags/markdown" class="btn btn-default btn-xs"> Markdown (1)</a>
+                <a role="button" href="/tags/markdig" class="btn btn-default btn-xs"> Markdig (3)</a>
+                <a role="button" href="/tags/markdown" class="btn btn-default btn-xs"> Markdown (2)</a>
                 <a role="button" href="/tags/microsoft.extensions.logging" class="btn btn-default btn-xs"> Microsoft.Extensions.Logging (2)</a>
                 <a role="button" href="/tags/task" class="btn btn-primary btn-xs"> Task (2)</a>
                 <a role="button" href="/tags/tpl" class="btn btn-default btn-xs"> TPL (2)</a>
-                <a role="button" href="/tags/wyam" class="btn btn-default btn-xs"> Wyam (5)</a>
+                <a role="button" href="/tags/wyam" class="btn btn-default btn-xs"> Wyam (6)</a>
         </div>
     </div>
 </div>
@@ -164,7 +164,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js"></script>
 <script type="text/javascript">
     anchors.options.placement = 'left';
-    anchors.add();
+    anchors.add('#content > h1,h2,h3,h4');
 
     var snippets = document.querySelectorAll("pre > code");
     [].forEach.call(snippets, function(snippet) {

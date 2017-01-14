@@ -107,6 +107,18 @@
 <div class="row">
     <div class="col-sm-8 right-border">
                 <div class="post-preview">
+                    <a href="/posts/emoji-cheat-sheet">
+                        <h2 class="post-title">Emoji Cheat Sheet</h2>
+                    </a>
+                    <p class="post-meta">Posted on Thursday, January 12, 2017</p>
+                    <p>This cheat sheet was compiled from the <a href="https://github.com/lunet-io/markdig/blob/master/src/Markdig/Extensions/Emoji/EmojiParser.cs">source for Markdig</a>.
+Not all shortcuts are working properly, which I assume is due to <a href="https://wyam.io">Wyam</a> using an older version of Markdig.
+A couple of shortcuts use the <code>\</code> character, which doesn't always work well with the rest of Markdown, and may require a trailing space.
+One shortcut, <code>&lt;/3</code>, breaks my Markdown pipetable in the source and I had to use the alternate <code>:broken_heart:</code> shortcut
+for the visual display here. This shortcut works in other places, but interfered with the pipetable here, which I cannot explain.</p>             
+                </div>       
+                    <hr /> 
+                <div class="post-preview">
                     <a href="/posts/wyam-anchors-and-code-copy">
                         <h2 class="post-title">Wyam Anchors and Code Copy</h2>
                     </a>
@@ -124,34 +136,21 @@ asked the following:</p>
 processing, and that Markdig supports extensions. Currently, Markdig lacks documentation. For this
 reason, I'm going to try and create a “cheat sheet” for the extensions.</p>             
                 </div>       
-                    <hr /> 
-                <div class="post-preview">
-                    <a href="/posts/less-in-wyam">
-                        <h2 class="post-title">Less in Wyam</h2>
-                    </a>
-                    <p class="post-meta">Posted on Sunday, January 8, 2017</p>
-                    <p>In the <a href="/posts/alerts-in-wyam">last post</a> I showed how to use Bootstrap alerts from
-within a Wyam based blog site. I included some CSS to restyle the alerts to include
-glyphicons for the various alert types. The CSS I used had a lot of repetitive code.
-The <a href="http://lesscs.org">Less</a> CSS preprocessor makes it easy to use mixins to eliminate
-duplicate code in CSS files. Wyam has a module for using Less, so I updated my site
-to use it.</p>             
-                </div>       
     </div>
     <div class="col-sm-4 sidebar">
         <hr class="visible-xs-block" />
         <h5>Tags</h5>
         <div>
-                <a role="button" href="/tags/wyam" class="btn btn-default btn-sm"> Wyam (5)</a>
+                <a role="button" href="/tags/wyam" class="btn btn-default btn-sm"> Wyam (6)</a>
                 <a role="button" href="/tags/c%23" class="btn btn-default btn-sm"> C# (4)</a>
                 <a role="button" href="/tags/net" class="btn btn-default btn-sm"> .NET (4)</a>
-                <a role="button" href="/tags/css" class="btn btn-default btn-sm"> CSS (3)</a>
-                <a role="button" href="/tags/task" class="btn btn-default btn-sm"> Task (2)</a>
+                <a role="button" href="/tags/css" class="btn btn-default btn-sm"> CSS (4)</a>
+                <a role="button" href="/tags/markdig" class="btn btn-default btn-sm"> Markdig (3)</a>
                 <a role="button" href="/tags/logging" class="btn btn-default btn-sm"> Logging (2)</a>
+                <a role="button" href="/tags/task" class="btn btn-default btn-sm"> Task (2)</a>
                 <a role="button" href="/tags/tpl" class="btn btn-default btn-sm"> TPL (2)</a>
                 <a role="button" href="/tags/microsoft.extensions.logging" class="btn btn-default btn-sm"> Microsoft.Extensions.Logging (2)</a>
-                <a role="button" href="/tags/markdig" class="btn btn-default btn-sm"> Markdig (2)</a>
-                <a role="button" href="/tags/digitaltapestry" class="btn btn-default btn-sm"> digitaltapestry (1)</a>
+                <a role="button" href="/tags/markdown" class="btn btn-default btn-sm"> Markdown (2)</a>
         </div>
         <ul class="pager">
             <li class="next">
@@ -161,10 +160,10 @@ to use it.</p>
         <hr />
         <h5>Older Posts</h5>
         <ul class="list-unstyled">
+                <li><a href="/posts/less-in-wyam">Less in Wyam</a></li>
                 <li><a href="/posts/alerts-in-wyam">Alerts In Wyam</a></li>
                 <li><a href="/posts/understanding-task-II">Understanding Task - Part II</a></li>
                 <li><a href="/posts/understanding-task-I">Understanding Task - Part I</a></li>
-                <li><a href="/posts/logging-part-II">Logging - Part II</a></li>
         </ul>
         <ul class="pager">
             <li class="next">
@@ -202,7 +201,7 @@ to use it.</p>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js"></script>
 <script type="text/javascript">
     anchors.options.placement = 'left';
-    anchors.add();
+    anchors.add('#content > h1,h2,h3,h4');
 
     var snippets = document.querySelectorAll("pre > code");
     [].forEach.call(snippets, function(snippet) {

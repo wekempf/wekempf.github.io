@@ -157,6 +157,10 @@ the theme that allows you to add your own JavaScript to every page. For AnchorJS
 will add the anchor button to the <code>h1</code> tag in the header of the page. The one inside the blog's banner. This one
 serves no purpose, really, and I think it looks bad. Some CSS or JavaScript magic could probably fix this easy enough,
 but I've not done that work.</p>
+<p><strong>Update:</strong> <a href="http://www.phillipsj.net/posts/wyam-improved-anchors?platform=hootsuite">Jamie Philips</a> provided a fix
+for the anchor button in the banner issue. Here's what I'm currently using.</p>
+<pre><code class="language-JavaScript">anchors.add('#content &gt; h1,h2,h3,h4');
+</code></pre>
 <h2 id="clipboard.js">clipboard.js</h2>
 <p>This one was more difficult. The idea is we want a button to appear with every code block that when clicked copies
 the code in that block. Since clipboard.js is really just about adding clipboard support through JavaScript, and not
@@ -371,7 +375,7 @@ and use <a href="http://lesscss.org">Less</a>, which I've <a href="/posts/less-i
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js"></script>
 <script type="text/javascript">
     anchors.options.placement = 'left';
-    anchors.add();
+    anchors.add('#content > h1,h2,h3,h4');
 
     var snippets = document.querySelectorAll("pre > code");
     [].forEach.call(snippets, function(snippet) {

@@ -103,6 +103,12 @@
         <h1>2017</h1>
         <hr />
         <div class="post-list">
+            <a href="/posts/emoji-cheat-sheet">
+                <h3 class="post-title">Emoji Cheat Sheet</h3>
+            </a>
+            <p class="post-meta">Posted on Thursday, January 12, 2017</p>            
+        </div>   
+        <div class="post-list">
             <a href="/posts/wyam-anchors-and-code-copy">
                 <h3 class="post-title">Wyam Anchors and Code Copy</h3>
             </a>
@@ -186,7 +192,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js"></script>
 <script type="text/javascript">
     anchors.options.placement = 'left';
-    anchors.add();
+    anchors.add('#content > h1,h2,h3,h4');
 
     var snippets = document.querySelectorAll("pre > code");
     [].forEach.call(snippets, function(snippet) {
