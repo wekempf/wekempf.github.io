@@ -4,8 +4,217 @@
 	<id>http://digitaltapestry.net/</id>
 	<title>Digital Tapestry</title>
 	<rights>2017</rights>
-	<updated>2017-01-14T14:38:06Z</updated>
+	<updated>2017-01-14T19:45:01Z</updated>
 	<subtitle>Weaving a Digital Tapestry</subtitle>
+	<entry>
+		<link href="http://digitaltapestry.net/posts/playing-with-equality" />
+		<id>http://digitaltapestry.net/posts/playing-with-equality</id>
+		<title>Playing With Equality</title>
+		<updated>2017-01-14T13:10:36Z</updated>
+		<content>&lt;h1 id="playing-with-equality"&gt;Playing With Equality&lt;/h1&gt;
+&lt;p&gt;Most developers think they understand equality, but it's actually a pretty tricky subject.
+Implementing equality correctly is much more complicated than most realize. In this post
+I'm going to play around with equality, showing you some things you may not be aware of,
+and eventually show you an interesting trick you can use when implementing equality.&lt;/p&gt;
+&lt;h2 id="value-equality"&gt;Value Equality&lt;/h2&gt;
+&lt;p&gt;Did you know that in .NET you get value equality for free? Value types automatically
+implement &lt;code&gt;object.Equals&lt;/code&gt; and &lt;code&gt;object.GetHashCode&lt;/code&gt; to “do the right thing”.
+Here's a simple &lt;code&gt;Point&lt;/code&gt; struct.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;public struct Point
+{
+    public int X { get; set; }
+
+    public int Y { get; set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And here's some simple code to illustrate the equality behavior you get for free.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;var p1 = new Point { X = 10, Y = 20 };
+var p2 = new Point { X = 10, Y = 30 };
+var p3 = new Point { X = 10, Y = 20 };
+
+WriteLine(p1.Equals(p1));
+WriteLine(p1.Equals(p2));
+WriteLine(p1.Equals(p3));
+WriteLine(p1.GetHashCode());
+WriteLine(p2.GetHashCode());
+WriteLine(p3.GetHashCode());
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This produces the following results.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;True
+False
+True
+346948930
+346948936
+346948930
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So &lt;code&gt;object.Equals&lt;/code&gt; behaves as you'd expect, as does &lt;code&gt;object.GetHashCode&lt;/code&gt;. What you
+don't get is &lt;code&gt;IEquatable&amp;lt;Point&amp;gt;&lt;/code&gt;, unfortunately, but for value types that's fairly
+easy to implement.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;public struct Point : IEquatable&amp;lt;Point&amp;gt;
+{
+    public int X { get; set; }
+
+    public int Y { get; set; }
+
+        public bool Equals(Point other) =&amp;gt; object.Equals(this, other);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="reference-equality"&gt;Reference Equality&lt;/h2&gt;
+&lt;p&gt;It's not so simple for reference types. Reference types don't provide value equality,
+they provide reference equality. Let's illustrate.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;public class RefPoint
+{
+    public int X { get; set; }
+
+    public int Y { get; set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is identical to our original &lt;code&gt;Point&lt;/code&gt;, except it's a class instead of a struct.
+Let's use it like we did the struct.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;var p4 = new RefPoint { X = 10, Y = 20 };
+var p5 = new RefPoint { X = 10, Y = 30 };
+var p6 = new RefPoint { X = 10, Y = 20 };
+
+WriteLine(p4.Equals(p4));
+WriteLine(p4.Equals(p5));
+WriteLine(p4.Equals(p6));
+WriteLine(p4.GetHashCode());
+WriteLine(p5.GetHashCode());
+WriteLine(p6.GetHashCode());
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here's the result.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-text"&gt;True
+False
+False
+21083178
+55530882
+30015890
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So, every instance has it's own unique hash code and an instance is only equal to itself.
+This is reference equality. We can override the behavior to get back value equality, but
+it's non-trivial.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;public class RefPoint : IEquatable&amp;lt;RefPoint&amp;gt;
+{
+    public int X { get; set; }
+
+    public int Y { get; set; }
+
+    public override bool Equals(object obj) =&amp;gt; this.Equals(obj as RefPoint);
+
+    public override int GetHashCode() =&amp;gt;
+        (this.X.GetHashCode() * 486187739) + this.Y.GetHashCode();
+
+    public bool Equals(RefPoint other) =&amp;gt;
+        other == null
+            ? false
+            : this.X == other.X &amp;amp;&amp;amp; this.Y == other.Y;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Handling &lt;code&gt;null&lt;/code&gt; is a bit tricky, but most of us should be able to handle that corectly if
+we're careful. &lt;code&gt;GetHashCode&lt;/code&gt; is another matter. Not many people know how to implement a good
+hashing algorithm. With some web searching you can come across the basic algorithm I've used
+here: you multiply each “part” (each field/property) except the last by some large prime
+number and add all of the results together. You could memorize this, but it's still a lot
+of fiddly code to have to write for such an "easy" concept as equality.&lt;/p&gt;
+&lt;h2 id="valuetuple-trick"&gt;ValueTuple trick&lt;/h2&gt;
+&lt;p&gt;I promised a trick. Well, we know that value types implement equality by default. There's
+a trick you can take advantage of when implementing equality for reference types.&lt;/p&gt;
+&lt;p&gt;In C# 7 they've introduced tuples into the language. Under the cover these tuples are
+instances of a new type: &lt;code&gt;ValueTuple&lt;/code&gt;. This type is, as it's name implies, a value type.
+Since value types implement &lt;code&gt;object.Equals&lt;/code&gt; and &lt;code&gt;object.GetHashCode&lt;/code&gt;, we can take
+advantage of that when implementing them for reference types.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;public class RefPoint : IEquatable&amp;lt;RefPoint&amp;gt;
+{
+    public int X { get; set; }
+
+    public int Y { get; set; }
+
+    public override bool Equals(object obj) =&amp;gt; this.Equals(obj as RefPoint);
+
+    public override int GetHashCode() =&amp;gt;
+        this.AsTuple().GetHashCode();
+
+    public bool Equals(RefPoint other) =&amp;gt;
+        other == null
+            ? false
+            : this.AsTuple().Equals(other.AsTuple());
+
+    private (int X, int Y) AsTuple() =&amp;gt; (this.X, this.Y);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We stil have to handle &lt;code&gt;null&lt;/code&gt;, unfortunately, but the rest has become much easier.
+BTW, in older versions of C# you can do the same thing with an anonymous type
+or a custom value type, but neither is as nice as the &lt;code&gt;ValueTuple&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="wishful-thinking"&gt;Wishful Thinking&lt;/h2&gt;
+&lt;p&gt;The Ruby language has this nice little concept of the “spaceship operator”. The
+&lt;code&gt;&amp;lt;=&amp;gt;&lt;/code&gt; operator is basically equivelent to &lt;code&gt;IComparable.Compare&lt;/code&gt;, returning a
+negative value if the left value is less than the right value, a positive value
+if the left value is greater than the right value and zero if the left value is
+equal to the right value. The real beauty here is if you define this one operator,
+everything else is defined for you. Wouldn't it be awesome if we had the same
+concept in C#? In C# we split &lt;code&gt;IEquatable&lt;/code&gt; and &lt;code&gt;IComparable&lt;/code&gt; concepts up, rightfully,
+so we might need two operators. I'll call them &lt;code&gt;===&lt;/code&gt; and &lt;code&gt;&amp;lt;=&amp;gt;&lt;/code&gt;. If you defined
+&lt;code&gt;&amp;lt;=&amp;gt;&lt;/code&gt; you'd get &lt;code&gt;IEqutable&lt;/code&gt;, &lt;code&gt;IComparable&lt;/code&gt;, &lt;code&gt;object.Equals&lt;/code&gt;, &lt;code&gt;object.GetHashCode&lt;/code&gt;,
+&lt;code&gt;==&lt;/code&gt;, &lt;code&gt;!=&lt;/code&gt;, &lt;code&gt;&amp;lt;&lt;/code&gt;, &lt;code&gt;&amp;lt;=&lt;/code&gt;, &lt;code&gt;&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;gt;=&lt;/code&gt; all implemented for you by the compiler.
+If you implemented &lt;code&gt;===&lt;/code&gt; instead you'd get &lt;code&gt;IEquatable&lt;/code&gt;, &lt;code&gt;object.Equals&lt;/code&gt;,
+&lt;code&gt;object.GetHashCode&lt;/code&gt;, &lt;code&gt;==&lt;/code&gt; and &lt;code&gt;!=&lt;/code&gt;. Oh, and as long as we're wishing,
+let's make it really simple to implement these two operators.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;public class RefPoint
+{
+    public int X { get; set; }
+
+    public int Y { get; set; }
+
+    public operator ===() =&amp;gt; this.X, this.Y;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the above example we implemented this hypothetical operator not by declaring
+how to compare but by only declaring what to compare. This allows the definition
+to automatically implement everything else for us, basically giving us code equivalent
+to what I showed for the &lt;code&gt;ValueTuple&lt;/code&gt; trick (plus the operators).&lt;/p&gt;
+&lt;p&gt;Yeah, I'm not entirely sold on the syntax here either. After all, there's no &lt;code&gt;===&lt;/code&gt; or&lt;code&gt;&lt;/code&gt;&amp;lt;=&amp;gt;` operators you can use anywhere other than in declaring things here. Maybe it would
+make more sense with syntax like this.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;public class RefPoint
+    equatable : X, Y
+{
+    public int X { get; set; }
+
+    public int Y { get; set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Still, the idea of no longer having to deal with the intricacies of implementing equality
+(or ordering) by hand, the source of far too many bugs, is enticing, isn't it?&lt;/p&gt;
+
+
+&lt;div id="disqus_thread"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'playing-with-equality';
+    var disqus_title = 'Playing With Equality';
+    var disqus_url = 'http://digitaltapestry.net/posts/playing-with-equality';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+&lt;/script&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+&lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
+		<summary>&lt;p&gt;Most developers think they understand equality, but it's actually a pretty tricky subject.
+Implementing equality correctly is much more complicated than most realize. In this post
+I'm going to play around with equality, showing you some things you may not be aware of,
+and eventually show you an interesting trick you can use when implementing equality.&lt;/p&gt;</summary>
+	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/emoji-cheat-sheet" />
 		<id>http://digitaltapestry.net/posts/emoji-cheat-sheet</id>
@@ -35,11 +244,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:smile:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:smile:&lt;/td&gt;
+&lt;td&gt;😄&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:smiley:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:smiley:&lt;/td&gt;
+&lt;td&gt;😃&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:grinning:&lt;/code&gt;&lt;/td&gt;
@@ -79,15 +288,15 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:stuck_out_tongue_winking_eye:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:stuck_out_tongue_winking_eye:&lt;/td&gt;
+&lt;td&gt;😜&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:stuck_out_tongue_closed_eyes:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:stuck_out_tongue_closed_eyes:&lt;/td&gt;
+&lt;td&gt;😝&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:stuck_out_tongue:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:stuck_out_tongue:&lt;/td&gt;
+&lt;td&gt;😛&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:flushed:&lt;/code&gt;&lt;/td&gt;
@@ -127,11 +336,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sob:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sob:&lt;/td&gt;
+&lt;td&gt;😭&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sleepy:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sleepy:&lt;/td&gt;
+&lt;td&gt;😪&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:disappointed_relieved:&lt;/code&gt;&lt;/td&gt;
@@ -143,11 +352,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sweat_smile:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sweat_smile:&lt;/td&gt;
+&lt;td&gt;😅&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sweat:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sweat:&lt;/td&gt;
+&lt;td&gt;😓&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:weary:&lt;/code&gt;&lt;/td&gt;
@@ -163,7 +372,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:scream:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:scream:&lt;/td&gt;
+&lt;td&gt;😱&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:angry:&lt;/code&gt;&lt;/td&gt;
@@ -187,7 +396,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:satisfied:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:satisfied:&lt;/td&gt;
+&lt;td&gt;😆&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:yum:&lt;/code&gt;&lt;/td&gt;
@@ -199,11 +408,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sunglasses:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sunglasses:&lt;/td&gt;
+&lt;td&gt;😎&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sleeping:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sleeping:&lt;/td&gt;
+&lt;td&gt;😴&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:dizzy_face:&lt;/code&gt;&lt;/td&gt;
@@ -227,7 +436,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:smiling_imp:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:smiling_imp:&lt;/td&gt;
+&lt;td&gt;😈&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:imp:&lt;/code&gt;&lt;/td&gt;
@@ -235,7 +444,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:open_mouth:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:open_mouth:&lt;/td&gt;
+&lt;td&gt;😮&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:grimacing:&lt;/code&gt;&lt;/td&gt;
@@ -263,7 +472,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:smirk:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:smirk:&lt;/td&gt;
+&lt;td&gt;😏&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:expressionless:&lt;/code&gt;&lt;/td&gt;
@@ -311,11 +520,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:older_man:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:older_man:&lt;/td&gt;
+&lt;td&gt;👴&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:older_woman:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:older_woman:&lt;/td&gt;
+&lt;td&gt;👵&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:person_with_blond_hair:&lt;/code&gt;&lt;/td&gt;
@@ -331,11 +540,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:smiley_cat:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:smiley_cat:&lt;/td&gt;
+&lt;td&gt;😺&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:smile_cat:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:smile_cat:&lt;/td&gt;
+&lt;td&gt;😸&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:heart_eyes_cat:&lt;/code&gt;&lt;/td&gt;
@@ -347,11 +556,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:smirk_cat:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:smirk_cat:&lt;/td&gt;
+&lt;td&gt;😼&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:scream_cat:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:scream_cat:&lt;/td&gt;
+&lt;td&gt;🙀&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:crying_cat_face:&lt;/code&gt;&lt;/td&gt;
@@ -375,7 +584,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:see_no_evil:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:see_no_evil:&lt;/td&gt;
+&lt;td&gt;🙈&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:hear_no_evil:&lt;/code&gt;&lt;/td&gt;
@@ -383,11 +592,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:speak_no_evil:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:speak_no_evil:&lt;/td&gt;
+&lt;td&gt;🙊&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:skull:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:skull:&lt;/td&gt;
+&lt;td&gt;💀&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:alien:&lt;/code&gt;&lt;/td&gt;
@@ -403,7 +612,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:shit:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:shit:&lt;/td&gt;
+&lt;td&gt;💩&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:fire:&lt;/code&gt;&lt;/td&gt;
@@ -411,11 +620,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sparkles:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sparkles:&lt;/td&gt;
+&lt;td&gt;✨&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:star2:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:star2:&lt;/td&gt;
+&lt;td&gt;🌟&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:dizzy:&lt;/code&gt;&lt;/td&gt;
@@ -435,7 +644,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sweat_drops:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sweat_drops:&lt;/td&gt;
+&lt;td&gt;💦&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:droplet:&lt;/code&gt;&lt;/td&gt;
@@ -443,7 +652,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:zzz:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:zzz:&lt;/td&gt;
+&lt;td&gt;💤&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:dash:&lt;/code&gt;&lt;/td&gt;
@@ -487,7 +696,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:ok_hand:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:ok_hand:&lt;/td&gt;
+&lt;td&gt;👌&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:facepunch:&lt;/code&gt;&lt;/td&gt;
@@ -519,7 +728,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:open_hands:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:open_hands:&lt;/td&gt;
+&lt;td&gt;👐&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:point_up_2:&lt;/code&gt;&lt;/td&gt;
@@ -603,7 +812,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:ok_woman:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:ok_woman:&lt;/td&gt;
+&lt;td&gt;🙆&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:no_good:&lt;/code&gt;&lt;/td&gt;
@@ -667,11 +876,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:shoe:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:shoe:&lt;/td&gt;
+&lt;td&gt;👞&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sandal:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sandal:&lt;/td&gt;
+&lt;td&gt;👡&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:high_heel:&lt;/code&gt;&lt;/td&gt;
@@ -683,7 +892,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:shirt:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:shirt:&lt;/td&gt;
+&lt;td&gt;👕&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:tshirt:&lt;/code&gt;&lt;/td&gt;
@@ -787,7 +996,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sparkling_heart:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sparkling_heart:&lt;/td&gt;
+&lt;td&gt;💖&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:revolving_hearts:&lt;/code&gt;&lt;/td&gt;
@@ -823,7 +1032,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:speech_balloon:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:speech_balloon:&lt;/td&gt;
+&lt;td&gt;💬&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:footprints:&lt;/code&gt;&lt;/td&gt;
@@ -903,7 +1112,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sheep:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sheep:&lt;/td&gt;
+&lt;td&gt;🐑&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:elephant:&lt;/code&gt;&lt;/td&gt;
@@ -939,7 +1148,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:snake:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:snake:&lt;/td&gt;
+&lt;td&gt;🐍&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:turtle:&lt;/code&gt;&lt;/td&gt;
@@ -967,15 +1176,15 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:snail:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:snail:&lt;/td&gt;
+&lt;td&gt;🐌&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:octopus:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:octopus:&lt;/td&gt;
+&lt;td&gt;🐙&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:shell:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:shell:&lt;/td&gt;
+&lt;td&gt;🐚&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:tropical_fish:&lt;/code&gt;&lt;/td&gt;
@@ -1055,7 +1264,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:ox:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:ox:&lt;/td&gt;
+&lt;td&gt;🐂&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:dragon_face:&lt;/code&gt;&lt;/td&gt;
@@ -1119,7 +1328,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sunflower:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sunflower:&lt;/td&gt;
+&lt;td&gt;🌻&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:hibiscus:&lt;/code&gt;&lt;/td&gt;
@@ -1171,7 +1380,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:seedling:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:seedling:&lt;/td&gt;
+&lt;td&gt;🌱&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:blossom:&lt;/code&gt;&lt;/td&gt;
@@ -1183,7 +1392,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sun_with_face:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sun_with_face:&lt;/td&gt;
+&lt;td&gt;🌞&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:full_moon_with_face:&lt;/code&gt;&lt;/td&gt;
@@ -1263,15 +1472,15 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:stars:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:stars:&lt;/td&gt;
+&lt;td&gt;🌠&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:star:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:star:&lt;/td&gt;
+&lt;td&gt;⭐&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sunny:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sunny:&lt;/td&gt;
+&lt;td&gt;☀️&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:partly_sunny:&lt;/code&gt;&lt;/td&gt;
@@ -1283,7 +1492,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:zap:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:zap:&lt;/td&gt;
+&lt;td&gt;⚡&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:umbrella:&lt;/code&gt;&lt;/td&gt;
@@ -1291,11 +1500,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:snowflake:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:snowflake:&lt;/td&gt;
+&lt;td&gt;❄️&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:snowman:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:snowman:&lt;/td&gt;
+&lt;td&gt;⛄&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:cyclone:&lt;/code&gt;&lt;/td&gt;
@@ -1311,7 +1520,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:ocean:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:ocean:&lt;/td&gt;
+&lt;td&gt;🌊&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:bamboo:&lt;/code&gt;&lt;/td&gt;
@@ -1327,7 +1536,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:school_satchel:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:school_satchel:&lt;/td&gt;
+&lt;td&gt;🎒&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:mortar_board:&lt;/code&gt;&lt;/td&gt;
@@ -1343,7 +1552,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sparkler:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sparkler:&lt;/td&gt;
+&lt;td&gt;🎇&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:wind_chime:&lt;/code&gt;&lt;/td&gt;
@@ -1363,7 +1572,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:santa:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:santa:&lt;/td&gt;
+&lt;td&gt;🎅&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:christmas_tree:&lt;/code&gt;&lt;/td&gt;
@@ -1459,7 +1668,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:satellite:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:satellite:&lt;/td&gt;
+&lt;td&gt;📡&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:tv:&lt;/code&gt;&lt;/td&gt;
@@ -1475,11 +1684,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sound:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sound:&lt;/td&gt;
+&lt;td&gt;🔉&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:speaker:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:speaker:&lt;/td&gt;
+&lt;td&gt;🔈&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:mute:&lt;/code&gt;&lt;/td&gt;
@@ -1579,7 +1788,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:shower:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:shower:&lt;/td&gt;
+&lt;td&gt;🚿&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:toilet:&lt;/code&gt;&lt;/td&gt;
@@ -1603,7 +1812,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:smoking:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:smoking:&lt;/td&gt;
+&lt;td&gt;🚬&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:bomb:&lt;/code&gt;&lt;/td&gt;
@@ -1627,7 +1836,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:syringe:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:syringe:&lt;/td&gt;
+&lt;td&gt;💉&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:moneybag:&lt;/code&gt;&lt;/td&gt;
@@ -1671,7 +1880,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:outbox_tray:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:outbox_tray:&lt;/td&gt;
+&lt;td&gt;📤&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:email:&lt;/code&gt;&lt;/td&gt;
@@ -1751,7 +1960,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:scroll:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:scroll:&lt;/td&gt;
+&lt;td&gt;📜&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:clipboard:&lt;/code&gt;&lt;/td&gt;
@@ -1775,11 +1984,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:open_file_folder:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:open_file_folder:&lt;/td&gt;
+&lt;td&gt;📂&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:scissors:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:scissors:&lt;/td&gt;
+&lt;td&gt;✂️&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:pushpin:&lt;/code&gt;&lt;/td&gt;
@@ -1799,7 +2008,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:straight_ruler:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:straight_ruler:&lt;/td&gt;
+&lt;td&gt;📏&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:triangular_ruler:&lt;/code&gt;&lt;/td&gt;
@@ -1819,7 +2028,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:orange_book:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:orange_book:&lt;/td&gt;
+&lt;td&gt;📙&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:notebook:&lt;/code&gt;&lt;/td&gt;
@@ -1843,7 +2052,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:open_book:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:open_book:&lt;/td&gt;
+&lt;td&gt;📖&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:bookmark:&lt;/code&gt;&lt;/td&gt;
@@ -1907,7 +2116,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:saxophone:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:saxophone:&lt;/td&gt;
+&lt;td&gt;🎷&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:guitar:&lt;/code&gt;&lt;/td&gt;
@@ -1915,7 +2124,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:space_invader:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:space_invader:&lt;/td&gt;
+&lt;td&gt;👾&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:video_game:&lt;/code&gt;&lt;/td&gt;
@@ -1951,7 +2160,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:soccer:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:soccer:&lt;/td&gt;
+&lt;td&gt;⚽&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:baseball:&lt;/code&gt;&lt;/td&gt;
@@ -1999,19 +2208,19 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:ski:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:ski:&lt;/td&gt;
+&lt;td&gt;🎿&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:snowboarder:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:snowboarder:&lt;/td&gt;
+&lt;td&gt;🏂&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:swimmer:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:swimmer:&lt;/td&gt;
+&lt;td&gt;🏊&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:surfer:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:surfer:&lt;/td&gt;
+&lt;td&gt;🏄&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:fishing_pole_and_fish:&lt;/code&gt;&lt;/td&gt;
@@ -2027,7 +2236,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sake:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sake:&lt;/td&gt;
+&lt;td&gt;🍶&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:baby_bottle:&lt;/code&gt;&lt;/td&gt;
@@ -2079,7 +2288,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:spaghetti:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:spaghetti:&lt;/td&gt;
+&lt;td&gt;🍝&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:curry:&lt;/code&gt;&lt;/td&gt;
@@ -2095,7 +2304,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sushi:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sushi:&lt;/td&gt;
+&lt;td&gt;🍣&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:fish_cake:&lt;/code&gt;&lt;/td&gt;
@@ -2119,11 +2328,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:stew:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:stew:&lt;/td&gt;
+&lt;td&gt;🍲&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:oden:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:oden:&lt;/td&gt;
+&lt;td&gt;🍢&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:dango:&lt;/code&gt;&lt;/td&gt;
@@ -2155,7 +2364,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:shaved_ice:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:shaved_ice:&lt;/td&gt;
+&lt;td&gt;🍧&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:birthday:&lt;/code&gt;&lt;/td&gt;
@@ -2215,7 +2424,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:strawberry:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:strawberry:&lt;/td&gt;
+&lt;td&gt;🍓&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:peach:&lt;/code&gt;&lt;/td&gt;
@@ -2239,7 +2448,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sweet_potato:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sweet_potato:&lt;/td&gt;
+&lt;td&gt;🍠&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:eggplant:&lt;/code&gt;&lt;/td&gt;
@@ -2263,11 +2472,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:school:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:school:&lt;/td&gt;
+&lt;td&gt;🏫&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:office:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:office:&lt;/td&gt;
+&lt;td&gt;🏢&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:post_office:&lt;/code&gt;&lt;/td&gt;
@@ -2347,11 +2556,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sunrise_over_mountains:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sunrise_over_mountains:&lt;/td&gt;
+&lt;td&gt;🌄&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sunrise:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sunrise:&lt;/td&gt;
+&lt;td&gt;🌅&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:night_with_stars:&lt;/code&gt;&lt;/td&gt;
@@ -2359,7 +2568,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:statue_of_liberty:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:statue_of_liberty:&lt;/td&gt;
+&lt;td&gt;🗽&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:bridge_at_night:&lt;/code&gt;&lt;/td&gt;
@@ -2383,7 +2592,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:ship:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:ship:&lt;/td&gt;
+&lt;td&gt;🚢&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:boat:&lt;/code&gt;&lt;/td&gt;
@@ -2391,11 +2600,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sailboat:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sailboat:&lt;/td&gt;
+&lt;td&gt;⛵&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:speedboat:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:speedboat:&lt;/td&gt;
+&lt;td&gt;🚤&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:rowboat:&lt;/code&gt;&lt;/td&gt;
@@ -2415,7 +2624,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:seat:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:seat:&lt;/td&gt;
+&lt;td&gt;💺&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:helicopter:&lt;/code&gt;&lt;/td&gt;
@@ -2423,7 +2632,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:steam_locomotive:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:steam_locomotive:&lt;/td&gt;
+&lt;td&gt;🚂&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:tram:&lt;/code&gt;&lt;/td&gt;
@@ -2431,7 +2640,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:station:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:station:&lt;/td&gt;
+&lt;td&gt;🚉&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:mountain_railway:&lt;/code&gt;&lt;/td&gt;
@@ -2479,7 +2688,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:oncoming_bus:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:oncoming_bus:&lt;/td&gt;
+&lt;td&gt;🚍&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:blue_car:&lt;/code&gt;&lt;/td&gt;
@@ -2487,7 +2696,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:oncoming_automobile:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:oncoming_automobile:&lt;/td&gt;
+&lt;td&gt;🚘&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:car:&lt;/code&gt;&lt;/td&gt;
@@ -2503,7 +2712,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:oncoming_taxi:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:oncoming_taxi:&lt;/td&gt;
+&lt;td&gt;🚖&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:articulated_lorry:&lt;/code&gt;&lt;/td&gt;
@@ -2523,7 +2732,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:oncoming_police_car:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:oncoming_police_car:&lt;/td&gt;
+&lt;td&gt;🚔&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:fire_engine:&lt;/code&gt;&lt;/td&gt;
@@ -2547,7 +2756,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:suspension_railway:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:suspension_railway:&lt;/td&gt;
+&lt;td&gt;🚟&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:mountain_cableway:&lt;/code&gt;&lt;/td&gt;
@@ -2603,7 +2812,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:slot_machine:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:slot_machine:&lt;/td&gt;
+&lt;td&gt;🎰&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:hotsprings:&lt;/code&gt;&lt;/td&gt;
@@ -2675,7 +2884,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:one:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:one:&lt;/td&gt;
+&lt;td&gt;1️⃣&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:two:&lt;/code&gt;&lt;/td&gt;
@@ -2695,11 +2904,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:six:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:six:&lt;/td&gt;
+&lt;td&gt;6️⃣&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:seven:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:seven:&lt;/td&gt;
+&lt;td&gt;7️⃣&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:eight:&lt;/code&gt;&lt;/td&gt;
@@ -2711,7 +2920,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:zero:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:zero:&lt;/td&gt;
+&lt;td&gt;0️⃣&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:keycap_ten:&lt;/code&gt;&lt;/td&gt;
@@ -2723,7 +2932,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:symbols:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:symbols:&lt;/td&gt;
+&lt;td&gt;🔣&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:arrow_up:&lt;/code&gt;&lt;/td&gt;
@@ -2835,7 +3044,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:ok:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:ok:&lt;/td&gt;
+&lt;td&gt;🆗&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:twisted_rightwards_arrows:&lt;/code&gt;&lt;/td&gt;
@@ -2871,7 +3080,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:signal_strength:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:signal_strength:&lt;/td&gt;
+&lt;td&gt;📶&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:cinema:&lt;/code&gt;&lt;/td&gt;
@@ -2971,7 +3180,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sa:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sa:&lt;/td&gt;
+&lt;td&gt;🈂️&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:m:&lt;/code&gt;&lt;/td&gt;
@@ -2999,7 +3208,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:secret:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:secret:&lt;/td&gt;
+&lt;td&gt;㊙️&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:congratulations:&lt;/code&gt;&lt;/td&gt;
@@ -3011,7 +3220,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sos:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sos:&lt;/td&gt;
+&lt;td&gt;🆘&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:id:&lt;/code&gt;&lt;/td&gt;
@@ -3059,7 +3268,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sparkle:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sparkle:&lt;/td&gt;
+&lt;td&gt;❇️&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:negative_squared_cross_mark:&lt;/code&gt;&lt;/td&gt;
@@ -3103,7 +3312,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:o2:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:o2:&lt;/td&gt;
+&lt;td&gt;🅾️&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:diamond_shape_with_a_dot_inside:&lt;/code&gt;&lt;/td&gt;
@@ -3147,11 +3356,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:scorpius:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:scorpius:&lt;/td&gt;
+&lt;td&gt;♏&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:sagittarius:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:sagittarius:&lt;/td&gt;
+&lt;td&gt;♐&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:capricorn:&lt;/code&gt;&lt;/td&gt;
@@ -3167,11 +3376,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:ophiuchus:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:ophiuchus:&lt;/td&gt;
+&lt;td&gt;⛎&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:six_pointed_star:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:six_pointed_star:&lt;/td&gt;
+&lt;td&gt;🔯&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:atm:&lt;/code&gt;&lt;/td&gt;
@@ -3235,7 +3444,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:o:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:o:&lt;/td&gt;
+&lt;td&gt;⭕&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:top:&lt;/code&gt;&lt;/td&gt;
@@ -3251,11 +3460,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:on:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:on:&lt;/td&gt;
+&lt;td&gt;🔛&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:soon:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:soon:&lt;/td&gt;
+&lt;td&gt;🔜&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:arrows_clockwise:&lt;/code&gt;&lt;/td&gt;
@@ -3375,7 +3584,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:spades:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:spades:&lt;/td&gt;
+&lt;td&gt;♠️&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:hearts:&lt;/code&gt;&lt;/td&gt;
@@ -3451,7 +3660,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:small_red_triangle:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:small_red_triangle:&lt;/td&gt;
+&lt;td&gt;🔺&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:black_square_button:&lt;/code&gt;&lt;/td&gt;
@@ -3479,7 +3688,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:small_red_triangle_down:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:small_red_triangle_down:&lt;/td&gt;
+&lt;td&gt;🔻&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:white_large_square:&lt;/code&gt;&lt;/td&gt;
@@ -3499,11 +3708,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:small_orange_diamond:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:small_orange_diamond:&lt;/td&gt;
+&lt;td&gt;🔸&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:small_blue_diamond:&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:small_blue_diamond:&lt;/td&gt;
+&lt;td&gt;🔹&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;&amp;gt;:(&lt;/code&gt;&lt;/td&gt;
@@ -3635,7 +3844,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:-*&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:-*&lt;/td&gt;
+&lt;td&gt;😗&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;x-)&lt;/code&gt;&lt;/td&gt;
@@ -3643,7 +3852,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;X-)&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;X-)&lt;/td&gt;
+&lt;td&gt;😆&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:|&lt;/code&gt;&lt;/td&gt;
@@ -3651,7 +3860,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:-|&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;:-&lt;/td&gt;
+&lt;td&gt;😐&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;:o&lt;/code&gt;&lt;/td&gt;
@@ -4062,7 +4271,7 @@ reason, I'm going to try and create a “cheat sheet” for the extensions.&lt;/
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;pipetables –or– advanced&lt;/td&gt;
-&lt;td&gt;http://pandoc.org/MANUAL.html#extension-pipe_tables&lt;/td&gt;
+&lt;td&gt;&lt;a href="http://pandoc.org/MANUAL.html#extension-pipe_tables"&gt;http://pandoc.org/MANUAL.html#extension-pipe_tables&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4078,7 +4287,7 @@ reason, I'm going to try and create a “cheat sheet” for the extensions.&lt;/
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th style="text-align: right;"&gt;Right&lt;/th&gt;
-&lt;th&gt;Left&lt;/th&gt;
+&lt;th style="text-align: left;"&gt;Left&lt;/th&gt;
 &lt;th&gt;Default&lt;/th&gt;
 &lt;th style="text-align: center;"&gt;Center&lt;/th&gt;
 &lt;/tr&gt;
@@ -4086,19 +4295,19 @@ reason, I'm going to try and create a “cheat sheet” for the extensions.&lt;/
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td style="text-align: right;"&gt;12&lt;/td&gt;
-&lt;td&gt;12&lt;/td&gt;
+&lt;td style="text-align: left;"&gt;12&lt;/td&gt;
 &lt;td&gt;12&lt;/td&gt;
 &lt;td style="text-align: center;"&gt;12&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style="text-align: right;"&gt;123&lt;/td&gt;
-&lt;td&gt;123&lt;/td&gt;
+&lt;td style="text-align: left;"&gt;123&lt;/td&gt;
 &lt;td&gt;123&lt;/td&gt;
 &lt;td style="text-align: center;"&gt;123&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style="text-align: right;"&gt;1&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
+&lt;td style="text-align: left;"&gt;1&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td style="text-align: center;"&gt;1&lt;/td&gt;
 &lt;/tr&gt;
@@ -4116,7 +4325,7 @@ reason, I'm going to try and create a “cheat sheet” for the extensions.&lt;/
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;gridtables –or– advanced&lt;/td&gt;
-&lt;td&gt;http://pandoc.org/MANUAL.html#extension-grid_tables&lt;/td&gt;
+&lt;td&gt;&lt;a href="http://pandoc.org/MANUAL.html#extension-grid_tables"&gt;http://pandoc.org/MANUAL.html#extension-grid_tables&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4177,7 +4386,7 @@ reason, I'm going to try and create a “cheat sheet” for the extensions.&lt;/
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;emphasisextras –or– advanced&lt;/td&gt;
-&lt;td&gt;http://pandoc.org/MANUAL.html#strikeout –and– https://markdown-it.github.io/&lt;/td&gt;
+&lt;td&gt;&lt;a href="http://pandoc.org/MANUAL.html#strikeout"&gt;http://pandoc.org/MANUAL.html#strikeout&lt;/a&gt; –and– &lt;a href="https://markdown-it.github.io/"&gt;https://markdown-it.github.io/&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4209,7 +4418,7 @@ reason, I'm going to try and create a “cheat sheet” for the extensions.&lt;/
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;attributes –or– advanced&lt;/td&gt;
-&lt;td&gt;https://michelf.ca/projects/php-markdown/extra/#spe-attr&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://michelf.ca/projects/php-markdown/extra/#spe-attr"&gt;https://michelf.ca/projects/php-markdown/extra/#spe-attr&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4238,7 +4447,7 @@ reason, I'm going to try and create a “cheat sheet” for the extensions.&lt;/
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;definitionlists –or– advanced&lt;/td&gt;
-&lt;td&gt;https://michelf.ca/projects/php-markdown/extra/#def-list&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://michelf.ca/projects/php-markdown/extra/#def-list"&gt;https://michelf.ca/projects/php-markdown/extra/#def-list&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4267,7 +4476,7 @@ the family Rosaceae.&lt;/p&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;footnotes –or– advanced&lt;/td&gt;
-&lt;td&gt;https://michelf.ca/projects/php-markdown/extra/#footnotes&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://michelf.ca/projects/php-markdown/extra/#footnotes"&gt;https://michelf.ca/projects/php-markdown/extra/#footnotes&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4289,7 +4498,7 @@ the family Rosaceae.&lt;/p&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;autoidentifiers –or– advanced&lt;/td&gt;
-&lt;td&gt;http://pandoc.org/MANUAL.html#extension-auto_identifiers&lt;/td&gt;
+&lt;td&gt;&lt;a href="http://pandoc.org/MANUAL.html#extension-auto_identifiers"&gt;http://pandoc.org/MANUAL.html#extension-auto_identifiers&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4319,8 +4528,8 @@ the family Rosaceae.&lt;/p&gt;
 &lt;h3 id="code-7"&gt;Code&lt;/h3&gt;
 &lt;pre&gt;&lt;code class="language-text"&gt;http://www.digitaltapestry.net
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id="result-7"&gt;Result &lt;a id="fnref:7" href="#fn:4" class="footnote-ref"&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;http://www.digitaltapestry.net&lt;/p&gt;
+&lt;h3 id="result-7"&gt;Result&lt;/h3&gt;
+&lt;p&gt;&lt;a href="http://www.digitaltapestry.net"&gt;http://www.digitaltapestry.net&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id="task-lists"&gt;Task Lists&lt;/h2&gt;
 &lt;table class="table"&gt;
 &lt;thead&gt;
@@ -4332,7 +4541,7 @@ the family Rosaceae.&lt;/p&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;tasklists –or– advanced&lt;/td&gt;
-&lt;td&gt;https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments"&gt;https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4394,7 +4603,7 @@ the family Rosaceae.&lt;/p&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;medialinks –or– advanced&lt;/td&gt;
-&lt;td&gt;https://talk.commonmark.org/t/embedded-audio-and-video/441&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://talk.commonmark.org/t/embedded-audio-and-video/441"&gt;https://talk.commonmark.org/t/embedded-audio-and-video/441&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4414,7 +4623,7 @@ the family Rosaceae.&lt;/p&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;abbreviations –or– advanced&lt;/td&gt;
-&lt;td&gt;https://michelf.ca/projects/php-markdown/extra/#abbr&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://michelf.ca/projects/php-markdown/extra/#abbr"&gt;https://michelf.ca/projects/php-markdown/extra/#abbr&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4423,9 +4632,8 @@ the family Rosaceae.&lt;/p&gt;
 
 Later in a text we are using HTML and it becomes an abbr tag HTML
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id="result-11"&gt;Result &lt;a id="fnref:8" href="#fn:5" class="footnote-ref"&gt;&lt;sup&gt;5&lt;/sup&gt;&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;*[HTML]: Hypertext Markup Language&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Later in a text we are using HTML and it becomes an abbr tag HTML&lt;/p&gt;
+&lt;h3 id="result-11"&gt;Result&lt;/h3&gt;
+&lt;p&gt;Later in a text we are using &lt;abbr title="Hypertext Markup Language"&gt;HTML&lt;/abbr&gt; and it becomes an abbr tag &lt;abbr title="Hypertext Markup Language"&gt;HTML&lt;/abbr&gt;&lt;/p&gt;
 &lt;h2 id="citation"&gt;Citation&lt;/h2&gt;
 &lt;table class="table"&gt;
 &lt;thead&gt;
@@ -4437,7 +4645,7 @@ Later in a text we are using HTML and it becomes an abbr tag HTML
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;citations –or– advanced&lt;/td&gt;
-&lt;td&gt;https://talk.commonmark.org/t/referencing-creative-works-with-cite/892&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://talk.commonmark.org/t/referencing-creative-works-with-cite/892"&gt;https://talk.commonmark.org/t/referencing-creative-works-with-cite/892&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4457,7 +4665,7 @@ Later in a text we are using HTML and it becomes an abbr tag HTML
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;customcontainers –or– advanced&lt;/td&gt;
-&lt;td&gt;https://talk.commonmark.org/t/custom-container-for-block-and-inline/2051&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://talk.commonmark.org/t/custom-container-for-block-and-inline/2051"&gt;https://talk.commonmark.org/t/custom-container-for-block-and-inline/2051&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4480,7 +4688,7 @@ This is a Bootstrap alert.
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;figures –or– advanced&lt;/td&gt;
-&lt;td&gt;https://talk.commonmark.org/t/image-tag-should-expand-to-figure-when-used-with-title/265/5&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://talk.commonmark.org/t/image-tag-should-expand-to-figure-when-used-with-title/265/5"&gt;https://talk.commonmark.org/t/image-tag-should-expand-to-figure-when-used-with-title/265/5&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4504,7 +4712,7 @@ This is a Bootstrap alert.
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;footers –or– advanced&lt;/td&gt;
-&lt;td&gt;https://talk.commonmark.org/t/syntax-for-footer/2070&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://talk.commonmark.org/t/syntax-for-footer/2070"&gt;https://talk.commonmark.org/t/syntax-for-footer/2070&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4528,7 +4736,7 @@ This is a Bootstrap alert.
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;mathematics –or– advanced&lt;/td&gt;
-&lt;td&gt;https://talk.commonmark.org/t/mathematics-extension/457/31&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://talk.commonmark.org/t/mathematics-extension/457/31"&gt;https://talk.commonmark.org/t/mathematics-extension/457/31&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4542,7 +4750,7 @@ $$
 \end{equation}
 $$
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id="result-16"&gt;Result &lt;a id="fnref:4" href="#fn:2" class="footnote-ref"&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; &lt;a id="fnref:9" href="#fn:6" class="footnote-ref"&gt;&lt;sup&gt;6&lt;/sup&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="result-16"&gt;Result &lt;a id="fnref:4" href="#fn:2" class="footnote-ref"&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; &lt;a id="fnref:7" href="#fn:4" class="footnote-ref"&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;This is a &lt;span class="math"&gt;math block&lt;/span&gt;&lt;/p&gt;
 &lt;div class="math"&gt;\begin{equation}
   \int_0^\infty \frac{x^3}{e^x-1}\,dx = \frac{\pi^4}{15}
@@ -4560,7 +4768,7 @@ $$
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;emojis&lt;/td&gt;
-&lt;td&gt;https://markdown-it.github.io/&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://markdown-it.github.io/"&gt;https://markdown-it.github.io/&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4580,7 +4788,7 @@ $$
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;smartypants&lt;/td&gt;
-&lt;td&gt;https://daringfireball.net/projects/smartypants/&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://daringfireball.net/projects/smartypants/"&gt;https://daringfireball.net/projects/smartypants/&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4621,7 +4829,7 @@ This is a en ellipsis...
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;diagrams –or– advanced&lt;/td&gt;
-&lt;td&gt;https://knsv.github.io/mermaid/&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://knsv.github.io/mermaid/"&gt;https://knsv.github.io/mermaid/&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4634,7 +4842,7 @@ This is a en ellipsis...
         C--&amp;gt;D;
     ```
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id="result-19"&gt;Result &lt;a id="fnref:5" href="#fn:2" class="footnote-ref"&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; &lt;a id="fnref:10" href="#fn:7" class="footnote-ref"&gt;&lt;sup&gt;7&lt;/sup&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="result-19"&gt;Result &lt;a id="fnref:5" href="#fn:2" class="footnote-ref"&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; &lt;a id="fnref:8" href="#fn:5" class="footnote-ref"&gt;&lt;sup&gt;5&lt;/sup&gt;&lt;/a&gt;&lt;/h3&gt;
 &lt;div class="mermaid"&gt;graph TD;
     A--&amp;gt;B;
     A--&amp;gt;C;
@@ -4649,24 +4857,18 @@ This is a en ellipsis...
 &lt;p&gt;Alignment doesn't appear to be working, and I don't now why.&lt;a href="#fnref:1" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn:2"&gt;
-&lt;p&gt;Not all results are visibly evident with the current styling. View the HTML produced.&lt;a href="#fnref:2" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;a href="#fnref:3" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;a href="#fnref:4" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;a href="#fnref:5" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Not all results are visibly evident with the current styling. View the &lt;abbr title="Hypertext Markup Language"&gt;HTML&lt;/abbr&gt; produced.&lt;a href="#fnref:2" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;a href="#fnref:3" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;a href="#fnref:4" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;a href="#fnref:5" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn:3"&gt;
 &lt;p&gt;An example footnote.&lt;a href="#fnref:6" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn:4"&gt;
-&lt;p&gt;Not working with Wyam and I'm not sure why. Maybe a new feature and Wyam isn't using the newest version?&lt;a href="#fnref:7" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I'll be honest, I don't understand the use case for this one.&lt;a href="#fnref:7" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn:5"&gt;
-&lt;p&gt;Not working. Produces an error “Inline has already a parent”.&lt;a href="#fnref:8" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id="fn:6"&gt;
-&lt;p&gt;I'll be honest, I don't understand the use case for this one.&lt;a href="#fnref:9" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id="fn:7"&gt;
 &lt;p&gt;This needs mermaid.css and mermaid.js to be linked. I've done so here, but the way you do it will be
 improved the next release, so I'll wait to blog about that. Not sure why the generated diagram here
-is missing the arrow lines, but I don't believe it's got anything to do with Wyam or Markdig.&lt;a href="#fnref:10" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
+is missing the arrow lines, but I don't believe it's got anything to do with Wyam or Markdig.&lt;a href="#fnref:8" class="footnote-back-ref"&gt;↩&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
