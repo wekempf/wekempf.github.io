@@ -5,8 +5,8 @@
 		<link>http://digitaltapestry.net/</link>
 		<description>Weaving a Digital Tapestry</description>
 		<copyright>2017</copyright>
-		<pubDate>Sat, 14 Jan 2017 19:47:42 GMT</pubDate>
-		<lastBuildDate>Sat, 14 Jan 2017 19:47:42 GMT</lastBuildDate>
+		<pubDate>Sat, 14 Jan 2017 19:57:06 GMT</pubDate>
+		<lastBuildDate>Sat, 14 Jan 2017 19:57:06 GMT</lastBuildDate>
 		<item>
 			<title>Playing With Equality</title>
 			<link>http://digitaltapestry.net/posts/playing-with-equality</link>
@@ -177,7 +177,8 @@ let's make it really simple to implement these two operators.&lt;/p&gt;
 how to compare but by only declaring what to compare. This allows the definition
 to automatically implement everything else for us, basically giving us code equivalent
 to what I showed for the &lt;code&gt;ValueTuple&lt;/code&gt; trick (plus the operators).&lt;/p&gt;
-&lt;p&gt;Yeah, I'm not entirely sold on the syntax here either. After all, there's no &lt;code&gt;===&lt;/code&gt; or&lt;code&gt;&lt;/code&gt;&amp;lt;=&amp;gt;` operators you can use anywhere other than in declaring things here. Maybe it would
+&lt;p&gt;Yeah, I'm not entirely sold on the syntax here either. After all, there's no &lt;code&gt;===&lt;/code&gt; or
+&lt;code&gt;&amp;lt;=&amp;gt;&lt;/code&gt; operators you can use anywhere other than in declaring things here. Maybe it would
 make more sense with syntax like this.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-csharp"&gt;public class RefPoint
     equatable : X, Y
