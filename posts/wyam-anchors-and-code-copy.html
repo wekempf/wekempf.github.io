@@ -84,7 +84,7 @@
                 </nav>
                 
                 <!-- Page Header -->
-                <header class="intro-header" id="intro-header">
+                <header class="intro-header" id="intro-header" style="background-image: url(&quot;/assets/images/banner_web.jpg&quot;)">
                         <div class="container">
                                 <div class="row">
                                         <div class="col-md-12">
@@ -423,19 +423,5 @@ and use <a href="http://lesscss.org">Less</a>, which I've <a href="/posts/less-i
 </script>
                 <script>hljs.initHighlightingOnLoad();</script>
 
-                        <script type="text/javascript">                
-                                // Header background                        
-                                var colors = Please.make_color({
-                                        colors_returned: 3,
-                                        saturation: .6
-                                });
-                                var t = new Trianglify({
-                                        x_gradient: colors,
-                                        y_gradient: ["#FFFFFF"]
-                                });
-                                var header = document.getElementById("intro-header");
-                                var pattern = t.generate(header.clientWidth, header.clientHeight);
-                                header.setAttribute('style', 'background-image: ' + pattern.dataUrl);                        
-                        </script>
         </body>
 </html>

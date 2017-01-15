@@ -5,8 +5,8 @@
 		<link>http://digitaltapestry.net/</link>
 		<description>Weaving a Digital Tapestry</description>
 		<copyright>2017</copyright>
-		<pubDate>Sat, 14 Jan 2017 19:57:06 GMT</pubDate>
-		<lastBuildDate>Sat, 14 Jan 2017 19:57:06 GMT</lastBuildDate>
+		<pubDate>Sun, 15 Jan 2017 15:22:50 GMT</pubDate>
+		<lastBuildDate>Sun, 15 Jan 2017 15:22:50 GMT</lastBuildDate>
 		<item>
 			<title>Playing With Equality</title>
 			<link>http://digitaltapestry.net/posts/playing-with-equality</link>
@@ -14,6 +14,7 @@
 Implementing equality correctly is much more complicated than most realize. In this post
 I'm going to play around with equality, showing you some things you may not be aware of,
 and eventually show you an interesting trick you can use when implementing equality.&lt;/p&gt;</description>
+			<enclosure url="http://digitaltapestry.net/assets/images/banner_web.jpg" length="0" type="image" />
 			<guid>http://digitaltapestry.net/posts/playing-with-equality</guid>
 			<pubDate>Sat, 14 Jan 2017 13:10:36 GMT</pubDate>
 			<content:encoded>&lt;h1 id="playing-with-equality"&gt;Playing With Equality&lt;/h1&gt;
@@ -224,6 +225,7 @@ make more sense with syntax like this.&lt;/p&gt;
 A couple of shortcuts use the &lt;code&gt;\&lt;/code&gt; character, which doesn't always work well with the rest of Markdown, and may require a trailing space.
 One shortcut, &lt;code&gt;&amp;lt;/3&lt;/code&gt;, breaks my Markdown pipetable in the source and I had to use the alternate &lt;code&gt;:broken_heart:&lt;/code&gt; shortcut
 for the visual display here. This shortcut works in other places, but interfered with the pipetable here, which I cannot explain.&lt;/p&gt;</description>
+			<enclosure url="http://digitaltapestry.net/assets/images/banner_web.jpg" length="0" type="image" />
 			<guid>http://digitaltapestry.net/posts/emoji-cheat-sheet</guid>
 			<pubDate>Thu, 12 Jan 2017 11:02:00 GMT</pubDate>
 			<content:encoded>&lt;h1 id="emoji-cheat-sheet"&gt;Emoji Cheat Sheet&lt;/h1&gt;
@@ -4013,6 +4015,7 @@ for the visual display here. This shortcut works in other places, but interfered
 			<link>http://digitaltapestry.net/posts/wyam-anchors-and-code-copy</link>
 			<description>&lt;p&gt;On the &lt;a href="https://wyam.io"&gt;Wyam&lt;/a&gt; &lt;a href="https://gitter.im/Wyamio/Wyam"&gt;Gitter&lt;/a&gt; discussion Gary Ewan Park (@gep13 &lt;a id="fnref:1" href="#fn:1" class="footnote-ref"&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;)
 asked the following:&lt;/p&gt;</description>
+			<enclosure url="http://digitaltapestry.net/assets/images/banner_web.jpg" length="0" type="image" />
 			<guid>http://digitaltapestry.net/posts/wyam-anchors-and-code-copy</guid>
 			<pubDate>Wed, 11 Jan 2017 07:34:28 GMT</pubDate>
 			<content:encoded>&lt;h1 id="wyam-anchors-and-code-copy"&gt;Wyam Anchors and Code Copy&lt;/h1&gt;
@@ -4257,6 +4260,7 @@ and use &lt;a href="http://lesscss.org"&gt;Less&lt;/a&gt;, which I've &lt;a href
 			<description>&lt;p&gt;I mentioned in the post &lt;a href="/posts/alerts-in-wyam"&gt;Alerts in Wyam&lt;/a&gt; that Wyam uses Markdig for Markdown
 processing, and that Markdig supports extensions. Currently, Markdig lacks documentation. For this
 reason, I'm going to try and create a “cheat sheet” for the extensions.&lt;/p&gt;</description>
+			<enclosure url="http://digitaltapestry.net/assets/images/banner_web.jpg" length="0" type="image" />
 			<guid>http://digitaltapestry.net/posts/markdig-cheat-sheet</guid>
 			<pubDate>Sun, 08 Jan 2017 17:17:42 GMT</pubDate>
 			<content:encoded>&lt;h1 id="markdig-cheat-sheet"&gt;Markdig Cheat Sheet&lt;/h1&gt;
@@ -4911,6 +4915,7 @@ glyphicons for the various alert types. The CSS I used had a lot of repetitive c
 The &lt;a href="http://lesscs.org"&gt;Less&lt;/a&gt; CSS preprocessor makes it easy to use mixins to eliminate
 duplicate code in CSS files. Wyam has a module for using Less, so I updated my site
 to use it.&lt;/p&gt;</description>
+			<enclosure url="http://digitaltapestry.net/assets/images/banner_web.jpg" length="0" type="image" />
 			<guid>http://digitaltapestry.net/posts/less-in-wyam</guid>
 			<pubDate>Sun, 08 Jan 2017 13:25:42 GMT</pubDate>
 			<content:encoded>&lt;h1 id="less-in-wyam"&gt;Less in Wyam&lt;/h1&gt;
@@ -5022,6 +5027,7 @@ Pipelines[BlogPipelines.Resources].Add(
 			<link>http://digitaltapestry.net/posts/alerts-in-wyam</link>
 			<description>&lt;p&gt;Bootstrap has the concept of “alerts”, which are specially styled divs used to call out notes.
 Here's some examples:&lt;/p&gt;</description>
+			<enclosure url="http://digitaltapestry.net/assets/images/banner_web.jpg" length="0" type="image" />
 			<guid>http://digitaltapestry.net/posts/alerts-in-wyam</guid>
 			<pubDate>Sun, 08 Jan 2017 11:02:00 GMT</pubDate>
 			<content:encoded>&lt;h1 id="alerts-in-wyam"&gt;Alerts in Wyam&lt;/h1&gt;
@@ -5328,6 +5334,7 @@ being able to effectively write programs with the TPL you do need this understan
 about asynchronous programming from a different point of view than most. I'm going to start from the bottom and work my
 way up, while most other books/blogs/articles start at the top and work their way down, though usually not going to deep.
 My hope is that by working from the bottom up, some of the mystery will just disappear.&lt;/p&gt;</description>
+			<enclosure url="http://digitaltapestry.net/assets/images/banner_web.jpg" length="0" type="image" />
 			<guid>http://digitaltapestry.net/posts/understanding-task-I</guid>
 			<pubDate>Sat, 07 Jan 2017 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;h1 id="understanding-task"&gt;Understanding Task&lt;/h1&gt;
@@ -5439,6 +5446,7 @@ it with a more accurate one.&lt;/p&gt;
 			<description>&lt;p&gt;In &lt;a href="/posts/logging-part-I"&gt;Part I&lt;/a&gt; we were introduced to &lt;a href="https://github.com/aspnet/Logging"&gt;Microsoft.Extensions.Logging&lt;/a&gt;
 which I amusingly abbreviate to just MEL. In particular, we explored the design of the &lt;code&gt;ILogger&lt;/code&gt; interface.
 In this post we'll continue to explore MEL by looking next at the design of the &lt;code&gt;ILoggerFactory&lt;/code&gt; interface.&lt;/p&gt;</description>
+			<enclosure url="http://digitaltapestry.net/assets/images/banner_web.jpg" length="0" type="image" />
 			<guid>http://digitaltapestry.net/posts/logging-part-II</guid>
 			<pubDate>Sun, 01 Jan 2017 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;h1 id="logging"&gt;Logging&lt;/h1&gt;
@@ -5593,6 +5601,7 @@ in Part III.&lt;/p&gt;
 			<description>&lt;p&gt;We've all dealt with logging in our projects before. This is a mostly known commodity for every developer.
 So, why am I blogging about it? Well, I think there's something to be learned about the finer points of
 logging, and there's a new kid on the block: &lt;a href="https://github.com/aspnet/Logging"&gt;Microsoft.Extensions.Logging&lt;/a&gt;.&lt;/p&gt;</description>
+			<enclosure url="http://digitaltapestry.net/assets/images/banner_web.jpg" length="0" type="image" />
 			<guid>http://digitaltapestry.net/posts/logging-part-I</guid>
 			<pubDate>Wed, 28 Dec 2016 09:00:00 GMT</pubDate>
 			<content:encoded>&lt;h1 id="logging"&gt;Logging&lt;/h1&gt;
@@ -6119,6 +6128,7 @@ the design of &lt;code&gt;ILoggerFactory&lt;/code&gt; which gets us a little clo
 			<title>Welcome Back</title>
 			<link>http://digitaltapestry.net/posts/welcome-back</link>
 			<description>&lt;p&gt;Hi again. Or hi for the first time if you're new.&lt;/p&gt;</description>
+			<enclosure url="http://digitaltapestry.net/assets/images/banner_web.jpg" length="0" type="image" />
 			<guid>http://digitaltapestry.net/posts/welcome-back</guid>
 			<pubDate>Mon, 26 Dec 2016 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;p&gt;Hi again. Or hi for the first time if you're new.&lt;/p&gt;

@@ -4,10 +4,11 @@
 	<id>http://digitaltapestry.net/</id>
 	<title>Digital Tapestry</title>
 	<rights>2017</rights>
-	<updated>2017-01-14T19:57:06Z</updated>
+	<updated>2017-01-15T15:22:50Z</updated>
 	<subtitle>Weaving a Digital Tapestry</subtitle>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/playing-with-equality" />
+		<link rel="enclosure" type="image" href="http://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>http://digitaltapestry.net/posts/playing-with-equality</id>
 		<title>Playing With Equality</title>
 		<updated>2017-01-14T13:10:36Z</updated>
@@ -218,6 +219,7 @@ and eventually show you an interesting trick you can use when implementing equal
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/emoji-cheat-sheet" />
+		<link rel="enclosure" type="image" href="http://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>http://digitaltapestry.net/posts/emoji-cheat-sheet</id>
 		<title>Emoji Cheat Sheet</title>
 		<updated>2017-01-12T11:02:00Z</updated>
@@ -4009,6 +4011,7 @@ for the visual display here. This shortcut works in other places, but interfered
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/wyam-anchors-and-code-copy" />
+		<link rel="enclosure" type="image" href="http://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>http://digitaltapestry.net/posts/wyam-anchors-and-code-copy</id>
 		<title>Wyam Anchors and Code Copy</title>
 		<updated>2017-01-11T07:34:28Z</updated>
@@ -4252,6 +4255,7 @@ asked the following:&lt;/p&gt;</summary>
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/markdig-cheat-sheet" />
+		<link rel="enclosure" type="image" href="http://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>http://digitaltapestry.net/posts/markdig-cheat-sheet</id>
 		<title>Markdig Cheat Sheet</title>
 		<updated>2017-01-08T17:17:42Z</updated>
@@ -4903,6 +4907,7 @@ reason, I'm going to try and create a “cheat sheet” for the extensions.&lt;/
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/less-in-wyam" />
+		<link rel="enclosure" type="image" href="http://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>http://digitaltapestry.net/posts/less-in-wyam</id>
 		<title>Less in Wyam</title>
 		<updated>2017-01-08T13:25:42Z</updated>
@@ -5018,6 +5023,7 @@ to use it.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/alerts-in-wyam" />
+		<link rel="enclosure" type="image" href="http://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>http://digitaltapestry.net/posts/alerts-in-wyam</id>
 		<title>Alerts In Wyam</title>
 		<updated>2017-01-08T11:02:00Z</updated>
@@ -5318,6 +5324,7 @@ update &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to more closely represen
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/understanding-task-I" />
+		<link rel="enclosure" type="image" href="http://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>http://digitaltapestry.net/posts/understanding-task-I</id>
 		<title>Understanding Task - Part I</title>
 		<updated>2017-01-07T00:00:00Z</updated>
@@ -5434,6 +5441,7 @@ My hope is that by working from the bottom up, some of the mystery will just dis
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/logging-part-II" />
+		<link rel="enclosure" type="image" href="http://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>http://digitaltapestry.net/posts/logging-part-II</id>
 		<title>Logging - Part II</title>
 		<updated>2017-01-01T00:00:00Z</updated>
@@ -5588,6 +5596,7 @@ In this post we'll continue to explore MEL by looking next at the design of the 
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/logging-part-I" />
+		<link rel="enclosure" type="image" href="http://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>http://digitaltapestry.net/posts/logging-part-I</id>
 		<title>Logging - Part I</title>
 		<updated>2016-12-28T09:00:00Z</updated>
@@ -6116,6 +6125,7 @@ logging, and there's a new kid on the block: &lt;a href="https://github.com/aspn
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/welcome-back" />
+		<link rel="enclosure" type="image" href="http://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>http://digitaltapestry.net/posts/welcome-back</id>
 		<title>Welcome Back</title>
 		<updated>2016-12-26T00:00:00Z</updated>

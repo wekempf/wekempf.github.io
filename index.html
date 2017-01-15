@@ -51,6 +51,11 @@
                 <script src="/assets/js/respond.min.js"></script>
         <![endif]-->
 
+                <style>
+                        .intro-header *, .navbar:not(.is-fixed) * { color: GoldenRod !important; }
+                        hr { border-color: GoldenRod !important; }
+                        .btn { color: initial !important }
+                </style>
 
         </head>
         <body>
@@ -84,7 +89,7 @@
                 </nav>
                 
                 <!-- Page Header -->
-                <header class="intro-header" id="intro-header">
+                <header class="intro-header" id="intro-header" style="background-image: url(&quot;/assets/images/banner_web.jpg&quot;)">
                         <div class="container">
                                 <div class="row">
                                         <div class="col-md-12">
@@ -142,15 +147,15 @@ asked the following:</p>
         <h5>Tags</h5>
         <div>
                 <a role="button" href="/tags/wyam" class="btn btn-default btn-sm"> Wyam (6)</a>
-                <a role="button" href="/tags/c%23" class="btn btn-default btn-sm"> C# (5)</a>
                 <a role="button" href="/tags/net" class="btn btn-default btn-sm"> .NET (5)</a>
+                <a role="button" href="/tags/c%23" class="btn btn-default btn-sm"> C# (5)</a>
                 <a role="button" href="/tags/css" class="btn btn-default btn-sm"> CSS (4)</a>
                 <a role="button" href="/tags/markdig" class="btn btn-default btn-sm"> Markdig (3)</a>
-                <a role="button" href="/tags/markdown" class="btn btn-default btn-sm"> Markdown (2)</a>
-                <a role="button" href="/tags/logging" class="btn btn-default btn-sm"> Logging (2)</a>
-                <a role="button" href="/tags/task" class="btn btn-default btn-sm"> Task (2)</a>
-                <a role="button" href="/tags/tpl" class="btn btn-default btn-sm"> TPL (2)</a>
                 <a role="button" href="/tags/microsoft.extensions.logging" class="btn btn-default btn-sm"> Microsoft.Extensions.Logging (2)</a>
+                <a role="button" href="/tags/logging" class="btn btn-default btn-sm"> Logging (2)</a>
+                <a role="button" href="/tags/markdown" class="btn btn-default btn-sm"> Markdown (2)</a>
+                <a role="button" href="/tags/tpl" class="btn btn-default btn-sm"> TPL (2)</a>
+                <a role="button" href="/tags/task" class="btn btn-default btn-sm"> Task (2)</a>
         </div>
         <ul class="pager">
             <li class="next">
@@ -249,19 +254,5 @@ asked the following:</p>
 </script>
                 <script>hljs.initHighlightingOnLoad();</script>
 
-                        <script type="text/javascript">                
-                                // Header background                        
-                                var colors = Please.make_color({
-                                        colors_returned: 3,
-                                        saturation: .6
-                                });
-                                var t = new Trianglify({
-                                        x_gradient: colors,
-                                        y_gradient: ["#FFFFFF"]
-                                });
-                                var header = document.getElementById("intro-header");
-                                var pattern = t.generate(header.clientWidth, header.clientHeight);
-                                header.setAttribute('style', 'background-image: ' + pattern.dataUrl);                        
-                        </script>
         </body>
 </html>
