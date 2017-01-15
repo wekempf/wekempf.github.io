@@ -27,9 +27,6 @@ Task("Preview")
         Wyam(CreateSettings(true));        
     });
     
-Task("Default")
-    .IsDependentOn("Build");    
-    
 Task("Publish")
     .IsDependentOn("Build")
     .Does(() =>
@@ -51,6 +48,9 @@ Task("Publish")
         }
     });
 
+Task("Default")
+    .IsDependentOn("Build");    
+    
 RunTarget(target);
 
 WyamSettings CreateSettings(bool preview)

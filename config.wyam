@@ -6,6 +6,8 @@ GlobalMetadata["Title"] = "Digital Tapestry";
 GlobalMetadata["Description"] = "Weaving a Digital Tapestry";
 GlobalMetadata["Intro"] = "The musings of a .NET developer.";
 GlobalMetadata["MarkdownExtensions"] = "advanced+bootstrap+emojis+smartypants";
+InitialMetadata["Image"] = "/assets/images/banner_web.jpg";
+InitialMetadata["HeaderTextColor"] = "GoldenRod";
 
 Pipelines.Add("Less",
     ReadFiles("**/*.less"),

@@ -7,7 +7,6 @@ Tags: ["Markdown", "Markdig", "Wyam", "CSS"]
 # Emoji Cheat Sheet
 
 This cheat sheet was compiled from the [source for Markdig](https://github.com/lunet-io/markdig/blob/master/src/Markdig/Extensions/Emoji/EmojiParser.cs).
-Not all shortcuts are working properly, which I assume is due to [Wyam](https://wyam.io) using an older version of Markdig.
 A couple of shortcuts use the `\` character, which doesn't always work well with the rest of Markdown, and may require a trailing space.
 One shortcut, `</3`, breaks my Markdown pipetable in the source and I had to use the alternate `:broken_heart:` shortcut
 for the visual display here. This shortcut works in other places, but interfered with the pipetable here, which I cannot explain.
@@ -916,11 +915,11 @@ Shortcut | Result
 `:,D` | :,D
 `:,-D` | :,-D
 `:*` | :*
-`:-*` | :-*
+`:-*` | :-* 
 `x-)` | x-)
-`X-)` | X-)
+`X-)` | X-) 
 `:|` | :|
-`:-|` | :-|
+`:-|` | :-| 
 `:o` | :o
 `:-o` | :-o
 `:O` | :O

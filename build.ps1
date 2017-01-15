@@ -42,6 +42,7 @@ http://cakebuild.net
 Param(
     [string]$Script = "_build.cake",
     [Parameter(Position = "0")]
+    [ValidateSet("Clean","Build","Preview","Publish","Default")]
     [string]$Target = "Default",
     [ValidateSet("Release", "Debug")]
     [string]$Configuration = "Release",

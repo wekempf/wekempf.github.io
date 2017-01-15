@@ -52,6 +52,13 @@ will add the anchor button to the ```h1``` tag in the header of the page. The on
 serves no purpose, really, and I think it looks bad. Some CSS or JavaScript magic could probably fix this easy enough,
 but I've not done that work.
 
+**Update:** [Jamie Philips](http://www.phillipsj.net/posts/wyam-improved-anchors?platform=hootsuite) provided a fix
+for the anchor button in the banner issue. Here's what I'm currently using.
+
+```JavaScript
+anchors.add('#content > h1,h2,h3,h4');
+```
+
 ## clipboard.js
 
 This one was more difficult. The idea is we want a button to appear with every code block that when clicked copies

@@ -204,7 +204,7 @@ autolinks --or-- advanced | generates links if a text starts with ```http://``` 
 http://www.digitaltapestry.net
 ```
 
-### Result [^4]
+### Result
 
 http://www.digitaltapestry.net
 
@@ -282,9 +282,9 @@ abbreviations --or-- advanced | https://michelf.ca/projects/php-markdown/extra/#
 Later in a text we are using HTML and it becomes an abbr tag HTML
 ```
 
-### Result [^5]
+### Result
 
-```*[HTML]: Hypertext Markup Language```
+*[HTML]: Hypertext Markup Language
 
 Later in a text we are using HTML and it becomes an abbr tag HTML
 
@@ -381,7 +381,7 @@ $$
 $$
 ```
 
-### Result [^2] [^6]
+### Result [^2] [^4]
 
 This is a $math block$
 
@@ -470,7 +470,7 @@ diagrams --or-- advanced | https://knsv.github.io/mermaid/
     ```
 ```
 
-### Result [^2] [^7]
+### Result [^2] [^5]
 
 ```mermaid
 graph TD;
@@ -485,9 +485,7 @@ graph TD;
 [^1]: Alignment doesn't appear to be working, and I don't now why.
 [^2]: Not all results are visibly evident with the current styling. View the HTML produced.
 [^3]: An example footnote.
-[^4]: Not working with Wyam and I'm not sure why. Maybe a new feature and Wyam isn't using the newest version?
-[^5]: Not working. Produces an error "Inline has already a parent".
-[^6]: I'll be honest, I don't understand the use case for this one.
-[^7]: This needs mermaid.css and mermaid.js to be linked. I've done so here, but the way you do it will be
+[^4]: I'll be honest, I don't understand the use case for this one.
+[^5]: This needs mermaid.css and mermaid.js to be linked. I've done so here, but the way you do it will be
       improved the next release, so I'll wait to blog about that. Not sure why the generated diagram here
       is missing the arrow lines, but I don't believe it's got anything to do with Wyam or Markdig.
