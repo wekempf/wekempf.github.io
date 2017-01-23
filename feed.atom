@@ -4,8 +4,106 @@
 	<id>http://digitaltapestry.net/</id>
 	<title>Digital Tapestry</title>
 	<rights>2017</rights>
-	<updated>2017-01-16T19:58:18Z</updated>
+	<updated>2017-01-23T23:07:18Z</updated>
 	<subtitle>Weaving a Digital Tapestry</subtitle>
+	<entry>
+		<link href="http://digitaltapestry.net/posts/poshwyam" />
+		<link rel="enclosure" type="image" href="http://digitaltapestry.net/assets/images/banner_web.jpg" />
+		<id>http://digitaltapestry.net/posts/poshwyam</id>
+		<title>PoshWyam</title>
+		<updated>2017-01-23T17:18:00Z</updated>
+		<content>&lt;h1 id="poshwyam"&gt;PoshWyam&lt;/h1&gt;
+&lt;p&gt;Over on the &lt;a href="https://gitter.im/Wyamio/Wyam"&gt;Wyam Gitter&lt;/a&gt; &lt;a href="https://github.com/phillipsj"&gt;Jamie Phillips (@phillipsj)&lt;/a&gt;
+made a casual remark about using my PowerShell script I use in this blog's source for creating new blog posts, and
+how he was trying to modify it for draft usage. That blossomed into a whole new project under the Wyamio organization
+called &lt;a href="https://github.com/Wyamio/PoshWyam"&gt;PoshWyam&lt;/a&gt; that I've been hacking at for a few days now. It's in preliminary
+(read “alpha”, not even "beta") state right now, but it is ready enough for people to use and provide feedback.
+Once we are ready this will go up on &lt;a href="https://www.powershellgallery.com/"&gt;PowerShell Gallery&lt;/a&gt;, but until then
+if you want to use it you'll need to clone the repo.&lt;/p&gt;
+&lt;p&gt;Here's a whirlwind tour for usage, prior to release.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-PowerShell"&gt;import-module PoshWyam\PoshWyam.psd1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You need to import the module from the location in which you cloned the repo (alternatively, you could copy the
+PoshWyam directory from the repo into your PowerShell module path somewhere).&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-PowerShell"&gt;Get-Command -Module PoshWyam
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;View all of the fabulous commands exported by this new module.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-PowerShell"&gt;Get-Help New-blog
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;View the help for any of these new commands. Keep in mind that we're alpha at best here. I know I'm missing
+example documentation for all the commands, for instance. That said, every command is documented. If you find
+anything missing or confusing provide feedback, please.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-PowerShell"&gt;New-Blog "My Blog" http://www.myblog.com
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Create a new blog. Note that the example above is the minimal syntax for doing so. There's other parameters
+you can supply, all documented with &lt;code&gt;Get-Help&lt;/code&gt;. This new blog includes a &lt;code&gt;Cake&lt;/code&gt; build script, so you're ready
+to go right out of the box, no installation of any tools necessary. The &lt;code&gt;Cake&lt;/code&gt; bootstrapper, &lt;code&gt;build.ps1&lt;/code&gt; installs
+it locally to this project and the &lt;code&gt;wyam.cake&lt;/code&gt; script will install &lt;code&gt;Wyam&lt;/code&gt; locally.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-PowerShell"&gt;Invoke-Wyam
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you have some need to run &lt;code&gt;wyam.exe&lt;/code&gt; you can use the &lt;code&gt;Invoke-Wyam&lt;/code&gt; cmdlet to do so. This bootstraps the local
+installation of &lt;code&gt;Wyam&lt;/code&gt; if it's not yet been done and then invokes it with the arguments you pass.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-PowerShell"&gt;New-BlogPost "My Second Post" Tag1,Tag2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This creates a new blog post with the specified Title and Tags. You can use the &lt;code&gt;-Draft&lt;/code&gt; switch to specify the
+creation of a draft post instead. You can also get creative and pipe this command to &lt;code&gt;Invoke-Item&lt;/code&gt; to open
+the markdown file in the associated editor on your system, just to go crazy with it.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-PowerShell"&gt;Get-BlogPost
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This gets all the blog posts, sorted by the Published date.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-PowerShell"&gt;Get-BlogPost \*Second\*
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can supply a &lt;code&gt;-Title&lt;/code&gt; parameter, including wild cards, to limit the search to just those posts that match.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-PowerShell"&gt;Get-BlogPost \*Second\* | Get-Content
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The output objects for &lt;code&gt;Get-BlogPost&lt;/code&gt; are designed specifically for piping to other PowerShell cmdlets that
+take a &lt;code&gt;-Path&lt;/code&gt; parameter by property name. This means most of the cmdlets you'd want to use it with will
+“just work” as you expect. Don't be fooled by the default output of this command. We use a type formatting
+file to make the output from &lt;code&gt;Get-BlogPost&lt;/code&gt; look nice and clean, but there are properties, specifically
+a &lt;code&gt;Path&lt;/code&gt; property, that are present but not displayed by default.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-PowerShell"&gt;Publish-BlogDraft Title
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Doesn't do you much good to create draft posts if you can't easily publish them later. Do note that
+currently Wyam doesn't understand the concept of drafts, so the drafts created here cannot be viewed
+even by using the preview server until they are published. This is a feature that
+&lt;a href="https://github.com/daveaglick"&gt;Dave Glick (@daveaglick)&lt;/a&gt; might add to &lt;code&gt;Wyam&lt;/code&gt; in the future.&lt;/p&gt;
+&lt;p&gt;Those are the main commands, at least as of right now. Have other command ideas you'd like to see?
+Found a bug? Want to participate in the development? Let us know on &lt;a href="https://github.com/Wyamio/PoshWyam"&gt;GitHub&lt;/a&gt;
+or &lt;a href="https://gitter.im/Wyamio/PoshWyam"&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
+
+
+&lt;div id="disqus_thread"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'poshwyam';
+    var disqus_title = 'PoshWyam';
+    var disqus_url = 'http://digitaltapestry.net/posts/poshwyam';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+&lt;/script&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+&lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
+		<summary>&lt;p&gt;Over on the &lt;a href="https://gitter.im/Wyamio/Wyam"&gt;Wyam Gitter&lt;/a&gt; &lt;a href="https://github.com/phillipsj"&gt;Jamie Phillips (@phillipsj)&lt;/a&gt;
+made a casual remark about using my PowerShell script I use in this blog's source for creating new blog posts, and
+how he was trying to modify it for draft usage. That blossomed into a whole new project under the Wyamio organization
+called &lt;a href="https://github.com/Wyamio/PoshWyam"&gt;PoshWyam&lt;/a&gt; that I've been hacking at for a few days now. It's in preliminary
+(read “alpha”, not even "beta") state right now, but it is ready enough for people to use and provide feedback.
+Once we are ready this will go up on &lt;a href="https://www.powershellgallery.com/"&gt;PowerShell Gallery&lt;/a&gt;, but until then
+if you want to use it you'll need to clone the repo.&lt;/p&gt;</summary>
+	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/playing-with-equality" />
 		<link rel="enclosure" type="image" href="http://digitaltapestry.net/assets/images/banner_web.jpg" />
