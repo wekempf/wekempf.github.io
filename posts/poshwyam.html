@@ -154,10 +154,10 @@ the markdown file in the associated editor on your system, just to go crazy with
 <pre><code class="language-PowerShell">Get-BlogPost
 </code></pre>
 <p>This gets all the blog posts, sorted by the Published date.</p>
-<pre><code class="language-PowerShell">Get-BlogPost \*Second\*
+<pre><code class="language-PowerShell">Get-BlogPost *Second*
 </code></pre>
 <p>You can supply a <code>-Title</code> parameter, including wild cards, to limit the search to just those posts that match.</p>
-<pre><code class="language-PowerShell">Get-BlogPost \*Second\* | Get-Content
+<pre><code class="language-PowerShell">Get-BlogPost *Second* | Get-Content
 </code></pre>
 <p>The output objects for <code>Get-BlogPost</code> are designed specifically for piping to other PowerShell cmdlets that
 take a <code>-Path</code> parameter by property name. This means most of the cmdlets you'd want to use it with will
