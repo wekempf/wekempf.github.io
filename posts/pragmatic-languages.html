@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+
+        <title>Digital Tapestry - Pragmatic Languages</title>
+        <meta name="description" content="Weaving a Digital Tapestry" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+
+        <link type="application/rss+xml" rel="alternate" title="Digital Tapestry" href="/feed.rss" />
+        <link type="application/atom+xml" rel="alternate" title="Digital Tapestry" href="/feed.atom" />
+        <link rel="shortcut icon" href="/favicon.ico?v=2" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico?v=2" type="image/x-icon">
+
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/assets/css/highlight.css" rel="stylesheet">
+        <link href="/assets/css/clean-blog.css" rel="stylesheet" />
+        <link href="/assets/css/master.css" rel="stylesheet" />
+        <link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="/assets/css/override.css" rel="stylesheet" />
+        <ling href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css" rel="stylesheet" type="text/css">
+
+
+        <meta name="application-name" content="Digital Tapestry" />
+        <meta name="msapplication-tooltip" content="Digital Tapestry" />
+        <meta name="msapplication-starturl" content="/" />
+
+        <meta property="og:title" content="Digital Tapestry - Pragmatic Languages" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://digitaltapestry.net/posts/pragmatic-languages" />
+        <!-- TODO: More social graph meta tags -->
+
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>     
+        <script src="/assets/js/highlight.pack.js"></script>   
+        <script src="/assets/js/clean-blog.js"></script>
+        <script src="/assets/js/d3.v3.min.js"></script>
+        <script src="/assets/js/trianglify.min.js"></script>
+        <script src="/assets/js/Please-compressed.js"></script>
+        <script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+                
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+                <script src="/assets/js/html5shiv.js"></script>
+                <script src="/assets/js/respond.min.js"></script>
+        <![endif]-->
+
+                <style>
+                        .intro-header *, .navbar:not(.is-fixed) * { color: #101F45 !important; }
+                        hr { border-color: #101F45 !important; }
+                        .btn { color: initial !important }
+                </style>
+
+        </head>
+        <body>
+                
+                <!-- Navigation -->
+                <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+                        <div class="container-fluid">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <div class="navbar-header page-scroll">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        </button>
+                                        <a class="navbar-brand" href="/">Digital Tapestry</a>
+                                </div>
+                        
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse" id="navbar-collapse">
+                                        <ul class="nav navbar-nav navbar-right">
+                                                        <li><a href="/tags">All Tags</a></li>
+        <li><a href="/posts">Archive</a></li>
+        <li><a href="/resume">Resume</a></li>
+ 
+                                        </ul>
+                                </div>
+                                <!-- /.navbar-collapse -->
+                        </div>
+                        <!-- /.container -->
+                </nav>
+                
+                <!-- Page Header -->
+                <header class="intro-header" id="intro-header" style="background-image: url(&quot;/assets/images/banner_web.jpg&quot;)">
+                        <div class="container">
+                                <div class="row">
+                                        <div class="col-md-12">
+
+    
+<div class="post-heading">
+    <h1>Pragmatic Languages</h1>
+    <div class="meta">        
+Published on Thursday, February 9, 2017<br>    </div>
+        <div class="tags">
+                    <a role="button" href="/tags/languages" class="btn btn-default btn-xs">Languages</a>
+                    <a role="button" href="/tags/programming" class="btn btn-default btn-xs">Programming</a>
+        </div>     
+</div>
+                                        </div>
+                                </div>
+                        </div>
+                </header>
+                
+                <!-- Main Content -->
+                <div class="container">
+                        <div class="row">
+                                <div id="content" class="col-md-12">
+                                        
+
+<h1 id="pragmatic-languages">Pragmatic Languages</h1>
+<p>I was influenced heavily early on in my career by the book <em>The Pragmatic Programmer: From Journeyman to Master</em><a id="fnref:1" href="#fn:1" class="footnote-ref"><sup>1</sup></a>. One of the
+best pieces of advice given in that book was to learn new languages. That's a continuous process. You should never stop learning
+new languages. Most developers basically learn a single language and spend their career programming in it, but the pragmatic
+programmer knows that this is a mistake. There's the obvious problem: languages come and go, and thus so can your career.
+This even happens to programmers that use languages &ldquo;that will never go away.&rdquo; For instance, COBOL is still used pretty heavily,
+and I'm not about to predict when it will ever truly disappear. Despite that, I saw many a COBOL developer who's career ended
+in the late 80s and early 90s as the demand for the language waned. That's a silly position to be in, since demand for programmers
+was on the rise.</p>
+<p>The idea behind learning new languages is deeper than that, though. Yes, you don't want to be caught in the position of the only
+language you know losing demand. That said, though, the reality is that most of us will spend most of our career writing code
+in a single language. Maybe you'll switch languages once or twice, but that's the extent of it. So, why continually learn new
+languages? The answer to that is because it makes you a better programmer. Every language has a &ldquo;style&rdquo; that's pretty unique.
+We've labeled certain groupings of these styles: procedural, functional, Object-Oriented. Even with these labels though
+you'll find that many languages mostly fall into one category but have features of others, and no two languages really
+approach a problem the same way. Learning these other styles can actually open up your mind to other ways of attacking a
+problem, even when using another language&hellip; say the language you actually use in your career. If a language sees enough use,
+you see this within the evolution of the language itself. For instance, C# started life pretty much as an Object-Oriented
+language. There were little hints of procedural features (static methods) and functional concepts (delegates), but There
+was no way you'd put it in either of those categories. Over time, though, features were added to the language to the point
+where we're on the cusp of actually being able to call it a functional language as well. That said, it's still no F# or
+Haskell, both of which use very different styles for solving problems.</p>
+<p>I have no idea if that super brief explanation swayed you or not. If not, I strongly recommend reading <em>The Pragmatic Programmer</em>.
+Assuming you are convinced, what languages should you learn? Well, all of them ;). That's not realistic, though. You're
+probably looking for guidance as you start picking up this habit as to what languages to start with. Well, opinions will
+differ greatly hear, but I'm going to tell you which languages I consider to have been important to me as I did this, and
+why I felt that way.</p>
+<h2 id="assembly-language">Assembly Language</h2>
+<p>Note that I'm not telling you what Assembly language to learn. I learned a couple of them, but I don't think it matters too
+much which one(s) you learn.</p>
+<p>This &ldquo;language&rdquo; almost didn't make my list here. &quot;When I was a youngun'...&quot; this was a very important &ldquo;language&rdquo; to learn.
+It's importance is diminished, somewhat, in this day and age. It's still important because it's the best way to understand
+how the hardware you're righting code for works. Some other languages are &quot;low level&quot; enough to help you learn some of this,
+which is why this almost didn't make the list, but there's no doubt learning Assembly is the best way to understand the
+hardware. Depending on your language, this might also be important for day to day debugging tasks, and it will always
+be important for the really hard debugging cases.</p>
+<h2 id="cc">C/C++</h2>
+<p>OK, some will hate that I've grouped the two together. They are separate languages, and maybe I should have made them separate
+entries. If you're cognizant of what you should learn, however, you could learn C++ without ever learning C. I do think you
+should learn C++ regardless.</p>
+<p>These are low level languages, and in a pinch could stand in for learning Assembly. You'll learn concepts like the stack and
+the heap, pointers, memory management, etc. This are all concepts that are extremely important to understand even if your
+language of choice doesn't expose them or at least hides them from most of your code. The higher level abstractions are all
+built on these concepts, and understanding them will help you to write more efficient code in any language. C++ is singularly
+unique. Over time it's gained all sort of features from other languages, but has done so in ways that usually more directly
+expose you to how such features work. For instance, C++ started out with function pointers and over time wrapped those
+in high level concepts like lambdas. When doing so, however, you are still very much cognizant of the lower level concepts
+used to build the higher level features. Templates are a great examle here. Most modern languages have the concept of
+&ldquo;generic types&rdquo; in one form or another, but none match the low level implementation of C++ templates and it's expressibility.
+Of course, this means that C++ is probably the most complex language in existence. There's a reason there's a big divide
+among those that love the language and those that hate it, with very few people falling in between. Don't ignore this
+important language because of the complexity, however. Avoiding it as your day to day language may make sense (do note that
+I said &quot;may&quot;), but avoiding learning it to make you a better programmer is, IMHO, a grave error. I'd almost label this
+language as <em>the</em> most important language to learn, even though it's probably the last language I'd use for most tasks
+today (again, note that I said <em>most</em>).</p>
+<h2 id="smalltalk">Smalltalk</h2>
+<p>OK, my mentioning this one is a little hypocritical, as while I've studied it a little, it's the language on this list
+that I've used the least, by a very wide margin. That said, I've learned enough from it to be confident in saying you
+can learn a lot from this language. You can't really talk about OO programming without having some knowledge of Smalltalk.
+Many things we consider to just be part of our essential tools have their roots in Smalltalk: unit testing, patterns,
+messaging&hellip; these are all concepts that at least in part came from Smalltalk and the developers that used it.</p>
+<h2 id="lisp">Lisp</h2>
+<p>There are other functional languages, including more &ldquo;pure&rdquo; languages that are probably more important today. That said,
+Lisp is to functional what Smalltalk was to OO. Lisp syntax may make your eyes bleed, but the simplicity of it's design
+and the incredible power that design gives you are a thing of beauty. If you truly learn Lisp I guarantee this language
+will impact how you think about problem solving in pretty much every other language you ever use. In particular,
+the concept of Macros in Lisp is something I whished more languages had.</p>
+<h2 id="haskell">Haskell</h2>
+<p>There's no doubt that functional languages are seeing a resurgence today. There's also no doubt that functional concepts
+are becoming more important regardless of the language you use. Functional approaches to problems are so often the
+simplest and most ellagant approaches. Haskell, among all of the languages in this category, stands out from most
+in a list of languages for a pragmatic programmer to learn, because it's got one of the richest type systems of any
+other language. Where Lisp is powerful due to it's simplicity, Haskell is powerful on a different level, due to its
+type abstractions. Learning about Monads and Higher Kinded Types my hurt your brain a bit, they really allow you to
+approach problems in a different manner.</p>
+<h2 id="eiffel">Eiffel</h2>
+<p>I have a special place in my heart for this one, even though I've never been able to really use it. The book
+<em>Object Oriented Software Construction</em><a id="fnref:2" href="#fn:2" class="footnote-ref"><sup>2</sup></a> is on my top 5 list of books every developer should read. There were
+concepts born out of Eiffel, such as Design By Contract (DbC), that should influence how every developer writes
+programs. It's one of the more unique languages I've ever worked with, and it's ideas certainly still influence
+me today.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>There's all sorts of other languages that I've learned and love, or that have taught me new tricks even if I didn't
+much care for the language. Ruby, Python, Scala, C#, Java, F#. Some of those came very close to making my list here
+(looking at you Ruby and C#), but this list isn't a list of my favorite languages. It's also not a list of languages
+I'd like to learn better (Rust, Swift, Go, Smalltalk). It's a list of the languages I believe most influenced me and is the most
+likely to influence you as well. These should be the start of your journey, and not the entirety of it.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Hunt, Andrew and David Thomas. <a href="https://www.amazon.com/Pragmatic-Programmer-Journeyman-Master/dp/020161622X/ref=sr_1_1?ie=UTF8&amp;qid=1486642301&amp;sr=8-1&amp;keywords=the+pragmatic+programmer">The Pragmatic Programmer: From Journeyman to Master</a>.<a href="#fnref:1" class="footnote-back-ref">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Meyer, Bertrand. <a href="https://www.amazon.com/Object-Oriented-Software-Construction-Book-CD-ROM/dp/0136291554/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1486647602&amp;sr=1-1&amp;keywords=object+oriented+software+construction">Object Oriented Software Construction</a>.<a href="#fnref:2" class="footnote-back-ref">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'pragmatic-languages';
+    var disqus_title = 'Pragmatic Languages';
+    var disqus_url = 'http://digitaltapestry.net/posts/pragmatic-languages';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                                </div>
+                        </div>
+                </div>
+                
+                <hr>
+                
+                <!-- Footer -->
+                <footer>
+                        <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="list-inline text-center">
+                <li>
+                    <a href="https://twitter.com/wekempf">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/wekempf">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <p class="copyright text-muted">
+                Copyright © 2017 by William E. Kempf. The opinions expressed herein are my own and do not represent those of my employer or any other third-party views in any way.
+                <br />
+                This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/" rel="license">Creative Commons Attribution 4.0 International License</a>.
+                <br />
+                <a href="/feed.rss"><i class="fa fa-rss"></i> RSS Feed</a> | <a href="/feed.atom"><i class="fa fa-rss"></i> Atom Feed</a>
+                <br />
+                <a href="https://github.com/wekempf/wekempf.github.io"><i class="fa fa-github"></i> This Site on GitHub</a>
+                <br />
+                Hosted on <a href="https://pages.github.com/">GitHub Pages</a>
+                <br />
+                <strong><a href="https://wyam.io">Generated by Wyam</a></strong>
+            </p>
+        </div>
+    </div>
+</div>
+                </footer> 
+
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js"></script>
+<script type="text/javascript">
+    anchors.options.placement = 'left';
+    anchors.add('#content > h1,h2,h3,h4');
+
+    var snippets = document.querySelectorAll("pre > code");
+    [].forEach.call(snippets, function(snippet) {
+        snippet.insertAdjacentHTML("beforebegin", "<button class='btn-copy' data-clipboard-snippet><img class='clippy' width=13 src='/assets/images/clippy.svg' alt='Copy to clipboard'></button>");
+    });
+    var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+        target: function(trigger) {
+            return trigger.nextElementSibling;
+        }
+    });
+    clipboardSnippets.on('success', function(e) {
+        e.clearSelection();
+        showTooltip(e.trigger, "Copied!");
+    });
+    clipboardSnippets.on('error', function(e) {
+        showTooltip(e.trigger, fallbackMessage(e.action));
+    });
+
+    var btns = document.querySelectorAll('.btn-copy');
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('mouseleave', function(e) {
+            e.currentTarget.setAttribute('class', 'btn-copy');
+            e.currentTarget.removeAttribute('aria-label');
+        });
+    }
+
+    function showTooltip(elem, msg) {
+        elem.setAttribute('class', 'btn-copy tooltipped tooltipped-s');
+        elem.setAttribute('aria-label', msg);
+    }
+
+    function fallbackMessage(action) {
+        var actionMsg = '';
+        var actionKey = (action === 'cut' ? 'X' : 'C');
+        if (/iPhone|iPad/i.test(navigator.userAgent)) {
+            actionMsg = 'No support :(';
+        } else if (/Mac/i.test(navigator.userAgent)) {
+            actionMsg = 'Press ⌘-' + actionKey + ' to ' + action;
+        } else {
+            actionMsg = 'Press Ctrl-' + actionKey + ' to ' + action;
+        }
+        return actionMsg;
+    }
+    hljs.initHighlightingOnLoad();
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70929529-2', 'auto');
+  ga('send', 'pageview');
+</script>
+                <script>hljs.initHighlightingOnLoad();</script>
+
+        </body>
+</html>
