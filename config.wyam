@@ -1,13 +1,16 @@
+#r Blog
+#t CleanBlog
+
 #n -p Wyam.Less
 #n -p Wyam.Minification
 
-Settings.Host = "digitaltapestry.net";
-GlobalMetadata["Title"] = "Digital Tapestry";
-GlobalMetadata["Description"] = "Weaving a Digital Tapestry";
-GlobalMetadata["Intro"] = "The musings of a .NET developer.";
-GlobalMetadata["MarkdownExtensions"] = "advanced+bootstrap+emojis+smartypants";
-InitialMetadata["Image"] = "/assets/images/banner_web.jpg";
-InitialMetadata["HeaderTextColor"] = "#101F45";
+Settings[Keys.Host] = "digitaltapestry.net";
+Settings[Keys.Title] = "Digital Tapestry";
+Settings["Description"] = "Weaving a Digital Tapestry";
+Settings["Intro"] = "The musings of a .NET developer.";
+Settings["MarkdownExtensions"] = "advanced+bootstrap+emojis+smartypants";
+Settings["Image"] = "/assets/images/banner_web.jpg";
+Settings["HeaderTextColor"] = "#101F45";
 
 Pipelines.Add("Less",
     ReadFiles("**/*.less"),

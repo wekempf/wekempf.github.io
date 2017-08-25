@@ -18,15 +18,6 @@ permalink: /resume/
 William E. Kempf is a software developer with more than 20 years of experience. He's looking for a senior
 development position working with modern technologies and methodologies.
 
-### Education {#education}
-
-* **Doane College**  
-  Crete NE  
-  BS in Computer Science / Math
-* **Kenesaw Public School**  
-  Kenesaw NE  
-  High School Diploma
-
 ### Skills {#skills}
 
 * **UI Development**  
@@ -85,6 +76,15 @@ web application written for First USA using Java, JSP, HTML, CSS and JavaScript.
 In charge of all IT infrastructure. Wrote and maintained various database applications
 used to track inventory and business processes. Developed the EDI system used to track
 bills of lading.
+
+### Education {#education}
+
+* **Doane College**  
+  Crete NE  
+  BS in Computer Science / Math
+* **Kenesaw Public School**  
+  Kenesaw NE  
+  High School Diploma
 
 ## Other Experience {#otherexperience}
 

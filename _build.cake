@@ -1,8 +1,6 @@
 #tool nuget:?package=Wyam&prerelease
 #addin nuget:?package=Cake.Wyam&prerelease
 
-var recipe = "Blog";
-var theme = "CleanBlog";
 var isLocal = BuildSystem.IsLocalBuild;
 var gitPagesRepo = isLocal
     ? "git@github.com:wekempf/wekempf.github.io.git"
@@ -56,8 +54,6 @@ RunTarget(target);
 WyamSettings CreateSettings(bool preview)
 {
     return new WyamSettings {
-        Recipe = recipe,
-        Theme = theme,
         Preview = preview,
         Watch = preview
     };
