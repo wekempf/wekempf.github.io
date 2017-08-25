@@ -4,7 +4,8 @@
 	<id>http://digitaltapestry.net/</id>
 	<title>Digital Tapestry</title>
 	<rights>2017</rights>
-	<updated>2017-02-14T14:44:38Z</updated>
+	<updated>2017-08-25T13:06:16Z</updated>
+	<logo>http://digitaltapestry.net/assets/images/banner_web.jpg</logo>
 	<subtitle>Weaving a Digital Tapestry</subtitle>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/pragmatic-languages" />
@@ -136,14 +137,7 @@ likely to influence you as well. These should be the start of your journey, and 
 &lt;/script&gt;
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 &lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
-		<summary>&lt;p&gt;I was influenced heavily early on in my career by the book &lt;em&gt;The Pragmatic Programmer: From Journeyman to Master&lt;/em&gt;&lt;a id="fnref:1" href="#fn:1" class="footnote-ref"&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;. One of the
-best pieces of advice given in that book was to learn new languages. That's a continuous process. You should never stop learning
-new languages. Most developers basically learn a single language and spend their career programming in it, but the pragmatic
-programmer knows that this is a mistake. There's the obvious problem: languages come and go, and thus so can your career.
-This even happens to programmers that use languages “that will never go away.” For instance, COBOL is still used pretty heavily,
-and I'm not about to predict when it will ever truly disappear. Despite that, I saw many a COBOL developer who's career ended
-in the late 80s and early 90s as the demand for the language waned. That's a silly position to be in, since demand for programmers
-was on the rise.&lt;/p&gt;</summary>
+		<summary>Weaving a Digital Tapestry</summary>
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/poshwyam" />
@@ -235,13 +229,7 @@ or &lt;a href="https://gitter.im/Wyamio/PoshWyam"&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
 &lt;/script&gt;
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 &lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
-		<summary>&lt;p&gt;Over on the &lt;a href="https://gitter.im/Wyamio/Wyam"&gt;Wyam Gitter&lt;/a&gt; &lt;a href="https://github.com/phillipsj"&gt;Jamie Phillips (@phillipsj)&lt;/a&gt;
-made a casual remark about using my PowerShell script I use in this blog's source for creating new blog posts, and
-how he was trying to modify it for draft usage. That blossomed into a whole new project under the Wyamio organization
-called &lt;a href="https://github.com/Wyamio/PoshWyam"&gt;PoshWyam&lt;/a&gt; that I've been hacking at for a few days now. It's in preliminary
-(read “alpha”, not even "beta") state right now, but it is ready enough for people to use and provide feedback.
-Once we are ready this will go up on &lt;a href="https://www.powershellgallery.com/"&gt;PowerShell Gallery&lt;/a&gt;, but until then
-if you want to use it you'll need to clone the repo.&lt;/p&gt;</summary>
+		<summary>Weaving a Digital Tapestry</summary>
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/playing-with-equality" />
@@ -449,10 +437,7 @@ make more sense with syntax like this.&lt;/p&gt;
 &lt;/script&gt;
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 &lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
-		<summary>&lt;p&gt;Most developers think they understand equality, but it's actually a pretty tricky subject.
-Implementing equality correctly is much more complicated than most realize. In this post
-I'm going to play around with equality, showing you some things you may not be aware of,
-and eventually show you an interesting trick you can use when implementing equality.&lt;/p&gt;</summary>
+		<summary>Weaving a Digital Tapestry</summary>
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/emoji-cheat-sheet" />
@@ -4241,10 +4226,7 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;/script&gt;
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 &lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
-		<summary>&lt;p&gt;This cheat sheet was compiled from the &lt;a href="https://github.com/lunet-io/markdig/blob/master/src/Markdig/Extensions/Emoji/EmojiParser.cs"&gt;source for Markdig&lt;/a&gt;.
-A couple of shortcuts use the &lt;code&gt;\&lt;/code&gt; character, which doesn't always work well with the rest of Markdown, and may require a trailing space.
-One shortcut, &lt;code&gt;&amp;lt;/3&lt;/code&gt;, breaks my Markdown pipetable in the source and I had to use the alternate &lt;code&gt;:broken_heart:&lt;/code&gt; shortcut
-for the visual display here. This shortcut works in other places, but interfered with the pipetable here, which I cannot explain.&lt;/p&gt;</summary>
+		<summary>Weaving a Digital Tapestry</summary>
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/wyam-anchors-and-code-copy" />
@@ -4487,8 +4469,7 @@ and use &lt;a href="http://lesscss.org"&gt;Less&lt;/a&gt;, which I've &lt;a href
 &lt;/script&gt;
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 &lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
-		<summary>&lt;p&gt;On the &lt;a href="https://wyam.io"&gt;Wyam&lt;/a&gt; &lt;a href="https://gitter.im/Wyamio/Wyam"&gt;Gitter&lt;/a&gt; discussion Gary Ewan Park (@gep13 &lt;a id="fnref:1" href="#fn:1" class="footnote-ref"&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;)
-asked the following:&lt;/p&gt;</summary>
+		<summary>Weaving a Digital Tapestry</summary>
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/markdig-cheat-sheet" />
@@ -5138,9 +5119,7 @@ is missing the arrow lines, but I don't believe it's got anything to do with Wya
 &lt;/script&gt;
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 &lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
-		<summary>&lt;p&gt;I mentioned in the post &lt;a href="/posts/alerts-in-wyam"&gt;Alerts in Wyam&lt;/a&gt; that Wyam uses Markdig for Markdown
-processing, and that Markdig supports extensions. Currently, Markdig lacks documentation. For this
-reason, I'm going to try and create a “cheat sheet” for the extensions.&lt;/p&gt;</summary>
+		<summary>Weaving a Digital Tapestry</summary>
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/less-in-wyam" />
@@ -5251,12 +5230,7 @@ Pipelines[BlogPipelines.Resources].Add(
 &lt;/script&gt;
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 &lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
-		<summary>&lt;p&gt;In the &lt;a href="/posts/alerts-in-wyam"&gt;last post&lt;/a&gt; I showed how to use Bootstrap alerts from
-within a Wyam based blog site. I included some CSS to restyle the alerts to include
-glyphicons for the various alert types. The CSS I used had a lot of repetitive code.
-The &lt;a href="http://lesscs.org"&gt;Less&lt;/a&gt; CSS preprocessor makes it easy to use mixins to eliminate
-duplicate code in CSS files. Wyam has a module for using Less, so I updated my site
-to use it.&lt;/p&gt;</summary>
+		<summary>Weaving a Digital Tapestry</summary>
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/alerts-in-wyam" />
@@ -5373,8 +5347,7 @@ with the above CSS.&lt;/p&gt;
 &lt;/script&gt;
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 &lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
-		<summary>&lt;p&gt;Bootstrap has the concept of “alerts”, which are specially styled divs used to call out notes.
-Here's some examples:&lt;/p&gt;</summary>
+		<summary>Weaving a Digital Tapestry</summary>
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/understanding-task-II" />
@@ -5554,10 +5527,7 @@ much better suited for using the TPL.&lt;/p&gt;
 &lt;/script&gt;
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 &lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
-		<summary>&lt;p&gt;In &lt;a href="/posts/understanding-task-I"&gt;Part I&lt;/a&gt; I explained that a &lt;code&gt;Task&lt;/code&gt; is really &lt;strong&gt;just&lt;/strong&gt; a datastructure
-that represents the result of “something”, and implemented a &lt;em&gt;very&lt;/em&gt; basic &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to illustrate
-that. Of course, that isn't a very complete picture and I promised that this time around we'd
-update &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to more closely represent the mental model you have for &lt;code&gt;Task&lt;/code&gt;.&lt;/p&gt;</summary>
+		<summary>Weaving a Digital Tapestry</summary>
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/understanding-task-I" />
@@ -5667,14 +5637,7 @@ it with a more accurate one.&lt;/p&gt;
 &lt;/script&gt;
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 &lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
-		<summary>&lt;p&gt;I've noticed that many developers I work and talk with have a pretty big misunderstanding of the &lt;code&gt;Task&lt;/code&gt; and &lt;code&gt;Task&amp;lt;T&amp;gt;&lt;/code&gt; types
-from the Task Programming Library (TPL). In their minds a &lt;code&gt;Task&lt;/code&gt; is a synonym for a &lt;code&gt;Thread&lt;/code&gt;. With a bit of explanation
-I can get them to almost understand that a &lt;code&gt;Task&lt;/code&gt; is more often than not run on the thread pool, or represents asynchronous
-I/O, but I don't get the feeling that I too often actually get them to understand this at a deep level. I think that
-being able to effectively write programs with the TPL you do need this understanding, so I'm going to write a blog series
-about asynchronous programming from a different point of view than most. I'm going to start from the bottom and work my
-way up, while most other books/blogs/articles start at the top and work their way down, though usually not going to deep.
-My hope is that by working from the bottom up, some of the mystery will just disappear.&lt;/p&gt;</summary>
+		<summary>Weaving a Digital Tapestry</summary>
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/logging-part-II" />
@@ -5827,9 +5790,7 @@ in Part III.&lt;/p&gt;
 &lt;/script&gt;
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 &lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
-		<summary>&lt;p&gt;In &lt;a href="/posts/logging-part-I"&gt;Part I&lt;/a&gt; we were introduced to &lt;a href="https://github.com/aspnet/Logging"&gt;Microsoft.Extensions.Logging&lt;/a&gt;
-which I amusingly abbreviate to just MEL. In particular, we explored the design of the &lt;code&gt;ILogger&lt;/code&gt; interface.
-In this post we'll continue to explore MEL by looking next at the design of the &lt;code&gt;ILoggerFactory&lt;/code&gt; interface.&lt;/p&gt;</summary>
+		<summary>Weaving a Digital Tapestry</summary>
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/logging-part-I" />
@@ -6356,9 +6317,7 @@ the design of &lt;code&gt;ILoggerFactory&lt;/code&gt; which gets us a little clo
 &lt;/script&gt;
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 &lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
-		<summary>&lt;p&gt;We've all dealt with logging in our projects before. This is a mostly known commodity for every developer.
-So, why am I blogging about it? Well, I think there's something to be learned about the finer points of
-logging, and there's a new kid on the block: &lt;a href="https://github.com/aspnet/Logging"&gt;Microsoft.Extensions.Logging&lt;/a&gt;.&lt;/p&gt;</summary>
+		<summary>Weaving a Digital Tapestry</summary>
 	</entry>
 	<entry>
 		<link href="http://digitaltapestry.net/posts/welcome-back" />
@@ -6417,6 +6376,6 @@ and as I make modifications here I'll likely blog about them as well.&lt;/p&gt;
 &lt;/script&gt;
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 &lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content>
-		<summary>&lt;p&gt;Hi again. Or hi for the first time if you're new.&lt;/p&gt;</summary>
+		<summary>Weaving a Digital Tapestry</summary>
 	</entry>
 </feed>
