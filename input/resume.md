@@ -10,7 +10,7 @@ permalink: /resume/
 
 > 19252 Roudebush Blvd.  
 > Noblesville, IN 46060  
-> (317) 825-2558  
+> (317) 258-8225  
 > wekempf@outlook.com
 
 ### Profile {#profile}
