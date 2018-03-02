@@ -4,9 +4,370 @@
 		<title>Digital Tapestry</title>
 		<link>http://digitaltapestry.net/</link>
 		<description>Weaving a Digital Tapestry</description>
-		<copyright>2017</copyright>
-		<pubDate>Tue, 29 Aug 2017 17:51:00 GMT</pubDate>
-		<lastBuildDate>Tue, 29 Aug 2017 17:51:00 GMT</lastBuildDate>
+		<copyright>2018</copyright>
+		<pubDate>Fri, 02 Mar 2018 18:20:41 GMT</pubDate>
+		<lastBuildDate>Fri, 02 Mar 2018 18:20:41 GMT</lastBuildDate>
+		<item>
+			<title>Equality</title>
+			<link>http://digitaltapestry.net/posts/equality</link>
+			<description>Weaving a Digital Tapestry</description>
+			<enclosure url="http://digitaltapestry.net/assets/images/banner_web.jpg" length="0" type="image" />
+			<guid>http://digitaltapestry.net/posts/equality</guid>
+			<pubDate>Fri, 01 Sep 2017 07:44:40 GMT</pubDate>
+			<content:encoded>&lt;h1 id="equality"&gt;Equality&lt;/h1&gt;
+&lt;p&gt;Equality is such a simple concept at a high level, but don't fool yourself. The devil is in the details. Correctly
+implementing equality is actually much harder than you'd think, and most code I've seen has done it wrong. There
+are a lot of very subtle rules you should obey when implementing equality that are easy to forget or to implement
+incorrectly.&lt;/p&gt;
+&lt;p&gt;Think I'm exagerating, or just plain wrong? Well, consider the number of tests there are in the &lt;code&gt;EquatableVerifier&amp;lt;T&amp;gt;&lt;/code&gt;
+in &lt;code&gt;Testify&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="alert alert-info"&gt;&lt;p&gt;&lt;code&gt;EquatableVerifier&amp;lt;T&amp;gt;&lt;/code&gt; is a “contract verifier” provided in &lt;a href="http://www.digitaltapestry.net/testify/"&gt;Testify&lt;/a&gt;,
+a unit testing helper framework I'm the author of. Contract verifiers provide a suite of tests for "contracts"
+that a type should obey. &lt;code&gt;EquatableVerifier&amp;lt;T&amp;gt;&lt;/code&gt; ensures a type obeys the contract for &lt;code&gt;IEquatable&amp;lt;T&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Test&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyObjectEqualsIsOverridden&lt;/td&gt;
+&lt;td&gt;Verifies that you've overridden the &lt;code&gt;Object.Equals&lt;/code&gt; method.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyObjectEqualsWithEqualItems&lt;/td&gt;
+&lt;td&gt;Verifies that &lt;code&gt;Object.Equals&lt;/code&gt; returns true when the objects are supposed to be equal.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyObjectEqualsWithNull&lt;/td&gt;
+&lt;td&gt;Verifies that &lt;code&gt;Object.Equals&lt;/code&gt; returns false when the object passed to it is &lt;code&gt;null&lt;/code&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyGetHashCodeIsOverridden&lt;/td&gt;
+&lt;td&gt;Verifies that you've overridden the &lt;code&gt;Object.GetHashCode&lt;/code&gt; method.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyGetHashCodeIsStable&lt;/td&gt;
+&lt;td&gt;Verifies that &lt;code&gt;Object.GetHashCode&lt;/code&gt; returns the same value when called more than once.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyGetHashCodeWithEqualItems&lt;/td&gt;
+&lt;td&gt;Verifies that &lt;code&gt;Object.GetHashCode&lt;/code&gt; returns the same value when the objects are supposed to be equal.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyObjectEqualsWithInequalItems&lt;/td&gt;
+&lt;td&gt;Verifies that &lt;code&gt;Object.Equals&lt;/code&gt; returns false when the objects are supposed to not be equal.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyEqualsWithEqualItems&lt;/td&gt;
+&lt;td&gt;Verifies that &lt;code&gt;IEquatable&amp;lt;T&amp;gt;.Equals&lt;/code&gt; returns true when the objects are supposed to be equal.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyEqualsWithInequalItems&lt;/td&gt;
+&lt;td&gt;Verifies that &lt;code&gt;IEquatable&amp;lt;T&amp;gt;.Equals&lt;/code&gt; returns false when the objects are supposed to not be equal.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyEqualsWithNull&lt;/td&gt;
+&lt;td&gt;Verifies that &lt;code&gt;IEquatable&amp;lt;T&amp;gt;.Equals&lt;/code&gt; returns false when the object passed to it is &lt;code&gt;null&lt;/code&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyEqualityOperatorsDefined&lt;/td&gt;
+&lt;td&gt;Verifies that the == and != operators are defined.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpEqualityWithEqualItems&lt;/td&gt;
+&lt;td&gt;Verifies that == returns true when the objects are supposed to be equal.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpEqualityWithNotEqualItems&lt;/td&gt;
+&lt;td&gt;Verifies that == returns false when the objects are supposed to not be equal.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpInequalityWithEqualItems&lt;/td&gt;
+&lt;td&gt;Verifies that != returns false when the objects are supposed to be equal.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpInequalityWithNotEqualItems&lt;/td&gt;
+&lt;td&gt;Verifies that != returns true when the objects are supposed to not be qual.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpEqualityWithLeftNull&lt;/td&gt;
+&lt;td&gt;Verifies that == returns false when the left hand side is null and the right hand side is not.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpEqualityWithRightNull&lt;/td&gt;
+&lt;td&gt;Verifies that == returns false when the left hand side is not null and the right hand side is.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpEqualityWithRightAndLeftNull&lt;/td&gt;
+&lt;td&gt;Verifies that == returns true when both the left hand side and the right hand side are null.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpInequalityWithLeftNull&lt;/td&gt;
+&lt;td&gt;Verifies that != returns true when the left hand side is null and the right hand side is not.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpInequalityWithRightNull&lt;/td&gt;
+&lt;td&gt;Verifies that != returns true when the left hand side is not null and the right hand side is.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpInequalityWithRightAndLeftNull&lt;/td&gt;
+&lt;td&gt;Verifies that != returns false when both the left hand side and the right hand side are null.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyImmutability&lt;/td&gt;
+&lt;td&gt;Verifies that changing any mutable properties does not change the equality behavior.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;That's 20 tests performed to ensure equality is implemented correctly. There's ways to skip some of those tests (&lt;code&gt;SkipImmutabilityTests&lt;/code&gt;,
+&lt;code&gt;SkipOperatorTests&lt;/code&gt;), but you'd better have a darn good reason for skipping them. Some of those tests are more subtle then you'd think
+at first.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;VerifyObjectEqualsIsOverridden&lt;/code&gt; and &lt;code&gt;VerifyGetHashCodeIsOverridden&lt;/code&gt; are common mistakes. For that matter, overriding &lt;code&gt;Object.Equals&lt;/code&gt;
+but not implementing &lt;code&gt;IEquatable&amp;lt;T&amp;gt;&lt;/code&gt; is pretty common as well (there's no test for that, but the generic constraints on this verifier
+enforce it). Failing to override &lt;code&gt;Object.GetHashCode&lt;/code&gt; will likely cause incorrect behavior if the type is used in a &lt;code&gt;Dictionary&lt;/code&gt;,
+&lt;code&gt;HashSet&lt;/code&gt; or in other cases where you might not expect, like with &lt;code&gt;Enumerable.Distinct&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The tests that use &lt;code&gt;null&lt;/code&gt; are all easily overlooked, and even easier to get wrong when you implement them.&lt;/p&gt;
+&lt;p&gt;Often an object with equality semantics should also have comparable semantics (i.e. the type should be collatable/sortable via the
+&lt;code&gt;IComparable&amp;lt;T&amp;gt;&lt;/code&gt; interface). For that &lt;code&gt;Testify&lt;/code&gt; has the &lt;code&gt;ComparableVerifier&amp;lt;T&amp;gt;&lt;/code&gt;. This verifier includes all of the same tests
+as  &lt;code&gt;EquatableVerifier&amp;lt;T&amp;gt;&lt;/code&gt;and in addition it includes the following tests.&lt;/p&gt;
+&lt;table class="table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Test&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyCompareToObjWithNull&lt;/td&gt;
+&lt;td&gt;Verifies that &lt;code&gt;IComparable.CompareTo&lt;/code&gt; returns false when the object passed to is is &lt;code&gt;null&lt;/code&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyCompareToObjWithLesserItems&lt;/td&gt;
+&lt;td&gt;Verifies that &lt;code&gt;IComparable.CompareTo&lt;/code&gt; returns a value greater than zero when given an object that is supposed to be smaller.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyCompareToObjWithEqualItems&lt;/td&gt;
+&lt;td&gt;Verifies that &lt;code&gt;IComparable.CompareTo&lt;/code&gt; returns zero when given an object that is supposed to be equal.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyCompareToObjWithGreaterItems&lt;/td&gt;
+&lt;td&gt;Verifies that &lt;code&gt;IComparable.CompareTo&lt;/code&gt; returns a value less than zero when given an object that is supposed to be larger.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyCompareToOtherWithLesserItems&lt;/td&gt;
+&lt;td&gt;Verifies that &lt;code&gt;IComparable&amp;lt;T&amp;gt;.CompareTo&lt;/code&gt; returns a value greater than zero when given an object that is supposed to be smaller.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyCompareToOtherWithItems&lt;/td&gt;
+&lt;td&gt;Verifies that &lt;code&gt;IComparable&amp;lt;T&amp;gt;.CompareTo&lt;/code&gt; returns zero when given an object that is supposed to be equal.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyCompareToOtherWithGreaterItems&lt;/td&gt;
+&lt;td&gt;Verifies that &lt;code&gt;IComparable&amp;lt;T&amp;gt;.CompareTo&lt;/code&gt; returns a value less than zero when given an object that is supposed to be larger.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyCompareToOtherWithNull&lt;/td&gt;
+&lt;td&gt;Verifies that &lt;code&gt;IComparable&amp;lt;T&amp;gt;.CompareTo&lt;/code&gt; returns false when the object passed to is is &lt;code&gt;null&lt;/code&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyComparisonOperatorsDefined&lt;/td&gt;
+&lt;td&gt;Verifies that &amp;lt;, &amp;lt;=, &amp;gt;, and &amp;gt;= operators are defined.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpGreaterThanWithLesserItems&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;gt; returns false when the left hand side is less than the right hand side.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpGreaterThanWithItems&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;gt; returns false when the left hand side is equal to the right hand side.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpGreaterThanWithGreaterItems&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;gt; returns true when the left hand side is greater than the right hand side.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpGreaterThanOrEqualWithLesserItems&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;gt;= returns false when the left hand side is less than the right hand side.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpGreaterThanOrEqualWithItems&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;gt;= returns true when the left hand side is equal to the right hand side.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpGreaterThanOrEqualWithGreaterItems&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;gt;= returns true when the left hand side is greater than the right hand side.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpLessThanWithLesserItems&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;lt; returns true when the left hand side is less than the right hand side.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpLessThanWithItems&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;lt; returns false when the left hand side is equal to the right hand side.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpLessThanWithGreaterItems&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;lt; returns false when the left hand side is greater than the right hand side.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpLessThanOrEqualWithLesserItems&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;lt;= returns true when the left hand side is less than the right hand side.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpLessThanOrEqualWithItems&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;lt;= returns true when the left hand side is equal to the right hand side.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpLessThanOrEqualWithGreaterItems&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;lt;= returns false when the left hand side is greater than the right hand side.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpGreaterThanWithLeftNull&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;gt; returns false when the left hand side is null and the right hand side is not.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpGreaterThanWithRightNull&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;gt; return true when the left hand side is not null and the right hand side is.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpGreaterThanWithRightAndLeftNull&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;gt; returns false when both the left hand side and right hand side are null.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpGreaterThanOrEqualWithLeftNull&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;gt;= returns false when the left hand side is null and the right hand side is not.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpGreaterThanOrEqualWithRightNull&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;gt;= returns true when the left hand side is not null and the right hand side is.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpGreaterThanOrEqualWithRightAndLeftNull&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;gt;= returns true when both the left hand side and right hand side are null.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpLessThanWithLeftNull&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;lt; returns true when the left hand side is null and the right hand side is not.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpLessThanWithRightNull&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;lt; returns false when the left hand side is null and the right hand side is not.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpLessThanWithRightAndLeftNull&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;lt; returns false when both the left hand side and right hand side are null.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpLessThanOrEqualWithLeftNull&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;lt;= returns true when the left hand side is null and the right hand side is not.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpLessThanOrEqualWithRightNull&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;lt;= returns false when the left hand side is not null and the right hand side is.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VerifyOpLessThanOrEqualWithRightAndLeftNull&lt;/td&gt;
+&lt;td&gt;Verifies that operator &amp;lt;= returns true when both the left hand side and right hand side are null.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;So, 32 more tests. I hope you can see how easy it would be to mess this up now. Even more, I hope you see how much of a pain in the neck it would be to
+manually implement unit tests for every equatable/comparable type you create without something like the contract verifiers available in &lt;code&gt;Testify&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If I've convinced you that implementing this stuff is hard, what are you to do about it? Well, with C# 7 there's a trick you can use and a
+template you can follow to always get this right. Here's an example using the class Point type.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;public class Point : IEquatable&amp;lt;Point&amp;gt;, IComparable&amp;lt;Point&amp;gt;, IComparable
+{
+    public Point(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+
+    public int X { get; }
+
+    public int Y { get; }
+
+    public int CompareTo(Point other) =&amp;gt; other == null ? 1 : (X, Y).CompareTo((other.X, other.Y));
+
+    int IComparable.CompareTo(object obj) =&amp;gt; CompareTo(obj as Point);
+
+    public bool Equals(Point other) =&amp;gt; other == null ? false : (X, Y).Equals((other.X, other.Y));
+
+    public override bool Equals(object obj) =&amp;gt; Equals(obj as Point);
+
+    public override int GetHashCode() =&amp;gt; (X, Y).GetHashCode();
+
+    public static bool operator ==(Point left, Point right) =&amp;gt; EqualityComparer&amp;lt;Point&amp;gt;.Default.Equals(left, right);
+
+    public static bool operator !=(Point left, Point right) =&amp;gt; !EqualityComparer&amp;lt;Point&amp;gt;.Default.Equals(left, right);
+
+    public static bool operator &amp;lt;(Point left, Point right) =&amp;gt; Comparer&amp;lt;Point&amp;gt;.Default.Compare(left, right) &amp;lt; 0;
+
+    public static bool operator &amp;lt;=(Point left, Point right) =&amp;gt; Comparer&amp;lt;Point&amp;gt;.Default.Compare(left, right) &amp;lt;= 0;
+
+    public static bool operator &amp;gt;(Point left, Point right) =&amp;gt; Comparer&amp;lt;Point&amp;gt;.Default.Compare(left, right) &amp;gt; 0;
+
+    public static bool operator &amp;gt;=(Point left, Point right) =&amp;gt; Comparer&amp;lt;Point&amp;gt;.Default.Compare(left, right) &amp;gt;= 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The main operatons, &lt;code&gt;IEquatable&amp;lt;T&amp;gt;.Equals&lt;/code&gt; and &lt;code&gt;IComparable&amp;lt;T&amp;gt;.CompareTo&lt;/code&gt; are implemented using tuples,
+which implement those interfaces. You have to do a null check here, so there is a little bit of room for messing it up.
+The other methods just delegate to these. The operators are then implemented using &lt;code&gt;EqualityComparer&amp;lt;T&amp;gt;&lt;/code&gt; and
+&lt;code&gt;Comparer&amp;lt;T&amp;gt;&lt;/code&gt; which handle the null checks and then delegate to the &lt;code&gt;IEquatable&amp;lt;T&amp;gt;&lt;/code&gt; and &lt;code&gt;IComparable&amp;lt;T&amp;gt;&lt;/code&gt;
+implementations provided. Even &lt;code&gt;GetHashCode&lt;/code&gt; gets to delegate to the implementation provided by tuples. Keep in mind
+this trick won't work (without some help) with types that aren't equatable/comparable, such as collections.&lt;/p&gt;
+&lt;p&gt;Here's the test for the above implementation.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;public class PointTests
+{
+    [Fact]
+    public void VerifyComparableContract()
+    {
+        var verifier = new ComparableVerifier&amp;lt;Point&amp;gt;
+        {
+            OrderedItemsFactory = () =&amp;gt; new[]
+            {
+                new Point(0, 0),
+                new Point(0, 1),
+                new Point(1, 0),
+                new Point(1, 1)
+            }
+        };
+        verifier.Verify();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;div id="disqus_thread"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'equality';
+    var disqus_title = 'Equality';
+    var disqus_url = 'http://digitaltapestry.net/posts/equality';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+&lt;/script&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+&lt;a href="http://disqus.com" class="dsq-brlink"&gt;comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;</content:encoded>
+		</item>
 		<item>
 			<title>Pragmatic Languages</title>
 			<link>http://digitaltapestry.net/posts/pragmatic-languages</link>
