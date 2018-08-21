@@ -1,5 +1,5 @@
-#tool nuget:?package=Wyam&prerelease
-#addin nuget:?package=Cake.Wyam&prerelease
+#tool nuget:?package=Wyam
+#addin nuget:?package=Cake.Wyam
 
 var isLocal = BuildSystem.IsLocalBuild;
 var gitPagesRepo = isLocal
@@ -55,7 +55,8 @@ WyamSettings CreateSettings(bool preview)
 {
     return new WyamSettings {
         Preview = preview,
-        Watch = preview
+        Watch = preview,
+        //Verbose = true
     };
 }
 

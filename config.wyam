@@ -1,25 +1,13 @@
 #r Blog
 #t CleanBlog
 
-#n -p Wyam.Less
-#n -p Wyam.Minification
+#n Wyam.Less
+#n Wyam.Minification
 
 Settings[Keys.Host] = "digitaltapestry.net";
 Settings[Keys.Title] = "Digital Tapestry";
-Settings["Description"] = "Weaving a Digital Tapestry";
-Settings["Intro"] = "The musings of a .NET developer.";
-Settings["MarkdownExtensions"] = "advanced+bootstrap+emojis+smartypants";
-Settings["Image"] = "/assets/images/banner_web.jpg";
+Settings[BlogKeys.Description] = "Weaving a Digital Tapestry";
+Settings[BlogKeys.Intro] = "The musings of a .NET developer.";
+Settings[BlogKeys.MarkdownConfiguration] = "advanced+bootstrap+emojis+smartypants";
+Settings[BlogKeys.Image] = "/assets/images/banner_web.jpg";
 Settings["HeaderTextColor"] = "#101F45";
-
-Pipelines.Add("Less",
-    ReadFiles("**/*.less"),
-    Less(),
-    MinifyCss(),
-    WriteFiles(".css")
-);
-
-Pipelines[BlogPipelines.Resources].Clear();
-Pipelines[BlogPipelines.Resources].Add(
-    CopyFiles("**/*{!.cshtml,!.md,!.less,}")
-);
