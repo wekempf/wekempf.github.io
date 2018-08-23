@@ -5,6 +5,7 @@
 #n Wyam.Minification
 
 Settings[Keys.Host] = "digitaltapestry.net";
+Settings[Keys.LinksUseHttps] = true;
 Settings[Keys.Title] = "Digital Tapestry";
 Settings[BlogKeys.Description] = "Weaving a Digital Tapestry";
 Settings[BlogKeys.Intro] = "The musings of a .NET developer.";

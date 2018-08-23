@@ -9,21 +9,17 @@ Tags: ["Wyam", "CSS", "JavaScript", "AnchorJS", "clipboard.js"]
 On the [Wyam](https://wyam.io) [Gitter](https://gitter.im/Wyamio/Wyam) discussion Gary Ewan Park (@gep13 [^1])
 asked the following:
 
-> If you look at a GitHub wiki page, say this one...
-
-> when you hover over the headers, you get this:
-
-> ![Anchor Button](https://files.gitter.im/Wyamio/Wyam/ZknP/blob "Anchor Button")
-
-> which allows you to click the link to the header. Markdig is already generating the link to the header, but is there an easy way to
+> If you look at a GitHub wiki page, say this one...  
+> when you hover over the headers, you get this:  
+> ![Anchor Button](https://files.gitter.im/Wyamio/Wyam/ZknP/blob "Anchor Button")  
+> which allows you to click the link to the header. Markdig is already generating the link to the header, but is there an easy way to  
 > add the showing of the link on hover, and to allow copying from the address bar?
 
 Dave Glick (@daveglick [^2]), the author of Wyam, responded with:
 
 > There is - in fact strongly considering adding this and code block copy buttons to the themes (it's all frontend JS stuff) - here's
 > the two libraries I like the best: [https://github.com/bryanbraun/anchorjs](https://github.com/bryanbraun/anchorjs) (for anchor links)
-> and [https://github.com/zenorocha/clipboard.js](https://github.com/zenorocha/clipboard.js) (for clipboard copying)
-
+> and [https://github.com/zenorocha/clipboard.js](https://github.com/zenorocha/clipboard.js) (for clipboard copying)  
 > Adding them to your own site would just be a matter of putting the appropriate JS in the _Scripts.cshtml file
 
 So, the three of us set off independently to see if we could figure out how to get these working. @daveglick [^2] intends to add

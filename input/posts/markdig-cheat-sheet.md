@@ -48,11 +48,11 @@ gridtables --or-- advanced | http://pandoc.org/MANUAL.html#extension-grid_tables
 +-------+------+---------+--------+
 | Right | Left | Default | Center |
 +======:+:=====+=========+:======:+
-| 12    | 12   | 12      | 12     |
+| 12 | 12 | 12 | 12 |
 +-------+------+---------+--------+
-| 123   | 123  | 123     | 123    |
+| 123 | 123 | 123 | 123 |
 +-------+------+---------+--------+
-| 1     | 1    | 1       | 1      |
+| 1 | 1 | 1 | 1 |
 +-------+------+---------+--------+
 ```
 
@@ -61,11 +61,11 @@ gridtables --or-- advanced | http://pandoc.org/MANUAL.html#extension-grid_tables
 +-------+------+---------+--------+
 | Right | Left | Default | Center |
 +======:+:=====+=========+:======:+
-| 12    | 12   | 12      | 12     |
+| 12 | 12 | 12 | 12 |
 +-------+------+---------+--------+
-| 123   | 123  | 123     | 123    |
+| 123 | 123 | 123 | 123 |
 +-------+------+---------+--------+
-| 1     | 1    | 1       | 1      |
+| 1 | 1 | 1 | 1 |
 +-------+------+---------+--------+
 
 ## Extra Emphasis
@@ -489,3 +489,7 @@ graph TD;
 [^5]: This needs mermaid.css and mermaid.js to be linked. I've done so here, but the way you do it will be
       improved the next release, so I'll wait to blog about that. Not sure why the generated diagram here
       is missing the arrow lines, but I don't believe it's got anything to do with Wyam or Markdig.
+      _Update:_ Turns out I had a typo in my link tag for the CSS that caused the display issue. Doh!
+      Also, adding the necessary CSS and JS is relatively easy now. Add a _Header.cshtml with any CSS links
+      you want, and _Scripts.cshtml for the scripts. You can view the source for this site to see it for
+      yourself: https://github.com/wekempf/wekempf.github.io/.
