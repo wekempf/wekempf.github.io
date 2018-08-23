@@ -143,6 +143,5 @@ h1 + h3 {
   margin: 0 0 20px 30px;
 }
 pre {
-  background: transparent;
-  border: 0;
+  background: #f5f7ff;
 }
