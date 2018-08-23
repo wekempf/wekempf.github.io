@@ -3,7 +3,7 @@
 
 var isLocal = BuildSystem.IsLocalBuild;
 var gitPagesRepo = isLocal
-    ? "git@github.com:wekempf/wekempf.github.io.git"
+    ? "https://github.com/wekempf/wekempf.github.io.git"
     : "https://wekempf:" + EnvironmentVariable("GitHubPersonalAccessToken") + "@github.com/wekempf/wekempf.github.io.git";
 var gitPagesBranch = "master";
 
