@@ -1,7 +1,7 @@
 ---
 Title: "Clojure Validation - Part I"
 Published: 08/21/2018 08:43:11
-Tags: ["Clojure"]
+Tags: ["Clojure", "ClojureScript", "Reagent"]
 ---
 
 # Clojure Validation - Part I
