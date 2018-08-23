@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 
-        <title>Digital Tapestry - Playing With Equality</title>
+        <title>Digital Tapestry - Clojure Validation - Part II</title>
         <meta name="description" content="Weaving a Digital Tapestry" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">        
 
@@ -28,9 +28,9 @@
         <meta name="msapplication-tooltip" content="Digital Tapestry" />
         <meta name="msapplication-starturl" content="/" />
 
-        <meta property="og:title" content="Digital Tapestry - Playing With Equality" />
+        <meta property="og:title" content="Digital Tapestry - Clojure Validation - Part II" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://digitaltapestry.net/posts/playing-with-equality" />
+        <meta property="og:url" content="https://digitaltapestry.net/posts/clojure-validation-part-2" />
         <!-- TODO: More social graph meta tags -->
 
         <script src="/assets/js/jquery.min.js"></script>
@@ -93,12 +93,13 @@
 
     
 <div class="post-heading">
-    <h1>Playing With Equality</h1>
+    <h1>Clojure Validation - Part II</h1>
     <div class="meta">        
-Published on Saturday, January 14, 2017<br>    </div>
+Published on Tuesday, August 21, 2018<br>    </div>
         <div class="tags">
-                    <a role="button" href="/tags/NET" class="btn btn-default btn-xs">.NET</a>
-                    <a role="button" href="/tags/C%23" class="btn btn-default btn-xs">C#</a>
+                    <a role="button" href="/tags/Clojure" class="btn btn-default btn-xs">Clojure</a>
+                    <a role="button" href="/tags/ClojureScript" class="btn btn-default btn-xs">ClojureScript</a>
+                    <a role="button" href="/tags/Reagent" class="btn btn-default btn-xs">Reagent</a>
         </div>     
 </div>
                                         </div>
@@ -112,189 +113,81 @@ Published on Saturday, January 14, 2017<br>    </div>
                                 <div id="content" class="col-md-12">
                                         
 
-<h1 id="playing-with-equality">Playing With Equality</h1>
-<p>Most developers think they understand equality, but it's actually a pretty tricky subject.
-Implementing equality correctly is much more complicated than most realize. In this post
-I'm going to play around with equality, showing you some things you may not be aware of,
-and eventually show you an interesting trick you can use when implementing equality.</p>
-<h2 id="value-equality">Value Equality</h2>
-<p>Did you know that in .NET you get value equality for free? Value types automatically
-implement <code>object.Equals</code> and <code>object.GetHashCode</code> to &ldquo;do the right thing&rdquo;.
-Here's a simple <code>Point</code> struct.</p>
-<pre><code class="language-csharp">public struct Point
-{
-    public int X { get; set; }
+<h1 id="clojure-validation-part-ii">Clojure Validation - Part II</h1>
+<h3 id="ui-validation">UI Validation</h3>
+<blockquote class="blockquote">
+<p>Nothing clears up a case so much as stating it to another person.</p>
+<footer>Sherlock Holmes</footer>
+</blockquote>
+<p>Last time we used Clojure Spec to build up some validation predicates to ensure we have a valid SSN. This time around we're going to tie this to some Reagent components to use in our Web UI, giving feedback to the user when they enter bad data.</p>
+<p>Full series:</p>
+<ul>
+<li><a href="/posts/clojure-validation-part-1">Part I - Clojure Spec</a></li>
+<li>Part II - UI Validation (this post)</li>
+<li><a href="/posts/clojure-validation-part-3">Part III - Better Messages with Phrase</a></li>
+<li><a href="/posts/clojure-validation-part-4">Part IV - I18N</a></li>
+</ul>
+<h2 id="final-result">Final Result</h2>
+<p>Here's an embedded example of the final result we're going to get after this blog post.</p>
+<div id="app"><p>Enable JavaScript to see the example.</p>
+</div>
+<div class="alert alert-info"><p>This is only the look and behavior at the end of this post, and not the final result we'll get working through this series!</p>
+</div>
+<h2 id="a-much-simpler-core">A Much Simpler Core</h2>
+<p>The generated <code>core.cljs</code> file we have currently, while not really complex, is far more complex then we need for this experiment. It's a SPA page with navigation, and frankly we don't need that. In fact, I'm wanting to generate a script that I can use to embed in this blog post, so we really want something simple here. This is what we'll start with.</p>
+<pre><code class="language-Clojure">(ns validation-experiment.core
+  (:require [reagent.core :as reagent :refer [atom]]))
 
-    public int Y { get; set; }
-}
+(defn example []
+  [:div [:label &quot;Enter SSN: &quot; [:input {:type :text}]]])
+
+(defn mount-root []
+  (reagent/render [example] (.getElementById js/document &quot;app&quot;)))
+
+(defn init! []
+  (mount-root))
 </code></pre>
-<p>And here's some simple code to illustrate the equality behavior you get for free.</p>
-<pre><code class="language-csharp">var p1 = new Point { X = 10, Y = 20 };
-var p2 = new Point { X = 10, Y = 30 };
-var p3 = new Point { X = 10, Y = 20 };
-
-WriteLine(p1.Equals(p1));
-WriteLine(p1.Equals(p2));
-WriteLine(p1.Equals(p3));
-WriteLine(p1.GetHashCode());
-WriteLine(p2.GetHashCode());
-WriteLine(p3.GetHashCode());
+<p>This produces (inside an existing DOM element with an &ldquo;app&rdquo; id) a simple label and a text input box. Oh the magnificence!</p>
+<p>You can view this wonder using Figwheel by executing the following.</p>
+<pre><code class="language-PowerShell">PS&gt; lein figwheel
 </code></pre>
-<p>This produces the following results.</p>
-<pre><code class="language-text">True
-False
-True
-346948930
-346948936
-346948930
+<p>Now open a browser and navigate to <a href="http://localhost:3449">http://localhost:3449</a> to behold the results of our hard work.</p>
+<p>If you're not familiar with <a href="https://github.com/bhauman/lein-figwheel">Figwheel</a> it &quot; builds your ClojureScript code and hot loads it into the browser as you are coding!&quot; So, don't stop it or close that browser. As we change our code and save it your browser will magically update with the changes live, current state intact. This is an unbelievable bit of tech that makes coding stuff like this a dream.</p>
+<h2 id="adding-state">Adding State</h2>
+<p>So, we have a text input box, but there's no state backing it. Let's fix that by changing a bit of the code.</p>
+<pre><code class="language-Clojure">(defonce ssn (atom &quot;123-45-6789&quot;))
+
+(defn example []
+  [:div [:label &quot;Enter SSN: &quot; [:input {:type :text :value &#64;ssn :on-change #(reset! ssn (-&gt; % .-target .-value))}]]])
 </code></pre>
-<p>So <code>object.Equals</code> behaves as you'd expect, as does <code>object.GetHashCode</code>. What you
-don't get is <code>IEquatable&lt;Point&gt;</code>, unfortunately, but for value types that's fairly
-easy to implement.</p>
-<pre><code class="language-csharp">public struct Point : IEquatable&lt;Point&gt;
-{
-    public int X { get; set; }
-
-    public int Y { get; set; }
-
-        public bool Equals(Point other) =&gt; object.Equals(this, other);
-}
+<p>We've defined an <code>ssn</code> variable as an <code>atom</code> with the value &ldquo;123-45-6789&rdquo;. A <a href="https://clojure.org/reference/atoms">Clojure atom</a> provides &quot;a way to manage shared, synchronous, independent state.&quot; In this case, this is actually a <a href="https://reagent-project.github.io/">Reagent atom</a>. &ldquo;It works exactly like the one in clojure.core, except that it keeps track of every time it is deref’ed. Any component that uses an atom is automagically re-rendered when its value changes.&rdquo; This is really the magic that makes Reagent work here, though with just what we have right now you will be forgiven for not seeing any magic.</p>
+<h2 id="adding-validation">Adding Validation</h2>
+<p>Let's see that magic in use! We'll add validation to our control using Clojure Spec and the code we wrote last time. We're going to need access to a few more namespaces.</p>
+<pre><code class="language-Clojure">(ns validation-experiment.core
+  (:require [reagent.core :as reagent :refer [atom]]
+            [validation-experiment.ssn :as ssn]
+            [clojure.spec.alpha :as s]))
 </code></pre>
-<h2 id="reference-equality">Reference Equality</h2>
-<p>It's not so simple for reference types. Reference types don't provide value equality,
-they provide reference equality. Let's illustrate.</p>
-<pre><code class="language-csharp">public class RefPoint
-{
-    public int X { get; set; }
-
-    public int Y { get; set; }
-}
+<p>Now, we can get automatic display of validation results with the following simple change.</p>
+<pre><code class="language-Clojure">(defn example []
+  [:div [:label &quot;Enter SSN: &quot; [:input {:type :text :value &#64;ssn :on-change #(reset! ssn (-&gt; % .-target .-value))}]]
+   [:p {:style {:color &quot;red&quot;}} (str (s/explain-data :validation-experiment.ssn/ssn &#64;ssn))]])
 </code></pre>
-<p>This is identical to our original <code>Point</code>, except it's a class instead of a struct.
-Let's use it like we did the struct.</p>
-<pre><code class="language-csharp">var p4 = new RefPoint { X = 10, Y = 20 };
-var p5 = new RefPoint { X = 10, Y = 30 };
-var p6 = new RefPoint { X = 10, Y = 20 };
-
-WriteLine(p4.Equals(p4));
-WriteLine(p4.Equals(p5));
-WriteLine(p4.Equals(p6));
-WriteLine(p4.GetHashCode());
-WriteLine(p5.GetHashCode());
-WriteLine(p6.GetHashCode());
-</code></pre>
-<p>Here's the result.</p>
-<pre><code class="language-text">True
-False
-False
-21083178
-55530882
-30015890
-</code></pre>
-<p>So, every instance has it's own unique hash code and an instance is only equal to itself.
-This is reference equality. We can override the behavior to get back value equality, but
-it's non-trivial.</p>
-<pre><code class="language-csharp">public class RefPoint : IEquatable&lt;RefPoint&gt;
-{
-    public int X { get; set; }
-
-    public int Y { get; set; }
-
-    public override bool Equals(object obj) =&gt; this.Equals(obj as RefPoint);
-
-    public override int GetHashCode() =&gt;
-        (this.X.GetHashCode() * 486187739) + this.Y.GetHashCode();
-
-    public bool Equals(RefPoint other) =&gt;
-        other == null
-            ? false
-            : this.X == other.X &amp;&amp; this.Y == other.Y;
-}
-</code></pre>
-<p>Handling <code>null</code> is a bit tricky, but most of us should be able to handle that corectly if
-we're careful. <code>GetHashCode</code> is another matter. Not many people know how to implement a good
-hashing algorithm. With some web searching you can come across the basic algorithm I've used
-here: you multiply each &ldquo;part&rdquo; (each field/property) except the last by some large prime
-number and add all of the results together. You could memorize this, but it's still a lot
-of fiddly code to have to write for such an &quot;easy&quot; concept as equality.</p>
-<h2 id="valuetuple-trick">ValueTuple trick</h2>
-<p>I promised a trick. Well, we know that value types implement equality by default. There's
-a trick you can take advantage of when implementing equality for reference types.</p>
-<p>In C# 7 they've introduced tuples into the language. Under the cover these tuples are
-instances of a new type: <code>ValueTuple</code>. This type is, as it's name implies, a value type.
-Since value types implement <code>object.Equals</code> and <code>object.GetHashCode</code>, we can take
-advantage of that when implementing them for reference types.</p>
-<pre><code class="language-csharp">public class RefPoint : IEquatable&lt;RefPoint&gt;
-{
-    public int X { get; set; }
-
-    public int Y { get; set; }
-
-    public override bool Equals(object obj) =&gt; this.Equals(obj as RefPoint);
-
-    public override int GetHashCode() =&gt;
-        this.AsTuple().GetHashCode();
-
-    public bool Equals(RefPoint other) =&gt;
-        other == null
-            ? false
-            : this.AsTuple().Equals(other.AsTuple());
-
-    private (int X, int Y) AsTuple() =&gt; (this.X, this.Y);
-}
-</code></pre>
-<p>We stil have to handle <code>null</code>, unfortunately, but the rest has become much easier.
-BTW, in older versions of C# you can do the same thing with an anonymous type
-or a custom value type, but neither is as nice as the <code>ValueTuple</code>.</p>
-<h2 id="wishful-thinking">Wishful Thinking</h2>
-<p>The Ruby language has this nice little concept of the &ldquo;spaceship operator&rdquo;. The
-<code>&lt;=&gt;</code> operator is basically equivelent to <code>IComparable.Compare</code>, returning a
-negative value if the left value is less than the right value, a positive value
-if the left value is greater than the right value and zero if the left value is
-equal to the right value. The real beauty here is if you define this one operator,
-everything else is defined for you. Wouldn't it be awesome if we had the same
-concept in C#? In C# we split <code>IEquatable</code> and <code>IComparable</code> concepts up, rightfully,
-so we might need two operators. I'll call them <code>===</code> and <code>&lt;=&gt;</code>. If you defined
-<code>&lt;=&gt;</code> you'd get <code>IEqutable</code>, <code>IComparable</code>, <code>object.Equals</code>, <code>object.GetHashCode</code>,
-<code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code> and <code>&gt;=</code> all implemented for you by the compiler.
-If you implemented <code>===</code> instead you'd get <code>IEquatable</code>, <code>object.Equals</code>,
-<code>object.GetHashCode</code>, <code>==</code> and <code>!=</code>. Oh, and as long as we're wishing,
-let's make it really simple to implement these two operators.</p>
-<pre><code class="language-csharp">public class RefPoint
-{
-    public int X { get; set; }
-
-    public int Y { get; set; }
-
-    public operator ===() =&gt; this.X, this.Y;
-}
-</code></pre>
-<p>In the above example we implemented this hypothetical operator not by declaring
-how to compare but by only declaring what to compare. This allows the definition
-to automatically implement everything else for us, basically giving us code equivalent
-to what I showed for the <code>ValueTuple</code> trick (plus the operators).</p>
-<p>Yeah, I'm not entirely sold on the syntax here either. After all, there's no <code>===</code> or
-<code>&lt;=&gt;</code> operators you can use anywhere other than in declaring things here. Maybe it would
-make more sense with syntax like this.</p>
-<pre><code class="language-csharp">public class RefPoint
-    equatable : X, Y
-{
-    public int X { get; set; }
-
-    public int Y { get; set; }
-}
-</code></pre>
-<p>Still, the idea of no longer having to deal with the intricacies of implementing equality
-(or ordering) by hand, the source of far too many bugs, is enticing, isn't it?</p>
+<p>We've added a <code>p</code> tag, styled it to display in red, and populated it with the results of <code>s/explain-data</code> rendered as a string. Last time we used <code>s/explain</code>, so this shouldn't be too unfamilar. The difference between <code>s/explain</code> and <code>s/explain-data</code> is that the former just writes the results to the output (not very helpful in a web page) while the latter returns those results as a Clojure map, which we rendered as a string to include in our paragraph.</p>
+<p>Play around a bit with the result, entering different values into the text box. See how the validation display changes as you type? Notice that it disappears entirely when you've entered a valid SSN? The live updates are the magic of Reagent and it's atom, while having the validation message dissapear is a result of how Reagent handles <code>nil</code>. When <code>s/explain-data</code> returns <code>nil</code> for valid input Reagent actually removes it from the child list.</p>
+<p>Look at how super simple it was to get validation in Reagent using Clojure Spec!</p>
+<p>Oh, but the validation message displayed is really ugly you say? Well, yes, yes it is. We'll fix that in the <a href="/posts/clojure-validation-part-3">next part</a> of this series.</p>
+<div class="alert alert-success"><p>The code for this part of the series can be found in the branch <code>part2</code> in the associated repo at <a href="https://github.com/wekempf/validation-experiment.">https://github.com/wekempf/validation-experiment.</a></p>
+</div>
 
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
-    var disqus_identifier = 'playing-with-equality';
-    var disqus_title = 'Playing With Equality';
-    var disqus_url = 'https://digitaltapestry.net/posts/playing-with-equality';
+    var disqus_identifier = 'clojure-validation-part-2';
+    var disqus_title = 'Clojure Validation - Part II';
+    var disqus_url = 'https://digitaltapestry.net/posts/clojure-validation-part-2';
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
@@ -419,6 +312,7 @@ make more sense with syntax like this.</p>
   ga('create', 'UA-70929529-2', 'auto');
   ga('send', 'pageview');
 </script>
+<script type="text/javascript" src="/assets/scripts/clojure-validation-part-2/app.js"></script>
 
                 <script>hljs.initHighlightingOnLoad();</script>
 

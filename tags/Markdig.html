@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 
-        <title>Digital Tapestry - Playing With Equality</title>
+        <title>Digital Tapestry - Markdig</title>
         <meta name="description" content="Weaving a Digital Tapestry" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">        
 
@@ -28,9 +28,9 @@
         <meta name="msapplication-tooltip" content="Digital Tapestry" />
         <meta name="msapplication-starturl" content="/" />
 
-        <meta property="og:title" content="Digital Tapestry - Playing With Equality" />
+        <meta property="og:title" content="Digital Tapestry - Markdig" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://digitaltapestry.net/posts/playing-with-equality" />
+        <meta property="og:url" content="https://digitaltapestry.net/tags/Markdig" />
         <!-- TODO: More social graph meta tags -->
 
         <script src="/assets/js/jquery.min.js"></script>
@@ -90,18 +90,9 @@
                         <div class="container">
                                 <div class="row">
                                         <div class="col-md-12">
-
-    
-<div class="post-heading">
-    <h1>Playing With Equality</h1>
-    <div class="meta">        
-Published on Saturday, January 14, 2017<br>    </div>
-        <div class="tags">
-                    <a role="button" href="/tags/NET" class="btn btn-default btn-xs">.NET</a>
-                    <a role="button" href="/tags/C%23" class="btn btn-default btn-xs">C#</a>
-        </div>     
-</div>
-                                        </div>
+<div class="site-heading">
+    <h1>Markdig</h1>
+</div>                                            </div>
                                 </div>
                         </div>
                 </header>
@@ -110,208 +101,66 @@ Published on Saturday, January 14, 2017<br>    </div>
                 <div class="container">
                         <div class="row">
                                 <div id="content" class="col-md-12">
-                                        
-
-<h1 id="playing-with-equality">Playing With Equality</h1>
-<p>Most developers think they understand equality, but it's actually a pretty tricky subject.
-Implementing equality correctly is much more complicated than most realize. In this post
-I'm going to play around with equality, showing you some things you may not be aware of,
-and eventually show you an interesting trick you can use when implementing equality.</p>
-<h2 id="value-equality">Value Equality</h2>
-<p>Did you know that in .NET you get value equality for free? Value types automatically
-implement <code>object.Equals</code> and <code>object.GetHashCode</code> to &ldquo;do the right thing&rdquo;.
-Here's a simple <code>Point</code> struct.</p>
-<pre><code class="language-csharp">public struct Point
-{
-    public int X { get; set; }
-
-    public int Y { get; set; }
-}
-</code></pre>
-<p>And here's some simple code to illustrate the equality behavior you get for free.</p>
-<pre><code class="language-csharp">var p1 = new Point { X = 10, Y = 20 };
-var p2 = new Point { X = 10, Y = 30 };
-var p3 = new Point { X = 10, Y = 20 };
-
-WriteLine(p1.Equals(p1));
-WriteLine(p1.Equals(p2));
-WriteLine(p1.Equals(p3));
-WriteLine(p1.GetHashCode());
-WriteLine(p2.GetHashCode());
-WriteLine(p3.GetHashCode());
-</code></pre>
-<p>This produces the following results.</p>
-<pre><code class="language-text">True
-False
-True
-346948930
-346948936
-346948930
-</code></pre>
-<p>So <code>object.Equals</code> behaves as you'd expect, as does <code>object.GetHashCode</code>. What you
-don't get is <code>IEquatable&lt;Point&gt;</code>, unfortunately, but for value types that's fairly
-easy to implement.</p>
-<pre><code class="language-csharp">public struct Point : IEquatable&lt;Point&gt;
-{
-    public int X { get; set; }
-
-    public int Y { get; set; }
-
-        public bool Equals(Point other) =&gt; object.Equals(this, other);
-}
-</code></pre>
-<h2 id="reference-equality">Reference Equality</h2>
-<p>It's not so simple for reference types. Reference types don't provide value equality,
-they provide reference equality. Let's illustrate.</p>
-<pre><code class="language-csharp">public class RefPoint
-{
-    public int X { get; set; }
-
-    public int Y { get; set; }
-}
-</code></pre>
-<p>This is identical to our original <code>Point</code>, except it's a class instead of a struct.
-Let's use it like we did the struct.</p>
-<pre><code class="language-csharp">var p4 = new RefPoint { X = 10, Y = 20 };
-var p5 = new RefPoint { X = 10, Y = 30 };
-var p6 = new RefPoint { X = 10, Y = 20 };
-
-WriteLine(p4.Equals(p4));
-WriteLine(p4.Equals(p5));
-WriteLine(p4.Equals(p6));
-WriteLine(p4.GetHashCode());
-WriteLine(p5.GetHashCode());
-WriteLine(p6.GetHashCode());
-</code></pre>
-<p>Here's the result.</p>
-<pre><code class="language-text">True
-False
-False
-21083178
-55530882
-30015890
-</code></pre>
-<p>So, every instance has it's own unique hash code and an instance is only equal to itself.
-This is reference equality. We can override the behavior to get back value equality, but
-it's non-trivial.</p>
-<pre><code class="language-csharp">public class RefPoint : IEquatable&lt;RefPoint&gt;
-{
-    public int X { get; set; }
-
-    public int Y { get; set; }
-
-    public override bool Equals(object obj) =&gt; this.Equals(obj as RefPoint);
-
-    public override int GetHashCode() =&gt;
-        (this.X.GetHashCode() * 486187739) + this.Y.GetHashCode();
-
-    public bool Equals(RefPoint other) =&gt;
-        other == null
-            ? false
-            : this.X == other.X &amp;&amp; this.Y == other.Y;
-}
-</code></pre>
-<p>Handling <code>null</code> is a bit tricky, but most of us should be able to handle that corectly if
-we're careful. <code>GetHashCode</code> is another matter. Not many people know how to implement a good
-hashing algorithm. With some web searching you can come across the basic algorithm I've used
-here: you multiply each &ldquo;part&rdquo; (each field/property) except the last by some large prime
-number and add all of the results together. You could memorize this, but it's still a lot
-of fiddly code to have to write for such an &quot;easy&quot; concept as equality.</p>
-<h2 id="valuetuple-trick">ValueTuple trick</h2>
-<p>I promised a trick. Well, we know that value types implement equality by default. There's
-a trick you can take advantage of when implementing equality for reference types.</p>
-<p>In C# 7 they've introduced tuples into the language. Under the cover these tuples are
-instances of a new type: <code>ValueTuple</code>. This type is, as it's name implies, a value type.
-Since value types implement <code>object.Equals</code> and <code>object.GetHashCode</code>, we can take
-advantage of that when implementing them for reference types.</p>
-<pre><code class="language-csharp">public class RefPoint : IEquatable&lt;RefPoint&gt;
-{
-    public int X { get; set; }
-
-    public int Y { get; set; }
-
-    public override bool Equals(object obj) =&gt; this.Equals(obj as RefPoint);
-
-    public override int GetHashCode() =&gt;
-        this.AsTuple().GetHashCode();
-
-    public bool Equals(RefPoint other) =&gt;
-        other == null
-            ? false
-            : this.AsTuple().Equals(other.AsTuple());
-
-    private (int X, int Y) AsTuple() =&gt; (this.X, this.Y);
-}
-</code></pre>
-<p>We stil have to handle <code>null</code>, unfortunately, but the rest has become much easier.
-BTW, in older versions of C# you can do the same thing with an anonymous type
-or a custom value type, but neither is as nice as the <code>ValueTuple</code>.</p>
-<h2 id="wishful-thinking">Wishful Thinking</h2>
-<p>The Ruby language has this nice little concept of the &ldquo;spaceship operator&rdquo;. The
-<code>&lt;=&gt;</code> operator is basically equivelent to <code>IComparable.Compare</code>, returning a
-negative value if the left value is less than the right value, a positive value
-if the left value is greater than the right value and zero if the left value is
-equal to the right value. The real beauty here is if you define this one operator,
-everything else is defined for you. Wouldn't it be awesome if we had the same
-concept in C#? In C# we split <code>IEquatable</code> and <code>IComparable</code> concepts up, rightfully,
-so we might need two operators. I'll call them <code>===</code> and <code>&lt;=&gt;</code>. If you defined
-<code>&lt;=&gt;</code> you'd get <code>IEqutable</code>, <code>IComparable</code>, <code>object.Equals</code>, <code>object.GetHashCode</code>,
-<code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code> and <code>&gt;=</code> all implemented for you by the compiler.
-If you implemented <code>===</code> instead you'd get <code>IEquatable</code>, <code>object.Equals</code>,
-<code>object.GetHashCode</code>, <code>==</code> and <code>!=</code>. Oh, and as long as we're wishing,
-let's make it really simple to implement these two operators.</p>
-<pre><code class="language-csharp">public class RefPoint
-{
-    public int X { get; set; }
-
-    public int Y { get; set; }
-
-    public operator ===() =&gt; this.X, this.Y;
-}
-</code></pre>
-<p>In the above example we implemented this hypothetical operator not by declaring
-how to compare but by only declaring what to compare. This allows the definition
-to automatically implement everything else for us, basically giving us code equivalent
-to what I showed for the <code>ValueTuple</code> trick (plus the operators).</p>
-<p>Yeah, I'm not entirely sold on the syntax here either. After all, there's no <code>===</code> or
-<code>&lt;=&gt;</code> operators you can use anywhere other than in declaring things here. Maybe it would
-make more sense with syntax like this.</p>
-<pre><code class="language-csharp">public class RefPoint
-    equatable : X, Y
-{
-    public int X { get; set; }
-
-    public int Y { get; set; }
-}
-</code></pre>
-<p>Still, the idea of no longer having to deal with the intricacies of implementing equality
-(or ordering) by hand, the source of far too many bugs, is enticing, isn't it?</p>
+                                        <div class="container-sm-height">
+    <div class="row row-sm-height">
+        <div class="col-sm-8 right-border col-sm-height">
+                    <div class="post-list">
+            <a href="/posts/emoji-cheat-sheet">
+                <h3 class="post-title">Emoji Cheat Sheet</h3>
+            </a>
+            <p class="post-meta">Posted on Thursday, January 12, 2017</p>      
+        </div>   
+        <div class="post-list">
+            <a href="/posts/markdig-cheat-sheet">
+                <h3 class="post-title">Markdig Cheat Sheet</h3>
+            </a>
+            <p class="post-meta">Posted on Sunday, January 8, 2017</p>      
+        </div>   
+        <div class="post-list">
+            <a href="/posts/alerts-in-wyam">
+                <h3 class="post-title">Alerts In Wyam</h3>
+            </a>
+            <p class="post-meta">Posted on Sunday, January 8, 2017</p>      
+        </div>   
 
 
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
-    var disqus_identifier = 'playing-with-equality';
-    var disqus_title = 'Playing With Equality';
-    var disqus_url = 'https://digitaltapestry.net/posts/playing-with-equality';
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-    
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            <nav>
+                <ul class="pager">
+                    <li class="previous">                
+                    </li>
+                    <li class="next">
+                    </li>
+                </ul>
+            </nav>
+            <hr class="visible-xs-block" />
+        </div>
+		
+        <div class="col-sm-4 col-sm-height">
+                <a role="button" href="/tags/Wyam" class="btn btn-default btn-xs">Wyam (7)</a>
+                <a role="button" href="/tags/C%23" class="btn btn-default btn-xs">C# (5)</a>
+                <a role="button" href="/tags/NET" class="btn btn-default btn-xs">.NET (5)</a>
+                <a role="button" href="/tags/Clojure" class="btn btn-default btn-xs">Clojure (4)</a>
+                <a role="button" href="/tags/CSS" class="btn btn-default btn-xs">CSS (4)</a>
+                <a role="button" href="/tags/ClojureScript" class="btn btn-default btn-xs">ClojureScript (3)</a>
+                <a role="button" href="/tags/Reagent" class="btn btn-default btn-xs">Reagent (3)</a>
+                <a role="button" href="/tags/Markdig" class="btn btn-primary btn-xs">Markdig (3)</a>
+                <a role="button" href="/tags/Markdown" class="btn btn-default btn-xs">Markdown (2)</a>
+                <a role="button" href="/tags/Task" class="btn btn-default btn-xs">Task (2)</a>
+                <a role="button" href="/tags/TPL" class="btn btn-default btn-xs">TPL (2)</a>
+                <a role="button" href="/tags/Logging" class="btn btn-default btn-xs">Logging (2)</a>
+                <a role="button" href="/tags/MicrosoftExtensionsLogging" class="btn btn-default btn-xs">Microsoft.Extensions.Logging (2)</a>
+                <a role="button" href="/tags/General" class="btn btn-default btn-xs">General (1)</a>
+                <a role="button" href="/tags/Programming" class="btn btn-default btn-xs">Programming (1)</a>
+                <a role="button" href="/tags/Languages" class="btn btn-default btn-xs">Languages (1)</a>
+                <a role="button" href="/tags/PowerShell" class="btn btn-default btn-xs">PowerShell (1)</a>
+                <a role="button" href="/tags/JavaScript" class="btn btn-default btn-xs">JavaScript (1)</a>
+                <a role="button" href="/tags/AnchorJS" class="btn btn-default btn-xs">AnchorJS (1)</a>
+                <a role="button" href="/tags/clipboardjs" class="btn btn-default btn-xs">clipboard.js (1)</a>
+                <a role="button" href="/tags/LESS" class="btn btn-default btn-xs">LESS (1)</a>
+                <a role="button" href="/tags/digitaltapestry" class="btn btn-default btn-xs">digitaltapestry (1)</a>
+        </div>
+    </div>
+</div>
                                 </div>
                         </div>
                 </div>

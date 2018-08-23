@@ -1,0 +1,408 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+
+        <title>Digital Tapestry - Clojure Validation - Part I</title>
+        <meta name="description" content="Weaving a Digital Tapestry" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+
+        <link type="application/rss+xml" rel="alternate" title="Digital Tapestry" href="/feed.rss" />
+                <link type="application/atom+xml" rel="alternate" title="Digital Tapestry" href="/feed.atom" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/assets/css/highlight.css" rel="stylesheet">
+        <link href="/assets/css/clean-blog.css" rel="stylesheet" />
+        <link href="/assets/css/master.css" rel="stylesheet" />
+        <link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="/assets/css/override.css" rel="stylesheet" />
+
+
+        <meta name="application-name" content="Digital Tapestry" />
+        <meta name="msapplication-tooltip" content="Digital Tapestry" />
+        <meta name="msapplication-starturl" content="/" />
+
+        <meta property="og:title" content="Digital Tapestry - Clojure Validation - Part I" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://digitaltapestry.net/posts/clojure-validation-part-1" />
+        <!-- TODO: More social graph meta tags -->
+
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>     
+        <script src="/assets/js/highlight.pack.js"></script>   
+        <script src="/assets/js/clean-blog.js"></script>
+        <script src="/assets/js/d3.v3.min.js"></script>
+        <script src="/assets/js/trianglify.min.js"></script>
+        <script src="/assets/js/Please-compressed.js"></script>
+        <script src="/assets/js/background-check.min.js"></script>
+                
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+                <script src="/assets/js/html5shiv.js"></script>
+                <script src="/assets/js/respond.min.js"></script>
+        <![endif]-->
+        
+        <link href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/overrides.css" rel="stylesheet" />
+
+
+
+        </head>
+        <body>
+                
+                <!-- Navigation -->
+                <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+                        <div class="container-fluid">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <div class="navbar-header page-scroll">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        </button>
+                                        <a class="navbar-brand" href="/">Digital Tapestry</a>
+                                </div>
+                        
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse" id="navbar-collapse">
+                                        <ul class="nav navbar-nav navbar-right">
+                                                        <li><a href="/posts">Archive</a></li>
+        <li><a href="/tags">Tags</a></li>
+        <li><a href="/resume">Resume</a></li>
+ 
+                                        </ul>
+                                </div>
+                                <!-- /.navbar-collapse -->
+                        </div>
+                        <!-- /.container -->
+                </nav>
+                
+                <!-- Page Header -->
+                <header class="intro-header" id="intro-header" style="background-image: url(&quot;/assets/images/banner_web.jpg&quot;)">
+                        <div class="container">
+                                <div class="row">
+                                        <div class="col-md-12">
+
+    
+<div class="post-heading">
+    <h1>Clojure Validation - Part I</h1>
+    <div class="meta">        
+Published on Tuesday, August 21, 2018<br>    </div>
+        <div class="tags">
+                    <a role="button" href="/tags/Clojure" class="btn btn-default btn-xs">Clojure</a>
+        </div>     
+</div>
+                                        </div>
+                                </div>
+                        </div>
+                </header>
+                
+                <!-- Main Content -->
+                <div class="container">
+                        <div class="row">
+                                <div id="content" class="col-md-12">
+                                        
+
+<h1 id="clojure-validation-part-i">Clojure Validation - Part I</h1>
+<h3 id="clojure-spec">Clojure Spec</h3>
+<blockquote class="blockquote">
+<p>You know my method. It is founded upon the observation of trifles.</p>
+<footer>Sherlock Holmes</footer>
+</blockquote>
+<p>Our goal is to use ClojureScript and Reagent to create a component that validates its input. Along the way we'll learn about a few other things, including Clojure Specs, the focus of this post.</p>
+<p>Full series:</p>
+<ul>
+<li>Part I - Clojure Spec (this post)</li>
+<li><a href="/posts/clojure-validation-part-2">Part II - UI Validation</a></li>
+<li><a href="/posts/clojure-validation-part-3">Part III - Better Messages with Phrase</a></li>
+<li><a href="/posts/clojure-validation-part-4">Part IV - I18N</a></li>
+</ul>
+<h2 id="creating-a-project">Creating a Project</h2>
+<p>This isn't a beginners tutorial, but I'm going to start with how to create our project just to ensure if you're following along yourself you can start from the same place. I'll create a new project using Leiningen like this.</p>
+<div class="alert alert-info"><p>I use PowerShell on Windows, so all command examples given will reflect this. If you're using a different platform or shell things may be slightly different for you, but it shouldn't be too hard to figure out.</p>
+</div>
+<pre><code class="language-PowerShell">PS&gt; lein new reagent validation-experiment +test
+</code></pre>
+<p>The code at this point is pushed to <a href="https://github.com/wekempf/validation-experiment">https://github.com/wekempf/validation-experiment</a> on the master branch. I'll create other branches for the code as we progress here.</p>
+<h2 id="our-ssn-type">Our SSN &ldquo;Type&rdquo;</h2>
+<p>Clojure is a dynamic language, so I'm using &ldquo;type&rdquo; rather loosely here. What we're going to work with, and validate, however is an SSN value. This is going to be a string that conforms to certain properties&hellip; which is what we'll want to validate. We're going to do our validation through <a href="https://clojure.org/guides/spec">Clojure Spec</a>. If you read that guide you may find it to be confusing (or at the very least, rather dry reading). While some of the details of how you use it may take some time to master, it really should not be too difficult to grasp at a high level.</p>
+<p>Basically, Clojure Spec is a library used to validate that data conforms to certain rules specified as predicates (functions that take the data and return true if the data conforms and false if it does not). At the 1000 foot view, that's all it is. Dial in a little closer and you'll see that Clojure Spec provides a few &ldquo;higher order functions&rdquo; that allow you to compose predicates so that you can take simple predicates and build more complex ones. This composability is an important aspect of functional programming (<abbr title="Functional Programming">FP</abbr>), and there's lots of power in this that may not be evident to those new to <abbr title="Functional Programming">FP</abbr>. Clojure Spec provides methods for &quot;running&quot; these predicates and producing rich information about the results. Finally, Clojure Spec provides facilities for runtime assertions and testing facilities such as generative testing. As we work on this experiment we'll touch on most of these features, but this isn't an in depth focus on Clojure Spec. We're focused on how we can use it to provide UI validation.</p>
+<p>Let's get started. Create an ssn.cljc file in the src\cljc\validation_experiment directory. In that file, add the following code.</p>
+<pre><code class="language-Clojure">(ns validation-experiment.ssn
+    (:require [clojure.spec.alpha :as s]))
+
+(defn- valid-format? [ssn]
+  (boolean (re-matches #&quot;\d{9}|\d{3}-\d{2}-\d{4}&quot; ssn)))
+
+(s/def ::ssn valid-format?)
+</code></pre>
+<p>We've created our namespace and required clojure.spec.alpha. The <code>s/def</code> call defines our predicate (so far) for validating SSN values. You may not be familiar with the <code>::ssn</code> syntax used here&hellip; that's a shortcut for specifying a keyword that's fully qualified with the current namespace. So, what we've really done here is defined the predicate for  <code>:validation-experiment.ssn/ssn</code>. Because Clojure Spec defines predicates in a global registry it's a best practice to define them using namespaces to avoid name collisions.</p>
+<p>I've chosen to use a (private) named predicate function outside of the <code>s/def</code>. This is a good practice for several reasons. First, it makes it easier to compose predicates as we'll see shortly. Just as importantly, though, it provides richer information that will be reported when there's validation errors.</p>
+<p>The <code>valid-format?</code> predicate validates that an SSN consists of 9 digits, with or without the &lsquo;-&rsquo; segment separators (i.e. 123456789 and 123-45-6789 are both valid). I'm accepting both formats to make it easier for a user to enter an SSN.</p>
+<p>With this in place, fire up a REPL with the following command.</p>
+<pre><code class="language-PowerShell">PS&gt; lein repl
+</code></pre>
+<p>At the REPL enter the following.</p>
+<pre><code>validation-experiment.repl=&gt; (require '[clojure.spec.alpha :as s])
+nil
+validation-experiment.repl=&gt; (require '[validation-experiment.ssn :as ssn])
+nil
+validation-experiment.repl=&gt; (s/valid? :validation-experiment.ssn/ssn &quot;123456789&quot;)
+true
+</code></pre>
+<p>Great! Clojure Spec is able to validate &ldquo;123456789&rdquo; as a valid SSN using our predicate. Let's try validating an invalid value.</p>
+<pre><code>validation-experiment.repl=&gt; (s/valid? :validation-experiment.ssn/ssn &quot;12345678&quot;)
+false
+</code></pre>
+<p>That works as well!</p>
+<p>Honestly, though, this isn't that exciting yet. If we'd made <code>valid-format?</code> public we could have just called that directly and gotten the same result. Let's try something else to start to see the benefit of using Clojure Spec.</p>
+<pre><code>validation-experiment.repl=&gt; (s/explain :validation-experiment.ssn/ssn &quot;12345678&quot;)
+val: &quot;12345678&quot; fails spec: :validation-experiment.ssn/ssn predicate: valid-format?
+nil
+</code></pre>
+<p>The <code>s/explain</code> function writes out information that tells how the data fails to conform to the specification. In this case it tells us the specification name (<code>:validation-experiment.ssn/ssn</code>) that failed. It also tells what predicate (<code>valid-format?</code>) within that specification failed. See why I wanted to use a named predicat function?</p>
+<p>Clojure Spec does more. There's nothing wrong with what we have so far but there's several invalid SSN values that will still be accepted right now. So, let's write another predicate to ensure the area segment (the first 3 digits) is not &ldquo;000&rdquo; which is not valid in SSNs.</p>
+<pre><code class="language-Clojure">(defn- valid-area? [ssn]
+  (not= (subs ssn 0 3) &quot;000&quot;))
+</code></pre>
+<p>We also have to update the <code>::ssn</code> definition to include this new predicate.</p>
+<pre><code class="language-Clojure">(s/def ::ssn (s/and valid-format? valid-area?))
+</code></pre>
+<p>We use <code>s/and</code> here to compose our two predicates into a single predicate that requires both to pass. Using composition like this allows Clojure Spec to give us pretty detailed information about why validation fails.</p>
+<p>Now let's see this in action.</p>
+<pre><code>validation-experiment.repl=&gt; (use 'validation-experiment.ssn :reload)
+nil
+validation-experiment.repl=&gt; (s/explain :validation-experiment.ssn/ssn &quot;000456789&quot;)
+val: &quot;000456789&quot; fails spec: :validation-experiment.ssn/ssn predicate: valid-area?
+nil
+</code></pre>
+<p>The &ldquo;000&rdquo; value isn't the only invalid value for the area segment (see <a href="http://usrecordsearch.com/ssn.htm">http://usrecordsearch.com/ssn.htm</a>): any value in the range 700-799 is also invalid. Let's update our predicate to reflect this.</p>
+<pre><code class="language-Clojure">(defn- parseInt [s]
+  #?(:clj (Integer/parseInt s))
+  #?(:cljs (js/parseInt s)))
+
+(defn- valid-area? [ssn]
+  (let [area (subs ssn 0 3)]
+    (and
+     (not= area &quot;000&quot;)
+     (not (some #{(parseInt area)} (range 700 799))))))
+</code></pre>
+<p>We've defined a helper <code>parseInt</code> here and used <a href="https://clojure.org/guides/reader_conditionals">reader conditionals</a> to &ldquo;do the right thing&rdquo; whether we're compiling to Clojure or ClojureScript. We then use that helper to test to see if the area is in the range 700-799 in the updated predicate. Test this out in the REPL.</p>
+<pre><code>validation-experiment.repl=&gt; (use 'validation-experiment.ssn :reload)
+nil
+validation-experiment.repl=&gt; (s/explain :validation-experiment.ssn/ssn &quot;777456789&quot;)
+val: &quot;777456789&quot; fails spec: :validation-experiment.ssn/ssn predicate: valid-area?
+nil
+</code></pre>
+<p>Like the area, the group segment in an SSN cannot be all zeros. We should add a predicate for that as well, but there's a slight complication here. We're accepting two forms for the SSN, with or without the &lsquo;-&rsquo; segment separator character. This means we need to check the digits either at position 3 or position 4, depending on the form used. Let's simplify this by creating a method that will strip out the separator characters so that it will always be in position 3 that we check. To do this we'll need to use <code>clojure.string/replace</code> so let's require that namespace.</p>
+<pre><code class="language-Clojure">(ns validation-experiment.ssn
+  (:require [clojure.spec.alpha :as s]
+            [clojure.string :as string]))
+</code></pre>
+<p>With that in place, here's the updated code we need to add.</p>
+<pre><code class="language-Clojure">(defn digits [ssn]
+  (string/replace ssn &quot;-&quot; &quot;&quot;))
+
+(defn- valid-group? [ssn]
+  (let [group (subs (digits ssn) 3 5)]
+    (not= group &quot;00&quot;)))
+
+(s/def ::ssn (s/and valid-format? valid-area? valid-group?))
+</code></pre>
+<p>Note that we've kept <code>digits</code> public (<code>defn</code> vs <code>defn-</code>) as this could be a useful method to use outside of this namespace.</p>
+<p>With that in place we can test it in the REPL.</p>
+<pre><code>validation-experiment.repl=&gt; (use 'validation-experiment.ssn :reload)
+nil
+validation-experiment.repl=&gt; (s/explain :validation-experiment.ssn/ssn &quot;123006789&quot;)
+val: &quot;1230
+06789&quot; fails spec: :validation-experiment.ssn/ssn predicate: valid-group?
+nil
+</code></pre>
+<p>There's one last check to make: SSN serial numbers can also not be all zeros. In addition, we'll improve the <code>::ssn</code> predicate a bit and ensure the data is a string before we test the other predicates. Here's the final code in it's entirety.</p>
+<pre><code class="language-Clojure">(ns validation-experiment.ssn
+  (:require [clojure.spec.alpha :as s]
+            [clojure.string :as string]))
+
+(defn- valid-format? [ssn]
+  (boolean (re-matches #&quot;\d{9}|\d{3}-\d{2}-\d{4}&quot; ssn)))
+
+(defn- parseInt [s]
+  #?(:clj (Integer/parseInt s))
+  #?(:cljs (js/parseInt s)))
+
+(defn- valid-area? [ssn]
+  (let [area (subs ssn 0 3)]
+    (and
+     (not= area &quot;000&quot;)
+     (not (some #{(parseInt area)} (range 700 799))))))
+
+(defn digits [ssn]
+  (string/replace ssn &quot;-&quot; &quot;&quot;))
+
+(defn- valid-group? [ssn]
+  (let [group (subs (digits ssn) 3 5)]
+    (not= group &quot;00&quot;)))
+
+(defn- valid-serial-number? [ssn]
+  (let [serial-number (subs (digits ssn) 5 9)]
+    (not= serial-number &quot;0000&quot;)))
+
+(s/def ::ssn (s/and string? valid-format? valid-area? valid-group? valid-serial-number?))
+</code></pre>
+<p>That's it for now. <a href="/posts/clojure-validation-part-2">Next time</a> we'll actually tie this into our Reagent code to validate the input in a text box.</p>
+<div class="alert alert-success"><p>The code for this part of the series can be found in the branch <code>part1</code> in the associated repo at <a href="https://github.com/wekempf/validation-experiment.">https://github.com/wekempf/validation-experiment.</a></p>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'clojure-validation-part-1';
+    var disqus_title = 'Clojure Validation - Part I';
+    var disqus_url = 'https://digitaltapestry.net/posts/clojure-validation-part-1';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                                </div>
+                        </div>
+                </div>
+                
+                <hr>
+                
+                <!-- Footer -->
+                <footer>
+                        <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="list-inline text-center">
+                <li>
+                    <a href="https://twitter.com/wekempf">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/wekempf">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <p class="copyright text-muted">
+                Copyright © 2018 by William E. Kempf. The opinions expressed herein are my own and do not represent those of my employer or any other third-party views in any way.
+                <br />
+                This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/" rel="license">Creative Commons Attribution 4.0 International License</a>.
+                <br />
+                <a href="/feed.rss"><i class="fa fa-rss"></i> RSS Feed</a> | <a href="/feed.atom"><i class="fa fa-rss"></i> Atom Feed</a>
+                <br />
+                <a href="https://github.com/wekempf/wekempf.github.io"><i class="fa fa-github"></i> This Site on GitHub</a>
+                <br />
+                Hosted on <a href="https://pages.github.com/">GitHub Pages</a>
+                <br />
+                <strong><a href="https://wyam.io">Generated by Wyam</a></strong>
+            </p>
+        </div>
+    </div>
+</div>
+                </footer> 
+
+                <script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js"></script>
+<script type="text/javascript">
+    anchors.options.placement = 'left';
+    anchors.add('#content > h1,h2,h3,h4');
+
+    var snippets = document.querySelectorAll("pre > code");
+    [].forEach.call(snippets, function(snippet) {
+        snippet.insertAdjacentHTML("beforebegin", "<button class='btn-copy' data-clipboard-snippet><img class='clippy' width=13 src='/assets/images/clippy.svg' alt='Copy to clipboard'></button>");
+    });
+    var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+        target: function(trigger) {
+            return trigger.nextElementSibling;
+        }
+    });
+    clipboardSnippets.on('success', function(e) {
+        e.clearSelection();
+        showTooltip(e.trigger, "Copied!");
+    });
+    clipboardSnippets.on('error', function(e) {
+        showTooltip(e.trigger, fallbackMessage(e.action));
+    });
+
+    var btns = document.querySelectorAll('.btn-copy');
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('mouseleave', function(e) {
+            e.currentTarget.setAttribute('class', 'btn-copy');
+            e.currentTarget.removeAttribute('aria-label');
+        });
+    }
+
+    function showTooltip(elem, msg) {
+        elem.setAttribute('class', 'btn-copy tooltipped tooltipped-s');
+        elem.setAttribute('aria-label', msg);
+    }
+
+    function fallbackMessage(action) {
+        var actionMsg = '';
+        var actionKey = (action === 'cut' ? 'X' : 'C');
+        if (/iPhone|iPad/i.test(navigator.userAgent)) {
+            actionMsg = 'No support :(';
+        } else if (/Mac/i.test(navigator.userAgent)) {
+            actionMsg = 'Press ⌘-' + actionKey + ' to ' + action;
+        } else {
+            actionMsg = 'Press Ctrl-' + actionKey + ' to ' + action;
+        }
+        return actionMsg;
+    }
+    hljs.initHighlightingOnLoad();
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70929529-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+                <script>hljs.initHighlightingOnLoad();</script>
+
+
+                <script>
+                        BackgroundCheck.init({
+                                targets: '.intro-header,.navbar',
+                                images: '.intro-header'
+                        });
+                </script>
+        </body>
+</html>
+

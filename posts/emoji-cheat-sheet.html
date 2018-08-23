@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="en">
         <head>
@@ -10,9 +10,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">        
 
         <link type="application/rss+xml" rel="alternate" title="Digital Tapestry" href="/feed.rss" />
-        <link type="application/atom+xml" rel="alternate" title="Digital Tapestry" href="/feed.atom" />
-        <link rel="shortcut icon" href="/favicon.ico?v=2" type="image/x-icon">
-        <link rel="icon" href="/favicon.ico?v=2" type="image/x-icon">
+                <link type="application/atom+xml" rel="alternate" title="Digital Tapestry" href="/feed.atom" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
         <link href="/assets/css/highlight.css" rel="stylesheet">
@@ -22,7 +22,6 @@
         <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
         <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
         <link href="/assets/css/override.css" rel="stylesheet" />
-        <ling href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css" rel="stylesheet" type="text/css">
 
 
         <meta name="application-name" content="Digital Tapestry" />
@@ -31,7 +30,7 @@
 
         <meta property="og:title" content="Digital Tapestry - Emoji Cheat Sheet" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://digitaltapestry.net/posts/emoji-cheat-sheet" />
+        <meta property="og:url" content="https://digitaltapestry.net/posts/emoji-cheat-sheet" />
         <!-- TODO: More social graph meta tags -->
 
         <script src="/assets/js/jquery.min.js"></script>
@@ -41,8 +40,7 @@
         <script src="/assets/js/d3.v3.min.js"></script>
         <script src="/assets/js/trianglify.min.js"></script>
         <script src="/assets/js/Please-compressed.js"></script>
-        <script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
-        <script>mermaid.initialize({startOnLoad:true});</script>
+        <script src="/assets/js/background-check.min.js"></script>
                 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,12 +48,11 @@
                 <script src="/assets/js/html5shiv.js"></script>
                 <script src="/assets/js/respond.min.js"></script>
         <![endif]-->
+        
+        <link href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/overrides.css" rel="stylesheet" />
 
-                <style>
-                        .intro-header *, .navbar:not(.is-fixed) * { color: #101F45 !important; }
-                        hr { border-color: #101F45 !important; }
-                        .btn { color: initial !important }
-                </style>
+
 
         </head>
         <body>
@@ -77,8 +74,8 @@
                                 <!-- Collect the nav links, forms, and other content for toggling -->
                                 <div class="collapse navbar-collapse" id="navbar-collapse">
                                         <ul class="nav navbar-nav navbar-right">
-                                                        <li><a href="/tags">All Tags</a></li>
-        <li><a href="/posts">Archive</a></li>
+                                                        <li><a href="/posts">Archive</a></li>
+        <li><a href="/tags">Tags</a></li>
         <li><a href="/resume">Resume</a></li>
  
                                         </ul>
@@ -100,6 +97,10 @@
     <div class="meta">        
 Published on Thursday, January 12, 2017<br>    </div>
         <div class="tags">
+                    <a role="button" href="/tags/CSS" class="btn btn-default btn-xs">CSS</a>
+                    <a role="button" href="/tags/Markdig" class="btn btn-default btn-xs">Markdig</a>
+                    <a role="button" href="/tags/Markdown" class="btn btn-default btn-xs">Markdown</a>
+                    <a role="button" href="/tags/Wyam" class="btn btn-default btn-xs">Wyam</a>
         </div>     
 </div>
                                         </div>
@@ -3876,7 +3877,7 @@ for the visual display here. This shortcut works in other places, but interfered
     var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
     var disqus_identifier = 'emoji-cheat-sheet';
     var disqus_title = 'Emoji Cheat Sheet';
-    var disqus_url = 'http://digitaltapestry.net/posts/emoji-cheat-sheet';
+    var disqus_url = 'https://digitaltapestry.net/posts/emoji-cheat-sheet';
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
@@ -3941,7 +3942,9 @@ for the visual display here. This shortcut works in other places, but interfered
 </div>
                 </footer> 
 
-                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js"></script>
+                <script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js"></script>
 <script type="text/javascript">
     anchors.options.placement = 'left';
@@ -3999,7 +4002,16 @@ for the visual display here. This shortcut works in other places, but interfered
   ga('create', 'UA-70929529-2', 'auto');
   ga('send', 'pageview');
 </script>
+
                 <script>hljs.initHighlightingOnLoad();</script>
 
+
+                <script>
+                        BackgroundCheck.init({
+                                targets: '.intro-header,.navbar',
+                                images: '.intro-header'
+                        });
+                </script>
         </body>
 </html>
+
