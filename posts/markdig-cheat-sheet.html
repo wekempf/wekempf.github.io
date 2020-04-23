@@ -33,22 +33,6 @@
         <meta property="og:url" content="https://digitaltapestry.net/posts/markdig-cheat-sheet" />
         <!-- TODO: More social graph meta tags -->
 
-        <script src="/assets/js/jquery.min.js"></script>
-        <script src="/assets/js/bootstrap.min.js"></script>     
-        <script src="/assets/js/highlight.pack.js"></script>   
-        <script src="/assets/js/clean-blog.js"></script>
-        <script src="/assets/js/d3.v3.min.js"></script>
-        <script src="/assets/js/trianglify.min.js"></script>
-        <script src="/assets/js/Please-compressed.js"></script>
-        <script src="/assets/js/background-check.min.js"></script>
-                
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-                <script src="/assets/js/html5shiv.js"></script>
-                <script src="/assets/js/respond.min.js"></script>
-        <![endif]-->
-        
         <link href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/atelier-sulphurpool-light.css" rel="stylesheet" />
 <link href="/assets/css/overrides.css" rel="stylesheet" />
@@ -459,7 +443,7 @@ the family Rosaceae.</p>
 <pre><code class="language-text">![Rick Roll](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 </code></pre>
 <h3 id="result-10">Result</h3>
-<p><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" class="img-fluid" width="500" height="281" frameborder="0" allowfullscreen></iframe></p>
+<p><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" class="img-fluid" width="500" height="281" frameborder="0" allowfullscreen=""></iframe></p>
 <h2 id="abbreviations">Abbreviations</h2>
 <table class="table">
 <thead>
@@ -599,12 +583,14 @@ $$
 $$
 </code></pre>
 <h3 id="result-16">Result <a id="fnref:4" href="#fn:2" class="footnote-ref"><sup>2</sup></a> <a id="fnref:7" href="#fn:4" class="footnote-ref"><sup>4</sup></a></h3>
-<p>This is a <span class="math">math block</span></p>
-<div class="math">\begin{equation}
+<p>This is a <span class="math">\(math block\)</span></p>
+<div class="math">
+\[
+\begin{equation}
   \int_0^\infty \frac{x^3}{e^x-1}\,dx = \frac{\pi^4}{15}
   \label{eq:sample}
 \end{equation}
-</div>
+\]</div>
 <h2 id="emoji">Emoji</h2>
 <table class="table">
 <thead>
@@ -720,7 +706,7 @@ is missing the arrow lines, but I don't believe it's got anything to do with Wya
 <em>Update:</em> Turns out I had a typo in my link tag for the CSS that caused the display issue. Doh!
 Also, adding the necessary CSS and JS is relatively easy now. Add a _Header.cshtml with any CSS links
 you want, and _Scripts.cshtml for the scripts. You can view the source for this site to see it for
-yourself: <a href="https://github.com/wekempf/wekempf.github.io/.">https://github.com/wekempf/wekempf.github.io/.</a><a href="#fnref:8" class="footnote-back-ref">&#8617;</a></p>
+yourself: <a href="https://github.com/wekempf/wekempf.github.io/">https://github.com/wekempf/wekempf.github.io/</a>.<a href="#fnref:8" class="footnote-back-ref">&#8617;</a></p>
 </li>
 </ol>
 </div>
@@ -780,7 +766,7 @@ yourself: <a href="https://github.com/wekempf/wekempf.github.io/.">https://githu
                 </li>
             </ul>
             <p class="copyright text-muted">
-                Copyright © 2018 by William E. Kempf. The opinions expressed herein are my own and do not represent those of my employer or any other third-party views in any way.
+                Copyright © 2020 by William E. Kempf. The opinions expressed herein are my own and do not represent those of my employer or any other third-party views in any way.
                 <br />
                 This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/" rel="license">Creative Commons Attribution 4.0 International License</a>.
                 <br />
@@ -797,6 +783,22 @@ yourself: <a href="https://github.com/wekempf/wekempf.github.io/.">https://githu
 </div>
                 </footer> 
 
+                <script src="/assets/js/jquery.min.js"></script>
+                <script src="/assets/js/bootstrap.min.js"></script>     
+                <script src="/assets/js/highlight.pack.js"></script>   
+                <script src="/assets/js/clean-blog.js"></script>
+                <script src="/assets/js/d3.v3.min.js"></script>
+                <script src="/assets/js/trianglify.min.js"></script>
+                <script src="/assets/js/Please-compressed.js"></script>
+                <script src="/assets/js/background-check.min.js"></script>
+
+                <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+                <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+                <!--[if lt IE 9]>
+                        <script src="/assets/js/html5shiv.js"></script>
+                        <script src="/assets/js/respond.min.js"></script>
+                <![endif]-->
+                
                 <script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
 <script>mermaid.initialize({startOnLoad:true});</script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js"></script>

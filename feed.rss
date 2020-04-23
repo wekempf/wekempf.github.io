@@ -4,9 +4,27 @@
 		<title>Digital Tapestry</title>
 		<link>https://digitaltapestry.net/</link>
 		<description>Weaving a Digital Tapestry</description>
-		<copyright>2018</copyright>
-		<pubDate>Thu, 23 Aug 2018 16:32:23 GMT</pubDate>
-		<lastBuildDate>Thu, 23 Aug 2018 16:32:23 GMT</lastBuildDate>
+		<copyright>2020</copyright>
+		<pubDate>Thu, 23 Apr 2020 17:03:57 GMT</pubDate>
+		<lastBuildDate>Thu, 23 Apr 2020 17:03:57 GMT</lastBuildDate>
+		<item>
+			<title>F# Development Series</title>
+			<link>https://digitaltapestry.net/posts/f%2523-development-series</link>
+			<description>&lt;p&gt;Bear with me. This is going to be along work in progress.&lt;/p&gt;</description>
+			<enclosure url="https://digitaltapestry.net/assets/images/banner_web.jpg" length="0" type="image" />
+			<guid>https://digitaltapestry.net/posts/f%2523-development-series</guid>
+			<pubDate>Thu, 23 Apr 2020 12:41:07 GMT</pubDate>
+			<content:encoded>&lt;h1 id="f-development-series"&gt;F# Development Series&lt;/h1&gt;
+&lt;p&gt;Bear with me. This is going to be along work in progress.&lt;/p&gt;
+&lt;p&gt;The medical industry has an interesting concept for learning: see one, do one, teach one. The idea is that to master a topic you have to go through three phases. First, your &amp;ldquo;shown&amp;rdquo;/told/etc. how to do something by an instructor/mentor/ect. This is the first phase of learning. You start to get a surface level understanding of the topic here. Next, you actually apply what you've learned. Until you've done this there are things you don't really understand. It's here that you get a deeper understanding of the topic. That final phase, though, that's where you can claim to have a mastered the topic. If you can't explain the conpcepts you've learned in a way that others can understand it, you're still learning yourself.&lt;/p&gt;
+&lt;p&gt;This philosophy is one of the bigger reasons I've always blogged. It's not just so I can help others, it's so that I can gain mastery of a topic myself. It's part of &lt;em&gt;my&lt;/em&gt; learning experience.&lt;/p&gt;
+&lt;p&gt;Recently I've been learning F# development. I feel I'm past the first phase, and partially through the second. I'm struggling with the second phase, though, because I find that the existing resources (that I can find anyway) just don't do a good enough job in assisting me with actually &amp;ldquo;doing it&amp;rdquo;. There's plenty of resources out there that help me to learn the language, but next to none, especially of quality, that help me to learn the tooling. I can understand the language fine, but if I can't work with the tooling then getting beyond the &amp;quot;hello world&amp;quot; stage is going to elude me a bit.&lt;/p&gt;
+&lt;p&gt;Well, if the resources don't exist, I'm just going to have to learn by creating those resources myself. Because I'll be circumventing some of the stages here and mostly going straight to &amp;ldquo;teach one&amp;rdquo; it's going to be a bumpy ride. So bear with me. You can learn with me as I go, and in the end I can hopefully clean up what I get wrong initially.&lt;/p&gt;
+&lt;p&gt;So, the goal in this new series of blog posts is to teach you (i.e. me) how to work with the tooling to produce more complicated F# projects than just hello world or other such samples. As a .NET language, you'd think that if you knew C# this would be easy, but my experience so far says it's not. There's a whole world of tooling that the F# developer uses that the C# developer does not, and if you're going to be productive and master F# development, you're going to have become comfortable with this tooling.&lt;/p&gt;
+&lt;h2 id="addendum"&gt;Addendum&lt;/h2&gt;
+&lt;p&gt;As I go, this is going to be a very rough draft. I'm not going to polish the posts, they may be a bit scattered, and I will get things wrong. So if you're following allong, please, provide me with feedback in the comments. Over time I'll refine the posts, and end the end they'll hopefully be of good enough quality to be useful in helping others.&lt;/p&gt;
+</content:encoded>
+		</item>
 		<item>
 			<title>Clojure Validation - Part IV</title>
 			<link>https://digitaltapestry.net/posts/clojure-validation-part-4</link>
@@ -180,7 +198,7 @@
    [:p [:input {:type :button :value (if (= &amp;#64;lang :en) &amp;quot;German&amp;quot; &amp;quot;English&amp;quot;) :on-click #(swap! lang swap-lang)}]]])
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;That's it! There's our complete example.&lt;/p&gt;
-&lt;div class="alert alert-success"&gt;&lt;p&gt;The code for this part of the series can be found in the branch &lt;code&gt;part4&lt;/code&gt; in the associated repo at &lt;a href="https://github.com/wekempf/validation-experiment."&gt;https://github.com/wekempf/validation-experiment.&lt;/a&gt;&lt;/p&gt;
+&lt;div class="alert alert-success"&gt;&lt;p&gt;The code for this part of the series can be found in the branch &lt;code&gt;part4&lt;/code&gt; in the associated repo at &lt;a href="https://github.com/wekempf/validation-experiment"&gt;https://github.com/wekempf/validation-experiment&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 </content:encoded>
 		</item>
@@ -289,7 +307,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Yet again, it was really easy to go from a validation message only a Clojurist would love, to rich and human readable messages.&lt;/p&gt;
 &lt;p&gt;&lt;a href="/posts/clojure-validation-part-4"&gt;Next time&lt;/a&gt; we'll cover a bonus topic&amp;hellip; localizing these messages.&lt;/p&gt;
-&lt;div class="alert alert-success"&gt;&lt;p&gt;The code for this part of the series can be found in the branch &lt;code&gt;part3&lt;/code&gt; in the associated repo at &lt;a href="https://github.com/wekempf/validation-experiment."&gt;https://github.com/wekempf/validation-experiment.&lt;/a&gt;&lt;/p&gt;
+&lt;div class="alert alert-success"&gt;&lt;p&gt;The code for this part of the series can be found in the branch &lt;code&gt;part3&lt;/code&gt; in the associated repo at &lt;a href="https://github.com/wekempf/validation-experiment"&gt;https://github.com/wekempf/validation-experiment&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 </content:encoded>
 		</item>
@@ -338,7 +356,7 @@
 &lt;p&gt;You can view this wonder using Figwheel by executing the following.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-PowerShell"&gt;PS&amp;gt; lein figwheel
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now open a browser and navigate to &lt;a href="http://localhost:3449"&gt;http://localhost:3449&lt;/a&gt; to behold the results of our hard work.&lt;/p&gt;
+&lt;p&gt;Now open a browser and navigate to http://localhost:3449 to behold the results of our hard work.&lt;/p&gt;
 &lt;p&gt;If you're not familiar with &lt;a href="https://github.com/bhauman/lein-figwheel"&gt;Figwheel&lt;/a&gt; it &amp;quot; builds your ClojureScript code and hot loads it into the browser as you are coding!&amp;quot; So, don't stop it or close that browser. As we change our code and save it your browser will magically update with the changes live, current state intact. This is an unbelievable bit of tech that makes coding stuff like this a dream.&lt;/p&gt;
 &lt;h2 id="adding-state"&gt;Adding State&lt;/h2&gt;
 &lt;p&gt;So, we have a text input box, but there's no state backing it. Let's fix that by changing a bit of the code.&lt;/p&gt;
@@ -364,7 +382,7 @@
 &lt;p&gt;Play around a bit with the result, entering different values into the text box. See how the validation display changes as you type? Notice that it disappears entirely when you've entered a valid SSN? The live updates are the magic of Reagent and it's atom, while having the validation message dissapear is a result of how Reagent handles &lt;code&gt;nil&lt;/code&gt;. When &lt;code&gt;s/explain-data&lt;/code&gt; returns &lt;code&gt;nil&lt;/code&gt; for valid input Reagent actually removes it from the child list.&lt;/p&gt;
 &lt;p&gt;Look at how super simple it was to get validation in Reagent using Clojure Spec!&lt;/p&gt;
 &lt;p&gt;Oh, but the validation message displayed is really ugly you say? Well, yes, yes it is. We'll fix that in the &lt;a href="/posts/clojure-validation-part-3"&gt;next part&lt;/a&gt; of this series.&lt;/p&gt;
-&lt;div class="alert alert-success"&gt;&lt;p&gt;The code for this part of the series can be found in the branch &lt;code&gt;part2&lt;/code&gt; in the associated repo at &lt;a href="https://github.com/wekempf/validation-experiment."&gt;https://github.com/wekempf/validation-experiment.&lt;/a&gt;&lt;/p&gt;
+&lt;div class="alert alert-success"&gt;&lt;p&gt;The code for this part of the series can be found in the branch &lt;code&gt;part2&lt;/code&gt; in the associated repo at &lt;a href="https://github.com/wekempf/validation-experiment"&gt;https://github.com/wekempf/validation-experiment&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 </content:encoded>
 		</item>
@@ -398,7 +416,7 @@
 &lt;p&gt;The code at this point is pushed to &lt;a href="https://github.com/wekempf/validation-experiment"&gt;https://github.com/wekempf/validation-experiment&lt;/a&gt; on the master branch. I'll create other branches for the code as we progress here.&lt;/p&gt;
 &lt;h2 id="our-ssn-type"&gt;Our SSN &amp;ldquo;Type&amp;rdquo;&lt;/h2&gt;
 &lt;p&gt;Clojure is a dynamic language, so I'm using &amp;ldquo;type&amp;rdquo; rather loosely here. What we're going to work with, and validate, however is an SSN value. This is going to be a string that conforms to certain properties&amp;hellip; which is what we'll want to validate. We're going to do our validation through &lt;a href="https://clojure.org/guides/spec"&gt;Clojure Spec&lt;/a&gt;. If you read that guide you may find it to be confusing (or at the very least, rather dry reading). While some of the details of how you use it may take some time to master, it really should not be too difficult to grasp at a high level.&lt;/p&gt;
-&lt;p&gt;Basically, Clojure Spec is a library used to validate that data conforms to certain rules specified as predicates (functions that take the data and return true if the data conforms and false if it does not). At the 1000 foot view, that's all it is. Dial in a little closer and you'll see that Clojure Spec provides a few &amp;ldquo;higher order functions&amp;rdquo; that allow you to compose predicates so that you can take simple predicates and build more complex ones. This composability is an important aspect of functional programming (&lt;abbr title="Functional Programming"&gt;FP&lt;/abbr&gt;), and there's lots of power in this that may not be evident to those new to &lt;abbr title="Functional Programming"&gt;FP&lt;/abbr&gt;. Clojure Spec provides methods for &amp;quot;running&amp;quot; these predicates and producing rich information about the results. Finally, Clojure Spec provides facilities for runtime assertions and testing facilities such as generative testing. As we work on this experiment we'll touch on most of these features, but this isn't an in depth focus on Clojure Spec. We're focused on how we can use it to provide UI validation.&lt;/p&gt;
+&lt;p&gt;Basically, Clojure Spec is a library used to validate that data conforms to certain rules specified as predicates (functions that take the data and return true if the data conforms and false if it does not). At the 1000 foot view, that's all it is. Dial in a little closer and you'll see that Clojure Spec provides a few &amp;ldquo;higher order functions&amp;rdquo; that allow you to compose predicates so that you can take simple predicates and build more complex ones. This composability is an important aspect of functional programming (FP), and there's lots of power in this that may not be evident to those new to &lt;abbr title="Functional Programming"&gt;FP&lt;/abbr&gt;. Clojure Spec provides methods for &amp;quot;running&amp;quot; these predicates and producing rich information about the results. Finally, Clojure Spec provides facilities for runtime assertions and testing facilities such as generative testing. As we work on this experiment we'll touch on most of these features, but this isn't an in depth focus on Clojure Spec. We're focused on how we can use it to provide UI validation.&lt;/p&gt;
 &lt;p&gt;Let's get started. Create an ssn.cljc file in the src\cljc\validation_experiment directory. In that file, add the following code.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-Clojure"&gt;(ns validation-experiment.ssn
     (:require [clojure.spec.alpha :as s]))
@@ -522,7 +540,7 @@ nil
 (s/def ::ssn (s/and string? valid-format? valid-area? valid-group? valid-serial-number?))
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;That's it for now. &lt;a href="/posts/clojure-validation-part-2"&gt;Next time&lt;/a&gt; we'll actually tie this into our Reagent code to validate the input in a text box.&lt;/p&gt;
-&lt;div class="alert alert-success"&gt;&lt;p&gt;The code for this part of the series can be found in the branch &lt;code&gt;part1&lt;/code&gt; in the associated repo at &lt;a href="https://github.com/wekempf/validation-experiment."&gt;https://github.com/wekempf/validation-experiment.&lt;/a&gt;&lt;/p&gt;
+&lt;div class="alert alert-success"&gt;&lt;p&gt;The code for this part of the series can be found in the branch &lt;code&gt;part1&lt;/code&gt; in the associated repo at &lt;a href="https://github.com/wekempf/validation-experiment"&gt;https://github.com/wekempf/validation-experiment&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 </content:encoded>
 		</item>
@@ -4434,11 +4452,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;td&gt;😠&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;code&gt;:\&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;:\ &lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;:\&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;code&gt;:-\&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;:-\ &lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;:-\&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -5257,7 +5275,7 @@ the family Rosaceae.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-text"&gt;![Rick Roll](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id="result-10"&gt;Result&lt;/h3&gt;
-&lt;p&gt;&lt;iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" class="img-fluid" width="500" height="281" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/p&gt;
+&lt;p&gt;&lt;iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" class="img-fluid" width="500" height="281" frameborder="0" allowfullscreen=""&gt;&lt;/iframe&gt;&lt;/p&gt;
 &lt;h2 id="abbreviations"&gt;Abbreviations&lt;/h2&gt;
 &lt;table class="table"&gt;
 &lt;thead&gt;
@@ -5397,12 +5415,14 @@ $$
 $$
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id="result-16"&gt;Result &lt;a id="fnref:4" href="#fn:2" class="footnote-ref"&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; &lt;a id="fnref:7" href="#fn:4" class="footnote-ref"&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;This is a &lt;span class="math"&gt;math block&lt;/span&gt;&lt;/p&gt;
-&lt;div class="math"&gt;\begin{equation}
+&lt;p&gt;This is a &lt;span class="math"&gt;\(math block\)&lt;/span&gt;&lt;/p&gt;
+&lt;div class="math"&gt;
+\[
+\begin{equation}
   \int_0^\infty \frac{x^3}{e^x-1}\,dx = \frac{\pi^4}{15}
   \label{eq:sample}
 \end{equation}
-&lt;/div&gt;
+\]&lt;/div&gt;
 &lt;h2 id="emoji"&gt;Emoji&lt;/h2&gt;
 &lt;table class="table"&gt;
 &lt;thead&gt;
@@ -5518,7 +5538,7 @@ is missing the arrow lines, but I don't believe it's got anything to do with Wya
 &lt;em&gt;Update:&lt;/em&gt; Turns out I had a typo in my link tag for the CSS that caused the display issue. Doh!
 Also, adding the necessary CSS and JS is relatively easy now. Add a _Header.cshtml with any CSS links
 you want, and _Scripts.cshtml for the scripts. You can view the source for this site to see it for
-yourself: &lt;a href="https://github.com/wekempf/wekempf.github.io/."&gt;https://github.com/wekempf/wekempf.github.io/.&lt;/a&gt;&lt;a href="#fnref:8" class="footnote-back-ref"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+yourself: &lt;a href="https://github.com/wekempf/wekempf.github.io/"&gt;https://github.com/wekempf/wekempf.github.io/&lt;/a&gt;.&lt;a href="#fnref:8" class="footnote-back-ref"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
@@ -5602,8 +5622,8 @@ code.&lt;/p&gt;
 &lt;p&gt;This is simpler than the original CSS thanks to the &lt;code&gt;.alert-glyphicon&lt;/code&gt; mixin.&lt;/p&gt;
 &lt;p&gt;If you've already created a &lt;code&gt;input\assets\css\override.css&lt;/code&gt; you'll have to delete
 it. Now when you build the site, &lt;code&gt;override.less&lt;/code&gt; gets compiled to &lt;code&gt;override.css&lt;/code&gt;.
-This does still copy the &lt;code&gt;override.less&lt;/code&gt; file to the output as well. &lt;del&gt;&lt;sub&gt;If I figure
-out how to remove that, I'll update this post.&lt;/sub&gt;&lt;/del&gt;&lt;/p&gt;
+This does still copy the &lt;code&gt;override.less&lt;/code&gt; file to the output as well. &lt;sub&gt;&lt;del&gt;If I figure
+out how to remove that, I'll update this post.&lt;/del&gt;&lt;/sub&gt;&lt;/p&gt;
 &lt;p&gt;Update: Dave Glick, the awesome author of Wyam, solved the issue of the LESS file being copied for me on
 &lt;a href="https://gitter.im/Wyamio/Wyam"&gt;Gitter&lt;/a&gt;. He answers inquiries on there so quickly that I suspect he's
 actually an AI robot. 😉&lt;/p&gt;

@@ -1,17 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-	<link rel="self" href="https://digitaltapestry.net/" />
 	<id>https://digitaltapestry.net/</id>
 	<title>Digital Tapestry</title>
-	<rights>2018</rights>
-	<updated>2018-08-23T16:32:23Z</updated>
+	<link rel="self" href="https://digitaltapestry.net/" />
+	<rights>2020</rights>
+	<updated>2020-04-23T17:03:57Z</updated>
 	<logo>https://digitaltapestry.net/assets/images/banner_web.jpg</logo>
 	<subtitle>Weaving a Digital Tapestry</subtitle>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/clojure-validation-part-4" />
+		<id>https://digitaltapestry.net/posts/f%2523-development-series</id>
+		<title>F# Development Series</title>
+		<link href="https://digitaltapestry.net/posts/f%2523-development-series" />
 		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
+		<updated>2020-04-23T12:41:07Z</updated>
+		<content>&lt;h1 id="f-development-series"&gt;F# Development Series&lt;/h1&gt;
+&lt;p&gt;Bear with me. This is going to be along work in progress.&lt;/p&gt;
+&lt;p&gt;The medical industry has an interesting concept for learning: see one, do one, teach one. The idea is that to master a topic you have to go through three phases. First, your &amp;ldquo;shown&amp;rdquo;/told/etc. how to do something by an instructor/mentor/ect. This is the first phase of learning. You start to get a surface level understanding of the topic here. Next, you actually apply what you've learned. Until you've done this there are things you don't really understand. It's here that you get a deeper understanding of the topic. That final phase, though, that's where you can claim to have a mastered the topic. If you can't explain the conpcepts you've learned in a way that others can understand it, you're still learning yourself.&lt;/p&gt;
+&lt;p&gt;This philosophy is one of the bigger reasons I've always blogged. It's not just so I can help others, it's so that I can gain mastery of a topic myself. It's part of &lt;em&gt;my&lt;/em&gt; learning experience.&lt;/p&gt;
+&lt;p&gt;Recently I've been learning F# development. I feel I'm past the first phase, and partially through the second. I'm struggling with the second phase, though, because I find that the existing resources (that I can find anyway) just don't do a good enough job in assisting me with actually &amp;ldquo;doing it&amp;rdquo;. There's plenty of resources out there that help me to learn the language, but next to none, especially of quality, that help me to learn the tooling. I can understand the language fine, but if I can't work with the tooling then getting beyond the &amp;quot;hello world&amp;quot; stage is going to elude me a bit.&lt;/p&gt;
+&lt;p&gt;Well, if the resources don't exist, I'm just going to have to learn by creating those resources myself. Because I'll be circumventing some of the stages here and mostly going straight to &amp;ldquo;teach one&amp;rdquo; it's going to be a bumpy ride. So bear with me. You can learn with me as I go, and in the end I can hopefully clean up what I get wrong initially.&lt;/p&gt;
+&lt;p&gt;So, the goal in this new series of blog posts is to teach you (i.e. me) how to work with the tooling to produce more complicated F# projects than just hello world or other such samples. As a .NET language, you'd think that if you knew C# this would be easy, but my experience so far says it's not. There's a whole world of tooling that the F# developer uses that the C# developer does not, and if you're going to be productive and master F# development, you're going to have become comfortable with this tooling.&lt;/p&gt;
+&lt;h2 id="addendum"&gt;Addendum&lt;/h2&gt;
+&lt;p&gt;As I go, this is going to be a very rough draft. I'm not going to polish the posts, they may be a bit scattered, and I will get things wrong. So if you're following allong, please, provide me with feedback in the comments. Over time I'll refine the posts, and end the end they'll hopefully be of good enough quality to be useful in helping others.&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;Bear with me. This is going to be along work in progress.&lt;/p&gt;</summary>
+	</entry>
+	<entry>
 		<id>https://digitaltapestry.net/posts/clojure-validation-part-4</id>
 		<title>Clojure Validation - Part IV</title>
+		<link href="https://digitaltapestry.net/posts/clojure-validation-part-4" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2018-08-22T11:29:16Z</updated>
 		<content>&lt;h1 id="clojure-validation-part-iv"&gt;Clojure Validation - Part IV&lt;/h1&gt;
 &lt;h3 id="i18n"&gt;I18N&lt;/h3&gt;
@@ -179,16 +197,16 @@
    [:p [:input {:type :button :value (if (= &amp;#64;lang :en) &amp;quot;German&amp;quot; &amp;quot;English&amp;quot;) :on-click #(swap! lang swap-lang)}]]])
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;That's it! There's our complete example.&lt;/p&gt;
-&lt;div class="alert alert-success"&gt;&lt;p&gt;The code for this part of the series can be found in the branch &lt;code&gt;part4&lt;/code&gt; in the associated repo at &lt;a href="https://github.com/wekempf/validation-experiment."&gt;https://github.com/wekempf/validation-experiment.&lt;/a&gt;&lt;/p&gt;
+&lt;div class="alert alert-success"&gt;&lt;p&gt;The code for this part of the series can be found in the branch &lt;code&gt;part4&lt;/code&gt; in the associated repo at &lt;a href="https://github.com/wekempf/validation-experiment"&gt;https://github.com/wekempf/validation-experiment&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 </content>
 		<summary>&lt;p&gt;I confess that I have been blind as a mole, but it is better to learn wisdom late than never to learn it at all.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/clojure-validation-part-3" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/clojure-validation-part-3</id>
 		<title>Clojure Validation - Part III</title>
+		<link href="https://digitaltapestry.net/posts/clojure-validation-part-3" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2018-08-22T09:52:09Z</updated>
 		<content>&lt;h1 id="clojure-validation-part-iii"&gt;Clojure Validation - Part III&lt;/h1&gt;
 &lt;h3 id="better-messages-with-phrase"&gt;Better Messages with Phrase&lt;/h3&gt;
@@ -288,16 +306,16 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Yet again, it was really easy to go from a validation message only a Clojurist would love, to rich and human readable messages.&lt;/p&gt;
 &lt;p&gt;&lt;a href="/posts/clojure-validation-part-4"&gt;Next time&lt;/a&gt; we'll cover a bonus topic&amp;hellip; localizing these messages.&lt;/p&gt;
-&lt;div class="alert alert-success"&gt;&lt;p&gt;The code for this part of the series can be found in the branch &lt;code&gt;part3&lt;/code&gt; in the associated repo at &lt;a href="https://github.com/wekempf/validation-experiment."&gt;https://github.com/wekempf/validation-experiment.&lt;/a&gt;&lt;/p&gt;
+&lt;div class="alert alert-success"&gt;&lt;p&gt;The code for this part of the series can be found in the branch &lt;code&gt;part3&lt;/code&gt; in the associated repo at &lt;a href="https://github.com/wekempf/validation-experiment"&gt;https://github.com/wekempf/validation-experiment&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 </content>
 		<summary>&lt;p&gt;Data! Data! Data!” he cried impatiently. “I can’t make bricks without clay.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/clojure-validation-part-2" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/clojure-validation-part-2</id>
 		<title>Clojure Validation - Part II</title>
+		<link href="https://digitaltapestry.net/posts/clojure-validation-part-2" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2018-08-21T15:14:26Z</updated>
 		<content>&lt;h1 id="clojure-validation-part-ii"&gt;Clojure Validation - Part II&lt;/h1&gt;
 &lt;h3 id="ui-validation"&gt;UI Validation&lt;/h3&gt;
@@ -337,7 +355,7 @@
 &lt;p&gt;You can view this wonder using Figwheel by executing the following.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-PowerShell"&gt;PS&amp;gt; lein figwheel
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now open a browser and navigate to &lt;a href="http://localhost:3449"&gt;http://localhost:3449&lt;/a&gt; to behold the results of our hard work.&lt;/p&gt;
+&lt;p&gt;Now open a browser and navigate to http://localhost:3449 to behold the results of our hard work.&lt;/p&gt;
 &lt;p&gt;If you're not familiar with &lt;a href="https://github.com/bhauman/lein-figwheel"&gt;Figwheel&lt;/a&gt; it &amp;quot; builds your ClojureScript code and hot loads it into the browser as you are coding!&amp;quot; So, don't stop it or close that browser. As we change our code and save it your browser will magically update with the changes live, current state intact. This is an unbelievable bit of tech that makes coding stuff like this a dream.&lt;/p&gt;
 &lt;h2 id="adding-state"&gt;Adding State&lt;/h2&gt;
 &lt;p&gt;So, we have a text input box, but there's no state backing it. Let's fix that by changing a bit of the code.&lt;/p&gt;
@@ -363,16 +381,16 @@
 &lt;p&gt;Play around a bit with the result, entering different values into the text box. See how the validation display changes as you type? Notice that it disappears entirely when you've entered a valid SSN? The live updates are the magic of Reagent and it's atom, while having the validation message dissapear is a result of how Reagent handles &lt;code&gt;nil&lt;/code&gt;. When &lt;code&gt;s/explain-data&lt;/code&gt; returns &lt;code&gt;nil&lt;/code&gt; for valid input Reagent actually removes it from the child list.&lt;/p&gt;
 &lt;p&gt;Look at how super simple it was to get validation in Reagent using Clojure Spec!&lt;/p&gt;
 &lt;p&gt;Oh, but the validation message displayed is really ugly you say? Well, yes, yes it is. We'll fix that in the &lt;a href="/posts/clojure-validation-part-3"&gt;next part&lt;/a&gt; of this series.&lt;/p&gt;
-&lt;div class="alert alert-success"&gt;&lt;p&gt;The code for this part of the series can be found in the branch &lt;code&gt;part2&lt;/code&gt; in the associated repo at &lt;a href="https://github.com/wekempf/validation-experiment."&gt;https://github.com/wekempf/validation-experiment.&lt;/a&gt;&lt;/p&gt;
+&lt;div class="alert alert-success"&gt;&lt;p&gt;The code for this part of the series can be found in the branch &lt;code&gt;part2&lt;/code&gt; in the associated repo at &lt;a href="https://github.com/wekempf/validation-experiment"&gt;https://github.com/wekempf/validation-experiment&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 </content>
 		<summary>&lt;p&gt;Nothing clears up a case so much as stating it to another person.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/clojure-validation-part-1" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/clojure-validation-part-1</id>
 		<title>Clojure Validation - Part I</title>
+		<link href="https://digitaltapestry.net/posts/clojure-validation-part-1" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2018-08-21T08:43:11Z</updated>
 		<content>&lt;h1 id="clojure-validation-part-i"&gt;Clojure Validation - Part I&lt;/h1&gt;
 &lt;h3 id="clojure-spec"&gt;Clojure Spec&lt;/h3&gt;
@@ -397,7 +415,7 @@
 &lt;p&gt;The code at this point is pushed to &lt;a href="https://github.com/wekempf/validation-experiment"&gt;https://github.com/wekempf/validation-experiment&lt;/a&gt; on the master branch. I'll create other branches for the code as we progress here.&lt;/p&gt;
 &lt;h2 id="our-ssn-type"&gt;Our SSN &amp;ldquo;Type&amp;rdquo;&lt;/h2&gt;
 &lt;p&gt;Clojure is a dynamic language, so I'm using &amp;ldquo;type&amp;rdquo; rather loosely here. What we're going to work with, and validate, however is an SSN value. This is going to be a string that conforms to certain properties&amp;hellip; which is what we'll want to validate. We're going to do our validation through &lt;a href="https://clojure.org/guides/spec"&gt;Clojure Spec&lt;/a&gt;. If you read that guide you may find it to be confusing (or at the very least, rather dry reading). While some of the details of how you use it may take some time to master, it really should not be too difficult to grasp at a high level.&lt;/p&gt;
-&lt;p&gt;Basically, Clojure Spec is a library used to validate that data conforms to certain rules specified as predicates (functions that take the data and return true if the data conforms and false if it does not). At the 1000 foot view, that's all it is. Dial in a little closer and you'll see that Clojure Spec provides a few &amp;ldquo;higher order functions&amp;rdquo; that allow you to compose predicates so that you can take simple predicates and build more complex ones. This composability is an important aspect of functional programming (&lt;abbr title="Functional Programming"&gt;FP&lt;/abbr&gt;), and there's lots of power in this that may not be evident to those new to &lt;abbr title="Functional Programming"&gt;FP&lt;/abbr&gt;. Clojure Spec provides methods for &amp;quot;running&amp;quot; these predicates and producing rich information about the results. Finally, Clojure Spec provides facilities for runtime assertions and testing facilities such as generative testing. As we work on this experiment we'll touch on most of these features, but this isn't an in depth focus on Clojure Spec. We're focused on how we can use it to provide UI validation.&lt;/p&gt;
+&lt;p&gt;Basically, Clojure Spec is a library used to validate that data conforms to certain rules specified as predicates (functions that take the data and return true if the data conforms and false if it does not). At the 1000 foot view, that's all it is. Dial in a little closer and you'll see that Clojure Spec provides a few &amp;ldquo;higher order functions&amp;rdquo; that allow you to compose predicates so that you can take simple predicates and build more complex ones. This composability is an important aspect of functional programming (FP), and there's lots of power in this that may not be evident to those new to &lt;abbr title="Functional Programming"&gt;FP&lt;/abbr&gt;. Clojure Spec provides methods for &amp;quot;running&amp;quot; these predicates and producing rich information about the results. Finally, Clojure Spec provides facilities for runtime assertions and testing facilities such as generative testing. As we work on this experiment we'll touch on most of these features, but this isn't an in depth focus on Clojure Spec. We're focused on how we can use it to provide UI validation.&lt;/p&gt;
 &lt;p&gt;Let's get started. Create an ssn.cljc file in the src\cljc\validation_experiment directory. In that file, add the following code.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-Clojure"&gt;(ns validation-experiment.ssn
     (:require [clojure.spec.alpha :as s]))
@@ -521,16 +539,16 @@ nil
 (s/def ::ssn (s/and string? valid-format? valid-area? valid-group? valid-serial-number?))
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;That's it for now. &lt;a href="/posts/clojure-validation-part-2"&gt;Next time&lt;/a&gt; we'll actually tie this into our Reagent code to validate the input in a text box.&lt;/p&gt;
-&lt;div class="alert alert-success"&gt;&lt;p&gt;The code for this part of the series can be found in the branch &lt;code&gt;part1&lt;/code&gt; in the associated repo at &lt;a href="https://github.com/wekempf/validation-experiment."&gt;https://github.com/wekempf/validation-experiment.&lt;/a&gt;&lt;/p&gt;
+&lt;div class="alert alert-success"&gt;&lt;p&gt;The code for this part of the series can be found in the branch &lt;code&gt;part1&lt;/code&gt; in the associated repo at &lt;a href="https://github.com/wekempf/validation-experiment"&gt;https://github.com/wekempf/validation-experiment&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 </content>
 		<summary>&lt;p&gt;You know my method. It is founded upon the observation of trifles.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/a-new-adventure" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/a-new-adventure</id>
 		<title>A New Adventure</title>
+		<link href="https://digitaltapestry.net/posts/a-new-adventure" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2018-08-20T14:43:55Z</updated>
 		<content>&lt;h1 id="a-new-adventure"&gt;A New Adventure&lt;/h1&gt;
 &lt;blockquote class="blockquote"&gt;
@@ -550,10 +568,10 @@ Alice: I don’t know.&lt;br&gt;
 Cat: Then it doesn’t matter which way you go.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/pragmatic-languages" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/pragmatic-languages</id>
 		<title>Pragmatic Languages</title>
+		<link href="https://digitaltapestry.net/posts/pragmatic-languages" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2017-02-09T07:07:49Z</updated>
 		<content>&lt;h1 id="pragmatic-languages"&gt;Pragmatic Languages&lt;/h1&gt;
 &lt;p&gt;I was influenced heavily early on in my career by the book &lt;em&gt;The Pragmatic Programmer: From Journeyman to Master&lt;/em&gt;&lt;a id="fnref:1" href="#fn:1" class="footnote-ref"&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;. One of the
@@ -664,10 +682,10 @@ in the late 80s and early 90s as the demand for the language waned. That's a sil
 was on the rise.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/poshwyam" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/poshwyam</id>
 		<title>PoshWyam</title>
+		<link href="https://digitaltapestry.net/posts/poshwyam" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2017-01-23T17:18:00Z</updated>
 		<content>&lt;h1 id="poshwyam"&gt;PoshWyam&lt;/h1&gt;
 &lt;p&gt;Over on the &lt;a href="https://gitter.im/Wyamio/Wyam"&gt;Wyam Gitter&lt;/a&gt; &lt;a href="https://github.com/phillipsj"&gt;Jamie Phillips (&amp;#64;phillipsj)&lt;/a&gt;
@@ -737,10 +755,10 @@ Once we are ready this will go up on &lt;a href="https://www.powershellgallery.c
 if you want to use it you'll need to clone the repo.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/playing-with-equality" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/playing-with-equality</id>
 		<title>Playing With Equality</title>
+		<link href="https://digitaltapestry.net/posts/playing-with-equality" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2017-01-14T13:10:36Z</updated>
 		<content>&lt;h1 id="playing-with-equality"&gt;Playing With Equality&lt;/h1&gt;
 &lt;p&gt;Most developers think they understand equality, but it's actually a pretty tricky subject.
@@ -923,10 +941,10 @@ I'm going to play around with equality, showing you some things you may not be a
 and eventually show you an interesting trick you can use when implementing equality.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/emoji-cheat-sheet" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/emoji-cheat-sheet</id>
 		<title>Emoji Cheat Sheet</title>
+		<link href="https://digitaltapestry.net/posts/emoji-cheat-sheet" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2017-01-12T11:02:00Z</updated>
 		<content>&lt;h1 id="emoji-cheat-sheet"&gt;Emoji Cheat Sheet&lt;/h1&gt;
 &lt;p&gt;This cheat sheet was compiled from the &lt;a href="https://github.com/lunet-io/markdig/blob/master/src/Markdig/Extensions/Emoji/EmojiParser.cs"&gt;source for Markdig&lt;/a&gt;.
@@ -4430,11 +4448,11 @@ for the visual display here. This shortcut works in other places, but interfered
 &lt;td&gt;😠&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;code&gt;:\&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;:\ &lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;:\&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;code&gt;:-\&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;:-\ &lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;:-\&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -4690,10 +4708,10 @@ One shortcut, &lt;code&gt;&amp;lt;/3&lt;/code&gt;, breaks my Markdown pipetable 
 for the visual display here. This shortcut works in other places, but interfered with the pipetable here, which I cannot explain.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/wyam-anchors-and-code-copy" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/wyam-anchors-and-code-copy</id>
 		<title>Wyam Anchors and Code Copy</title>
+		<link href="https://digitaltapestry.net/posts/wyam-anchors-and-code-copy" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2017-01-11T07:34:28Z</updated>
 		<content>&lt;h1 id="wyam-anchors-and-code-copy"&gt;Wyam Anchors and Code Copy&lt;/h1&gt;
 &lt;p&gt;On the &lt;a href="https://wyam.io"&gt;Wyam&lt;/a&gt; &lt;a href="https://gitter.im/Wyamio/Wyam"&gt;Gitter&lt;/a&gt; discussion Gary Ewan Park (&amp;#64;gep13 &lt;a id="fnref:1" href="#fn:1" class="footnote-ref"&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;)
@@ -4901,10 +4919,10 @@ and use &lt;a href="http://lesscss.org"&gt;Less&lt;/a&gt;, which I've &lt;a href
 asked the following:&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/markdig-cheat-sheet" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/markdig-cheat-sheet</id>
 		<title>Markdig Cheat Sheet</title>
+		<link href="https://digitaltapestry.net/posts/markdig-cheat-sheet" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2017-01-08T17:17:42Z</updated>
 		<content>&lt;h1 id="markdig-cheat-sheet"&gt;Markdig Cheat Sheet&lt;/h1&gt;
 &lt;p&gt;I mentioned in the post &lt;a href="/posts/alerts-in-wyam"&gt;Alerts in Wyam&lt;/a&gt; that Wyam uses Markdig for Markdown
@@ -5254,7 +5272,7 @@ the family Rosaceae.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-text"&gt;![Rick Roll](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id="result-10"&gt;Result&lt;/h3&gt;
-&lt;p&gt;&lt;iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" class="img-fluid" width="500" height="281" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/p&gt;
+&lt;p&gt;&lt;iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" class="img-fluid" width="500" height="281" frameborder="0" allowfullscreen=""&gt;&lt;/iframe&gt;&lt;/p&gt;
 &lt;h2 id="abbreviations"&gt;Abbreviations&lt;/h2&gt;
 &lt;table class="table"&gt;
 &lt;thead&gt;
@@ -5394,12 +5412,14 @@ $$
 $$
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id="result-16"&gt;Result &lt;a id="fnref:4" href="#fn:2" class="footnote-ref"&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; &lt;a id="fnref:7" href="#fn:4" class="footnote-ref"&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;This is a &lt;span class="math"&gt;math block&lt;/span&gt;&lt;/p&gt;
-&lt;div class="math"&gt;\begin{equation}
+&lt;p&gt;This is a &lt;span class="math"&gt;\(math block\)&lt;/span&gt;&lt;/p&gt;
+&lt;div class="math"&gt;
+\[
+\begin{equation}
   \int_0^\infty \frac{x^3}{e^x-1}\,dx = \frac{\pi^4}{15}
   \label{eq:sample}
 \end{equation}
-&lt;/div&gt;
+\]&lt;/div&gt;
 &lt;h2 id="emoji"&gt;Emoji&lt;/h2&gt;
 &lt;table class="table"&gt;
 &lt;thead&gt;
@@ -5515,7 +5535,7 @@ is missing the arrow lines, but I don't believe it's got anything to do with Wya
 &lt;em&gt;Update:&lt;/em&gt; Turns out I had a typo in my link tag for the CSS that caused the display issue. Doh!
 Also, adding the necessary CSS and JS is relatively easy now. Add a _Header.cshtml with any CSS links
 you want, and _Scripts.cshtml for the scripts. You can view the source for this site to see it for
-yourself: &lt;a href="https://github.com/wekempf/wekempf.github.io/."&gt;https://github.com/wekempf/wekempf.github.io/.&lt;/a&gt;&lt;a href="#fnref:8" class="footnote-back-ref"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+yourself: &lt;a href="https://github.com/wekempf/wekempf.github.io/"&gt;https://github.com/wekempf/wekempf.github.io/&lt;/a&gt;.&lt;a href="#fnref:8" class="footnote-back-ref"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
@@ -5525,10 +5545,10 @@ processing, and that Markdig supports extensions. Currently, Markdig lacks docum
 reason, I'm going to try and create a “cheat sheet” for the extensions.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/less-in-wyam" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/less-in-wyam</id>
 		<title>Less in Wyam</title>
+		<link href="https://digitaltapestry.net/posts/less-in-wyam" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2017-01-08T13:25:42Z</updated>
 		<content>&lt;h1 id="less-in-wyam"&gt;Less in Wyam&lt;/h1&gt;
 &lt;p&gt;In the &lt;a href="/posts/alerts-in-wyam"&gt;last post&lt;/a&gt; I showed how to use Bootstrap alerts from
@@ -5596,8 +5616,8 @@ code.&lt;/p&gt;
 &lt;p&gt;This is simpler than the original CSS thanks to the &lt;code&gt;.alert-glyphicon&lt;/code&gt; mixin.&lt;/p&gt;
 &lt;p&gt;If you've already created a &lt;code&gt;input\assets\css\override.css&lt;/code&gt; you'll have to delete
 it. Now when you build the site, &lt;code&gt;override.less&lt;/code&gt; gets compiled to &lt;code&gt;override.css&lt;/code&gt;.
-This does still copy the &lt;code&gt;override.less&lt;/code&gt; file to the output as well. &lt;del&gt;&lt;sub&gt;If I figure
-out how to remove that, I'll update this post.&lt;/sub&gt;&lt;/del&gt;&lt;/p&gt;
+This does still copy the &lt;code&gt;override.less&lt;/code&gt; file to the output as well. &lt;sub&gt;&lt;del&gt;If I figure
+out how to remove that, I'll update this post.&lt;/del&gt;&lt;/sub&gt;&lt;/p&gt;
 &lt;p&gt;Update: Dave Glick, the awesome author of Wyam, solved the issue of the LESS file being copied for me on
 &lt;a href="https://gitter.im/Wyamio/Wyam"&gt;Gitter&lt;/a&gt;. He answers inquiries on there so quickly that I suspect he's
 actually an AI robot. 😉&lt;/p&gt;
@@ -5616,10 +5636,10 @@ duplicate code in CSS files. Wyam has a module for using Less, so I updated my s
 to use it.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/alerts-in-wyam" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/alerts-in-wyam</id>
 		<title>Alerts In Wyam</title>
+		<link href="https://digitaltapestry.net/posts/alerts-in-wyam" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2017-01-08T11:02:00Z</updated>
 		<content>&lt;h1 id="alerts-in-wyam"&gt;Alerts in Wyam&lt;/h1&gt;
 &lt;p&gt;Bootstrap has the concept of &amp;ldquo;alerts&amp;rdquo;, which are specially styled divs used to call out notes.
@@ -5709,10 +5729,10 @@ with the above CSS.&lt;/p&gt;
 Here's some examples:&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/understanding-task-II" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/understanding-task-II</id>
 		<title>Understanding Task - Part II</title>
+		<link href="https://digitaltapestry.net/posts/understanding-task-II" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/banner_web.jpg" />
 		<updated>2017-01-07T12:39:00Z</updated>
 		<content>&lt;h1 id="understanding-task"&gt;Understanding Task&lt;/h1&gt;
 &lt;h2 id="part-i"&gt;Part I&lt;/h2&gt;
@@ -5867,10 +5887,10 @@ that. Of course, that isn't a very complete picture and I promised that this tim
 update &lt;code&gt;MyTask&amp;lt;T&amp;gt;&lt;/code&gt; to more closely represent the mental model you have for &lt;code&gt;Task&lt;/code&gt;.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/understanding-task-I" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/understanding-task-I</id>
 		<title>Understanding Task - Part I</title>
+		<link href="https://digitaltapestry.net/posts/understanding-task-I" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2017-01-07T00:00:00Z</updated>
 		<content>&lt;h1 id="understanding-task"&gt;Understanding Task&lt;/h1&gt;
 &lt;h2 id="part-i"&gt;Part I&lt;/h2&gt;
@@ -5959,10 +5979,10 @@ way up, while most other books/blogs/articles start at the top and work their wa
 My hope is that by working from the bottom up, some of the mystery will just disappear.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/logging-part-II" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/logging-part-II</id>
 		<title>Logging - Part II</title>
+		<link href="https://digitaltapestry.net/posts/logging-part-II" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2017-01-01T00:00:00Z</updated>
 		<content>&lt;h1 id="logging"&gt;Logging&lt;/h1&gt;
 &lt;h2 id="part-ii"&gt;Part II&lt;/h2&gt;
@@ -6089,10 +6109,10 @@ which I amusingly abbreviate to just MEL. In particular, we explored the design 
 In this post we'll continue to explore MEL by looking next at the design of the &lt;code&gt;ILoggerFactory&lt;/code&gt; interface.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/logging-part-I" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/logging-part-I</id>
 		<title>Logging - Part I</title>
+		<link href="https://digitaltapestry.net/posts/logging-part-I" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2016-12-28T09:00:00Z</updated>
 		<content>&lt;h1 id="logging"&gt;Logging&lt;/h1&gt;
 &lt;h2 id="part-i"&gt;Part I&lt;/h2&gt;
@@ -6593,10 +6613,10 @@ So, why am I blogging about it? Well, I think there's something to be learned ab
 logging, and there's a new kid on the block: &lt;a href="https://github.com/aspnet/Logging"&gt;Microsoft.Extensions.Logging&lt;/a&gt;.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<link href="https://digitaltapestry.net/posts/welcome-back" />
-		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<id>https://digitaltapestry.net/posts/welcome-back</id>
 		<title>Welcome Back</title>
+		<link href="https://digitaltapestry.net/posts/welcome-back" />
+		<link rel="enclosure" type="image" href="https://digitaltapestry.net/assets/images/banner_web.jpg" />
 		<updated>2016-12-26T00:00:00Z</updated>
 		<content>&lt;p&gt;Hi again. Or hi for the first time if you're new.&lt;/p&gt;
 &lt;p&gt;My old Digital Tapestry blog died. I was using &lt;a href="http://www.orchardproject.net/"&gt;Orchard&lt;/a&gt; which is a fine .NET based CMS and hosting

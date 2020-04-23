@@ -33,22 +33,6 @@
         <meta property="og:url" content="https://digitaltapestry.net/posts/clojure-validation-part-1" />
         <!-- TODO: More social graph meta tags -->
 
-        <script src="/assets/js/jquery.min.js"></script>
-        <script src="/assets/js/bootstrap.min.js"></script>     
-        <script src="/assets/js/highlight.pack.js"></script>   
-        <script src="/assets/js/clean-blog.js"></script>
-        <script src="/assets/js/d3.v3.min.js"></script>
-        <script src="/assets/js/trianglify.min.js"></script>
-        <script src="/assets/js/Please-compressed.js"></script>
-        <script src="/assets/js/background-check.min.js"></script>
-                
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-                <script src="/assets/js/html5shiv.js"></script>
-                <script src="/assets/js/respond.min.js"></script>
-        <![endif]-->
-        
         <link href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/atelier-sulphurpool-light.css" rel="stylesheet" />
 <link href="/assets/css/overrides.css" rel="stylesheet" />
@@ -135,7 +119,7 @@ Published on Tuesday, August 21, 2018<br>    </div>
 <p>The code at this point is pushed to <a href="https://github.com/wekempf/validation-experiment">https://github.com/wekempf/validation-experiment</a> on the master branch. I'll create other branches for the code as we progress here.</p>
 <h2 id="our-ssn-type">Our SSN &ldquo;Type&rdquo;</h2>
 <p>Clojure is a dynamic language, so I'm using &ldquo;type&rdquo; rather loosely here. What we're going to work with, and validate, however is an SSN value. This is going to be a string that conforms to certain properties&hellip; which is what we'll want to validate. We're going to do our validation through <a href="https://clojure.org/guides/spec">Clojure Spec</a>. If you read that guide you may find it to be confusing (or at the very least, rather dry reading). While some of the details of how you use it may take some time to master, it really should not be too difficult to grasp at a high level.</p>
-<p>Basically, Clojure Spec is a library used to validate that data conforms to certain rules specified as predicates (functions that take the data and return true if the data conforms and false if it does not). At the 1000 foot view, that's all it is. Dial in a little closer and you'll see that Clojure Spec provides a few &ldquo;higher order functions&rdquo; that allow you to compose predicates so that you can take simple predicates and build more complex ones. This composability is an important aspect of functional programming (<abbr title="Functional Programming">FP</abbr>), and there's lots of power in this that may not be evident to those new to <abbr title="Functional Programming">FP</abbr>. Clojure Spec provides methods for &quot;running&quot; these predicates and producing rich information about the results. Finally, Clojure Spec provides facilities for runtime assertions and testing facilities such as generative testing. As we work on this experiment we'll touch on most of these features, but this isn't an in depth focus on Clojure Spec. We're focused on how we can use it to provide UI validation.</p>
+<p>Basically, Clojure Spec is a library used to validate that data conforms to certain rules specified as predicates (functions that take the data and return true if the data conforms and false if it does not). At the 1000 foot view, that's all it is. Dial in a little closer and you'll see that Clojure Spec provides a few &ldquo;higher order functions&rdquo; that allow you to compose predicates so that you can take simple predicates and build more complex ones. This composability is an important aspect of functional programming (FP), and there's lots of power in this that may not be evident to those new to <abbr title="Functional Programming">FP</abbr>. Clojure Spec provides methods for &quot;running&quot; these predicates and producing rich information about the results. Finally, Clojure Spec provides facilities for runtime assertions and testing facilities such as generative testing. As we work on this experiment we'll touch on most of these features, but this isn't an in depth focus on Clojure Spec. We're focused on how we can use it to provide UI validation.</p>
 <p>Let's get started. Create an ssn.cljc file in the src\cljc\validation_experiment directory. In that file, add the following code.</p>
 <pre><code class="language-Clojure">(ns validation-experiment.ssn
     (:require [clojure.spec.alpha :as s]))
@@ -259,7 +243,7 @@ nil
 (s/def ::ssn (s/and string? valid-format? valid-area? valid-group? valid-serial-number?))
 </code></pre>
 <p>That's it for now. <a href="/posts/clojure-validation-part-2">Next time</a> we'll actually tie this into our Reagent code to validate the input in a text box.</p>
-<div class="alert alert-success"><p>The code for this part of the series can be found in the branch <code>part1</code> in the associated repo at <a href="https://github.com/wekempf/validation-experiment.">https://github.com/wekempf/validation-experiment.</a></p>
+<div class="alert alert-success"><p>The code for this part of the series can be found in the branch <code>part1</code> in the associated repo at <a href="https://github.com/wekempf/validation-experiment">https://github.com/wekempf/validation-experiment</a>.</p>
 </div>
 
 
@@ -317,7 +301,7 @@ nil
                 </li>
             </ul>
             <p class="copyright text-muted">
-                Copyright © 2018 by William E. Kempf. The opinions expressed herein are my own and do not represent those of my employer or any other third-party views in any way.
+                Copyright © 2020 by William E. Kempf. The opinions expressed herein are my own and do not represent those of my employer or any other third-party views in any way.
                 <br />
                 This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/" rel="license">Creative Commons Attribution 4.0 International License</a>.
                 <br />
@@ -334,6 +318,22 @@ nil
 </div>
                 </footer> 
 
+                <script src="/assets/js/jquery.min.js"></script>
+                <script src="/assets/js/bootstrap.min.js"></script>     
+                <script src="/assets/js/highlight.pack.js"></script>   
+                <script src="/assets/js/clean-blog.js"></script>
+                <script src="/assets/js/d3.v3.min.js"></script>
+                <script src="/assets/js/trianglify.min.js"></script>
+                <script src="/assets/js/Please-compressed.js"></script>
+                <script src="/assets/js/background-check.min.js"></script>
+
+                <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+                <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+                <!--[if lt IE 9]>
+                        <script src="/assets/js/html5shiv.js"></script>
+                        <script src="/assets/js/respond.min.js"></script>
+                <![endif]-->
+                
                 <script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
 <script>mermaid.initialize({startOnLoad:true});</script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js"></script>

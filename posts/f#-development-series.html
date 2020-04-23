@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 
-        <title>Digital Tapestry - Microsoft.Extensions.Logging</title>
+        <title>Digital Tapestry - F# Development Series</title>
         <meta name="description" content="Weaving a Digital Tapestry" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">        
 
@@ -28,9 +28,9 @@
         <meta name="msapplication-tooltip" content="Digital Tapestry" />
         <meta name="msapplication-starturl" content="/" />
 
-        <meta property="og:title" content="Digital Tapestry - Microsoft.Extensions.Logging" />
+        <meta property="og:title" content="Digital Tapestry - F# Development Series" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://digitaltapestry.net/tags/MicrosoftExtensionsLogging" />
+        <meta property="og:url" content="https://digitaltapestry.net/posts/f%23-development-series" />
         <!-- TODO: More social graph meta tags -->
 
         <link href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css" rel="stylesheet" type="text/css">
@@ -73,9 +73,19 @@
                         <div class="container">
                                 <div class="row">
                                         <div class="col-md-12">
-<div class="site-heading">
-    <h1>Microsoft.Extensions.Logging</h1>
-</div>                                            </div>
+
+    
+<div class="post-heading">
+    <h1>F# Development Series</h1>
+    <div class="meta">        
+Published on Thursday, April 23, 2020<br>    </div>
+        <div class="tags">
+                    <a role="button" href="/tags/dotnet" class="btn btn-default btn-xs">dotnet</a>
+                    <a role="button" href="/tags/F%23" class="btn btn-default btn-xs">F#</a>
+                    <a role="button" href="/tags/VSCode" class="btn btn-default btn-xs">VSCode</a>
+        </div>     
+</div>
+                                        </div>
                                 </div>
                         </div>
                 </header>
@@ -84,64 +94,43 @@
                 <div class="container">
                         <div class="row">
                                 <div id="content" class="col-md-12">
-                                        <div class="container-sm-height">
-    <div class="row row-sm-height">
-        <div class="col-sm-8 right-border col-sm-height">
-            
-        <div class="post-list">
-            <a href="/posts/logging-part-II">
-                <h3 class="post-title">Logging - Part II</h3>
-            </a>
-            <p class="post-meta">Posted on Sunday, January 1, 2017</p>      
-        </div>   
-        <div class="post-list">
-            <a href="/posts/logging-part-I">
-                <h3 class="post-title">Logging - Part I</h3>
-            </a>
-            <p class="post-meta">Posted on Wednesday, December 28, 2016</p>      
-        </div>   
+                                        
+
+<h1 id="f-development-series">F# Development Series</h1>
+<p>Bear with me. This is going to be along work in progress.</p>
+<p>The medical industry has an interesting concept for learning: see one, do one, teach one. The idea is that to master a topic you have to go through three phases. First, your &ldquo;shown&rdquo;/told/etc. how to do something by an instructor/mentor/ect. This is the first phase of learning. You start to get a surface level understanding of the topic here. Next, you actually apply what you've learned. Until you've done this there are things you don't really understand. It's here that you get a deeper understanding of the topic. That final phase, though, that's where you can claim to have a mastered the topic. If you can't explain the conpcepts you've learned in a way that others can understand it, you're still learning yourself.</p>
+<p>This philosophy is one of the bigger reasons I've always blogged. It's not just so I can help others, it's so that I can gain mastery of a topic myself. It's part of <em>my</em> learning experience.</p>
+<p>Recently I've been learning F# development. I feel I'm past the first phase, and partially through the second. I'm struggling with the second phase, though, because I find that the existing resources (that I can find anyway) just don't do a good enough job in assisting me with actually &ldquo;doing it&rdquo;. There's plenty of resources out there that help me to learn the language, but next to none, especially of quality, that help me to learn the tooling. I can understand the language fine, but if I can't work with the tooling then getting beyond the &quot;hello world&quot; stage is going to elude me a bit.</p>
+<p>Well, if the resources don't exist, I'm just going to have to learn by creating those resources myself. Because I'll be circumventing some of the stages here and mostly going straight to &ldquo;teach one&rdquo; it's going to be a bumpy ride. So bear with me. You can learn with me as I go, and in the end I can hopefully clean up what I get wrong initially.</p>
+<p>So, the goal in this new series of blog posts is to teach you (i.e. me) how to work with the tooling to produce more complicated F# projects than just hello world or other such samples. As a .NET language, you'd think that if you knew C# this would be easy, but my experience so far says it's not. There's a whole world of tooling that the F# developer uses that the C# developer does not, and if you're going to be productive and master F# development, you're going to have become comfortable with this tooling.</p>
+<h2 id="addendum">Addendum</h2>
+<p>As I go, this is going to be a very rough draft. I'm not going to polish the posts, they may be a bit scattered, and I will get things wrong. So if you're following allong, please, provide me with feedback in the comments. Over time I'll refine the posts, and end the end they'll hopefully be of good enough quality to be useful in helping others.</p>
 
 
-            <nav>
-                <ul class="pager">
-                    <li class="previous">                
-                    </li>
-                    <li class="next">
-                    </li>
-                </ul>
-            </nav>
-            <hr class="visible-xs-block" />
-        </div>
-		
-        <div class="col-sm-4 col-sm-height">
-                <a role="button" href="/tags/Wyam" class="btn btn-default btn-xs">Wyam (7)</a>
-                <a role="button" href="/tags/C%23" class="btn btn-default btn-xs">C# (5)</a>
-                <a role="button" href="/tags/NET" class="btn btn-default btn-xs">.NET (5)</a>
-                <a role="button" href="/tags/Clojure" class="btn btn-default btn-xs">Clojure (4)</a>
-                <a role="button" href="/tags/CSS" class="btn btn-default btn-xs">CSS (4)</a>
-                <a role="button" href="/tags/ClojureScript" class="btn btn-default btn-xs">ClojureScript (4)</a>
-                <a role="button" href="/tags/Reagent" class="btn btn-default btn-xs">Reagent (4)</a>
-                <a role="button" href="/tags/Markdig" class="btn btn-default btn-xs">Markdig (3)</a>
-                <a role="button" href="/tags/Task" class="btn btn-default btn-xs">Task (2)</a>
-                <a role="button" href="/tags/TPL" class="btn btn-default btn-xs">TPL (2)</a>
-                <a role="button" href="/tags/Markdown" class="btn btn-default btn-xs">Markdown (2)</a>
-                <a role="button" href="/tags/Logging" class="btn btn-default btn-xs">Logging (2)</a>
-                <a role="button" href="/tags/MicrosoftExtensionsLogging" class="btn btn-primary btn-xs">Microsoft.Extensions.Logging (2)</a>
-                <a role="button" href="/tags/LESS" class="btn btn-default btn-xs">LESS (1)</a>
-                <a role="button" href="/tags/F%23" class="btn btn-default btn-xs">F# (1)</a>
-                <a role="button" href="/tags/VSCode" class="btn btn-default btn-xs">VSCode (1)</a>
-                <a role="button" href="/tags/dotnet" class="btn btn-default btn-xs">dotnet (1)</a>
-                <a role="button" href="/tags/PowerShell" class="btn btn-default btn-xs">PowerShell (1)</a>
-                <a role="button" href="/tags/Programming" class="btn btn-default btn-xs">Programming (1)</a>
-                <a role="button" href="/tags/Languages" class="btn btn-default btn-xs">Languages (1)</a>
-                <a role="button" href="/tags/JavaScript" class="btn btn-default btn-xs">JavaScript (1)</a>
-                <a role="button" href="/tags/AnchorJS" class="btn btn-default btn-xs">AnchorJS (1)</a>
-                <a role="button" href="/tags/clipboardjs" class="btn btn-default btn-xs">clipboard.js (1)</a>
-                <a role="button" href="/tags/General" class="btn btn-default btn-xs">General (1)</a>
-                <a role="button" href="/tags/digitaltapestry" class="btn btn-default btn-xs">digitaltapestry (1)</a>
-        </div>
-    </div>
-</div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'digitaltapestry'; // required: replace example with your forum shortname
+    var disqus_identifier = 'f#-development-series';
+    var disqus_title = 'F# Development Series';
+    var disqus_url = 'https://digitaltapestry.net/posts/f%23-development-series';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
                                 </div>
                         </div>
                 </div>

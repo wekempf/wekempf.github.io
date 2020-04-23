@@ -33,22 +33,6 @@
         <meta property="og:url" content="https://digitaltapestry.net/posts/clojure-validation-part-2" />
         <!-- TODO: More social graph meta tags -->
 
-        <script src="/assets/js/jquery.min.js"></script>
-        <script src="/assets/js/bootstrap.min.js"></script>     
-        <script src="/assets/js/highlight.pack.js"></script>   
-        <script src="/assets/js/clean-blog.js"></script>
-        <script src="/assets/js/d3.v3.min.js"></script>
-        <script src="/assets/js/trianglify.min.js"></script>
-        <script src="/assets/js/Please-compressed.js"></script>
-        <script src="/assets/js/background-check.min.js"></script>
-                
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-                <script src="/assets/js/html5shiv.js"></script>
-                <script src="/assets/js/respond.min.js"></script>
-        <![endif]-->
-        
         <link href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/atelier-sulphurpool-light.css" rel="stylesheet" />
 <link href="/assets/css/overrides.css" rel="stylesheet" />
@@ -150,7 +134,7 @@ Published on Tuesday, August 21, 2018<br>    </div>
 <p>You can view this wonder using Figwheel by executing the following.</p>
 <pre><code class="language-PowerShell">PS&gt; lein figwheel
 </code></pre>
-<p>Now open a browser and navigate to <a href="http://localhost:3449">http://localhost:3449</a> to behold the results of our hard work.</p>
+<p>Now open a browser and navigate to http://localhost:3449 to behold the results of our hard work.</p>
 <p>If you're not familiar with <a href="https://github.com/bhauman/lein-figwheel">Figwheel</a> it &quot; builds your ClojureScript code and hot loads it into the browser as you are coding!&quot; So, don't stop it or close that browser. As we change our code and save it your browser will magically update with the changes live, current state intact. This is an unbelievable bit of tech that makes coding stuff like this a dream.</p>
 <h2 id="adding-state">Adding State</h2>
 <p>So, we have a text input box, but there's no state backing it. Let's fix that by changing a bit of the code.</p>
@@ -176,7 +160,7 @@ Published on Tuesday, August 21, 2018<br>    </div>
 <p>Play around a bit with the result, entering different values into the text box. See how the validation display changes as you type? Notice that it disappears entirely when you've entered a valid SSN? The live updates are the magic of Reagent and it's atom, while having the validation message dissapear is a result of how Reagent handles <code>nil</code>. When <code>s/explain-data</code> returns <code>nil</code> for valid input Reagent actually removes it from the child list.</p>
 <p>Look at how super simple it was to get validation in Reagent using Clojure Spec!</p>
 <p>Oh, but the validation message displayed is really ugly you say? Well, yes, yes it is. We'll fix that in the <a href="/posts/clojure-validation-part-3">next part</a> of this series.</p>
-<div class="alert alert-success"><p>The code for this part of the series can be found in the branch <code>part2</code> in the associated repo at <a href="https://github.com/wekempf/validation-experiment.">https://github.com/wekempf/validation-experiment.</a></p>
+<div class="alert alert-success"><p>The code for this part of the series can be found in the branch <code>part2</code> in the associated repo at <a href="https://github.com/wekempf/validation-experiment">https://github.com/wekempf/validation-experiment</a>.</p>
 </div>
 
 
@@ -234,7 +218,7 @@ Published on Tuesday, August 21, 2018<br>    </div>
                 </li>
             </ul>
             <p class="copyright text-muted">
-                Copyright © 2018 by William E. Kempf. The opinions expressed herein are my own and do not represent those of my employer or any other third-party views in any way.
+                Copyright © 2020 by William E. Kempf. The opinions expressed herein are my own and do not represent those of my employer or any other third-party views in any way.
                 <br />
                 This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/" rel="license">Creative Commons Attribution 4.0 International License</a>.
                 <br />
@@ -251,6 +235,22 @@ Published on Tuesday, August 21, 2018<br>    </div>
 </div>
                 </footer> 
 
+                <script src="/assets/js/jquery.min.js"></script>
+                <script src="/assets/js/bootstrap.min.js"></script>     
+                <script src="/assets/js/highlight.pack.js"></script>   
+                <script src="/assets/js/clean-blog.js"></script>
+                <script src="/assets/js/d3.v3.min.js"></script>
+                <script src="/assets/js/trianglify.min.js"></script>
+                <script src="/assets/js/Please-compressed.js"></script>
+                <script src="/assets/js/background-check.min.js"></script>
+
+                <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+                <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+                <!--[if lt IE 9]>
+                        <script src="/assets/js/html5shiv.js"></script>
+                        <script src="/assets/js/respond.min.js"></script>
+                <![endif]-->
+                
                 <script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
 <script>mermaid.initialize({startOnLoad:true});</script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js"></script>
